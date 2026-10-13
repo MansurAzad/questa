@@ -672,7 +672,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <div className="fixed inset-0 z-40" onClick={() => setAdminMenuOpen(false)} />
                   <div
                     role="menu"
-                    className="absolute right-0 mt-2 w-64 max-w-[calc(100vw-1.5rem)] rounded-xl bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden"
+                    className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-1.5rem)] rounded-xl bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden"
                   >
                     <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700">
                       <p className="text-xs font-bold text-slate-900 dark:text-white truncate">{currentUser.fullName}</p>
@@ -681,7 +681,38 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       </p>
                     </div>
 
-                    <div className="py-1">
+                    <div className="px-4 pt-3 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-slate-100 dark:border-slate-700">
+                      Navigation
+                    </div>
+                    <div className="py-1 max-h-[55vh] overflow-y-auto">
+                      {navItems.map(tab => {
+                        const Icon = tab.icon;
+                        const isActive = activeTab === tab.id;
+                        return (
+                          <button
+                            key={tab.id}
+                            role="menuitem"
+                            onClick={() => { setActiveTab(tab.id); setAdminMenuOpen(false); }}
+                            className={`w-full flex items-center gap-2.5 px-4 py-2 text-xs transition-colors text-left ${
+                              isActive
+                                ? 'bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 font-bold'
+                                : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700'
+                            }`}
+                          >
+                            <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400'}`} />
+                            <span className="flex-1 truncate">{tab.label}</span>
+                            {tab.badge != null && (
+                              <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-300/50 dark:border-amber-700/50">
+                                {tab.badge}
+                              </span>
+                            )}
+                            {isActive && <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-amber-600 dark:text-amber-400" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="py-1 border-t border-slate-100 dark:border-slate-700">
                       <button
                         role="menuitem"
                         onClick={() => { setAdminMenuOpen(false); onSwitchToUserPortal(); }}
