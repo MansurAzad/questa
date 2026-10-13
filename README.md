@@ -54,9 +54,7 @@ All data is persisted client-side (encrypted `localStorage`), so the app runs wi
 | Build | Vite 8 |
 | Styling | Tailwind CSS v4 |
 | Icons | lucide-react |
-| Animation | motion |
 | QR codes | qrcode.react |
-| AI (optional) | @google/genai |
 
 ## Getting Started
 
@@ -68,19 +66,15 @@ All data is persisted client-side (encrypted `localStorage`), so the app runs wi
    npm install
    ```
 
-2. (Optional) Configure environment variables — copy `.env.example` to `.env.local` and fill in the values you need:
-
-   ```bash
-   cp .env.example .env.local
-   ```
-
-3. Start the dev server:
+2. Start the dev server:
 
    ```bash
    npm run dev
    ```
 
    Vite serves the app on the configured port (default `3000`). Open the printed URL in your browser.
+
+   > No environment variables are required — the app runs entirely client-side with encrypted `localStorage`.
 
 ## Available Scripts
 
