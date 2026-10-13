@@ -207,7 +207,7 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({ language, cmsTitle, 
         {/* Lightbox Modal */}
         {lightboxItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md">
-            <div className="max-w-4xl w-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl relative animate-in fade-in zoom-in-95">
+            <div className="max-w-4xl w-full bg-slate-900 rounded-3xl max-h-[90vh] overflow-y-auto border border-slate-800 shadow-2xl relative animate-in fade-in zoom-in-95">
               
               <button
                 onClick={() => setLightboxItem(null)}

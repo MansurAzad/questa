@@ -1276,7 +1276,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 grid grid-cols-3 gap-2 text-center text-xs">
+                  <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 grid grid-cols-1 sm:grid-cols-3 gap-2 text-center text-xs">
                     <div>
                       <span className="text-slate-500 dark:text-slate-400 text-[10px] block">Total Invested</span>
                       <strong className="text-slate-900 dark:text-white font-mono text-sm">

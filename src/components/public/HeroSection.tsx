@@ -60,13 +60,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onRegisterSuccess,
   cmsTitle,
   cmsSubtitle,
-  cmsBanner,
-  cmsKicker,
-  brandName
+  cmsBanner
 }) => {
   const t = (key: keyof typeof translations.en) => getTranslation(language, key);
-  const brand = brandName || 'Questa World';
-  const kicker = cmsKicker || "Official Investor Portal · Cox's Bazar & Mirpur, Dhaka";
   const bannerText =
     cmsBanner ||
     'Featured Scheme: Invest Any Amount, Get 2X Back in 12 Months — Paid in 12 Monthly Installments!';
@@ -145,7 +141,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const signupReady = result.isValid;
 
   return (
-    <section className="relative overflow-hidden bg-slate-900 text-white pt-12 pb-20 sm:pt-20 sm:pb-28">
+    <section className="relative overflow-hidden bg-slate-900 text-white pt-6 pb-20 sm:pt-8 sm:pb-28">
 
       {/* Background Architectural Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -154,13 +150,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Unboxed Kicker */}
-        <div className="flex flex-wrap items-center gap-2 text-xs text-amber-400 font-semibold tracking-wide uppercase mb-3">
-          <span>{brand}</span>
-          <span aria-hidden="true">·</span>
-          <span>{kicker}</span>
-        </div>
 
         {/* 12-Month Double Profit Scheme Alert Banner */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-emerald-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold mb-6 shadow-sm">

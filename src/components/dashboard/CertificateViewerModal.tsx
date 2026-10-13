@@ -145,7 +145,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
             {/* Signatures & Seal */}
             <div className="pt-10 mt-6 border-t border-amber-800/20 dark:border-amber-500/20 grid grid-cols-3 items-end text-center font-sans text-xs text-slate-600 dark:text-slate-400">
               <div>
-                <div className="w-24 border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
+                <div className="w-full max-w-[96px] border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
                   M. Rahman
                 </div>
                 <span className="block font-semibold">Md. Mokhlesur Rahman</span>
@@ -163,7 +163,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
               </div>
 
               <div>
-                <div className="w-24 border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
+                <div className="w-full max-w-[96px] border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
                   A. Chowdhury
                 </div>
                 <span className="block font-semibold">Managing Director</span>

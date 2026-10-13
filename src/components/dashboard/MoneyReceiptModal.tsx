@@ -70,7 +70,7 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs">
-      <div className="bg-white text-slate-900 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-200 animate-in fade-in zoom-in-95 print:p-0 print:border-none print:shadow-none">
+      <div className="bg-white text-slate-900 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-200 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto print:p-0 print:border-none print:shadow-none print:max-h-none print:overflow-visible">
         
         {/* Modal Controls (Hidden in Print) */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-100 print:hidden">
