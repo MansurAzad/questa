@@ -1,0 +1,6 @@
+{
+  "name": "Questa World - Real Estate & Investor Portal",
+  "description": "Comprehensive real estate development and investor portal for Questa World properties, plot bookings, installment tracking, share certificates, and portfolio analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
