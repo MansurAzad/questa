@@ -990,153 +990,46 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     kind: 'standard',
     title: 'New Investor Registration',
     subtitle: 'Create your secure Questa World account',
-    body: 'Featured Scheme: Invest Any Amount, Get 2X Back in 12 Months — Paid in 12 Monthly Installments!',
-    ctaLabel: 'Explore Projects',
+    body: '',
+    ctaLabel: '',
     visible: true,
     order: 0
   },
   {
-    id: 'features',
-    label: 'Why Choose Questa World',
-    kind: 'collection',
-    collectionKey: 'features',
-    title: 'Why Investors Choose Questa World',
-    subtitle: 'A transparent, legally secured and high-yield investment platform.',
-    body: '',
+    id: 'gallery',
+    label: 'Site Photo Gallery',
+    kind: 'standard',
+    title: 'On-Site Construction Photo Gallery',
+    subtitle: 'Real progress, documented on the ground every month.',
+    body:
+      'Explore transparent site photography from our active developments — deep piling and raft foundations, RCC superstructures, façade glazing, interior fit-outs and investor handover ceremonies at Questa Royal Bay and Questa World Commercial Center.',
     ctaLabel: '',
     visible: true,
     order: 1
   },
   {
-    id: 'projects',
-    label: 'Featured Projects',
+    id: 'gallery-videos',
+    label: 'Video Tour Gallery',
     kind: 'standard',
-    title: 'Featured Hospitality & Commercial Investments',
-    subtitle:
-      'Secure high-yield investments in strategically located hospitality and commercial assets.',
-    body: '',
+    title: 'Aerial Drone & Site Walkthrough Videos',
+    subtitle: 'Fly over the sites and walk every floor with our project team.',
+    body:
+      'High-definition drone flyovers and guided walkthrough videos capture the true scale, beachfront location and finishing quality of every Questa World development — the closest thing to standing on site.',
     ctaLabel: '',
     visible: true,
     order: 2
   },
   {
-    id: 'timeline',
-    label: 'Project Timeline',
+    id: 'gallery-renders',
+    label: '3D Render Gallery',
     kind: 'standard',
-    title: 'Civil Progress & Milestones',
-    subtitle: 'Track transparent construction progress across every Questa World development.',
-    body: '',
+    title: '3D Renders & Concept Gallery',
+    subtitle: 'See the finished vision before handover.',
+    body:
+      'Architectural 3D visualisations of the completed resorts, sky lounges, infinity pools and commercial interiors — the finished experience our investors are building towards.',
     ctaLabel: '',
     visible: true,
     order: 3
-  },
-  {
-    id: 'about',
-    label: 'About Questa World',
-    kind: 'standard',
-    title: 'Building Generations of Trust & Wealth',
-    subtitle:
-      'Questa World Limited is a government-registered real estate and hospitality investment enterprise headquartered in Dhaka, with regional offices in Chattogram.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 4
-  },
-  {
-    id: 'gallery',
-    label: 'Media Gallery',
-    kind: 'standard',
-    title: 'Live On-Site Development Progress',
-    subtitle:
-      'Witness transparent ground reality — deep piling, RCC superstructures, façade works, interior fitouts, and structural milestones.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 5
-  },
-  {
-    id: 'news',
-    label: 'Notice Board',
-    kind: 'standard',
-    title: 'Company Notices & Announcements',
-    subtitle:
-      'Stay updated with official company notices, AGM circulars, dividend distributions, and handover alerts.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 6
-  },
-  {
-    id: 'site-visit',
-    label: 'Site Visit Booking',
-    kind: 'standard',
-    title: 'Book a Free Site Visit',
-    subtitle:
-      'Visit our projects with complimentary AC microbus transport from Dhaka and Chattogram.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 7
-  },
-  {
-    id: 'calculator',
-    label: 'Investment Calculator',
-    kind: 'standard',
-    title: 'Plan Your Returns',
-    subtitle:
-      'Estimate your monthly dividends from hotel share ownership or calculate your 2X return from the 12-Month Double Profit Scheme.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 8
-  },
-  {
-    id: 'legal',
-    label: 'Legal & Security',
-    kind: 'standard',
-    title: 'Zero-Risk Real Estate & Ownership Security',
-    subtitle:
-      'Every share and floor unit is backed by ironclad registered deeds, verified ownership, and transparent registration.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 9
-  },
-  {
-    id: 'testimonials',
-    label: 'Investor Testimonials',
-    kind: 'collection',
-    collectionKey: 'testimonials',
-    title: 'Trusted by Investors Nationwide',
-    subtitle: 'Real experiences from Questa World shareholders.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 10
-  },
-  {
-    id: 'faqs',
-    label: 'Frequently Asked Questions',
-    kind: 'collection',
-    collectionKey: 'faqs',
-    title: 'Frequently Asked Questions',
-    subtitle: 'Everything you need to know before you invest.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 11
-  },
-  {
-    id: 'contact',
-    label: 'Contact Us',
-    kind: 'standard',
-    title: 'Contact Our Investment Team',
-    subtitle:
-      'Have questions about Questa World shares, installments, or the 12-Month Double Profit scheme? Reach out and our team will guide you.',
-    body: '',
-    ctaLabel: '',
-    visible: true,
-    order: 12
   }
 ];
 
@@ -1401,6 +1294,13 @@ export class StorageService {
     }
     if (!localStorage.getItem(STORAGE_KEYS.CMS_SECTIONS)) {
       localStorage.setItem(STORAGE_KEYS.CMS_SECTIONS, encryptPayload(DEFAULT_CMS_SECTIONS));
+    }
+    // One-time migration: collapse the public homepage to the curated layout
+    // (Hero registration + photo/video gallery sections only). Drops any
+    // previously stored sections (features/projects/timeline/… /contact).
+    if (!localStorage.getItem('qw_cms_sections_curated_v1')) {
+      localStorage.setItem(STORAGE_KEYS.CMS_SECTIONS, encryptPayload(DEFAULT_CMS_SECTIONS));
+      localStorage.setItem('qw_cms_sections_curated_v1', '1');
     }
     if (!localStorage.getItem(STORAGE_KEYS.CMS_COLLECTIONS)) {
       localStorage.setItem(STORAGE_KEYS.CMS_COLLECTIONS, encryptPayload(DEFAULT_CMS_COLLECTIONS));

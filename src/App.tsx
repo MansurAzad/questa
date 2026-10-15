@@ -165,7 +165,7 @@ export default function App() {
             } else if (view === 'admin') {
               setActiveView('admin');
               window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (['projects', 'timeline', 'calculator', 'legal', 'about', 'gallery', 'news', 'site-visit', 'contact'].includes(view)) {
+            } else if (['gallery', 'gallery-videos', 'gallery-renders'].includes(view)) {
               setActiveView('home');
               setTimeout(() => {
                 const el = document.getElementById(view);
@@ -333,8 +333,41 @@ export default function App() {
                       <MediaGallery
                         key={section.id}
                         language={language}
+                        sectionId="gallery"
+                        tone="light"
+                        badge="Project Media"
                         cmsTitle={section.title}
                         cmsSubtitle={section.subtitle}
+                        cmsBody={section.body}
+                        filter={{ kind: 'photo' }}
+                      />
+                    );
+                  case 'gallery-videos':
+                    return (
+                      <MediaGallery
+                        key={section.id}
+                        language={language}
+                        sectionId="gallery-videos"
+                        tone="muted"
+                        badge="Video Tours"
+                        cmsTitle={section.title}
+                        cmsSubtitle={section.subtitle}
+                        cmsBody={section.body}
+                        filter={{ kind: 'video' }}
+                      />
+                    );
+                  case 'gallery-renders':
+                    return (
+                      <MediaGallery
+                        key={section.id}
+                        language={language}
+                        sectionId="gallery-renders"
+                        tone="light"
+                        badge="3D & Concept"
+                        cmsTitle={section.title}
+                        cmsSubtitle={section.subtitle}
+                        cmsBody={section.body}
+                        filter={{ category: 'render' }}
                       />
                     );
                   case 'news':
@@ -443,9 +476,20 @@ export default function App() {
           language={language}
           settings={cmsSettings}
           onNavigate={view => {
-            if (view === 'dashboard' && !user) setAuthModalOpen(true);
-            else setActiveView(view);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (view === 'dashboard' && !user) {
+              setAuthModalOpen(true);
+            } else if (['gallery', 'gallery-videos', 'gallery-renders'].includes(view)) {
+              setActiveView('home');
+              setTimeout(() => {
+                const el = document.getElementById(view);
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 60);
+            } else {
+              setActiveView(view);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
           }}
           onOpenAuth={() => setAuthModalOpen(true)}
         />

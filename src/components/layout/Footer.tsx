@@ -39,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => onNavigate('projects')}
+                  onClick={() => onNavigate('gallery')}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
                   Questa Royal Bay Hotel &amp; Suites
@@ -47,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('projects')}
+                  onClick={() => onNavigate('gallery')}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
                   Questa World Commercial Center - Mirpur
@@ -72,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('calculator')}
+                  onClick={() => onNavigate('dashboard')}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
                   ROI &amp; Installment Calculator
@@ -80,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('legal')}
+                  onClick={() => onNavigate('dashboard')}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
                   Legal Deeds &amp; Ownership Records
@@ -88,7 +88,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('legal')}
+                  onClick={() => onNavigate('dashboard')}
                   className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors font-mono text-[11px]"
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
