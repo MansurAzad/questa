@@ -2,7 +2,6 @@ import React, { useMemo, useRef, useState } from 'react';
 import {
   ArrowRight,
   ShieldCheck,
-  Sparkles,
   UserPlus,
   Lock,
   Eye,
@@ -59,13 +58,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenPortal,
   onRegisterSuccess,
   cmsTitle,
-  cmsSubtitle,
-  cmsBanner
+  cmsSubtitle
 }) => {
   const t = (key: keyof typeof translations.en) => getTranslation(language, key);
-  const bannerText =
-    cmsBanner ||
-    'Featured Scheme: Invest Any Amount, Get 2X Back in 12 Months — Paid in 12 Monthly Installments!';
 
   // --- Registration / Signup form state ---
   const [fullName, setFullName] = useState('');
@@ -151,71 +146,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* 12-Month Double Profit Scheme Alert Banner */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-emerald-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold mb-6 shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>
-            {bannerText}
-          </span>
-        </div>
-
-        {/* Hero Title & Value Proposition */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-          <div className="lg:col-span-7 space-y-6 text-left">
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              {user && (
-                <button
-                  onClick={onOpenPortal}
-                  className="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-lg flex items-center gap-2"
-                >
-                  <span>{t('heroCtaPortal')}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-
-            {/* Unboxed Metadata Stats */}
-            <div className="pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
-              <div>
-                <span className="text-xl sm:text-2xl font-extrabold text-amber-400 font-mono block">
-                  1,450+
-                </span>
-                <span className="text-xs text-slate-400 font-medium">
-                  {t('statInvestors')}
-                </span>
-              </div>
-              <div>
-                <span className="text-xl sm:text-2xl font-extrabold text-white font-mono block">
-                  18.5%+
-                </span>
-                <span className="text-xs text-slate-400 font-medium">
-                  {t('statYield')}
-                </span>
-              </div>
-              <div>
-                <span className="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono block">
-                  100%
-                </span>
-                <span className="text-xs text-slate-400 font-medium">
-                  {t('statClearance')}
-                </span>
-              </div>
-              <div>
-                <span className="text-xl sm:text-2xl font-extrabold text-amber-300 font-mono block">
-                  2X Return
-                </span>
-                <span className="text-xs text-slate-400 font-medium">
-                  { '12-Mo Double Return'}
-                </span>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Right Card: Investor Registration / Signup */}
-          <div className="lg:col-span-5">
+        {/* Investor Registration / Signup */}
+        <div className="max-w-md mx-auto">
             <div className="relative rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-6 shadow-2xl">
 
               {/* Card Header */}
@@ -427,8 +359,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             </div>
           </div>
-
-        </div>
 
       </div>
     </section>
