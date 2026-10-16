@@ -44,17 +44,14 @@ export default function App() {
   // English-only: language is locked to English
   const language: Language = 'en';
 
-  // User state - preloads user1 by default as requested in prompt, or loads from local storage
+  // User state - do NOT auto-login; only restore existing session if present
   const [user, setUser] = useState<User | null>(() => {
     const existing = StorageService.getUser();
-    if (existing) return existing;
-    // Auto-login user1 initially so the user immediately sees the requested /user dashboard
-    const demo = StorageService.login('user1', '123456');
-    return demo || INITIAL_USER;
+    return existing || null;
   });
 
   // Active view: 'home' | 'projects' | 'calculator' | 'legal' | 'about' | 'dashboard'
-  const [activeView, setActiveView] = useState<string>('dashboard');
+  const [activeView, setActiveView] = useState<string>('home');
 
   // Investor dashboard active tab (menu hosted in the header profile dropdown)
   const [dashboardTab, setDashboardTab] = useState<DashboardTab>('overview');
@@ -130,6 +127,12 @@ export default function App() {
   const handleLoginSuccess = (loggedInUser: User) => {
     setUser(loggedInUser);
     refreshAllData();
+    // Route by role
+    if (loggedInUser.role === 'admin') {
+      setActiveView('admin');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     setActiveView('dashboard');
   };
 
@@ -163,7 +166,13 @@ export default function App() {
             if (view === 'dashboard' && !user) {
               setAuthModalOpen(true);
             } else if (view === 'admin') {
-              setActiveView('admin');
+              if (user?.role === 'admin') {
+                setActiveView('admin');
+              } else if (user) {
+                setActiveView('dashboard');
+              } else {
+                setAuthModalOpen(true);
+              }
               window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (['gallery', 'gallery-videos'].includes(view)) {
               setActiveView('home');
@@ -197,9 +206,9 @@ export default function App() {
             language={language}
             onLogout={handleLogout}
             onSwitchToUserPortal={() => {
-              if (!user || user.role === 'admin') {
-                const ziabul = StorageService.login('user1', '123456');
-                if (ziabul) setUser(ziabul);
+              if (!user) {
+                setAuthModalOpen(true);
+                return;
               }
               setActiveView('dashboard');
               window.scrollTo({ top: 0, behavior: 'smooth' });

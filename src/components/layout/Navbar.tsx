@@ -299,16 +299,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <span>{ 'Change Profile Picture'}</span>
                     </button>
 
-                    {!isDashboard && (
+                    {user?.role === 'admin' && (
                       <button
                         onClick={() => {
-                          onNavigate('dashboard');
+                          onNavigate('admin');
                           setUserDropdownOpen(false);
                         }}
-                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-left"
+                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-colors text-left font-semibold"
                       >
-                        <LayoutDashboard className="w-3.5 h-3.5 text-amber-600" />
-                        <span>{t('navPortal')}</span>
+                        <ShieldCheck className="w-3.5 h-3.5 text-amber-500" />
+                        <span>{ 'Admin 360° Control'}</span>
                       </button>
                     )}
 
@@ -325,16 +325,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </button>
                     )}
 
-                    <button
-                      onClick={() => {
-                        onNavigate('admin');
-                        setUserDropdownOpen(false);
-                      }}
-                      className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-colors text-left font-semibold"
-                    >
-                      <ShieldCheck className="w-3.5 h-3.5 text-amber-500" />
-                      <span>{ 'Admin 360° Control'}</span>
-                    </button>
+                    {!isDashboard && (
+                      <button
+                        onClick={() => {
+                          onNavigate('dashboard');
+                          setUserDropdownOpen(false);
+                        }}
+                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-left"
+                      >
+                        <LayoutDashboard className="w-3.5 h-3.5 text-amber-600" />
+                        <span>{t('navPortal')}</span>
+                      </button>
+                    )}
 
                     <button
                       onClick={() => {

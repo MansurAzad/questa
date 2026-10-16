@@ -150,7 +150,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       setSignupError('That username is already registered. Please choose another username or sign in.');
       return;
     }
-    const registered = StorageService.register(
+    StorageService.register(
       {
         fullName,
         username,
@@ -161,8 +161,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       },
       password
     );
-    setSignupDone(`Welcome ${registered.fullName}! Your investor account is ready.`);
-    onRegisterSuccess(registered);
+    setSignupDone('Registration successful. Please sign in with your new credentials.');
+    setTimeout(() => {
+      onOpenAuth?.();
+    }, 900);
   };
 
   const handleRecovery = (e: React.FormEvent) => {

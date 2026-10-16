@@ -162,7 +162,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         setError('That username is already registered. Please choose another username or sign in.');
         return;
       }
-      const registered = StorageService.register(
+      StorageService.register(
         {
           username,
           fullName,
@@ -173,8 +173,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         },
         password
       );
-      onLoginSuccess(registered);
-      onClose();
+      // Registration successful — switch to Login tab instead of auto-login
+      setError(null);
+      setTouched({});
+      setSubmitAttempt(false);
+      setIsLoginTab(true);
+      setPassword('');
+      setConfirmPassword('');
+      setTransactionPin('');
+      setConfirmTransactionPin('');
+      return;
     }
   };
 
