@@ -146,7 +146,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-clip">
       
       {/* Top Navigation (hidden on the admin dashboard — it has its own admin header) */}
       {activeView !== 'admin' && (

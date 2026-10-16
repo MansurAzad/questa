@@ -131,7 +131,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
     : notices.filter(n => n.category === selectedCategory);
 
   return (
-    <section id="news" className="py-20 bg-slate-50 dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <section id="news" className="py-14 sm:py-20 bg-slate-50 dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Header */}

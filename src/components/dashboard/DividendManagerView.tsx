@@ -216,8 +216,8 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
           <span className="text-[11px] font-mono text-slate-400">Auto-Disbursed on 1st of every month</span>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+        <div className="rtable-scroll">
+          <table className="rtable w-full text-left text-xs">
             <thead className="bg-slate-50/50 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-semibold">
               <tr>
                 <th className="p-3.5">Disbursement Date</th>
@@ -230,13 +230,13 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {dividendTransactions.map(tx => (
                 <tr key={tx.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                  <td className="p-3.5 font-mono text-slate-600 dark:text-slate-400">{tx.date}</td>
-                  <td className="p-3.5 font-medium text-slate-900 dark:text-white">
+                  <td data-label="Date" className="p-3.5 font-mono text-slate-600 dark:text-slate-400">{tx.date}</td>
+                  <td data-label="Hotel Asset / Period" className="p-3.5 font-medium text-slate-900 dark:text-white">
                     {tx.title}
                   </td>
-                  <td className="p-3.5 text-slate-600 dark:text-slate-300">{tx.method}</td>
-                  <td className="p-3.5 font-mono text-slate-500">{tx.referenceNo}</td>
-                  <td className="p-3.5 text-right font-mono font-bold">
+                  <td data-label="Method" className="p-3.5 text-slate-600 dark:text-slate-300">{tx.method}</td>
+                  <td data-label="Reference No" className="p-3.5 font-mono text-slate-500">{tx.referenceNo}</td>
+                  <td data-label="Yield Amount" className="p-3.5 text-right font-mono font-bold">
                     {tx.type === 'credit' ? (
                       <span className="text-emerald-600 dark:text-emerald-400">+{formatBDT(tx.amount, language)}</span>
                     ) : (

@@ -425,8 +425,8 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
           </div>
 
           <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+            <div className="rtable-scroll">
+              <table className="rtable w-full text-left text-xs">
                 <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-semibold">
                   <tr>
                     <th className="p-3">Member</th>
@@ -440,17 +440,17 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {filteredDownline.map(d => (
                     <tr key={d.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                      <td className="p-3">
+                      <td data-label="Member" className="p-3">
                         <div className="font-bold text-slate-900 dark:text-white">{d.name}</div>
                         <div className="text-[10px] text-slate-400 font-mono">@{d.username}</div>
                       </td>
-                      <td className="p-3">
+                      <td data-label="Gen" className="p-3">
                         <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Gen {d.generation}</span>
                       </td>
-                      <td className="p-3 text-slate-600 dark:text-slate-300 max-w-[160px] truncate">{d.assetBooked}</td>
-                      <td className="p-3 font-mono font-bold text-slate-900 dark:text-white">{formatBDT(d.investmentValue, language)}</td>
-                      <td className="p-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">+{formatBDT(d.commissionEarned, language)}</td>
-                      <td className="p-3 text-center">
+                      <td data-label="Asset" className="p-3 text-slate-600 dark:text-slate-300 max-w-[160px] truncate">{d.assetBooked}</td>
+                      <td data-label="Investment" className="p-3 font-mono font-bold text-slate-900 dark:text-white">{formatBDT(d.investmentValue, language)}</td>
+                      <td data-label="Commission" className="p-3 font-mono font-bold text-emerald-600 dark:text-emerald-400">+{formatBDT(d.commissionEarned, language)}</td>
+                      <td data-label="Status" className="p-3 text-center">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           d.status === 'active' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
                         }`}>

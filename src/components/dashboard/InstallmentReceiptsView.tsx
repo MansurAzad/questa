@@ -324,8 +324,8 @@ export const InstallmentReceiptsView: React.FC<InstallmentReceiptsViewProps> = (
                 No {filter} installments in this investment.
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[760px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[760px]">
                   <thead className="bg-slate-50 dark:bg-slate-800/60 border-y border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase font-semibold">
                     <tr>
                       <th className="p-3.5">Receipt No.</th>
@@ -341,26 +341,26 @@ export const InstallmentReceiptsView: React.FC<InstallmentReceiptsViewProps> = (
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {visibleRows.map(r => (
                       <tr key={r.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
-                        <td className="p-3.5 font-mono font-semibold text-slate-700 dark:text-slate-300">
+                        <td data-label="Receipt No." className="p-3.5 font-mono font-semibold text-slate-700 dark:text-slate-300">
                           {r.receiptNo || '—'}
                         </td>
-                        <td className="p-3.5 font-medium text-slate-900 dark:text-white">
+                        <td data-label="Installment" className="p-3.5 font-medium text-slate-900 dark:text-white">
                           #{r.installmentNo} of {r.totalInstallments}
                         </td>
-                        <td className="p-3.5 font-mono text-slate-600 dark:text-slate-300">
+                        <td data-label="Scheduled Date" className="p-3.5 font-mono text-slate-600 dark:text-slate-300">
                           {r.scheduledDate}
                         </td>
-                        <td className="p-3.5 font-mono text-slate-600 dark:text-slate-300">
+                        <td data-label="Received Date" className="p-3.5 font-mono text-slate-600 dark:text-slate-300">
                           {r.receivedDate || '—'}
                         </td>
-                        <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
+                        <td data-label="Amount" className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
                           +{formatBDT(r.amount, language)}
                         </td>
-                        <td className="p-3.5 font-mono text-[11px] text-slate-400">
+                        <td data-label="Reference" className="p-3.5 font-mono text-[11px] text-slate-400">
                           {r.referenceNo || '—'}
                         </td>
-                        <td className="p-3.5">{statusPill(r)}</td>
-                        <td className="p-3.5 text-right">
+                        <td data-label="Status" className="p-3.5">{statusPill(r)}</td>
+                        <td data-label="Action" className="p-3.5 text-right">
                           {r.status === 'received' ? (
                             <button
                               onClick={() => setSelectedReceipt(r)}

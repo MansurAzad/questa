@@ -1177,8 +1177,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             <div className={`${card} overflow-hidden`}>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[860px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[860px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Investor &amp; Member ID</th>
@@ -1193,23 +1193,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {filteredInvestors.map(inv => (
                       <tr key={inv.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
-                        <td className="p-3.5">
+                        <td data-label="Investor & Member ID" className="p-3.5">
                           <div className="font-bold text-slate-900 dark:text-white text-sm">{inv.fullName}</div>
                           <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                             @{inv.username} · ID: <strong className="text-amber-600 dark:text-amber-400">{inv.memberId}</strong>
                           </div>
                           <div className="text-[10px] text-slate-400">{inv.phone}</div>
                         </td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300">
+                        <td data-label="Branch" className="p-3.5 text-slate-600 dark:text-slate-300">
                           {inv.branch}
                           <span className="block text-[10px] text-slate-400 font-mono">Joined {inv.joinedDate}</span>
                         </td>
-                        <td className="p-3.5">
+                        <td data-label="Rank" className="p-3.5">
                           <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
                             {inv.rank}
                           </span>
                         </td>
-                        <td className="p-3.5">
+                        <td data-label="KYC" className="p-3.5">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border flex items-center gap-1 w-fit ${statusBadge(inv.kycStatus)}`}>
                             {inv.kycStatus === 'verified' && <Check className="w-3 h-3" />}
                             {inv.kycStatus === 'verified' ? 'Verified' : 'Pending ID'}
@@ -1218,13 +1218,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <span className="block mt-1 text-[10px] font-bold text-rose-600 dark:text-rose-400">SUSPENDED</span>
                           )}
                         </td>
-                        <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
+                        <td data-label="Portfolio" className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
                           {formatBDT(inv.totalInvested, language)}
                         </td>
-                        <td className="p-3.5 font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                        <td data-label="Dividend Wallet" className="p-3.5 font-mono font-bold text-emerald-600 dark:text-emerald-400">
                           {formatBDT(inv.dividendBalance, language)}
                         </td>
-                        <td className="p-3.5 text-right">
+                        <td data-label="Actions" className="p-3.5 text-right">
                           <div className="flex items-center justify-end gap-1.5">
                             {inv.kycStatus === 'pending' && (
                               <button
@@ -1480,8 +1480,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </span>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[900px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[900px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Investor Member</th>
@@ -1501,27 +1501,27 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                       return (
                         <tr key={plan.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
-                          <td className="p-3.5">
+                          <td data-label="Investor Member" className="p-3.5">
                             <strong className="text-slate-900 dark:text-white block font-sans text-xs">{plan.memberName}</strong>
                             <span className="text-slate-500 dark:text-slate-400 text-[11px]">{plan.memberId}</span>
                           </td>
-                          <td className="p-3.5">
+                          <td data-label="Package & Capital" className="p-3.5">
                             <span className="text-slate-700 dark:text-slate-200 font-sans block text-xs">{plan.packageName}</span>
                             <strong className="text-amber-600 dark:text-amber-400 text-xs">Capital: {formatBDT(plan.principalAmount, language)}</strong>
                           </td>
-                          <td className="p-3.5">
+                          <td data-label="12-Mo Total Return" className="p-3.5">
                             <span className="text-emerald-600 dark:text-emerald-400 font-bold text-sm block">
                               {formatBDT(plan.totalReturnAmount, language)}
                             </span>
                             <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans">200% Payout</span>
                           </td>
-                          <td className="p-3.5">
+                          <td data-label="Monthly Installment" className="p-3.5">
                             <span className="text-amber-600 dark:text-amber-300 font-bold text-xs block">
                               {formatBDT(plan.monthlyInstallmentAmount, language)}
                             </span>
                             <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans">/ month</span>
                           </td>
-                          <td className="p-3.5 min-w-36">
+                          <td data-label="Progress" className="p-3.5 min-w-36">
                             <div className="flex items-center justify-between text-[11px] mb-1">
                               <span className="text-slate-600 dark:text-slate-300 font-sans">{plan.paidInstallments}/12 Paid</span>
                               <span className="text-emerald-600 dark:text-emerald-400">{progressPct}%</span>
@@ -1533,19 +1533,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               />
                             </div>
                           </td>
-                          <td className="p-3.5">
+                          <td data-label="Next Payout" className="p-3.5">
                             <span className="text-slate-600 dark:text-slate-300 text-xs">{plan.nextPayoutDate}</span>
                             <span className={`block text-[10px] font-sans font-bold ${isCompleted ? 'text-emerald-600 dark:text-emerald-400' : 'text-blue-600 dark:text-blue-400'}`}>
                               {isCompleted ? 'Completed' : 'Active'}
                             </span>
                           </td>
-                          <td className="p-3.5">
+                          <td data-label="Deed & PDC Cheques" className="p-3.5">
                             <span className="text-[11px] text-slate-600 dark:text-slate-300 block">{plan.agreementDeedNo}</span>
                             <span className="text-[10px] text-amber-600/90 dark:text-amber-400/90 font-mono">
                               {plan.pdcCheckNumbers.length} PDC Cheques Backed
                             </span>
                           </td>
-                          <td className="p-3.5 text-right font-sans">
+                          <td data-label="Actions" className="p-3.5 text-right font-sans">
                             <div className="flex items-center justify-end gap-1.5">
                               {!isCompleted && (
                                 <button
@@ -1668,8 +1668,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <h3 className="text-xs font-bold text-slate-900 dark:text-white">Share Holdings on Record</h3>
                 <span className="text-xs font-mono text-slate-500 dark:text-slate-400">{shares.length} active shares</span>
               </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[720px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[720px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Project</th>
@@ -1684,13 +1684,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {shares.map(share => (
                       <tr key={share.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                        <td className="p-3.5 font-medium text-slate-900 dark:text-white">{share.projectName}</td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300">{share.shareUnits}</td>
-                        <td className="p-3.5 font-mono text-slate-900 dark:text-white">{formatBDT(share.totalInvestment, language)}</td>
-                        <td className="p-3.5 font-mono text-emerald-600 dark:text-emerald-400">{formatBDT(share.paidAmount, language)}</td>
-                        <td className="p-3.5 font-mono text-emerald-600 dark:text-emerald-400">+{formatBDT(share.monthlyDividendAmount, language)}</td>
-                        <td className="p-3.5 font-mono text-indigo-600 dark:text-indigo-400">{formatBDT(share.totalDividendsEarned, language)}</td>
-                        <td className="p-3.5 font-mono text-amber-600 dark:text-amber-400 font-bold">{share.annualRoiPercentage}%</td>
+                        <td data-label="Project" className="p-3.5 font-medium text-slate-900 dark:text-white">{share.projectName}</td>
+                        <td data-label="Units" className="p-3.5 text-slate-600 dark:text-slate-300">{share.shareUnits}</td>
+                        <td data-label="Total Investment" className="p-3.5 font-mono text-slate-900 dark:text-white">{formatBDT(share.totalInvestment, language)}</td>
+                        <td data-label="Paid" className="p-3.5 font-mono text-emerald-600 dark:text-emerald-400">{formatBDT(share.paidAmount, language)}</td>
+                        <td data-label="Monthly Dividend" className="p-3.5 font-mono text-emerald-600 dark:text-emerald-400">+{formatBDT(share.monthlyDividendAmount, language)}</td>
+                        <td data-label="Total Earned" className="p-3.5 font-mono text-indigo-600 dark:text-indigo-400">{formatBDT(share.totalDividendsEarned, language)}</td>
+                        <td data-label="ROI" className="p-3.5 font-mono text-amber-600 dark:text-amber-400 font-bold">{share.annualRoiPercentage}%</td>
                       </tr>
                     ))}
                     {shares.length === 0 && (
@@ -1710,8 +1710,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <div className="p-4 bg-slate-50 dark:bg-slate-800/70 border-b border-slate-200 dark:border-slate-800">
                 <h3 className="text-xs font-bold text-slate-900 dark:text-white">Historical Dividend Disbursement Rounds</h3>
               </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[720px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[720px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Month</th>
@@ -1725,16 +1725,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {dividendRounds.map(round => (
                       <tr key={round.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                        <td className="p-3.5 font-bold text-slate-900 dark:text-white text-sm">{round.monthYear}</td>
-                        <td className="p-3.5 font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+                        <td data-label="Month" className="p-3.5 font-bold text-slate-900 dark:text-white text-sm">{round.monthYear}</td>
+                        <td data-label="Rate / Suite" className="p-3.5 font-mono text-emerald-600 dark:text-emerald-400 font-bold">
                           {formatBDT(round.ratePerSuite, language)}
                         </td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300">{round.investorsCount} Investors</td>
-                        <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
+                        <td data-label="Investors Benefited" className="p-3.5 text-slate-600 dark:text-slate-300">{round.investorsCount} Investors</td>
+                        <td data-label="Total Disbursed" className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
                           {formatBDT(round.totalDisbursed, language)}
                         </td>
-                        <td className="p-3.5 font-mono text-slate-500 dark:text-slate-400">{round.disbursedDate}</td>
-                        <td className="p-3.5 text-center">
+                        <td data-label="Date" className="p-3.5 font-mono text-slate-500 dark:text-slate-400">{round.disbursedDate}</td>
+                        <td data-label="Status" className="p-3.5 text-center">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${statusBadge(round.status)}`}>
                             {round.status.toUpperCase()}
                           </span>
@@ -1921,8 +1921,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             <div className={`${card} overflow-hidden`}>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[860px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[860px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Slip # &amp; Booking</th>
@@ -1937,31 +1937,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {filteredSlips.map(slip => (
                       <tr key={slip.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                        <td className="p-3.5">
+                        <td data-label="Slip # & Booking" className="p-3.5">
                           <strong className="text-slate-900 dark:text-white text-sm">{slip.slipNo}</strong>
                           <span className="block text-[10px] text-amber-600 dark:text-amber-400 font-mono">{slip.bookingId}</span>
                         </td>
-                        <td className="p-3.5">
+                        <td data-label="Investor" className="p-3.5">
                           <span className="font-bold text-slate-900 dark:text-white">{slip.memberName}</span>
                           <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-mono">@{slip.memberUsername}</span>
                         </td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300">
+                        <td data-label="Bank & Branch" className="p-3.5 text-slate-600 dark:text-slate-300">
                           {slip.bankName}
                           <span className="block text-[10px] text-slate-400">{slip.branchName}</span>
                         </td>
-                        <td className="p-3.5 font-mono text-slate-500 dark:text-slate-400">
+                        <td data-label="TxID / Ref" className="p-3.5 font-mono text-slate-500 dark:text-slate-400">
                           {slip.transactionId}
                           <span className="block text-[10px] text-slate-400">{slip.depositDate}</span>
                         </td>
-                        <td className="p-3.5 font-mono font-extrabold text-emerald-600 dark:text-emerald-400 text-sm">
+                        <td data-label="Amount" className="p-3.5 font-mono font-extrabold text-emerald-600 dark:text-emerald-400 text-sm">
                           {formatBDT(slip.amount, language)}
                         </td>
-                        <td className="p-3.5 text-center">
+                        <td data-label="Status" className="p-3.5 text-center">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${statusBadge(slip.status)}`}>
                             {slip.status.toUpperCase()}
                           </span>
                         </td>
-                        <td className="p-3.5 text-right">
+                        <td data-label="Action" className="p-3.5 text-right">
                           <div className="flex items-center justify-end gap-1.5">
                             {slip.status === 'pending' ? (
                               <>
@@ -2132,8 +2132,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <h3 className="text-xs font-bold text-slate-900 dark:text-white">Recent Referral Signups &amp; Commission Status</h3>
                 <span className="text-xs font-mono text-slate-500 dark:text-slate-400">{referralSignups.length} records</span>
               </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[860px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[860px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Member</th>
@@ -2148,24 +2148,24 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {referralSignups.map(ref => (
                       <tr key={ref.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                        <td className="p-3.5">
+                        <td data-label="Member" className="p-3.5">
                           <strong className="text-slate-900 dark:text-white text-sm">{ref.name}</strong>
                           <span className="block text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                             @{ref.username} · Gen {ref.generation}
                           </span>
                         </td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300">{ref.sponsorName}</td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300">{ref.assetBooked}</td>
-                        <td className="p-3.5 font-mono text-slate-900 dark:text-white">{formatBDT(ref.investmentValue, language)}</td>
-                        <td className="p-3.5 font-mono text-amber-600 dark:text-amber-400 font-bold">
+                        <td data-label="Sponsor" className="p-3.5 text-slate-600 dark:text-slate-300">{ref.sponsorName}</td>
+                        <td data-label="Asset Booked" className="p-3.5 text-slate-600 dark:text-slate-300">{ref.assetBooked}</td>
+                        <td data-label="Investment" className="p-3.5 font-mono text-slate-900 dark:text-white">{formatBDT(ref.investmentValue, language)}</td>
+                        <td data-label="Commission" className="p-3.5 font-mono text-amber-600 dark:text-amber-400 font-bold">
                           {formatBDT(ref.commissionEarned, language)}
                         </td>
-                        <td className="p-3.5 text-center">
+                        <td data-label="KYC" className="p-3.5 text-center">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${statusBadge(ref.kycVerified ? 'verified' : 'pending')}`}>
                             {ref.kycVerified ? 'Verified' : 'Pending'}
                           </span>
                         </td>
-                        <td className="p-3.5 text-center">
+                        <td data-label="Payout" className="p-3.5 text-center">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${statusBadge(ref.payoutStatus === 'credited' ? 'approved' : 'pending')}`}>
                             {ref.payoutStatus.toUpperCase()}
                           </span>
@@ -2292,8 +2292,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </form>
 
             <div className={`${card} overflow-hidden`}>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[720px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[720px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Circular Title</th>
@@ -2306,7 +2306,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {notices.map(ntc => (
                       <tr key={ntc.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                        <td className="p-3.5 font-bold text-slate-900 dark:text-white text-sm">
+                        <td data-label="Circular Title" className="p-3.5 font-bold text-slate-900 dark:text-white text-sm">
                           <div className="flex items-center gap-2">
                             {ntc.priority === 'urgent' && (
                               <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-rose-50 dark:bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30">
@@ -2316,14 +2316,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <span className="line-clamp-2">{ntc.title}</span>
                           </div>
                         </td>
-                        <td className="p-3.5 text-amber-600 dark:text-amber-400 font-mono">{ntc.category}</td>
-                        <td className="p-3.5 font-mono text-slate-500 dark:text-slate-400">{ntc.date}</td>
-                        <td className="p-3.5 text-center">
+                        <td data-label="Category" className="p-3.5 text-amber-600 dark:text-amber-400 font-mono">{ntc.category}</td>
+                        <td data-label="Published Date" className="p-3.5 font-mono text-slate-500 dark:text-slate-400">{ntc.date}</td>
+                        <td data-label="Status" className="p-3.5 text-center">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${statusBadge(ntc.status)}`}>
                             {ntc.status.toUpperCase()}
                           </span>
                         </td>
-                        <td className="p-3.5 text-right">
+                        <td data-label="Action" className="p-3.5 text-right">
                           <button
                             onClick={() => handleDeleteNotice(ntc.id)}
                             className="p-1 rounded text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10"
@@ -2388,8 +2388,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             <div className={`${card} overflow-hidden`}>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs min-w-[860px]">
+              <div className="rtable-scroll">
+                <table className="rtable w-full text-left text-xs min-w-[860px]">
                   <thead className={tableHead}>
                     <tr>
                       <th className="p-3.5">Ticket # &amp; Subject</th>
@@ -2404,12 +2404,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {filteredTickets.map(t => (
                       <tr key={t.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                        <td className="p-3.5">
+                        <td data-label="Ticket # & Subject" className="p-3.5">
                           <strong className="text-slate-900 dark:text-white text-sm block">{t.subject}</strong>
                           <span className="text-[10px] text-amber-600 dark:text-amber-400 font-mono">#{t.ticketNo}</span>
                         </td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300 font-medium">{t.category.toUpperCase()}</td>
-                        <td className="p-3.5">
+                        <td data-label="Category" className="p-3.5 text-slate-600 dark:text-slate-300 font-medium">{t.category.toUpperCase()}</td>
+                        <td data-label="Priority" className="p-3.5">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
                             t.priority === 'high'
                               ? 'bg-rose-50 dark:bg-rose-500/20 text-rose-600 dark:text-rose-300 border-rose-200 dark:border-rose-500/30'
@@ -2420,16 +2420,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             {t.priority.toUpperCase()}
                           </span>
                         </td>
-                        <td className="p-3.5 text-slate-600 dark:text-slate-300 max-w-xs truncate">
+                        <td data-label="Latest Message" className="p-3.5 text-slate-600 dark:text-slate-300 max-w-xs truncate">
                           {t.messages[t.messages.length - 1]?.text || 'No message'}
                         </td>
-                        <td className="p-3.5 font-mono text-slate-500 dark:text-slate-400">{t.updatedAt}</td>
-                        <td className="p-3.5 text-center">
+                        <td data-label="Updated" className="p-3.5 font-mono text-slate-500 dark:text-slate-400">{t.updatedAt}</td>
+                        <td data-label="Status" className="p-3.5 text-center">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${statusBadge(t.status)}`}>
                             {t.status.toUpperCase()}
                           </span>
                         </td>
-                        <td className="p-3.5 text-right">
+                        <td data-label="Actions" className="p-3.5 text-right">
                           <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => setSelectedTicketForReply(t)}
@@ -2590,8 +2590,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </div>
             ) : (
               <div className={`${card} overflow-hidden`}>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs min-w-[1200px]">
+                <div className="rtable-scroll">
+                  <table className="rtable w-full text-left text-xs min-w-[1200px]">
                     <thead className={tableHead}>
                       <tr>
                         <th className="p-3.5">User Name</th>
@@ -2613,29 +2613,29 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           key={`${signup.source}-${signup.id ?? signup.username}`}
                           className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors"
                         >
-                          <td className="p-3.5 font-mono font-semibold text-slate-900 dark:text-white">
+                          <td data-label="User Name" className="p-3.5 font-mono font-semibold text-slate-900 dark:text-white">
                             @{signup.username}
                           </td>
-                          <td className="p-3.5 text-slate-700 dark:text-slate-200">{signup.fullName || '—'}</td>
-                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">{signup.phone || '—'}</td>
-                          <td className="p-3.5 text-slate-700 dark:text-slate-200">{signup.email || '—'}</td>
-                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                          <td data-label="Full Name" className="p-3.5 text-slate-700 dark:text-slate-200">{signup.fullName || '—'}</td>
+                          <td data-label="Phone Number" className="p-3.5 font-mono text-slate-700 dark:text-slate-200">{signup.phone || '—'}</td>
+                          <td data-label="Email" className="p-3.5 text-slate-700 dark:text-slate-200">{signup.email || '—'}</td>
+                          <td data-label="Password" className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
                             {revealSignupSecrets ? signup.password || '—' : '••••••'}
                           </td>
-                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                          <td data-label="Transaction Pin" className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
                             {revealSignupSecrets
                               ? signup.transactionPin || '—'
                               : signup.transactionPin
                                 ? '••••'
                                 : '—'}
                           </td>
-                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                          <td data-label="Reference Username" className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
                             {signup.referenceUsername ? `@${signup.referenceUsername}` : '—'}
                           </td>
-                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                          <td data-label="Member ID" className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
                             {signup.memberId || '—'}
                           </td>
-                          <td className="p-3.5 text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                          <td data-label="Registered" className="p-3.5 text-slate-500 dark:text-slate-400 whitespace-nowrap">
                             {signup.createdAt
                               ? new Date(signup.createdAt).toLocaleString('en-GB', {
                                   day: '2-digit',
@@ -2646,7 +2646,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 })
                               : signup.joinedDate || '—'}
                           </td>
-                          <td className="p-3.5">
+                          <td data-label="Source" className="p-3.5">
                             <span
                               className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                 signup.source === 'server'
@@ -2657,7 +2657,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               {signup.source === 'server' ? 'DATABASE' : 'LOCAL'}
                             </span>
                           </td>
-                          <td className="p-3.5 text-right">
+                          <td data-label="Actions" className="p-3.5 text-right">
                             <button
                               onClick={() => void handleDeleteSignup(signup)}
                               className="p-1.5 rounded-lg text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"

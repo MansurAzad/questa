@@ -97,7 +97,8 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
 
             {/* Assets Table */}
             <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden text-xs">
-              <table className="w-full text-left">
+              <div className="rtable-scroll">
+              <table className="w-full text-left min-w-[520px]">
                 <thead className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono uppercase">
                   <tr>
                     <th className="p-3">Asset Description</th>
@@ -130,6 +131,7 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
                   </tr>
                 </tfoot>
               </table>
+              </div>
             </div>
 
             <p className="text-xs text-slate-500">

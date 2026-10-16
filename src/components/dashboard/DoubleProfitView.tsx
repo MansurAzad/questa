@@ -381,8 +381,8 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
                     <h5 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4">
                       12-Month Installment Ledger & PDC Cheque Security
                     </h5>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left text-xs min-w-[720px]">
+                    <div className="rtable-scroll">
+                      <table className="rtable w-full text-left text-xs min-w-[720px]">
                         <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-semibold">
                           <tr>
                             <th className="p-3">#</th>
@@ -396,14 +396,14 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
                         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                           {schedule.map(row => (
                             <tr key={row.installmentNo} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                              <td className="p-3 font-mono text-slate-500">{row.installmentNo}</td>
-                              <td className="p-3 font-medium text-slate-900 dark:text-white">{row.monthLabel}</td>
-                              <td className="p-3 font-mono text-slate-600 dark:text-slate-300">{row.dueDate}</td>
-                              <td className="p-3 font-mono font-bold text-slate-900 dark:text-white">
+                              <td data-label="#" className="p-3 font-mono text-slate-500">{row.installmentNo}</td>
+                              <td data-label="Month" className="p-3 font-medium text-slate-900 dark:text-white">{row.monthLabel}</td>
+                              <td data-label="Due Date" className="p-3 font-mono text-slate-600 dark:text-slate-300">{row.dueDate}</td>
+                              <td data-label="Amount" className="p-3 font-mono font-bold text-slate-900 dark:text-white">
                                 {formatBDT(row.amount, language)}
                               </td>
-                              <td className="p-3 font-mono text-[11px] text-slate-400">{row.chequeNumber}</td>
-                              <td className="p-3 text-center">
+                              <td data-label="PDC Cheque No" className="p-3 font-mono text-[11px] text-slate-400">{row.chequeNumber}</td>
+                              <td data-label="Status" className="p-3 text-center">
                                 {row.status === 'paid' ? (
                                   <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                                     PAID

@@ -36,3 +36,117 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* ---------------------------------------------------------------
+   Responsive data tables ("cards" on mobile)
+   Add `class="rtable"` to a <table> and `data-label="Column"`
+   to each <td>. On screens < 768px the header is hidden and every
+   row becomes a stacked card with a label/value pair per cell.
+   On >= 768px it renders as a normal table (unchanged).
+   --------------------------------------------------------------- */
+.rtable-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .rtable {
+    width: 100%;
+    min-width: 0 !important;
+  }
+  .rtable > thead {
+    display: none;
+  }
+  .rtable,
+  .rtable > tbody,
+  .rtable > tbody > tr,
+  .rtable > tbody > tr > td {
+    display: block;
+    width: 100%;
+  }
+  .rtable > tbody > tr {
+    border: 1px solid rgb(226 232 240) !important;
+    border-radius: 0.9rem;
+    margin: 0 0 0.7rem;
+    padding: 0.3rem 0.15rem;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+  }
+  .dark .rtable > tbody > tr {
+    border-color: rgb(30 41 59) !important;
+    background: rgb(15 23 42);
+  }
+  .rtable > tbody > tr > td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.55rem 0.85rem !important;
+    border: 0 !important;
+    text-align: right;
+    white-space: normal;
+  }
+  .rtable > tbody > tr > td + td {
+    border-top: 1px dashed rgb(241 245 249) !important;
+  }
+  .dark .rtable > tbody > tr > td + td {
+    border-top-color: rgb(30 41 59) !important;
+  }
+  .rtable > tbody > tr > td::before {
+    content: attr(data-label);
+    flex: 0 1 auto;
+    max-width: 46%;
+    text-align: left;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgb(100 116 139);
+    line-height: 1.3;
+  }
+  .dark .rtable > tbody > tr > td::before {
+    color: rgb(148 163 184);
+  }
+  .rtable > tbody > tr > td:not([data-label])::before,
+  .rtable > tbody > tr > td[data-label=""]::before {
+    display: none;
+  }
+  .rtable > tbody > tr > td[data-label=""],
+  .rtable > tbody > tr > td:not([data-label]) {
+    justify-content: flex-end;
+  }
+  .rtable > tbody > tr > td[colspan] {
+    justify-content: center;
+  }
+  .rtable > tbody > tr > td[colspan]::before {
+    display: none;
+  }
+  /* The scroll wrapper is unnecessary once rows are cards. */
+  .rtable-scroll {
+    overflow: visible !important;
+  }
+}
+
+/* Utility: responsive card grid helpers */
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .card-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .card-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .card-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Guard against accidental horizontal overflow from long words / unbreakable
+   strings inside cards and tables on small screens. */
+@media (max-width: 767px) {
+  .rtable, .rtable * {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}

@@ -430,8 +430,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 </div>
 
                 <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs overflow-hidden">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs min-w-[720px]">
+                  <div className="rtable-scroll">
+                    <table className="rtable w-full text-left text-xs min-w-[720px]">
                       <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase font-semibold">
                         <tr>
                           <th className="p-3.5">Date</th>
@@ -444,19 +444,19 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                       <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                         {transactions.map(tx => (
                           <tr key={tx.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                            <td className="p-3.5 font-mono text-slate-600 dark:text-slate-400">
+                            <td data-label="Date" className="p-3.5 font-mono text-slate-600 dark:text-slate-400">
                               {tx.date}
                             </td>
-                            <td className="p-3.5 font-medium text-slate-900 dark:text-white">
+                            <td data-label="Description" className="p-3.5 font-medium text-slate-900 dark:text-white">
                               {tx.title}
                             </td>
-                            <td className="p-3.5 text-slate-600 dark:text-slate-300">
+                            <td data-label="Method" className="p-3.5 text-slate-600 dark:text-slate-300">
                               {tx.method}
                             </td>
-                            <td className="p-3.5 font-mono text-slate-500">
+                            <td data-label="Ref / TxID" className="p-3.5 font-mono text-slate-500">
                               {tx.referenceNo}
                             </td>
-                            <td className="p-3.5 text-right font-mono font-bold">
+                            <td data-label="Amount" className="p-3.5 text-right font-mono font-bold">
                               {tx.type === 'credit' ? (
                                 <span className="text-emerald-600 dark:text-emerald-400">
                                   +{formatBDT(tx.amount, language)}
