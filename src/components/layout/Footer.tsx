@@ -11,14 +11,14 @@ interface FooterProps {
 }
 
 const DEFAULT_SETTINGS: CmsSiteSettings = {
-  brandName: 'Questa World',
-  legalName: 'Questa World Limited',
+  brandName: 'Questra World',
+  legalName: 'Questra World Limited',
   tagline: "Official Investor Portal · Cox's Bazar & Mirpur, Dhaka",
   supportPhone: '+880 1819-001122',
-  supportEmail: 'support@questaworld.com',
-  corporateAddress: 'Questa World Tower, Pallabi, Mirpur-12, Dhaka, Bangladesh',
+  supportEmail: 'support@questraworld.com',
+  corporateAddress: 'Questra World Tower, Pallabi, Mirpur-12, Dhaka, Bangladesh',
   footerNote: '',
-  copyrightText: '© {year} Questa World Limited. All rights reserved.'
+  copyrightText: '© {year} Questra World Limited. All rights reserved.'
 };
 
 export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth }) => {
@@ -42,7 +42,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
                   onClick={() => onNavigate('gallery')}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
-                  Questa Royal Bay Hotel &amp; Suites
+                  Questra Royal Bay Hotel &amp; Suites
                 </button>
               </li>
               <li>
@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
                   onClick={() => onNavigate('gallery')}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
-                  Questa World Commercial Center - Mirpur
+                  Questra World Commercial Center - Mirpur
                 </button>
               </li>
             </ul>
@@ -107,8 +107,8 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 text-center sm:text-left">
             <img
-              src="/questa-logo.jpeg"
-              alt="Questa World logo"
+              src="/questra-logo.jpeg"
+              alt="Questra World logo"
               className="w-7 h-7 rounded-md object-cover ring-1 ring-slate-700 shrink-0"
             />
             <Copyright className="w-3.5 h-3.5 text-amber-500/80 shrink-0" />

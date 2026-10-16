@@ -104,19 +104,19 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
           <div className="flex items-start justify-between gap-4 border-b border-amber-200 pb-4">
             <div className="flex items-center gap-3">
               <img
-                src="/questa-logo.jpeg"
-                alt="Questa World logo"
+                src="/questra-logo.jpeg"
+                alt="Questra World logo"
                 className="w-12 h-12 rounded-xl object-cover shadow-xs border border-amber-300 bg-white"
               />
               <div>
                 <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900">
-                  QUESTA WORLD LIMITED
+                  QUESTRA WORLD LIMITED
                 </h2>
                 <p className="text-[11px] text-slate-600">
                   Corporate Head Office: House #12, Road #03, Section #12, Pallabi, Mirpur, Dhaka-1216
                 </p>
                 <p className="text-[10px] text-slate-500 font-mono">
-                  Hotline: +880 1810-685888 · Web: www.questaworld.com
+                  Hotline: +880 1810-685888 · Web: www.questraworld.com
                 </p>
               </div>
             </div>
@@ -160,7 +160,7 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
               <div>
                 <span className="text-[11px] text-slate-500 block">Payment Purpose / Description:</span>
                 <strong className="text-slate-900 font-bold text-xs">
-                  {installment.title} - Questa Royal Bay (Hotel & Suites), Cox's Bazar
+                  {installment.title} - Questra Royal Bay (Hotel & Suites), Cox's Bazar
                 </strong>
                 <div className="text-[10px] text-slate-500 mt-0.5">
                   Payment Method: <strong>{installment.paymentMethod || 'Online Gateway / bKash'}</strong> · Ref/Trx: <span className="font-mono">{installment.transactionId || 'TRX-CS-8842'}</span>
@@ -188,7 +188,7 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
               </div>
               <div className="text-[10px] text-slate-500 leading-tight">
                 <span className="font-bold text-slate-700 block">Digitally Verified</span>
-                Scan to verify receipt authenticity against Questa World Central Ledger.
+                Scan to verify receipt authenticity against Questra World Central Ledger.
               </div>
             </div>
 

@@ -46,7 +46,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    project: 'questa-royal-bay',
+    project: 'questra-royal-bay',
     pickupPoint: 'mirpur-pallabi',
     visitDate: todayISO(),
     guests: '2',
@@ -88,9 +88,9 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
         phone: formData.phone,
         preferredDate: dateStr,
         timeSlot: 'Morning (09:30 AM)',
-        projectInterested: formData.project === 'questa-commercial-center'
-          ? 'Questa Commercial Center (Mirpur, Dhaka)'
-          : "Questa Royal Bay (Hotel & Suites), Cox's Bazar",
+        projectInterested: formData.project === 'questra-commercial-center'
+          ? 'Questra Commercial Center (Mirpur, Dhaka)'
+          : "Questra Royal Bay (Hotel & Suites), Cox's Bazar",
         pickupLocation: formData.pickupPoint,
         guestsCount: Number(formData.guests)
       });
@@ -104,8 +104,8 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
   };
 
   const projects = [
-    { id: 'questa-royal-bay', name: "Questa Royal Bay — Cox's Bazar", desc: 'Beachfront Hotel & Suites' },
-    { id: 'questa-commercial-center', name: 'Questa Commercial Center — Mirpur', desc: 'Retail & Office Tower' },
+    { id: 'questra-royal-bay', name: "Questra Royal Bay — Cox's Bazar", desc: 'Beachfront Hotel & Suites' },
+    { id: 'questra-commercial-center', name: 'Questra Commercial Center — Mirpur', desc: 'Retail & Office Tower' },
   ];
 
   const pickupPoints = [

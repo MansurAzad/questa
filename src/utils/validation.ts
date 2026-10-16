@@ -1,5 +1,5 @@
 /**
- * Questa World — central validation toolkit.
+ * Questra World — central validation toolkit.
  *
  * Every form in the app uses these pure rule functions so that validation
  * behaviour (in-field messages, red-field highlighting, in-box summaries and

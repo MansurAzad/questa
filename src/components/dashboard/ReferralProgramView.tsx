@@ -73,7 +73,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   onNavigateToTree
 }) => {
   const referralCode = user.referralCode || user.memberId.replace('QW-CTG-', 'QW-') || 'QW-8842';
-  const referralUrl = `https://questaworld.com/user/register?ref=${user.username}&code=${referralCode}`;
+  const referralUrl = `https://questraworld.com/user/register?ref=${user.username}&code=${referralCode}`;
 
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
@@ -108,7 +108,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   const [newInviteUsername, setNewInviteUsername] = useState('');
   const [newInvitePhone, setNewInvitePhone] = useState('');
   const [newInviteEmail, setNewInviteEmail] = useState('');
-  const [newInviteProject, setNewInviteProject] = useState("Questa Royal Bay Cox's Bazar (1 Suite Share)");
+  const [newInviteProject, setNewInviteProject] = useState("Questra Royal Bay Cox's Bazar (1 Suite Share)");
   const [newInviteInvestment, setNewInviteInvestment] = useState('3500000');
   const [newInviteNotes, setNewInviteNotes] = useState('');
   const [inviteSubmitting, setInviteSubmitting] = useState(false);
@@ -144,7 +144,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   };
 
   // Social Share Helpers
-  const shareText = `Invest in Questa World premium hotel & commercial projects for guaranteed capital appreciation & halal returns. Use my referral code: ${referralCode} to sign up: ${referralUrl}`;
+  const shareText = `Invest in Questra World premium hotel & commercial projects for guaranteed capital appreciation & halal returns. Use my referral code: ${referralCode} to sign up: ${referralUrl}`;
 
   const handleShareWhatsApp = () => {
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
@@ -159,7 +159,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   };
 
   const handleShareEmail = () => {
-    const subject = encodeURIComponent('Invitation to Invest with Questa World');
+    const subject = encodeURIComponent('Invitation to Invest with Questra World');
     const body = encodeURIComponent(shareText);
     window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
   };
@@ -312,7 +312,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'questa_referral_network.csv';
+    a.download = 'questra_referral_network.csv';
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -803,8 +803,8 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
                       onChange={e => setNewInviteProject(e.target.value)}
                       className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                     >
-                      <option>Questa Royal Bay Cox's Bazar (1 Suite Share)</option>
-                      <option>Questa Commercial Center (Tower Floor Share)</option>
+                      <option>Questra Royal Bay Cox's Bazar (1 Suite Share)</option>
+                      <option>Questra Commercial Center (Tower Floor Share)</option>
                     </select>
                   </div>
                   <div>

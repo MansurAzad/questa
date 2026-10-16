@@ -101,7 +101,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
 
   const contactMethods = [
     { icon: Phone, label: 'Hotline', value: cmsPhone || '+880 1810-685888', sub: 'Sat–Thu, 9:00 AM – 6:00 PM' },
-    { icon: Mail, label: 'Email', value: cmsEmail || 'info@questaworld.com', sub: 'Response within 24 hours' },
+    { icon: Mail, label: 'Email', value: cmsEmail || 'info@questraworld.com', sub: 'Response within 24 hours' },
     { icon: MapPin, label: 'Head Office', value: cmsAddress || 'House #12, Road #03, Pallabi, Mirpur, Dhaka-1216', sub: 'By appointment only' },
   ];
 
@@ -125,7 +125,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
             {cmsTitle || 'Contact Our Investment Team'}
           </h2>
           <p className="text-sm text-slate-500 mt-3 leading-relaxed">
-            {cmsSubtitle || 'Have questions about Questa World shares, installments, or the 12-Month Double Profit scheme? Reach out and our team will guide you.'}
+            {cmsSubtitle || 'Have questions about Questra World shares, installments, or the 12-Month Double Profit scheme? Reach out and our team will guide you.'}
           </p>
         </div>
 

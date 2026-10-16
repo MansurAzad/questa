@@ -123,7 +123,7 @@ export const DepositSlipUploadView: React.FC<DepositSlipUploadViewProps> = ({
       memberName: user.fullName,
       memberId: user.memberId,
       bookingId: 'share-royal-bay-204',
-      projectName: 'Questa Royal Bay (Hotel & Suites)',
+      projectName: 'Questra Royal Bay (Hotel & Suites)',
       bankName,
       branchName: paymentMode,
       amount: inst.amount,
@@ -166,7 +166,7 @@ export const DepositSlipUploadView: React.FC<DepositSlipUploadViewProps> = ({
             Manual Deposit &amp; Crypto Payment Submission
           </h2>
           <p className="text-xs text-slate-500">
-            Upload bank deposit counterfoils, or pay by USDT (TRC20). Every submission is verified manually by the Questa World accounts department.
+            Upload bank deposit counterfoils, or pay by USDT (TRC20). Every submission is verified manually by the Questra World accounts department.
           </p>
         </div>
 

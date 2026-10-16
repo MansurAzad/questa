@@ -36,15 +36,15 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     {
       name: 'Mr. Ripon Hossain',
       role: 'Chairman',
-      company: 'Questa World Real Estate Limited',
+      company: 'Questra World Real Estate Limited',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
       message:
-        'Our core philosophy has always been transparency, legal integrity, and sustainable wealth creation. At Questa World, we do not merely sell shares or floor units; we build generations of trust and lasting family heritage across Bangladesh.'
+        'Our core philosophy has always been transparency, legal integrity, and sustainable wealth creation. At Questra World, we do not merely sell shares or floor units; we build generations of trust and lasting family heritage across Bangladesh.'
     },
     {
       name: 'Mr. H. M. Ziaur Rahman',
       role: 'Managing Director',
-      company: 'Questa World Real Estate Limited',
+      company: 'Questra World Real Estate Limited',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80',
       message:
         'We are determined to pioneer world-class beachfront hospitality and premium commercial developments in Cox\'s Bazar and Mirpur, Dhaka. Our commitment is timely project execution, zero legal flaws, and guaranteed returns for our valued investors.'
@@ -52,7 +52,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     {
       name: 'Mr. Uttam Saha',
       role: 'Marketing Director',
-      company: 'Questa World Real Estate Limited',
+      company: 'Questra World Real Estate Limited',
       image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80',
       message:
         'Customer satisfaction and transparent communication define our investor relationships. Whether for small fractional hotel suite shares or larger commercial floor investments, we offer bespoke guidance and unwavering post-purchase service.'
@@ -97,13 +97,13 @@ export const AboutUs: React.FC<AboutUsProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider mb-3">
             <Building2 className="w-3.5 h-3.5" />
-            About Questa World
+            About Questra World
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {cmsTitle || 'Building Generations of Trust & Wealth'}
           </h2>
           <p className="text-sm text-slate-500 mt-4 leading-relaxed">
-            {cmsSubtitle || 'Questa World Limited is a government-registered real estate and hospitality investment enterprise headquartered in Dhaka, with regional offices in Chattogram. We specialize in fractional hotel suite ownership, commercial tower floor shares, and our flagship 12-Month Double Profit investment scheme.'}
+            {cmsSubtitle || 'Questra World Limited is a government-registered real estate and hospitality investment enterprise headquartered in Dhaka, with regional offices in Chattogram. We specialize in fractional hotel suite ownership, commercial tower floor shares, and our flagship 12-Month Double Profit investment scheme.'}
           </p>
         </div>
 
@@ -170,7 +170,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
               Our Pillars of Integrity
             </h3>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              The foundational standards that set Questa World apart in the real estate sector.
+              The foundational standards that set Questra World apart in the real estate sector.
             </p>
           </div>
 

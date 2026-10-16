@@ -74,12 +74,12 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
             {/* Top Emblem & Header */}
             <div className="text-center pb-6 border-b border-amber-800/20 dark:border-amber-500/20">
               <img
-                src="/questa-logo.jpeg"
-                alt="Questa World logo"
+                src="/questra-logo.jpeg"
+                alt="Questra World logo"
                 className="w-16 h-16 mx-auto rounded-full object-cover border-2 border-amber-600 bg-white mb-2"
               />
               <h1 className="text-xl sm:text-2xl font-extrabold tracking-widest text-amber-950 dark:text-amber-200 uppercase">
-                Questa World LIMITED
+                Questra World LIMITED
               </h1>
               <p className="text-xs font-sans text-slate-500 dark:text-slate-400 tracking-wider uppercase mt-0.5">
                 Government Registered Corporate Real Estate & Investment Enterprise · Dhaka & Chattogram
@@ -105,7 +105,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
             {type === 'double_profit_deed' ? (
               <div className="font-sans text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-4 leading-relaxed">
                 <p>
-                  This is to certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong> (Member ID: <span className="font-mono">{user.memberId}</span>) is an enrolled investor in the official <strong>Questa World 12-Month Double Profit Scheme</strong>.
+                  This is to certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong> (Member ID: <span className="font-mono">{user.memberId}</span>) is an enrolled investor in the official <strong>Questra World 12-Month Double Profit Scheme</strong>.
                 </p>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-xl bg-amber-50/50 dark:bg-slate-800/60 border border-amber-200/50 dark:border-amber-800/50 text-xs">
@@ -136,7 +136,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
             ) : share ? (
               <div className="font-sans text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-4 leading-relaxed">
                 <p>
-                  This is to certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong> is the verified lawful holder of <strong>{share.shareUnits} fractional ownership suite unit shares</strong> in Questa World developments at {share.projectName}.
+                  This is to certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong> is the verified lawful holder of <strong>{share.shareUnits} fractional ownership suite unit shares</strong> in Questra World developments at {share.projectName}.
                 </p>
                 <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg text-xs font-mono">
                   Total Investment: {formatBDT(share.totalInvestment, language)}
@@ -158,7 +158,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
               <div className="flex flex-col items-center">
                 <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-600 flex items-center justify-center p-1 text-center">
                   <span className="text-[8px] font-bold text-emerald-600 uppercase tracking-tighter block leading-tight">
-                    GOVT. VETTED<br />SEAL OF TRUST<br />QUESTA
+                    GOVT. VETTED<br />SEAL OF TRUST<br />QUESTRA
                   </span>
                 </div>
                 <span className="text-[10px] text-emerald-600 font-semibold mt-1">100% DISPUTE FREE</span>
@@ -169,7 +169,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
                   A. Chowdhury
                 </div>
                 <span className="block font-semibold">Managing Director</span>
-                <span className="text-[10px] text-slate-400">Questa World LIMITED</span>
+                <span className="text-[10px] text-slate-400">Questra World LIMITED</span>
               </div>
             </div>
 

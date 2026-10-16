@@ -52,12 +52,12 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       summary:
         'Our company guarantees 2X total payout in 12 months (100% net profit). Both capital and profits are disbursed consecutively across 12 equal monthly installments directly into your bank or portal wallet. Backed by 12 Bank PDC Cheques and registered legal deed.',
       summaryBn:
-        'Questa World notification'
+        'Questra World notification'
     },
     {
       id: 'not-01',
-      title: 'Questa Royal Bay Hotel & Suites - Suite Handover & Ownership Registration Schedule',
-      titleBn: 'Questa Royal Bay Hotel & Suites - Suite Handover & Ownership Registration Schedule',
+      title: 'Questra Royal Bay Hotel & Suites - Suite Handover & Ownership Registration Schedule',
+      titleBn: 'Questra Royal Bay Hotel & Suites - Suite Handover & Ownership Registration Schedule',
       category: 'handover',
       categoryLabel: 'Possession & Handover',
       categoryLabelBn: 'Possession & Handover',
@@ -66,26 +66,26 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       summary:
         'Share owners whose suite-share payment schedules are completed are requested to visit our Mirpur Head Office to collect their registered ownership deeds and confirm suite handover dates for the Cox\'s Bazar beachfront tower.',
       summaryBn:
-        'Questa World notification'
+        'Questra World notification'
     },
     {
       id: 'not-02',
-      title: 'Questa Royal Bay Hotel & Suites - Monthly Dividend Distribution Notification',
-      titleBn: 'Questa Royal Bay Hotel & Suites - Monthly Dividend Distribution Notification',
+      title: 'Questra Royal Bay Hotel & Suites - Monthly Dividend Distribution Notification',
+      titleBn: 'Questra Royal Bay Hotel & Suites - Monthly Dividend Distribution Notification',
       category: 'important',
       categoryLabel: 'Dividend Distribution',
       categoryLabelBn: 'Dividend Distribution',
       date: '01 October 2026',
       urgent: false,
       summary:
-        'Monthly profit sharing and Q3 performance dividends for Questa Royal Bay Hotel & Suites share owners have been directly transferred to respective bank accounts. Investors can view detailed statement vouchers in the portal.',
+        'Monthly profit sharing and Q3 performance dividends for Questra Royal Bay Hotel & Suites share owners have been directly transferred to respective bank accounts. Investors can view detailed statement vouchers in the portal.',
       summaryBn:
-        'Questa World notification'
+        'Questra World notification'
     },
     {
       id: 'not-03',
-      title: 'Free Weekend Site Visit to Questa Royal Bay & Commercial Center',
-      titleBn: 'Free Weekend Site Visit to Questa Royal Bay & Commercial Center',
+      title: 'Free Weekend Site Visit to Questra Royal Bay & Commercial Center',
+      titleBn: 'Free Weekend Site Visit to Questra Royal Bay & Commercial Center',
       category: 'event',
       categoryLabel: 'Site Tour',
       categoryLabelBn: 'Site Tour',
@@ -94,7 +94,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       summary:
         'Complimentary luxury AC Microbus tours depart every Friday and Saturday from Pallabi Head Office (9:30 AM) and Motijheel Branch (10:00 AM). Complimentary lunch and refreshments are provided for visiting families.',
       summaryBn:
-        'Questa World notification'
+        'Questra World notification'
     },
     {
       id: 'not-04',
@@ -106,9 +106,9 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       date: '15 September 2026',
       urgent: false,
       summary:
-        'As per the latest digital sub-registry guidelines, all share and floor unit registration for Questa World properties is being expedited with zero physical hassle. Certified ownership deeds are issued within 15 working days.',
+        'As per the latest digital sub-registry guidelines, all share and floor unit registration for Questra World properties is being expedited with zero physical hassle. Certified ownership deeds are issued within 15 working days.',
       summaryBn:
-        'Questa World notification'
+        'Questra World notification'
     },
     {
       id: 'not-05',
@@ -120,9 +120,9 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       date: '05 September 2026',
       urgent: false,
       summary:
-        'The Annual General Meeting of Questa World Limited will be held on 18 December 2026 at the Grand Ball Room, Hotel Radisson Blu Dhaka. All registered investors are cordially invited.',
+        'The Annual General Meeting of Questra World Limited will be held on 18 December 2026 at the Grand Ball Room, Hotel Radisson Blu Dhaka. All registered investors are cordially invited.',
       summaryBn:
-        'Questa World notification'
+        'Questra World notification'
     }
   ];
 

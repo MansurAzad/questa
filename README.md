@@ -1,6 +1,6 @@
 <div align="center">
 
-# Questa World
+# Questra World
 
 **A modern real-estate investment platform with a public marketing homepage, an investor dashboard, and a full admin console.**
 
@@ -12,7 +12,7 @@ Built with React 19, TypeScript, Vite, and Tailwind CSS v4.
 
 ## Overview
 
-Questa World is a single-page application that combines three experiences in one app:
+Questra World is a single-page application that combines three experiences in one app:
 
 - **Public website** — hero sign-up, project showcases, timeline, media, notice board, investment & ROI calculator, site-visit booking, and legal/security information.
 - **Investor dashboard** — personal KPIs, referral network, KYC, deposits & installments, double profit plan, share dividends, notices, and support.
@@ -123,4 +123,4 @@ npm run build
 
 ## License
 
-Part of the Questa World project. All rights reserved.
+Part of the Questra World project. All rights reserved.

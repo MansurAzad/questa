@@ -31,7 +31,7 @@ export const CmsCollectionSection: React.FC<CmsCollectionSectionProps> = ({ sect
             {isFeatures && <Sparkles className="w-3.5 h-3.5" />}
             {isTestimonials && <Quote className="w-3.5 h-3.5" />}
             {!isFeatures && !isTestimonials && <HelpCircle className="w-3.5 h-3.5" />}
-            <span>{isFeatures ? 'Why Questa World' : isTestimonials ? 'Investor Voices' : 'Support & Answers'}</span>
+            <span>{isFeatures ? 'Why Questra World' : isTestimonials ? 'Investor Voices' : 'Support & Answers'}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {section.title}

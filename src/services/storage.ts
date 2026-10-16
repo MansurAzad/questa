@@ -64,12 +64,12 @@ export const INITIAL_ADMIN: User = {
   username: 'admin',
   fullName: 'Md. Ripon Hossain (Super Admin)',
   fullNameBn: 'Md. Ripon Hossain (Super Admin)',
-  email: 'admin@questaworld.com',
+  email: 'admin@questraworld.com',
   phone: '+880 1819-001122',
   branch: 'Corporate Head Office (Mirpur-12, Dhaka)',
   memberId: 'QW-HQ-001',
   avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80',
-  address: 'Questa World Tower, Pallabi, Mirpur-12',
+  address: 'Questra World Tower, Pallabi, Mirpur-12',
   city: 'Dhaka',
   nidNo: '1975 1209 8832 01',
   role: 'admin',
@@ -87,8 +87,8 @@ export const INITIAL_ADMIN: User = {
 export const INITIAL_SHARES: ShareInvestment[] = [
   {
     id: 'share-royal-bay-204',
-    projectName: 'Questa Royal Bay Hotel & Suites - Cox\'s Bazar',
-    projectNameBn: 'Questa Royal Bay Hotel & Suites - Cox\'s Bazar',
+    projectName: 'Questra Royal Bay Hotel & Suites - Cox\'s Bazar',
+    projectNameBn: 'Questra Royal Bay Hotel & Suites - Cox\'s Bazar',
     shareCategory: 'luxury_suite',
     shareUnits: 2,
     shareNumbers: ['RB-204', 'RB-205'],
@@ -253,8 +253,8 @@ export const INITIAL_NOTIFICATIONS: AppNotification[] = [
   },
   {
     id: 'notif-3',
-    title: 'Questa Royal Bay Construction Milestone',
-    titleBn: 'Questa Royal Bay Construction Milestone',
+    title: 'Questra Royal Bay Construction Milestone',
+    titleBn: 'Questra Royal Bay Construction Milestone',
     message: 'Beachfront RCC superstructure and facade glazing work progressing on schedule. Your suite floor is now structurally complete.',
     messageBn: 'Beachfront RCC superstructure and facade glazing work progressing on schedule. Your suite floor is now structurally complete.',
     date: '2026-09-28',
@@ -278,7 +278,7 @@ export const INITIAL_TICKETS: SupportTicket[] = [
       {
         sender: 'user',
         senderName: 'Ziabul Hoque',
-        text: 'Dear Questa World Support, kindly provide the certified copy of my Royal Bay suite share certificate for my bank file.',
+        text: 'Dear Questra World Support, kindly provide the certified copy of my Royal Bay suite share certificate for my bank file.',
         timestamp: '2026-09-15 11:30 AM'
       },
       {
@@ -293,9 +293,9 @@ export const INITIAL_TICKETS: SupportTicket[] = [
 
 export const PUBLIC_PROJECTS: ProjectInfo[] = [
   {
-    id: 'questa-royal-bay',
-    name: 'Questa Royal Bay Luxury Hotel & Suites',
-    nameBn: 'Questa Royal Bay Luxury Hotel & Suites',
+    id: 'questra-royal-bay',
+    name: 'Questra Royal Bay Luxury Hotel & Suites',
+    nameBn: 'Questra Royal Bay Luxury Hotel & Suites',
     tagline: '5-Star Hospitality Fractional Ownership & Monthly Profit Sharing',
     taglineBn: '5-Star Hospitality Fractional Ownership & Monthly Profit Sharing',
     category: 'hospitality',
@@ -387,9 +387,9 @@ export const PUBLIC_PROJECTS: ProjectInfo[] = [
     ]
   },
   {
-    id: 'questa-commercial-center',
-    name: 'Questa World Commercial Center - Mirpur',
-    nameBn: 'Questa World Commercial Center - Mirpur',
+    id: 'questra-commercial-center',
+    name: 'Questra World Commercial Center - Mirpur',
+    nameBn: 'Questra World Commercial Center - Mirpur',
     tagline: 'Prime Commercial Retail & Office Tower in Pallabi',
     taglineBn: 'Prime Commercial Retail & Office Tower in Pallabi',
     category: 'commercial',
@@ -398,7 +398,7 @@ export const PUBLIC_PROJECTS: ProjectInfo[] = [
     size: '14 Storied Modern Commercial Hub',
     startingPrice: '৳15,00,000 / Floor Share',
     heroImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80',
-    description: 'Strategically positioned next to the Pallabi Metro Station, Questa World Commercial Center is designed for corporate headquarters, banking institutions, and premium brand showrooms with triple-level basement parking.',
+    description: 'Strategically positioned next to the Pallabi Metro Station, Questra World Commercial Center is designed for corporate headquarters, banking institutions, and premium brand showrooms with triple-level basement parking.',
     features: [
       'Direct 2-Minute Walk from Pallabi MRT Metro Station',
       'High Footfall Commercial Hotspot',
@@ -592,7 +592,7 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
     memberName: 'Ziabul Hoque Chowdhury',
     memberId: 'QW-CTG-8842',
     bookingId: 'share-royal-bay-204',
-    projectName: 'Questa Royal Bay (Hotel & Suites)',
+    projectName: 'Questra Royal Bay (Hotel & Suites)',
     bankName: 'The City Bank Ltd',
     branchName: 'Agrabad Commercial Branch, Ctg',
     amount: 35000,
@@ -610,7 +610,7 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
     memberName: 'Md. Anwar Hossain',
     memberId: 'QW-CTG-9021',
     bookingId: 'share-royal-bay-204',
-    projectName: 'Questa Royal Bay (Hotel & Suites)',
+    projectName: 'Questra Royal Bay (Hotel & Suites)',
     bankName: 'Islami Bank Bangladesh Ltd',
     branchName: 'Khatungonj Corporate Branch',
     amount: 35000,
@@ -628,7 +628,7 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
     memberName: 'Engr. Tanvir Ahmed',
     memberId: 'QW-DHK-5512',
     bookingId: 'share-royal-bay-204',
-    projectName: "Questa Royal Bay Cox's Bazar",
+    projectName: "Questra Royal Bay Cox's Bazar",
     bankName: 'Dutch-Bangla Bank Ltd',
     branchName: 'Uttara Branch, Dhaka',
     amount: 50000,
@@ -648,7 +648,7 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
     phone: '+880 1715-889900',
     preferredDate: 'Friday, 17 Oct 2026',
     timeSlot: 'Morning (08:30 AM)',
-    projectInterested: 'Questa Royal Bay (Hotel & Suites), Cox\'s Bazar',
+    projectInterested: 'Questra Royal Bay (Hotel & Suites), Cox\'s Bazar',
     pickupLocation: 'Mirpur-12 Corporate Head Office, Dhaka',
     guestsCount: 4,
     assignedBus: 'AC Microbus #01 (Dhaka Metro-Cha 11-8842)',
@@ -662,7 +662,7 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
     phone: '+880 1819-223344',
     preferredDate: 'Saturday, 18 Oct 2026',
     timeSlot: 'Morning (09:00 AM)',
-    projectInterested: 'Questa Commercial Center (Mirpur, Dhaka)',
+    projectInterested: 'Questra Commercial Center (Mirpur, Dhaka)',
     pickupLocation: 'Dhanmondi 27 (Rapa Plaza Point)',
     guestsCount: 3,
     status: 'pending',
@@ -674,7 +674,7 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
     phone: '+880 1912-334455',
     preferredDate: 'Friday, 24 Oct 2026',
     timeSlot: 'Morning (09:30 AM)',
-    projectInterested: 'Questa Royal Bay Cox\'s Bazar (Resort Tour)',
+    projectInterested: 'Questra Royal Bay Cox\'s Bazar (Resort Tour)',
     pickupLocation: 'Chattogram Office (Salma Centre)',
     guestsCount: 2,
     status: 'pending',
@@ -685,7 +685,7 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
 export const INITIAL_NOTICES: NoticeItem[] = [
   {
     id: 'ntc-01',
-    title: 'Questa Royal Bay Hotel & Suites — New Share Unit Release & Dividend Schedule Notice',
+    title: 'Questra Royal Bay Hotel & Suites — New Share Unit Release & Dividend Schedule Notice',
     category: 'Share Release & Dividend',
     content: 'All respected shareholders are hereby informed that on 25 October 2026 at 10:00 AM at the Head Office, the new share unit release and monthly dividend distribution schedule for Royal Bay Hotel & Suites will be announced.',
     date: '08 October 2026',
@@ -694,7 +694,7 @@ export const INITIAL_NOTICES: NoticeItem[] = [
   },
   {
     id: 'ntc-02',
-    title: 'Questa Royal Bay Hotel Cox\'s Bazar 3rd Quarterly Dividend Distribution Completed',
+    title: 'Questra Royal Bay Hotel Cox\'s Bazar 3rd Quarterly Dividend Distribution Completed',
     category: 'Dividend Distribution',
     content: 'The September 2026 dividends for all respected shareholders of the Cox\'s Bazar Royal Bay Hotel & Suites project have been successfully credited to their linked bank accounts.',
     date: '01 October 2026',
@@ -815,7 +815,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     signupDate: '15 Aug 2026',
     signupTime: '02:40 PM',
     status: 'active',
-    assetBooked: 'Questa Royal Bay (Suite Share #168)',
+    assetBooked: 'Questra Royal Bay (Suite Share #168)',
     investmentValue: 3500000,
     commissionEarned: 350000,
     commissionRate: 10,
@@ -840,7 +840,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     signupDate: '04 Sep 2026',
     signupTime: '11:15 AM',
     status: 'active',
-    assetBooked: "Questa Royal Bay Cox's Bazar (1 Suite Share)",
+    assetBooked: "Questra Royal Bay Cox's Bazar (1 Suite Share)",
     investmentValue: 600000,
     commissionEarned: 60000,
     commissionRate: 10,
@@ -865,7 +865,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     signupDate: '28 Sep 2026',
     signupTime: '04:50 PM',
     status: 'active',
-    assetBooked: 'Questa Commercial Center (Shop #304)',
+    assetBooked: 'Questra Commercial Center (Shop #304)',
     investmentValue: 2500000,
     commissionEarned: 250000,
     commissionRate: 10,
@@ -890,7 +890,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     signupDate: '10 Oct 2026',
     signupTime: '01:20 PM',
     status: 'active',
-    assetBooked: 'Questa Commercial Center (Office #92)',
+    assetBooked: 'Questra Commercial Center (Office #92)',
     investmentValue: 4800000,
     commissionEarned: 240000,
     commissionRate: 5,
@@ -915,7 +915,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     signupDate: '14 Oct 2026',
     signupTime: '06:10 PM',
     status: 'active',
-    assetBooked: "Questa Royal Bay Cox's Bazar (2 Suite Shares)",
+    assetBooked: "Questra Royal Bay Cox's Bazar (2 Suite Shares)",
     investmentValue: 1200000,
     commissionEarned: 60000,
     commissionRate: 5,
@@ -940,7 +940,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     signupDate: '22 Oct 2026',
     signupTime: '10:05 AM',
     status: 'pending',
-    assetBooked: 'Questa Commercial Center (Shop #21)',
+    assetBooked: 'Questra Commercial Center (Shop #21)',
     investmentValue: 2200000,
     commissionEarned: 0,
     commissionRate: 0,
@@ -965,22 +965,22 @@ export const DEFAULT_CRYPTO_SETTINGS: CryptoPaymentSettings = {
   walletAddress: 'TQn9Y2khEsLJW1ChVWFMSMeRDow5KcbLSE',
   bdtPerUsdt: 125,
   instructions:
-    'Send the exact USDT (TRC20) amount to the Questa World wallet address above, then paste the on-chain Transaction Hash (TxID). All crypto deposits are verified manually by the Questa World finance desk.'
+    'Send the exact USDT (TRC20) amount to the Questra World wallet address above, then paste the on-chain Transaction Hash (TxID). All crypto deposits are verified manually by the Questra World finance desk.'
 };
 
 // ---------------------------------------------------------------------------
 // HOMEPAGE CMS DEFAULTS
 // ---------------------------------------------------------------------------
 export const DEFAULT_CMS_SETTINGS: CmsSiteSettings = {
-  brandName: 'Questa World',
-  legalName: 'Questa World Limited',
+  brandName: 'Questra World',
+  legalName: 'Questra World Limited',
   tagline: 'Official Investor Portal · Cox\'s Bazar & Mirpur, Dhaka',
   supportPhone: '+880 1819-001122',
-  supportEmail: 'support@questaworld.com',
-  corporateAddress: 'Questa World Tower, Pallabi, Mirpur-12, Dhaka, Bangladesh',
+  supportEmail: 'support@questraworld.com',
+  corporateAddress: 'Questra World Tower, Pallabi, Mirpur-12, Dhaka, Bangladesh',
   footerNote:
     'Government-registered real estate & hospitality investment enterprise. 100% legally verified ownership with notarized deeds and end-to-end encrypted records.',
-  copyrightText: '© {year} Questa World Limited. All rights reserved.'
+  copyrightText: '© {year} Questra World Limited. All rights reserved.'
 };
 
 export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
@@ -989,7 +989,7 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     label: 'Hero & Registration',
     kind: 'standard',
     title: 'New Investor Registration',
-    subtitle: 'Create your secure Questa World account',
+    subtitle: 'Create your secure Questra World account',
     body: '',
     ctaLabel: '',
     visible: true,
@@ -1002,7 +1002,7 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     title: 'On-Site Construction Photo Gallery',
     subtitle: 'Real progress, documented on the ground every month.',
     body:
-      'Explore transparent site photography from our active developments — deep piling and raft foundations, RCC superstructures, façade glazing, interior fit-outs and investor handover ceremonies at Questa Royal Bay and Questa World Commercial Center.',
+      'Explore transparent site photography from our active developments — deep piling and raft foundations, RCC superstructures, façade glazing, interior fit-outs and investor handover ceremonies at Questra Royal Bay and Questra World Commercial Center.',
     ctaLabel: '',
     visible: true,
     order: 1
@@ -1014,7 +1014,7 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     title: 'Aerial Drone & Site Walkthrough Videos',
     subtitle: 'Fly over the sites and walk every floor with our project team.',
     body:
-      'High-definition drone flyovers and guided walkthrough videos capture the true scale, beachfront location and finishing quality of every Questa World development — the closest thing to standing on site.',
+      'High-definition drone flyovers and guided walkthrough videos capture the true scale, beachfront location and finishing quality of every Questra World development — the closest thing to standing on site.',
     ctaLabel: '',
     visible: true,
     order: 2
@@ -1127,7 +1127,7 @@ export class StorageService {
     }
 
     // Check pre-seeded admin credentials: admin / admin123 or 123456
-    if ((cleanedUser === 'admin' || cleanedUser === 'questaworld') && (cleanedPass === 'admin123' || cleanedPass === '123456' || cleanedPass === 'admin')) {
+    if ((cleanedUser === 'admin' || cleanedUser === 'questraworld') && (cleanedPass === 'admin123' || cleanedPass === '123456' || cleanedPass === 'admin')) {
       const admin = INITIAL_ADMIN;
       localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(admin));
       this.ensureDataInitialized();
@@ -1153,7 +1153,7 @@ export class StorageService {
       username: newUser.username || 'investor_' + Math.floor(Math.random() * 1000),
       fullName: newUser.fullName || 'Valued Investor',
       fullNameBn: newUser.fullNameBn || newUser.fullName || 'Valued Investor',
-      email: newUser.email || 'investor@questaworld.com',
+      email: newUser.email || 'investor@questraworld.com',
       phone: newUser.phone || '+880 1700-000000',
       branch: newUser.branch || 'Dhaka Head Office (Mirpur)',
       memberId: 'QW-' + Math.floor(1000 + Math.random() * 9000),
@@ -1194,7 +1194,7 @@ export class StorageService {
   static accountExists(identifier: string): boolean {
     const cleaned = identifier.trim().toLowerCase();
     if (!cleaned) return false;
-    if (cleaned === 'ziabulctg1' || cleaned === 'admin' || cleaned === 'questaworld') return true;
+    if (cleaned === 'ziabulctg1' || cleaned === 'admin' || cleaned === 'questraworld') return true;
     if (localStorage.getItem('qw_registered_account_' + cleaned)) return true;
 
     // Fall back to matching a registered mobile number (digits only).
@@ -1333,6 +1333,35 @@ export class StorageService {
       }
       localStorage.setItem('qw_referral_matrix_migrated_v2', '1');
     }
+    // One-time migration: rebrand persisted records from "Questa World" to
+    // "Questra World" (covers encrypted JSON payloads and plain string values).
+    if (!localStorage.getItem('qw_brand_questra_v1')) {
+      try {
+        const rebrand = (text: string) =>
+          text.replace(/questa/gi, m =>
+            m === 'QUESTA' ? 'QUESTRA' : m.charAt(0) === 'Q' ? 'Questra' : 'questra'
+          );
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (!key || !key.startsWith('qw_') || key === 'qw_brand_questra_v1') continue;
+          const raw = localStorage.getItem(key);
+          if (!raw) continue;
+          let updated: string | null = null;
+          try {
+            const decoded = decodeURIComponent(atob(raw));
+            if (/questa/i.test(decoded)) {
+              updated = encryptPayload(JSON.parse(rebrand(decoded)));
+            }
+          } catch {
+            if (/questa/i.test(raw)) updated = rebrand(raw);
+          }
+          if (updated !== null) localStorage.setItem(key, updated);
+        }
+      } catch {
+        /* non-fatal — keep whatever data is present */
+      }
+      localStorage.setItem('qw_brand_questra_v1', '1');
+    }
     if (!localStorage.getItem(STORAGE_KEYS.LAST_SYNC)) {
       localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
     }
@@ -1348,8 +1377,8 @@ export class StorageService {
     const shares = this.getShares();
     const newShare: ShareInvestment = {
       id: shareData.id || 'share-' + Date.now(),
-      projectName: shareData.projectName || 'Questa Royal Bay Hotel & Suites',
-      projectNameBn: shareData.projectNameBn || 'Questa Royal Bay Hotel & Suites',
+      projectName: shareData.projectName || 'Questra Royal Bay Hotel & Suites',
+      projectNameBn: shareData.projectNameBn || 'Questra Royal Bay Hotel & Suites',
       location: shareData.location || "Cox's Bazar",
       locationBn: shareData.locationBn || "Cox's Bazar",
       suiteNo: shareData.suiteNo || `Suite #${Math.floor(200 + Math.random() * 300)}`,
@@ -1703,7 +1732,7 @@ export class StorageService {
       memberName: slip.memberName || user.fullName,
       memberId: slip.memberId || user.memberId,
       bookingId: slip.bookingId || 'share-royal-bay-204',
-      projectName: slip.projectName || 'Questa Royal Bay (Hotel & Suites)',
+      projectName: slip.projectName || 'Questra Royal Bay (Hotel & Suites)',
       bankName: slip.bankName || 'The City Bank Ltd',
       branchName: slip.branchName || 'Agrabad Branch',
       amount: slip.amount || 35000,
@@ -1837,7 +1866,7 @@ export class StorageService {
       phone: tour.phone || '+880 1700-000000',
       preferredDate: tour.preferredDate || 'Friday, Upcoming',
       timeSlot: tour.timeSlot || 'Morning (09:00 AM)',
-      projectInterested: tour.projectInterested || "Questa Royal Bay (Hotel & Suites), Cox's Bazar",
+      projectInterested: tour.projectInterested || "Questra Royal Bay (Hotel & Suites), Cox's Bazar",
       pickupLocation: tour.pickupLocation || 'Mirpur-12 Corporate Head Office',
       guestsCount: tour.guestsCount || 2,
       assignedBus: tour.assignedBus,

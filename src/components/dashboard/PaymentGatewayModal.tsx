@@ -227,7 +227,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
                 { 'Payment Successful!'}
               </h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                { 'Transaction successfully recorded in Questa World ledger.'}
+                { 'Transaction successfully recorded in Questra World ledger.'}
               </p>
             </div>
 
@@ -388,7 +388,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
               </div>
             ) : selectedChannel === 'Bank Transfer' ? (
               <div className="space-y-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 text-xs">
-                <p className="font-semibold text-slate-900 dark:text-white">Questa World Principal Bank Accounts:</p>
+                <p className="font-semibold text-slate-900 dark:text-white">Questra World Principal Bank Accounts:</p>
                 <div className="text-[11px] space-y-1 text-slate-600 dark:text-slate-300 font-mono">
                   <p>• The City Bank Ltd (Agrabad/Mirpur) A/C: 1102948192001</p>
                   <p>• Islami Bank Bangladesh PLC A/C: 2050218940023</p>

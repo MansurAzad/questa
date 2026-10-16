@@ -89,7 +89,7 @@ export const MemberTransferView: React.FC<MemberTransferViewProps> = ({
       i => i.username.toLowerCase() === recipient || i.memberId.toLowerCase() === recipient
     );
     if (!recipientExists) {
-      nextServerErrors.recipientUsername = 'Recipient not found in the Questa World member registry. Check the username or member ID.';
+      nextServerErrors.recipientUsername = 'Recipient not found in the Questra World member registry. Check the username or member ID.';
     } else if (recipient === user.username.toLowerCase() || recipient === user.memberId.toLowerCase()) {
       nextServerErrors.recipientUsername = 'You cannot transfer funds to your own account.';
     }
@@ -141,7 +141,7 @@ export const MemberTransferView: React.FC<MemberTransferViewProps> = ({
             Member-to-Member Balance Transfer
           </h2>
           <p className="text-xs text-slate-500">
-            Transfer wallet funds to another verified member ID or investor account within Questa World using your 4-digit Transaction PIN.
+            Transfer wallet funds to another verified member ID or investor account within Questra World using your 4-digit Transaction PIN.
           </p>
         </div>
 
@@ -213,7 +213,7 @@ export const MemberTransferView: React.FC<MemberTransferViewProps> = ({
               </div>
               <FieldError message={showError('recipientUsername')} />
               <span className="text-[10px] text-slate-400 mt-1 block">
-                Instant verification across Questa World member registry.
+                Instant verification across Questra World member registry.
               </span>
             </div>
 

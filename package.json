@@ -1,8 +1,8 @@
 {
-  "name": "questa-world",
+  "name": "questra-world",
   "private": true,
   "version": "1.0.0",
-  "description": "Questa World — real estate & investor portal with a public website, investor dashboard, and admin console.",
+  "description": "Questra World — real estate & investor portal with a public website, investor dashboard, and admin console.",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",

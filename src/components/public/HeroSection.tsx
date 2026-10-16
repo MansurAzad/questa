@@ -152,8 +152,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Card Header */}
               <div className="flex items-center gap-3">
                 <img
-                  src="/questa-logo.jpeg"
-                  alt="Questa World logo"
+                  src="/questra-logo.jpeg"
+                  alt="Questra World logo"
                   className="w-11 h-11 rounded-xl object-cover ring-1 ring-amber-400/30 shrink-0 bg-white"
                 />
                 <div>
@@ -161,7 +161,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     {cmsTitle || 'New Investor Registration'}
                   </h2>
                   <span className="text-[11px] text-slate-400">
-                    {cmsSubtitle || 'Create your secure Questa World account'}
+                    {cmsSubtitle || 'Create your secure Questra World account'}
                   </span>
                 </div>
               </div>

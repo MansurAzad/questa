@@ -188,7 +188,7 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
       {savedSuccess && (
         <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 text-xs text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
-          <span>Profile changes successfully encrypted and saved to Questa World database!</span>
+          <span>Profile changes successfully encrypted and saved to Questra World database!</span>
         </div>
       )}
 

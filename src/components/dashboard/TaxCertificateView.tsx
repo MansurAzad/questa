@@ -61,12 +61,12 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
           {/* Header */}
           <div className="text-center pb-6 border-b border-amber-900/20 dark:border-amber-500/20 font-sans">
             <img
-              src="/questa-logo.jpeg"
-              alt="Questa World logo"
+              src="/questra-logo.jpeg"
+              alt="Questra World logo"
               className="w-14 h-14 mx-auto rounded-full object-cover border-2 border-amber-600 bg-white mb-2 shadow-md"
             />
             <h1 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-slate-900 dark:text-white">
-              QUESTA WORLD LIMITED
+              QUESTRA WORLD LIMITED
             </h1>
             <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">
               Corporate Real Estate Developer & Taxpayer Withholding Entity · Dhaka & Chattogram
@@ -92,7 +92,7 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
               To Whom It May Concern,
             </p>
             <p>
-              This is to solemnly certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong>, holder of e-TIN: <span className="font-mono font-bold text-slate-900 dark:text-white">QW-TIN-{user.memberId.replace(/-/g, '')}</span>, National ID: <span className="font-mono text-slate-900 dark:text-white">{user.nidNo}</span>, and Questa World Member ID: <span className="font-mono text-amber-700 dark:text-amber-400 font-bold">{user.memberId}</span>, has legitimately invested in our approved properties as detailed below:
+              This is to solemnly certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong>, holder of e-TIN: <span className="font-mono font-bold text-slate-900 dark:text-white">QW-TIN-{user.memberId.replace(/-/g, '')}</span>, National ID: <span className="font-mono text-slate-900 dark:text-white">{user.nidNo}</span>, and Questra World Member ID: <span className="font-mono text-amber-700 dark:text-amber-400 font-bold">{user.memberId}</span>, has legitimately invested in our approved properties as detailed below:
             </p>
 
             {/* Assets Table */}

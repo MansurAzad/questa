@@ -84,13 +84,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-3 group text-left focus:outline-none"
             >
               <img
-                src="/questa-logo.jpeg"
-                alt="Questa World logo"
+                src="/questra-logo.jpeg"
+                alt="Questra World logo"
                 className="w-10 h-10 rounded-xl object-cover shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform bg-white ring-1 ring-slate-200 dark:ring-slate-700"
               />
               <div>
                 <span className="font-extrabold tracking-tight text-lg sm:text-xl text-slate-900 dark:text-white block leading-tight">
-                  Questa <span className="text-amber-600 dark:text-amber-500">World</span>
+                  Questra <span className="text-amber-600 dark:text-amber-500">World</span>
                 </span>
                 <span className="text-[10px] tracking-wider uppercase font-semibold text-slate-600 dark:text-slate-300 block -mt-0.5">
                   Real Estate & Investment

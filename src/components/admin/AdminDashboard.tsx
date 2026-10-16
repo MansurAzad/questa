@@ -620,14 +620,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
             <img
-              src="/questa-logo.jpeg"
-              alt="Questa World logo"
+              src="/questra-logo.jpeg"
+              alt="Questra World logo"
               className="w-10 h-10 rounded-xl object-cover shadow-xs bg-white ring-1 ring-slate-200 dark:ring-slate-700 shrink-0"
             />
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <span className="font-extrabold tracking-tight text-lg text-slate-900 dark:text-white truncate">
-                  Questa <span className="text-amber-600 dark:text-amber-500">World</span>
+                  Questra <span className="text-amber-600 dark:text-amber-500">World</span>
                 </span>
                 <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700 shrink-0">
                   ADMIN
@@ -2167,7 +2167,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     onChange={e => setNewNoticeTitle(e.target.value)}
                     onBlur={() => markNotice('newNoticeTitle')}
                     aria-invalid={!!showNoticeError('newNoticeTitle')}
-                    placeholder="e.g. Questa Royal Bay Hotel Share & Quarterly Dividend Distribution Urgent Notice"
+                    placeholder="e.g. Questra Royal Bay Hotel Share & Quarterly Dividend Distribution Urgent Notice"
                     className={showNoticeError('newNoticeTitle')
                       ? 'w-full px-3 py-2 rounded-xl border border-rose-400 dark:border-rose-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500/30'
                       : inputCls}

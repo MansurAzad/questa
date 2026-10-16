@@ -31,7 +31,7 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
   cmsTitle,
   cmsSubtitle
 }) => {
-  const [selectedProjectId, setSelectedProjectId] = useState<string>('questa-royal-bay');
+  const [selectedProjectId, setSelectedProjectId] = useState<string>('questra-royal-bay');
   const [selectedMilestoneId, setSelectedMilestoneId] = useState<string | null>(null);
   const [filterState, setFilterState] = useState<'all' | 'completed' | 'in_progress'>('all');
 

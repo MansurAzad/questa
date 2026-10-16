@@ -3,7 +3,7 @@
 export const translations = {
   en: {
     // Brand
-    brandName: 'Questa World',
+    brandName: 'Questra World',
     brandTagline: 'Secure Real Estate & Fractional Investment',
     
     // Nav
@@ -126,7 +126,7 @@ export const translations = {
 
     // Payment Gateway Modal
     modalPayTitle: 'Secure Payment Gateway',
-    modalPayDesc: 'Authorized payment integration for Questa World installment clearance.',
+    modalPayDesc: 'Authorized payment integration for Questra World installment clearance.',
     selectPaymentMethod: 'Select Payment Channel',
     bKashWallet: 'bKash Merchant Pay',
     nagadWallet: 'Nagad Direct',
@@ -143,7 +143,7 @@ export const translations = {
     verifiedStamp: 'GOVT. SUB-REGISTRY & RJSC COMPLIANT',
 
     // Glance Widget
-    glanceTitle: 'Questa World Portfolio Glance',
+    glanceTitle: 'Questra World Portfolio Glance',
     glanceDividend: 'Monthly Dividend',
     glanceSynced: 'Cloud Synced',
     glanceOffline: 'Offline Mode (Encrypted)',

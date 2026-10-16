@@ -15,25 +15,25 @@ export const LegalSecurity: React.FC<LegalSecurityProps> = ({ language, cmsTitle
       title: 'Registered Ownership & Title Chain',
       titleBn: 'Registered Ownership & Title Verification',
       desc: 'Every share and floor unit carries a clean, dispute-free ownership chain verified with the Sub-Registry and corporate legal counsel.',
-      descBn: 'Questa World Share Questa World Questa World Questa World Questa World Questa World Questa World Questa World-Questa World Questa World Questa World Questa World Questa World Questa World Questa World।'
+      descBn: 'Every share and floor unit carries a clean, dispute-free ownership chain verified with the Sub-Registry and corporate legal counsel.'
     },
     {
       title: 'National Building Code & Safety Conformance',
       titleBn: 'National Building Code & Fire Safety Compliant Construction',
-      desc: 'All Questa World towers are designed strictly adhering to the national building code, fire-safety regulations and approved architectural plans.',
-      descBn: 'All Questa World towers strictly follow the national building code, fire-safety regulations and approved architectural plans.'
+      desc: 'All Questra World towers are designed strictly adhering to the national building code, fire-safety regulations and approved architectural plans.',
+      descBn: 'All Questra World towers strictly follow the national building code, fire-safety regulations and approved architectural plans.'
     },
     {
       title: 'Direct Sub-Registry Deed Delivery',
       titleBn: 'Instant Registry Deed Transfer',
       desc: 'Share and floor owners receive full registered deed & ownership certificate delivery upon completion of payment schedules.',
-      descBn: 'Questa World Questa World Questa World PayQuesta World Questa World Questa World Share Questa World Questa World Questa World Questa World Questa World Questa World Questa World Questa World Questa World Questa World Questa World।'
+      descBn: 'Share and floor owners receive full registered deed & ownership certificate delivery upon completion of payment schedules.'
     },
     {
       title: 'Bank & Islamic Finance Approved',
       titleBn: 'Bank Loan & Shariah-Compliant Investment',
       desc: 'All projects are pre-vetted by leading banks for seamless construction finance and shariah-compliant fractional profit-sharing.',
-      descBn: 'Questa World Questa World Questa World Questa World Questa World Questa World Questa World-Questa World Questa World Questa World Questa World।'
+      descBn: 'All projects are pre-vetted by leading banks for seamless construction finance and shariah-compliant fractional profit-sharing.'
     }
   ];
 
@@ -50,7 +50,7 @@ export const LegalSecurity: React.FC<LegalSecurityProps> = ({ language, cmsTitle
             {cmsTitle || 'Zero-Risk Real Estate & Ownership Security'}
           </h2>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-            {cmsSubtitle || 'At Questa World, every share and floor unit is backed by ironclad registered deeds, verified ownership, and transparent registration.'}
+            {cmsSubtitle || 'At Questra World, every share and floor unit is backed by ironclad registered deeds, verified ownership, and transparent registration.'}
           </p>
         </div>
 

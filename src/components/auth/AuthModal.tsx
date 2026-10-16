@@ -152,8 +152,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </button>
 
           <img
-            src="/questa-logo.jpeg"
-            alt="Questa World logo"
+            src="/questra-logo.jpeg"
+            alt="Questra World logo"
             className="w-14 h-14 mx-auto rounded-xl object-cover ring-2 ring-amber-400/40 shadow-lg mb-3 bg-white"
           />
 
@@ -352,7 +352,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Footer info note */}
         <div className="px-6 py-3 bg-slate-50 dark:bg-slate-900/60 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 text-center">
-          Questa World 24/7 Investor Hotline: +880 1810-685888
+          Questra World 24/7 Investor Hotline: +880 1810-685888
         </div>
 
       </div>

@@ -40,8 +40,8 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
       preferredDate: formatted,
       timeSlot: 'Morning (09:30 AM)',
       projectInterested: pickupLocation.includes('Dhaka')
-        ? 'Questa Commercial Center (Mirpur, Dhaka)'
-        : "Questa Royal Bay (Hotel & Suites), Cox's Bazar",
+        ? 'Questra Commercial Center (Mirpur, Dhaka)'
+        : "Questra Royal Bay (Hotel & Suites), Cox's Bazar",
       pickupLocation,
       guestsCount: 1
     });

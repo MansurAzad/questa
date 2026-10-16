@@ -41,8 +41,8 @@ const SITE_PHOTOS: GalleryMediaItem[] = Array.from(
       id: `site-${n}`,
       kind: 'photo',
       category: 'construction',
-      title: `Questa World Project Site — Progress Photo ${n}`,
-      project: 'Questa World Development',
+      title: `Questra World Project Site — Progress Photo ${n}`,
+      project: 'Questra World Development',
       date: 'October 2026',
       tag: 'Site Photo',
       imageUrl: `/gallery/gallery-${n}.jpeg`
@@ -60,7 +60,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     kind: 'photo',
     category: 'render',
     title: 'Architectural 3D Render — Oceanfront Infinity Pool & Sky Lounge',
-    project: 'Questa Royal Bay Hotel & Suites',
+    project: 'Questra Royal Bay Hotel & Suites',
     date: 'May 2026',
     tag: '3D Render',
     imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&auto=format&fit=crop&q=80'
@@ -70,7 +70,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     kind: 'photo',
     category: 'render',
     title: 'Commercial Center Concept — Double-Height Retail Atrium',
-    project: 'Questa World Commercial Center - Mirpur',
+    project: 'Questra World Commercial Center - Mirpur',
     date: 'March 2026',
     tag: '3D Render',
     imageUrl: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&auto=format&fit=crop&q=80'
@@ -80,7 +80,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     kind: 'photo',
     category: 'render',
     title: 'Resort Master Plan — Landscape, Boardwalk & Amenity Deck',
-    project: 'Questa Royal Bay Hotel & Suites',
+    project: 'Questra Royal Bay Hotel & Suites',
     date: 'February 2026',
     tag: 'Master Plan',
     imageUrl: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&auto=format&fit=crop&q=80'
@@ -93,8 +93,8 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
       id: `video-${n}`,
       kind: 'video',
       category: 'construction',
-      title: `Questa World Project Site — Video Tour ${n}`,
-      project: 'Questa World Development',
+      title: `Questra World Project Site — Video Tour ${n}`,
+      project: 'Questra World Development',
       date: 'October 2026',
       tag: 'Site Video',
       imageUrl: `/videos/posters/tour-${n}.jpg`,

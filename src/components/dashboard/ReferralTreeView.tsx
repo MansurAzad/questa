@@ -100,7 +100,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
   const [newMemberName, setNewMemberName] = useState('');
   const [newMemberPhone, setNewMemberPhone] = useState('');
   const [newMemberUsername, setNewMemberUsername] = useState('');
-  const [newMemberAsset, setNewMemberAsset] = useState('Questa Royal Bay (1 Suite Share)');
+  const [newMemberAsset, setNewMemberAsset] = useState('Questra Royal Bay (1 Suite Share)');
   const [newMemberPlacement, setNewMemberPlacement] = useState('1');
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [downlineTouched, setDownlineTouched] = useState<Record<string, boolean>>({});
@@ -122,7 +122,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
   const markDownline = (f: string) => setDownlineTouched(prev => ({ ...prev, [f]: true }));
 
   const referralCode = user.referralCode || 'QW-8842';
-  const refUrl = `https://questaworld.com/user/register?ref=${user.username}&code=${referralCode}`;
+  const refUrl = `https://questraworld.com/user/register?ref=${user.username}&code=${referralCode}`;
 
   const handleCopy = () => {
     navigator.clipboard?.writeText(refUrl);
@@ -623,9 +623,9 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
                   onChange={e => setNewMemberAsset(e.target.value)}
                   className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                 >
-                  <option>Questa Royal Bay (1 Suite Share)</option>
-                  <option>Questa Royal Bay (2 Suite Shares)</option>
-                  <option>Questa Commercial Center (Floor Share)</option>
+                  <option>Questra Royal Bay (1 Suite Share)</option>
+                  <option>Questra Royal Bay (2 Suite Shares)</option>
+                  <option>Questra Commercial Center (Floor Share)</option>
                 </select>
               </div>
               <div>
