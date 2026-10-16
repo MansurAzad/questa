@@ -18,7 +18,11 @@ import {
   minLength,
   username as usernameRule,
   password as passwordRule,
+  email as emailRule,
   phone as phoneRule,
+  pin as pinRule,
+  optionalUsername,
+  matches,
   runRules,
   RuleSet
 } from '../../utils/validation';
@@ -45,7 +49,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [password, setPassword] = useState('123456');
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [branch, setBranch] = useState('Chattogram Office (Agrabad)');
+  const [email, setEmail] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [transactionPin, setTransactionPin] = useState('');
+  const [confirmTransactionPin, setConfirmTransactionPin] = useState('');
+  const [referenceUsername, setReferenceUsername] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -61,16 +69,45 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         password: required('Password')
       }
     : {
+        username: usernameRule('User Name'),
         fullName: compose(required('Full Name'), minLength('Full Name', 3)),
-        username: usernameRule('Username'),
-        phone: phoneRule('Mobile number', false),
-        password: passwordRule('Password', 6)
+        phone: phoneRule('Phone Number'),
+        email: emailRule('Email'),
+        password: passwordRule('Password', 6),
+        confirmPassword: matches('Confirm Password', 'Password', () => password),
+        transactionPin: pinRule('Transaction Pin', 4),
+        confirmTransactionPin: compose(
+          pinRule('Confirm Transaction Pin', 4),
+          matches('Confirm Transaction Pin', 'Transaction Pin', () => transactionPin)
+        ),
+        referenceUsername: optionalUsername('Reference Username')
       };
 
-  const values = { username, password, fullName, phone };
+  const values = {
+    username,
+    password,
+    fullName,
+    phone,
+    email,
+    confirmPassword,
+    transactionPin,
+    confirmTransactionPin,
+    referenceUsername
+  };
   const result = useMemo(
     () => runRules(values, rules),
-    [isLoginTab, username, password, fullName, phone]
+    [
+      isLoginTab,
+      username,
+      password,
+      fullName,
+      phone,
+      email,
+      confirmPassword,
+      transactionPin,
+      confirmTransactionPin,
+      referenceUsername
+    ]
   );
 
   if (!isOpen) return null;
@@ -126,7 +163,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         return;
       }
       const registered = StorageService.register(
-        { username, fullName, email: '', phone, branch },
+        {
+          username,
+          fullName,
+          phone,
+          email,
+          transactionPin,
+          referenceUsername: referenceUsername.trim() || undefined
+        },
         password
       );
       onLoginSuccess(registered);
@@ -220,27 +264,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
           )}
 
-          {!isLoginTab && (
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                Full Name
-              </label>
-              <input
-                type="text"
-                value={fullName}
-                onChange={e => setFullName(e.target.value)}
-                onBlur={() => mark('fullName')}
-                placeholder="e.g. Md. Rafiqul Islam"
-                aria-invalid={!!showError('fullName')}
-                className={withValidation(fieldBase, !!showError('fullName'))}
-              />
-              <FieldError message={showError('fullName')} />
-            </div>
-          )}
-
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-              {t('usernameLabel')}
+              User Name
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
@@ -260,10 +286,28 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </div>
 
           {!isLoginTab && (
-            <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Full Name
+              </label>
+              <input
+                type="text"
+                value={fullName}
+                onChange={e => setFullName(e.target.value)}
+                onBlur={() => mark('fullName')}
+                placeholder="e.g. Md. Rafiqul Islam"
+                aria-invalid={!!showError('fullName')}
+                className={withValidation(fieldBase, !!showError('fullName'))}
+              />
+              <FieldError message={showError('fullName')} />
+            </div>
+          )}
+
+          {!isLoginTab && (
+            <>
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Phone / Mobile
+                  Phone Number
                 </label>
                 <input
                   type="text"
@@ -278,24 +322,25 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </div>
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Branch Office
+                  Email
                 </label>
-                <select
-                  value={branch}
-                  onChange={e => setBranch(e.target.value)}
-                  className="w-full px-2 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
-                >
-                  <option>Chattogram Office (Agrabad)</option>
-                  <option>Dhaka Head Office (Mirpur)</option>
-                  <option>Cox's Bazar Site Office</option>
-                </select>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  onBlur={() => mark('email')}
+                  placeholder="you@gmail.com"
+                  aria-invalid={!!showError('email')}
+                  className={withValidation(fieldBase, !!showError('email'))}
+                />
+                <FieldError message={showError('email')} />
               </div>
-            </div>
+            </>
           )}
 
           <div>
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-              {t('passwordLabel')}
+              Password
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
@@ -321,16 +366,96 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <FieldError message={showError('password')} />
           </div>
 
-          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-            <label className="flex items-center gap-1.5 cursor-pointer">
-              <input type="checkbox" defaultChecked className="rounded border-slate-300 text-amber-600 focus:ring-amber-500" />
-              <span>{t('rememberMe')}</span>
-            </label>
-            <span className="flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              256-Bit SSL
-            </span>
-          </div>
+          {!isLoginTab && (
+            <>
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                    <Lock className="w-4 h-4" />
+                  </div>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    onBlur={() => mark('confirmPassword')}
+                    placeholder="Re-enter password"
+                    aria-invalid={!!showError('confirmPassword')}
+                    className={withValidation(`${fieldBase} pl-9 font-mono`, !!showError('confirmPassword'))}
+                  />
+                </div>
+                <FieldError message={showError('confirmPassword')} />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Transaction Pin
+                  </label>
+                  <input
+                    type="password"
+                    inputMode="numeric"
+                    maxLength={4}
+                    value={transactionPin}
+                    onChange={e => setTransactionPin(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                    onBlur={() => mark('transactionPin')}
+                    placeholder="4 digits"
+                    aria-invalid={!!showError('transactionPin')}
+                    className={withValidation(`${fieldBase} font-mono tracking-widest`, !!showError('transactionPin'))}
+                  />
+                  <FieldError message={showError('transactionPin')} />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    Confirm Transaction Pin
+                  </label>
+                  <input
+                    type="password"
+                    inputMode="numeric"
+                    maxLength={4}
+                    value={confirmTransactionPin}
+                    onChange={e => setConfirmTransactionPin(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                    onBlur={() => mark('confirmTransactionPin')}
+                    placeholder="4 digits"
+                    aria-invalid={!!showError('confirmTransactionPin')}
+                    className={withValidation(`${fieldBase} font-mono tracking-widest`, !!showError('confirmTransactionPin'))}
+                  />
+                  <FieldError message={showError('confirmTransactionPin')} />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Reference Username
+                </label>
+                <input
+                  type="text"
+                  value={referenceUsername}
+                  onChange={e => setReferenceUsername(e.target.value)}
+                  onBlur={() => mark('referenceUsername')}
+                  placeholder="Optional — sponsor's username"
+                  aria-invalid={!!showError('referenceUsername')}
+                  className={withValidation(`${fieldBase} font-mono`, !!showError('referenceUsername'))}
+                />
+                <FieldError message={showError('referenceUsername')} />
+              </div>
+            </>
+          )}
+
+          {isLoginTab && (
+            <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <label className="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" defaultChecked className="rounded border-slate-300 text-amber-600 focus:ring-amber-500" />
+                <span>{t('rememberMe')}</span>
+              </label>
+              <span className="flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                256-Bit SSL
+              </span>
+            </div>
+          )}
 
           <button
             type="submit"
@@ -344,7 +469,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <span>
               {showFixLabel
                 ? `Fix ${invalidCount} field${invalidCount > 1 ? 's' : ''} to continue`
-                : isLoginTab ? t('btnSignIn') : t('btnRegister')}
+                : isLoginTab ? t('btnSignIn') : 'Submit'}
             </span>
             <ArrowRight className="w-4 h-4" />
           </button>

@@ -102,6 +102,15 @@ export const username = (label = 'Username'): Rule => v => {
   return null;
 };
 
+/** Optional username (e.g. a referral reference) — only fails when typed but malformed. */
+export const optionalUsername = (label = 'Username'): Rule => v => {
+  if (isBlank(v)) return null;
+  const t = v.trim();
+  if (t.length < 4) return `${label} must be at least 4 characters.`;
+  if (!/^[a-zA-Z0-9_.]+$/.test(t)) return `Use only letters, numbers, dot (.) and underscore (_).`;
+  return null;
+};
+
 export const password = (label = 'Password', min = 6): Rule => v => {
   if (isBlank(v)) return `${label} is required.`;
   if (!isStrongEnoughPassword(v, min)) return `${label} must be at least ${min} characters.`;
@@ -147,6 +156,12 @@ export const pin = (label = 'T-PIN', digits = 4): Rule => v => {
   if (!new RegExp(`^\\d{${digits}}$`).test(v.trim()))
     return `${label} must be exactly ${digits} digits.`;
   return null;
+};
+
+/** Requires the value to exactly match another field's current value. */
+export const matches = (label: string, otherLabel: string, otherValue: () => string): Rule => v => {
+  if (isBlank(v)) return `${label} is required.`;
+  return v === otherValue() ? null : `${label} does not match the ${otherLabel.toLowerCase()}.`;
 };
 
 export const maxValue = (label: string, maximum: number, formatter?: (n: number) => string): Rule => v => {

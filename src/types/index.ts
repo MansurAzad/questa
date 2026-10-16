@@ -32,6 +32,10 @@ export interface User {
   bankAccount?: string;
   bankRoutingNumber?: string;
   mfsNumber?: string;
+  /** 4-digit transaction PIN chosen at signup. */
+  transactionPin?: string;
+  /** Username of the investor who referred this account (optional). */
+  referenceUsername?: string;
 }
 
 export interface ReferralSignup {

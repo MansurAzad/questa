@@ -1163,7 +1163,9 @@ export class StorageService {
       bankBranch: newUser.bankBranch,
       bankAccount: newUser.bankAccount,
       bankRoutingNumber: newUser.bankRoutingNumber,
-      mfsNumber: newUser.mfsNumber
+      mfsNumber: newUser.mfsNumber,
+      transactionPin: newUser.transactionPin,
+      referenceUsername: newUser.referenceUsername
     };
 
     localStorage.setItem(
@@ -1172,6 +1174,39 @@ export class StorageService {
     );
     localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(user));
     this.ensureDataInitialized();
+
+    // If a valid reference username was supplied, record the referral so the
+    // sponsor sees this signup in their referral network.
+    const sponsorUsername = (newUser.referenceUsername || '').trim();
+    if (sponsorUsername && this.accountExists(sponsorUsername)) {
+      try {
+        this.addReferralSignup({
+          name: user.fullName,
+          username: user.username,
+          memberId: user.memberId,
+          email: user.email,
+          phone: user.phone,
+          avatar: user.avatar,
+          sponsorUsername,
+          sponsorName: sponsorUsername,
+          generation: 1,
+          signupDate: user.joinedDate,
+          status: 'pending',
+          assetBooked: 'Not yet booked',
+          investmentValue: 0,
+          commissionEarned: 0,
+          commissionRate: 0,
+          payoutStatus: 'pending',
+          rank: 'New Investor',
+          location: user.city,
+          kycVerified: false,
+          notes: 'Registered via the public signup form with a reference username.'
+        });
+      } catch {
+        /* non-fatal — the account is still created */
+      }
+    }
+
     return user;
   }
 

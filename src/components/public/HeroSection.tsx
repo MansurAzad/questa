@@ -17,9 +17,13 @@ import {
   minLength,
   username as usernameRule,
   password as passwordRule,
-  optionalEmail,
+  email as emailRule,
   phone as phoneRule,
-  runRules
+  pin as pinRule,
+  optionalUsername,
+  matches,
+  runRules,
+  RuleSet
 } from '../../utils/validation';
 import { FieldError, ValidationSummary, focusFirstInvalid, withValidation } from '../ui/Validation';
 
@@ -38,13 +42,11 @@ interface HeroSectionProps {
   brandName?: string;
 }
 
-const SIGNUP_RULES = {
-  fullName: compose(required('Full Name'), minLength('Full Name', 3)),
-  username: usernameRule('Username'),
-  phone: phoneRule('Mobile number', false),
-  email: optionalEmail('Email address'),
-  password: passwordRule('Password', 6)
-};
+/**
+ * The signup form is fixed by requirement: User Name, Full Name, Phone Number,
+ * Email, Password, Confirm Password, Transaction Pin, Confirm Transaction Pin
+ * and Reference Username — no other fields.
+ */
 
 const inputBase =
   'w-full px-3 py-2 rounded-lg border border-slate-700 bg-slate-950/60 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500';
@@ -66,8 +68,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [username, setUsername] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [branch, setBranch] = useState('Chattogram Office (Agrabad)');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [transactionPin, setTransactionPin] = useState('');
+  const [confirmTransactionPin, setConfirmTransactionPin] = useState('');
+  const [referenceUsername, setReferenceUsername] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -76,8 +81,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [signupDone, setSignupDone] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const values = { fullName, username, phone, email, password };
-  const result = useMemo(() => runRules(values, SIGNUP_RULES), [fullName, username, phone, email, password]);
+  const rules = useMemo<RuleSet>(
+    () => ({
+      username: usernameRule('User Name'),
+      fullName: compose(required('Full Name'), minLength('Full Name', 3)),
+      phone: phoneRule('Phone Number'),
+      email: emailRule('Email'),
+      password: passwordRule('Password', 6),
+      confirmPassword: matches('Confirm Password', 'Password', () => password),
+      transactionPin: pinRule('Transaction Pin', 4),
+      confirmTransactionPin: compose(
+        pinRule('Confirm Transaction Pin', 4),
+        matches('Confirm Transaction Pin', 'Transaction Pin', () => transactionPin)
+      ),
+      referenceUsername: optionalUsername('Reference Username')
+    }),
+    [password, transactionPin]
+  );
+
+  const values = {
+    username,
+    fullName,
+    phone,
+    email,
+    password,
+    confirmPassword,
+    transactionPin,
+    confirmTransactionPin,
+    referenceUsername
+  };
+  const result = useMemo(
+    () => runRules(values, rules),
+    [
+      username,
+      fullName,
+      phone,
+      email,
+      password,
+      confirmPassword,
+      transactionPin,
+      confirmTransactionPin,
+      referenceUsername,
+      rules
+    ]
+  );
 
   const showError = (field: string): string | null =>
     (touched[field] || submitAttempt) ? (result.errors[field] || null) : null;
@@ -104,7 +151,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       return;
     }
     const registered = StorageService.register(
-      { fullName, username, phone, email, branch },
+      {
+        fullName,
+        username,
+        phone,
+        email,
+        transactionPin,
+        referenceUsername: referenceUsername.trim() || undefined
+      },
       password
     );
     setSignupDone(`Welcome ${registered.fullName}! Your investor account is ready.`);
@@ -184,6 +238,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 )}
 
                 <div>
+                  <label className="block text-slate-300 font-semibold mb-1">User Name *</label>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    onBlur={() => mark('username')}
+                    placeholder="e.g. rafiqul_islam7"
+                    aria-invalid={!!showError('username')}
+                    className={withValidation(`${inputBase} font-mono`, !!showError('username'))}
+                  />
+                  <FieldError message={showError('username')} />
+                </div>
+
+                <div>
                   <label className="block text-slate-300 font-semibold mb-1">Full Name *</label>
                   <input
                     type="text"
@@ -197,61 +265,32 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <FieldError message={showError('fullName')} />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-slate-300 font-semibold mb-1">Username *</label>
-                    <input
-                      type="text"
-                      value={username}
-                      onChange={e => setUsername(e.target.value)}
-                      onBlur={() => mark('username')}
-                      placeholder="mohammad_ali7"
-                      aria-invalid={!!showError('username')}
-                      className={withValidation(`${inputBase} font-mono`, !!showError('username'))}
-                    />
-                    <FieldError message={showError('username')} />
-                  </div>
-                  <div>
-                    <label className="block text-slate-300 font-semibold mb-1">Mobile Phone</label>
-                    <input
-                      type="text"
-                      value={phone}
-                      onChange={e => setPhone(e.target.value)}
-                      onBlur={() => mark('phone')}
-                      placeholder="+880 1711-000000"
-                      aria-invalid={!!showError('phone')}
-                      className={withValidation(`${inputBase} font-mono`, !!showError('phone'))}
-                    />
-                    <FieldError message={showError('phone')} />
-                  </div>
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Phone Number *</label>
+                  <input
+                    type="text"
+                    value={phone}
+                    onChange={e => setPhone(e.target.value)}
+                    onBlur={() => mark('phone')}
+                    placeholder="+880 1711-000000"
+                    aria-invalid={!!showError('phone')}
+                    className={withValidation(`${inputBase} font-mono`, !!showError('phone'))}
+                  />
+                  <FieldError message={showError('phone')} />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-slate-300 font-semibold mb-1">Email Address</label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      onBlur={() => mark('email')}
-                      placeholder="you@gmail.com"
-                      aria-invalid={!!showError('email')}
-                      className={withValidation(inputBase, !!showError('email'))}
-                    />
-                    <FieldError message={showError('email')} />
-                  </div>
-                  <div>
-                    <label className="block text-slate-300 font-semibold mb-1">Preferred Branch</label>
-                    <select
-                      value={branch}
-                      onChange={e => setBranch(e.target.value)}
-                      className={inputBase}
-                    >
-                      <option>Chattogram Office (Agrabad)</option>
-                      <option>Dhaka Head Office (Mirpur)</option>
-                      <option>Cox's Bazar Site Office</option>
-                    </select>
-                  </div>
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Email *</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    onBlur={() => mark('email')}
+                    placeholder="you@gmail.com"
+                    aria-invalid={!!showError('email')}
+                    className={withValidation(inputBase, !!showError('email'))}
+                  />
+                  <FieldError message={showError('email')} />
                 </div>
 
                 <div>
@@ -280,6 +319,72 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <FieldError message={showError('password')} />
                 </div>
 
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Confirm Password *</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                      <Lock className="w-3.5 h-3.5" />
+                    </div>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={confirmPassword}
+                      onChange={e => setConfirmPassword(e.target.value)}
+                      onBlur={() => mark('confirmPassword')}
+                      placeholder="Re-enter password"
+                      aria-invalid={!!showError('confirmPassword')}
+                      className={withValidation(`${inputBase} pl-9 font-mono`, !!showError('confirmPassword'))}
+                    />
+                  </div>
+                  <FieldError message={showError('confirmPassword')} />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-slate-300 font-semibold mb-1">Transaction Pin *</label>
+                    <input
+                      type="password"
+                      inputMode="numeric"
+                      maxLength={4}
+                      value={transactionPin}
+                      onChange={e => setTransactionPin(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                      onBlur={() => mark('transactionPin')}
+                      placeholder="4-digit PIN"
+                      aria-invalid={!!showError('transactionPin')}
+                      className={withValidation(`${inputBase} font-mono tracking-widest`, !!showError('transactionPin'))}
+                    />
+                    <FieldError message={showError('transactionPin')} />
+                  </div>
+                  <div>
+                    <label className="block text-slate-300 font-semibold mb-1">Confirm Transaction Pin *</label>
+                    <input
+                      type="password"
+                      inputMode="numeric"
+                      maxLength={4}
+                      value={confirmTransactionPin}
+                      onChange={e => setConfirmTransactionPin(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                      onBlur={() => mark('confirmTransactionPin')}
+                      placeholder="Re-enter PIN"
+                      aria-invalid={!!showError('confirmTransactionPin')}
+                      className={withValidation(`${inputBase} font-mono tracking-widest`, !!showError('confirmTransactionPin'))}
+                    />
+                    <FieldError message={showError('confirmTransactionPin')} />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Reference Username</label>
+                  <input
+                    type="text"
+                    value={referenceUsername}
+                    onChange={e => setReferenceUsername(e.target.value)}
+                    onBlur={() => mark('referenceUsername')}
+                    placeholder="Optional — your sponsor's username"
+                    aria-invalid={!!showError('referenceUsername')}
+                    className={withValidation(`${inputBase} font-mono`, !!showError('referenceUsername'))}
+                  />
+                  <FieldError message={showError('referenceUsername')} />
+                </div>
+
                 <button
                   type="submit"
                   aria-disabled={submitAttempt && !signupReady}
@@ -292,7 +397,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <span>
                     {submitAttempt && !signupReady
                       ? `Fix ${result.messages.length} field${result.messages.length > 1 ? 's' : ''} to continue`
-                      : 'Create Investor Account'}
+                      : 'Submit'}
                   </span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
