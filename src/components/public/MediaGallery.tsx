@@ -180,6 +180,7 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
                   controls
                   autoPlay
                   playsInline
+                  preload="metadata"
                   className="w-full h-full object-contain"
                 />
               ) : (

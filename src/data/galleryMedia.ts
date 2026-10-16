@@ -8,9 +8,8 @@
 // Real on-site photographs live in `public/gallery/` and are referenced with
 // root-relative paths (e.g. `/gallery/gallery-01.jpeg`).
 //
-// NOTE: `videoUrl` values below point at public sample MP4s so the player is
-// functional out of the box — replace them with the real project footage
-// (CDN / S3 / YouTube embed) when available.
+// Real site videos live in `public/videos/` (compressed for web playback) with
+// poster frames in `public/videos/posters/`.
 // ---------------------------------------------------------------------------
 
 export type GalleryMediaKind = 'photo' | 'video';
@@ -88,37 +87,18 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
   },
 
   // ----------------------------- VIDEOS ----------------------------------
-  {
-    id: 'vid-1',
-    kind: 'video',
-    category: 'aerial',
-    title: "Aerial Drone Flyover — Cox's Bazar Coastal Site",
-    project: 'Questa Royal Bay Hotel & Suites',
-    date: 'September 2026',
-    tag: 'Drone Video',
-    imageUrl: 'https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=1200&auto=format&fit=crop&q=80',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4'
-  },
-  {
-    id: 'vid-2',
-    kind: 'video',
-    category: 'construction',
-    title: 'Monthly Progress Walkthrough — Structural Floors & Façade',
-    project: 'Questa Royal Bay Hotel & Suites',
-    date: 'August 2026',
-    tag: 'Site Walkthrough',
-    imageUrl: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&auto=format&fit=crop&q=80',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
-  },
-  {
-    id: 'vid-3',
-    kind: 'video',
-    category: 'render',
-    title: '3D Concept Walkthrough — Questa World Commercial Center',
-    project: 'Questa World Commercial Center - Mirpur',
-    date: 'July 2026',
-    tag: '3D Walkthrough',
-    imageUrl: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&auto=format&fit=crop&q=80',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
-  }
+  ...Array.from({ length: 6 }, (_, index): GalleryMediaItem => {
+    const n = String(index + 1).padStart(2, '0');
+    return {
+      id: `video-${n}`,
+      kind: 'video',
+      category: 'construction',
+      title: `Questa World Project Site — Video Tour ${n}`,
+      project: 'Questa World Development',
+      date: 'October 2026',
+      tag: 'Site Video',
+      imageUrl: `/videos/posters/tour-${n}.jpg`,
+      videoUrl: `/videos/tour-${n}.mp4`
+    };
+  })
 ];
