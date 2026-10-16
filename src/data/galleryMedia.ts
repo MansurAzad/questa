@@ -5,6 +5,9 @@
 // Every section renders a curated slice of this single library (see the CMS
 // section ids `gallery`, `gallery-videos`, `gallery-renders`).
 //
+// Real on-site photographs live in `public/gallery/` and are referenced with
+// root-relative paths (e.g. `/gallery/gallery-01.jpeg`).
+//
 // NOTE: `videoUrl` values below point at public sample MP4s so the player is
 // functional out of the box — replace them with the real project footage
 // (CDN / S3 / YouTube embed) when available.
@@ -28,60 +31,33 @@ export interface GalleryMediaItem {
   videoUrl?: string;
 }
 
+/** Number of real on-site photographs shipped in `public/gallery/`. */
+const SITE_PHOTO_COUNT = 19;
+
+const SITE_PHOTOS: GalleryMediaItem[] = Array.from(
+  { length: SITE_PHOTO_COUNT },
+  (_, index): GalleryMediaItem => {
+    const n = String(index + 1).padStart(2, '0');
+    return {
+      id: `site-${n}`,
+      kind: 'photo',
+      category: 'construction',
+      title: `Questa World Project Site — Progress Photo ${n}`,
+      project: 'Questa World Development',
+      date: 'October 2026',
+      tag: 'Site Photo',
+      imageUrl: `/gallery/gallery-${n}.jpeg`
+    };
+  }
+);
+
 export const GALLERY_MEDIA: GalleryMediaItem[] = [
-  // ------------------------------- PHOTOS --------------------------------
+  // --------------------------- SITE PHOTOS -------------------------------
+  ...SITE_PHOTOS,
+
+  // --------------------------- 3D RENDERS --------------------------------
   {
-    id: 'med-1',
-    kind: 'photo',
-    category: 'construction',
-    title: 'Questa Royal Bay Hotel & Suites — Hurricane-Grade Glass Façade Installation',
-    project: 'Questa Royal Bay Hotel & Suites',
-    date: 'September 2026',
-    tag: 'Construction',
-    imageUrl: 'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?w=1200&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'med-2',
-    kind: 'photo',
-    category: 'construction',
-    title: 'Questa Royal Bay — 12-Story RCC Superstructure Milestone',
-    project: 'Questa Royal Bay Hotel & Suites',
-    date: 'August 2026',
-    tag: 'Structure',
-    imageUrl: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=1200&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'med-6',
-    kind: 'photo',
-    category: 'construction',
-    title: 'Mirpur Pallabi Commercial Hub — Triple-Basement Deep Piling',
-    project: 'Questa World Commercial Center - Mirpur',
-    date: 'April 2026',
-    tag: 'Foundation',
-    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'med-3',
-    kind: 'photo',
-    category: 'aerial',
-    title: 'Aerial Drone View — Beachfront Superstructure & Infinity Pool Deck',
-    project: 'Questa Royal Bay Hotel & Suites',
-    date: 'July 2026',
-    tag: 'Aerial',
-    imageUrl: 'https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=1200&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'med-4',
-    kind: 'photo',
-    category: 'event',
-    title: 'Registered Share Deed Handover Ceremony with Investors',
-    project: 'Corporate Event',
-    date: 'June 2026',
-    tag: 'Investor Meet',
-    imageUrl: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'med-5',
+    id: 'rend-1',
     kind: 'photo',
     category: 'render',
     title: 'Architectural 3D Render — Oceanfront Infinity Pool & Sky Lounge',
@@ -91,7 +67,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&auto=format&fit=crop&q=80'
   },
   {
-    id: 'med-7',
+    id: 'rend-2',
     kind: 'photo',
     category: 'render',
     title: 'Commercial Center Concept — Double-Height Retail Atrium',
@@ -101,7 +77,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     imageUrl: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&auto=format&fit=crop&q=80'
   },
   {
-    id: 'med-8',
+    id: 'rend-3',
     kind: 'photo',
     category: 'render',
     title: 'Resort Master Plan — Landscape, Boardwalk & Amenity Deck',
@@ -111,7 +87,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     imageUrl: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&auto=format&fit=crop&q=80'
   },
 
-  // ------------------------------- VIDEOS --------------------------------
+  // ----------------------------- VIDEOS ----------------------------------
   {
     id: 'vid-1',
     kind: 'video',

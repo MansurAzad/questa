@@ -339,7 +339,7 @@ export default function App() {
                         cmsTitle={section.title}
                         cmsSubtitle={section.subtitle}
                         cmsBody={section.body}
-                        filter={{ kind: 'photo' }}
+                        filter={{ kind: 'photo', category: 'construction' }}
                       />
                     );
                   case 'gallery-videos':
@@ -367,7 +367,7 @@ export default function App() {
                         cmsTitle={section.title}
                         cmsSubtitle={section.subtitle}
                         cmsBody={section.body}
-                        filter={{ category: 'render' }}
+                        filter={{ kind: 'photo', category: 'render' }}
                       />
                     );
                   case 'news':
