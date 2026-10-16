@@ -119,7 +119,7 @@ export interface InstallmentRecord {
   amount: number;
   status: 'paid' | 'due' | 'upcoming';
   paidDate?: string;
-  paymentMethod?: 'bKash' | 'Nagad' | 'Rocket' | 'Bank Transfer' | 'Card' | 'USDT (TRC20)';
+  paymentMethod?: 'PayPal' | 'Wise' | 'Stripe' | 'Bank Transfer' | 'Card' | 'USDT (TRC20)';
   transactionId?: string;
   receiptNo?: string;
 }

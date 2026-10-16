@@ -117,7 +117,7 @@ export const MemberTransferView: React.FC<MemberTransferViewProps> = ({
       };
 
       StorageService.addTransaction(tx);
-      StorageService.addAuditLog('P2P_TRANSFER', `@${recipientUsername}`, `Transferred ৳${tx.amount.toLocaleString()} from @${user.username}. Ref: ${tx.referenceNo}`, 'success');
+      StorageService.addAuditLog('P2P_TRANSFER', `@${recipientUsername}`, `Transferred $${tx.amount.toLocaleString()} from @${user.username}. Ref: ${tx.referenceNo}`, 'success');
 
       setIsProcessing(false);
       setSuccessTx(tx);
@@ -203,7 +203,7 @@ export const MemberTransferView: React.FC<MemberTransferViewProps> = ({
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="e.g. anwar_ctg or QW-CTG-9021"
+                  placeholder="e.g. andrew_h or QW-INT-9021"
                   value={recipientUsername}
                   onChange={e => { setRecipientUsername(e.target.value); if (serverErrors.recipientUsername) setServerErrors(prev => ({ ...prev, recipientUsername: '' })); }}
                   onBlur={() => mark('recipientUsername')}
@@ -219,7 +219,7 @@ export const MemberTransferView: React.FC<MemberTransferViewProps> = ({
 
             <div>
               <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
-                Amount to Transfer (BDT) *
+                Amount to Transfer (USD) *
               </label>
               <input
                 type="number"

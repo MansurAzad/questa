@@ -41,7 +41,7 @@ export const DepositSlipUploadView: React.FC<DepositSlipUploadViewProps> = ({
     () => dueInstallments[0]?.id || installments[0]?.id || ''
   );
   const [paymentMode, setPaymentMode] = useState('Bank Cash Deposit');
-  const [bankName, setBankName] = useState('The City Bank Limited (Agrabad Branch)');
+  const [bankName, setBankName] = useState('HSBC (Central Branch)');
   const [slipNumber, setSlipNumber] = useState('CBL-DEP-884291');
   const [depositDate, setDepositDate] = useState(todayISO());
   const [txHash, setTxHash] = useState('');
@@ -235,7 +235,7 @@ export const DepositSlipUploadView: React.FC<DepositSlipUploadViewProps> = ({
                   <option>Bank Cash Deposit</option>
                   <option>Account Transfer / IBFT</option>
                   <option>Cheque / Pay Order</option>
-                  <option>bKash / Nagad Agent Counter</option>
+                  <option>PayPal / Wise Agent Counter</option>
                   {crypto.enabled && <option>USDT (TRC20) Crypto Transfer</option>}
                 </select>
               </div>

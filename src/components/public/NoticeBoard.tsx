@@ -64,7 +64,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       date: '08 October 2026',
       urgent: true,
       summary:
-        'Share owners whose suite-share payment schedules are completed are requested to visit our Mirpur Head Office to collect their registered ownership deeds and confirm suite handover dates for the Cox\'s Bazar beachfront tower.',
+        'Share owners whose suite-share payment schedules are completed are requested to visit our Global Head Office to collect their registered ownership deeds and confirm suite handover dates for the Waterfront District beachfront tower.',
       summaryBn:
         'Questra World notification'
     },
@@ -92,7 +92,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       date: '25 September 2026',
       urgent: false,
       summary:
-        'Complimentary luxury AC Microbus tours depart every Friday and Saturday from Pallabi Head Office (9:30 AM) and Motijheel Branch (10:00 AM). Complimentary lunch and refreshments are provided for visiting families.',
+        'Complimentary luxury AC Microbus tours depart every Friday and Saturday from Global Head Office (9:30 AM) and Central Branch (10:00 AM). Complimentary lunch and refreshments are provided for visiting families.',
       summaryBn:
         'Questra World notification'
     },
@@ -106,7 +106,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       date: '15 September 2026',
       urgent: false,
       summary:
-        'As per the latest digital sub-registry guidelines, all share and floor unit registration for Questra World properties is being expedited with zero physical hassle. Certified ownership deeds are issued within 15 working days.',
+        'As per the latest digital land-registry guidelines, all share and floor unit registration for Questra World properties is being expedited with zero physical hassle. Certified ownership deeds are issued within 15 working days.',
       summaryBn:
         'Questra World notification'
     },
@@ -120,7 +120,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
       date: '05 September 2026',
       urgent: false,
       summary:
-        'The Annual General Meeting of Questra World Limited will be held on 18 December 2026 at the Grand Ball Room, Hotel Radisson Blu Dhaka. All registered investors are cordially invited.',
+        'The Annual General Meeting of Questra World Limited will be held on 18 December 2026 at the Grand Ball Room, Grand International Convention Centre. All registered investors are cordially invited.',
       summaryBn:
         'Questra World notification'
     }
@@ -146,7 +146,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400">
               {cmsSubtitle || (isBn
-                ? 'Latest official updates on share transfers, sub-registry, dividend distribution, and site visits.।'
+                ? 'Latest official updates on share transfers, land-registry, dividend distribution, and site visits.।'
                 : 'Stay updated with official company notices, AGM circulars, dividend distributions, and handover alerts.')}
             </p>
           </div>
@@ -254,8 +254,8 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
                 <AlertCircle className="w-5 h-5 shrink-0 text-amber-600" />
                 <span>
                   {isBn
-                    ? 'For any queries, contact our head office hotline directly at +880 1810-685888.'
-                    : 'For official clarifications, please call our Head Office Help Desk at +880 1810-685888.'}
+                    ? 'For any queries, contact our head office hotline directly at +44 181 068 5888.'
+                    : 'For official clarifications, please call our Head Office Help Desk at +44 181 068 5888.'}
                 </span>
               </div>
 

@@ -44,12 +44,12 @@ export default function App() {
   // English-only: language is locked to English
   const language: Language = 'en';
 
-  // User state - preloads Ziabulctg1 by default as requested in prompt, or loads from local storage
+  // User state - preloads user1 by default as requested in prompt, or loads from local storage
   const [user, setUser] = useState<User | null>(() => {
     const existing = StorageService.getUser();
     if (existing) return existing;
-    // Auto-login Ziabulctg1 initially so the user immediately sees the requested /user dashboard
-    const demo = StorageService.login('Ziabulctg1', '123456');
+    // Auto-login user1 initially so the user immediately sees the requested /user dashboard
+    const demo = StorageService.login('user1', '123456');
     return demo || INITIAL_USER;
   });
 
@@ -198,7 +198,7 @@ export default function App() {
             onLogout={handleLogout}
             onSwitchToUserPortal={() => {
               if (!user || user.role === 'admin') {
-                const ziabul = StorageService.login('Ziabulctg1', '123456');
+                const ziabul = StorageService.login('user1', '123456');
                 if (ziabul) setUser(ziabul);
               }
               setActiveView('dashboard');
@@ -232,13 +232,13 @@ export default function App() {
                 Investor Authentication Required
               </h3>
               <p className="text-xs text-slate-500">
-                Please log in with the provided credentials <strong>Ziabulctg1 / 123456</strong> to access your real estate portfolio.
+                Please log in with the provided credentials <strong>user1 / 123456</strong> to access your real estate portfolio.
               </p>
               <button
                 onClick={() => setAuthModalOpen(true)}
                 className="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs"
               >
-                Sign In as Ziabulctg1
+                Sign In as user1
               </button>
             </div>
           )

@@ -69,7 +69,7 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
               QUESTRA WORLD LIMITED
             </h1>
             <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">
-              Corporate Real Estate Developer & Taxpayer Withholding Entity · Dhaka & Chattogram
+              Corporate Real Estate Developer & Taxpayer Withholding Entity · Worldwide
             </p>
             <p className="text-[11px] font-mono text-slate-400 mt-1">
               Certificate No: QW/TAX/2026-27/0842 · Tax Assessment Year: 2026–2027
@@ -92,7 +92,7 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
               To Whom It May Concern,
             </p>
             <p>
-              This is to solemnly certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong>, holder of e-TIN: <span className="font-mono font-bold text-slate-900 dark:text-white">QW-TIN-{user.memberId.replace(/-/g, '')}</span>, National ID: <span className="font-mono text-slate-900 dark:text-white">{user.nidNo}</span>, and Questra World Member ID: <span className="font-mono text-amber-700 dark:text-amber-400 font-bold">{user.memberId}</span>, has legitimately invested in our approved properties as detailed below:
+              This is to solemnly certify that <strong className="text-slate-900 dark:text-white">{user.fullName}</strong>, holder of Tax ID: <span className="font-mono font-bold text-slate-900 dark:text-white">QW-TAX-{user.memberId.replace(/-/g, '')}</span>, Government ID: <span className="font-mono text-slate-900 dark:text-white">{user.nidNo}</span>, and Questra World Member ID: <span className="font-mono text-amber-700 dark:text-amber-400 font-bold">{user.memberId}</span>, has legitimately invested in our approved properties as detailed below:
             </p>
 
             {/* Assets Table */}
@@ -133,7 +133,7 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
             </div>
 
             <p className="text-xs text-slate-500">
-              All transactions have been executed through recognized banking channels (The City Bank Limited & formal electronic gateways) in full compliance with anti-money laundering and tax withholding directives.
+              All transactions have been executed through recognized banking channels (HSBC & formal electronic gateways) in full compliance with anti-money laundering and tax withholding directives.
             </p>
           </div>
 
@@ -141,9 +141,9 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
           <div className="pt-10 mt-6 border-t border-amber-800/20 dark:border-amber-500/20 grid grid-cols-2 sm:grid-cols-3 items-end text-center font-sans text-xs text-slate-600 dark:text-slate-400">
             <div>
               <div className="w-24 border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
-                S. Ahmed
+                S. Ashton
               </div>
-              <span className="block font-semibold">Shahriar Ahmed, FCA</span>
+              <span className="block font-semibold">Steven Ashton, CPA</span>
               <span className="text-[10px] text-slate-400">Chief Financial Officer</span>
             </div>
 
@@ -158,9 +158,9 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
 
             <div>
               <div className="w-24 border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
-                M. Rahman
+                M. Reynolds
               </div>
-              <span className="block font-semibold">Md. Mokhlesur Rahman</span>
+              <span className="block font-semibold">Mark Reynolds</span>
               <span className="text-[10px] text-slate-400">Senior Tax & Legal Advisor</span>
             </div>
           </div>

@@ -80,13 +80,12 @@ export const LegalSecurity: React.FC<LegalSecurityProps> = ({ language, cmsTitle
             <div>
               <h4 className="text-sm font-bold">Official Verification Desk</h4>
               <p className="text-xs text-slate-300">
-                Inspect registered deeds, ownership certificates, and project approvals at our Mirpur Pallabi Head Office or Agrabad Chattogram Branch.
+                Inspect registered deeds, ownership certificates, and project approvals at our Global Head Office or Central Singapore Branch.
               </p>
             </div>
           </div>
           <div className="text-xs font-mono bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 whitespace-nowrap">
-            Hotline: +880 1810-685888
-          </div>
+            Hotline: +44 181 068 5888</div>
         </div>
 
       </div>

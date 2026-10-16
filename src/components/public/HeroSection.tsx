@@ -244,7 +244,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     onBlur={() => mark('username')}
-                    placeholder="e.g. rafiqul_islam7"
+                    placeholder="e.g. alex_johnson"
                     aria-invalid={!!showError('username')}
                     className={withValidation(`${inputBase} font-mono`, !!showError('username'))}
                   />
@@ -258,7 +258,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     value={fullName}
                     onChange={e => setFullName(e.target.value)}
                     onBlur={() => mark('fullName')}
-                    placeholder="e.g. Md. Rafiqul Islam"
+                    placeholder="e.g. Michael Anderson"
                     aria-invalid={!!showError('fullName')}
                     className={withValidation(inputBase, !!showError('fullName'))}
                   />
@@ -272,7 +272,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     onBlur={() => mark('phone')}
-                    placeholder="+880 1711-000000"
+                    placeholder="+61 171 100 0000"
                     aria-invalid={!!showError('phone')}
                     className={withValidation(`${inputBase} font-mono`, !!showError('phone'))}
                   />
@@ -407,7 +407,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <span>
                     {'Existing investor demo login: '}
-                    <span className="font-mono text-amber-300">Ziabulctg1 / 123456</span>
+                    <span className="font-mono text-amber-300">user1 / 123456</span>
                   </span>
                 </div>
               </form>

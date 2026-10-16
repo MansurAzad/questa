@@ -82,7 +82,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
                 Questra World LIMITED
               </h1>
               <p className="text-xs font-sans text-slate-500 dark:text-slate-400 tracking-wider uppercase mt-0.5">
-                Government Registered Corporate Real Estate & Investment Enterprise · Dhaka & Chattogram
+                Government Registered Corporate Real Estate & Investment Enterprise · Worldwide
               </p>
               <p className="text-[11px] font-sans text-slate-400 font-mono mt-1">
                 Ref No: {type === 'double_profit_deed' ? (plans?.[0]?.agreementDeedNo || 'QW-DP-2026-DEED') : share?.certificateNo}
@@ -148,9 +148,9 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
             <div className="pt-10 mt-6 border-t border-amber-800/20 dark:border-amber-500/20 grid grid-cols-3 items-end text-center font-sans text-xs text-slate-600 dark:text-slate-400">
               <div>
                 <div className="w-full max-w-[96px] border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
-                  M. Rahman
+                  M. Reynolds
                 </div>
-                <span className="block font-semibold">Md. Mokhlesur Rahman</span>
+                <span className="block font-semibold">Mark Reynolds</span>
                 <span className="text-[10px] text-slate-400">Head of Legal Affairs</span>
               </div>
 
@@ -166,7 +166,7 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
 
               <div>
                 <div className="w-full max-w-[96px] border-b border-slate-400 mx-auto mb-1.5 font-script italic text-slate-800 dark:text-slate-200">
-                  A. Chowdhury
+                  A. Anderson
                 </div>
                 <span className="block font-semibold">Managing Director</span>
                 <span className="text-[10px] text-slate-400">Questra World LIMITED</span>

@@ -28,59 +28,59 @@ import {
 } from '../types/cms';
 import { submitSignupToServer } from './registrations';
 
-// Pre-seeded user data matching user's requested login: Ziabulctg1 / 123456
+// Pre-seeded user data matching user's requested login: user1 / 123456
 export const INITIAL_USER: User = {
-  id: 'usr-ctg-8842',
-  username: 'Ziabulctg1',
-  fullName: 'Ziabul Hoque Chowdhury',
-  fullNameBn: 'Ziabul Hoque Chowdhury',
-  referralCode: 'QW-8842',
-  email: 'ziabul.ctg@gmail.com',
-  phone: '+880 1819-745239',
-  branch: 'Chattogram Office (Salma Centre, Muradpur)',
-  memberId: 'QW-CTG-8842',
+  id: 'usr-global-001',
+  username: 'user1',
+  fullName: 'Alex Johnson',
+  fullNameBn: 'Alex Johnson',
+  referralCode: 'QW-1001',
+  email: 'user1@questraworld.com',
+  phone: '+1 415 555 0101',
+  branch: 'Global Headquarters',
+  memberId: 'QW-GLOBAL-1001',
   avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-  address: 'House #42, Road #3, South Agrabad C/A',
-  city: 'Chattogram',
-  nidNo: '1984 1592 7831 44',
+  address: 'Global Business District, International Center',
+  city: 'International',
+  nidNo: '0000 0000 0000',
   role: 'investor',
   joinedDate: '15 March 2024',
-  e2eEncryptionKey: 'QW-AES256-GCM-e8b2a19f9301ac77',
+  e2eEncryptionKey: 'QW-AES256-GCM-global-001',
   twoFactorEnabled: true,
   nominee: {
-    name: 'Mrs. Taslima Ziabul',
+    name: 'Mrs. Jordan Johnson',
     relation: 'Spouse',
-    phone: '+880 1819-745240',
+    phone: '+61 181 974 5240',
     nid: '1988 2419 8832 91'
   },
-  bankName: 'The City Bank Limited',
-  bankBranch: 'Agrabad Commercial Branch, Chattogram',
+  bankName: 'HSBC',
+  bankBranch: 'Central Commercial Branch, Singapore',
   bankAccount: '1102948192001',
   bankRoutingNumber: '225150921',
-  mfsNumber: '01819745239'
+  mfsNumber: '+14155550199'
 };
 
 export const INITIAL_ADMIN: User = {
   id: 'usr-admin-001',
   username: 'admin',
-  fullName: 'Md. Ripon Hossain (Super Admin)',
-  fullNameBn: 'Md. Ripon Hossain (Super Admin)',
+  fullName: 'Richard Hoffman (Super Admin)',
+  fullNameBn: 'Richard Hoffman (Super Admin)',
   email: 'admin@questraworld.com',
-  phone: '+880 1819-001122',
-  branch: 'Corporate Head Office (Mirpur-12, Dhaka)',
+  phone: '+49 181 900 1122',
+  branch: 'Global Head Office (Financial District)',
   memberId: 'QW-HQ-001',
   avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80',
-  address: 'Questra World Tower, Pallabi, Mirpur-12',
-  city: 'Dhaka',
+  address: 'Questra World Tower, International Business District',
+  city: 'Dubai',
   nidNo: '1975 1209 8832 01',
   role: 'admin',
   joinedDate: '01 January 2020',
   e2eEncryptionKey: 'QW-ADMIN-ROOT-KEY-990182',
   twoFactorEnabled: true,
   nominee: {
-    name: 'H. M. Ziaur Rahman',
+    name: 'Henry M. Whitfield',
     relation: 'Managing Director Partner',
-    phone: '+880 1819-001123',
+    phone: '+1 181 900 1123',
     nid: '1978 4429 8812 02'
   }
 };
@@ -88,8 +88,8 @@ export const INITIAL_ADMIN: User = {
 export const INITIAL_SHARES: ShareInvestment[] = [
   {
     id: 'share-royal-bay-204',
-    projectName: 'Questra Royal Bay Hotel & Suites - Cox\'s Bazar',
-    projectNameBn: 'Questra Royal Bay Hotel & Suites - Cox\'s Bazar',
+    projectName: 'Questra Royal Bay Hotel & Suites',
+    projectNameBn: 'Questra Royal Bay Hotel & Suites',
     shareCategory: 'luxury_suite',
     shareUnits: 2,
     shareNumbers: ['RB-204', 'RB-205'],
@@ -134,7 +134,7 @@ export const INITIAL_INSTALLMENTS: InstallmentRecord[] = [
     amount: 35000,
     status: 'paid',
     paidDate: '2026-09-22',
-    paymentMethod: 'bKash',
+    paymentMethod: 'PayPal',
     transactionId: 'BK9X88291A',
     receiptNo: 'REC-2026-09-881'
   },
@@ -148,7 +148,7 @@ export const INITIAL_INSTALLMENTS: InstallmentRecord[] = [
     status: 'paid',
     paidDate: '2026-08-20',
     paymentMethod: 'Bank Transfer',
-    transactionId: 'CBL-FT-491028',
+    transactionId: 'WISE-FT-491028',
     receiptNo: 'REC-2026-08-412'
   },
   {
@@ -160,7 +160,7 @@ export const INITIAL_INSTALLMENTS: InstallmentRecord[] = [
     amount: 35000,
     status: 'paid',
     paidDate: '2026-07-24',
-    paymentMethod: 'Nagad',
+    paymentMethod: 'Wise',
     transactionId: 'NG8812048B',
     receiptNo: 'REC-2026-07-109'
   }
@@ -176,7 +176,7 @@ export const INITIAL_TRANSACTIONS: TransactionRecord[] = [
     amount: 18500,
     type: 'credit',
     status: 'completed',
-    method: 'City Bank Auto-Credit',
+    method: 'HSBC Auto-Credit',
     referenceNo: 'DIV-2026-09-CXB'
   },
   {
@@ -188,7 +188,7 @@ export const INITIAL_TRANSACTIONS: TransactionRecord[] = [
     amount: 35000,
     type: 'debit',
     status: 'completed',
-    method: 'bKash Gateway',
+    method: 'PayPal Gateway',
     referenceNo: 'BK9X88291A'
   },
   {
@@ -200,7 +200,7 @@ export const INITIAL_TRANSACTIONS: TransactionRecord[] = [
     amount: 18500,
     type: 'credit',
     status: 'completed',
-    method: 'City Bank Auto-Credit',
+    method: 'HSBC Auto-Credit',
     referenceNo: 'DIV-2026-08-CXB'
   },
   {
@@ -212,14 +212,14 @@ export const INITIAL_TRANSACTIONS: TransactionRecord[] = [
     amount: 35000,
     type: 'debit',
     status: 'completed',
-    method: 'City Bank Online Transfer',
-    referenceNo: 'CBL-FT-491028'
+    method: 'HSBC Online Transfer',
+    referenceNo: 'WISE-FT-491028'
   },
   {
     id: 'tx-105',
     date: '2026-08-15',
-    title: 'Associate Referral Commission (Chattogram Client Share Booking)',
-    titleBn: 'Associate Referral Commission (Chattogram Client Share Booking)',
+    title: 'Associate Referral Commission (Singapore Client Share Booking)',
+    titleBn: 'Associate Referral Commission (Singapore Client Share Booking)',
     category: 'referral',
     amount: 25000,
     type: 'credit',
@@ -234,8 +234,8 @@ export const INITIAL_NOTIFICATIONS: AppNotification[] = [
     id: 'notif-1',
     title: 'Installment Due Reminder',
     titleBn: 'Installment Due Reminder',
-    message: 'Your monthly installment of ৳35,000 for your Royal Bay suite share is due on 25 October 2026.',
-    messageBn: 'Your monthly installment of ৳35,000 for your Royal Bay suite share is due on 25 October 2026.',
+    message: 'Your monthly installment of $35,000 for your Royal Bay suite share is due on 25 October 2026.',
+    messageBn: 'Your monthly installment of $35,000 for your Royal Bay suite share is due on 25 October 2026.',
     date: '2026-10-08',
     read: false,
     type: 'installment',
@@ -245,8 +245,8 @@ export const INITIAL_NOTIFICATIONS: AppNotification[] = [
     id: 'notif-2',
     title: 'Monthly Dividend Disbursed',
     titleBn: 'Monthly Dividend Disbursed',
-    message: '৳18,500 has been credited to your linked City Bank account for Cox\'s Bazar Royal Bay shares.',
-    messageBn: '৳18,500 has been credited to your linked City Bank account for Cox\'s Bazar Royal Bay shares.',
+    message: '$18,500 has been credited to your linked bank account for Waterfront District Royal Bay shares.',
+    messageBn: '$18,500 has been credited to your linked bank account for Waterfront District Royal Bay shares.',
     date: '2026-10-01',
     read: false,
     type: 'dividend',
@@ -278,14 +278,14 @@ export const INITIAL_TICKETS: SupportTicket[] = [
     messages: [
       {
         sender: 'user',
-        senderName: 'Ziabul Hoque',
+        senderName: 'Alex Johnson',
         text: 'Dear Questra World Support, kindly provide the certified copy of my Royal Bay suite share certificate for my bank file.',
         timestamp: '2026-09-15 11:30 AM'
       },
       {
         sender: 'support',
-        senderName: 'Md. Kamrul Hasan (Legal Officer)',
-        text: 'Assalamu Alaikum Mr. Ziabul. Your certified copy is generated. You can view the authenticated digital copy in the Digital Certificates section.',
+        senderName: 'Karl Hansen (Legal Officer)',
+        text: 'Assalamu Alaikum Mr. Johnson. Your certified copy is generated. You can view the authenticated digital copy in the Digital Certificates section.',
         timestamp: '2026-09-17 03:45 PM'
       }
     ]
@@ -300,22 +300,22 @@ export const PUBLIC_PROJECTS: ProjectInfo[] = [
     tagline: '5-Star Hospitality Fractional Ownership & Monthly Profit Sharing',
     taglineBn: '5-Star Hospitality Fractional Ownership & Monthly Profit Sharing',
     category: 'hospitality',
-    location: 'Marine Drive Road, Inani, Cox\'s Bazar',
-    locationBn: 'Marine Drive Road, Inani, Cox\'s Bazar',
+    location: 'Marine Drive Road, Waterfront District',
+    locationBn: 'Marine Drive Road, Waterfront District',
     size: '320 Keys Luxury Beachfront Resort',
-    startingPrice: '৳6,00,000 / Suite Share',
+    startingPrice: '$600,000 / Suite Share',
     heroImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=80',
     description: 'A landmark beachfront hospitality venture providing secure fractional share investment with guaranteed legal deed, lifetime vacation privileges (7 days free stay annually), and high-yield monthly revenue distribution.',
     features: [
       '18.5% to 22% Projected Annual Dividend Payout',
-      'Monthly Auto-Transfer to Any Bangladeshi Bank Account',
+      'Monthly Auto-Transfer to Any Global Bank Account',
       'Sub-Registry Fractional Ownership Deed Provided',
       '7 Days Free Annual Stay for Family with VIP Access',
       'Professional International Hotel Management Operator'
     ],
     featuresBn: [
       '18.5% to 22% Projected Annual Dividend Payout',
-      'Monthly Auto-Transfer to Any Bangladeshi Bank Account',
+      'Monthly Auto-Transfer to Any Global Bank Account',
       'Sub-Registry Fractional Ownership Deed Provided',
       '7 Days Free Annual Stay for Family with VIP Access',
       'Professional International Hotel Management Operator'
@@ -391,23 +391,23 @@ export const PUBLIC_PROJECTS: ProjectInfo[] = [
     id: 'questra-commercial-center',
     name: 'Questra World Commercial Center - Mirpur',
     nameBn: 'Questra World Commercial Center - Mirpur',
-    tagline: 'Prime Commercial Retail & Office Tower in Pallabi',
-    taglineBn: 'Prime Commercial Retail & Office Tower in Pallabi',
+    tagline: 'Prime Commercial Retail & Office Tower in Central',
+    taglineBn: 'Prime Commercial Retail & Office Tower in Central',
     category: 'commercial',
-    location: 'Section 12, Pallabi, Mirpur, Dhaka',
-    locationBn: 'Section 12, Pallabi, Mirpur, Dhaka',
+    location: 'Prime Commercial District',
+    locationBn: 'Prime Commercial District',
     size: '14 Storied Modern Commercial Hub',
-    startingPrice: '৳15,00,000 / Floor Share',
+    startingPrice: '$1,500,000 / Floor Share',
     heroImage: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80',
-    description: 'Strategically positioned next to the Pallabi Metro Station, Questra World Commercial Center is designed for corporate headquarters, banking institutions, and premium brand showrooms with triple-level basement parking.',
+    description: 'Strategically positioned next to the Central Metro Station, Questra World Commercial Center is designed for corporate headquarters, banking institutions, and premium brand showrooms with triple-level basement parking.',
     features: [
-      'Direct 2-Minute Walk from Pallabi MRT Metro Station',
+      'Direct 2-Minute Walk from Central MRT Metro Station',
       'High Footfall Commercial Hotspot',
       'Central VRF Air Conditioning & High-Speed Elevators',
       'Guaranteed Rental Yield Agreement Option'
     ],
     featuresBn: [
-      'Direct 2-Minute Walk from Pallabi MRT Metro Station',
+      'Direct 2-Minute Walk from Central MRT Metro Station',
       'High Footfall Commercial Hotspot',
       'Central VRF Air Conditioning & High-Speed Elevators',
       'Guaranteed Rental Yield Agreement Option'
@@ -455,8 +455,8 @@ export const PUBLIC_PROJECTS: ProjectInfo[] = [
       },
       {
         id: 'm-pal-4',
-        title: 'Mirpur Metro Station Skywalk & Showroom Handover',
-        titleBn: 'Mirpur Metro Station Skywalk & Showroom Handover',
+        title: 'Central Metro Station Skywalk & Showroom Handover',
+        titleBn: 'Central Metro Station Skywalk & Showroom Handover',
         phase: 'Phase 4',
         targetDate: 'Dec 2026',
         completionPercentage: 92,
@@ -485,13 +485,13 @@ export const PUBLIC_PROJECTS: ProjectInfo[] = [
 export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
   {
     id: 'usr-ctg-8842',
-    username: 'Ziabulctg1',
-    fullName: 'Ziabul Hoque Chowdhury',
-    fullNameBn: 'Ziabul Hoque Chowdhury',
-    phone: '+880 1819-745239',
+    username: 'user1',
+    fullName: 'Alex Johnson',
+    fullNameBn: 'Alex Johnson',
+    phone: '+1 181 974 5239',
     email: 'ziabul.ctg@gmail.com',
-    memberId: 'QW-CTG-8842',
-    branch: 'Chattogram Office (Salma Centre)',
+    memberId: 'QW-GLOBAL-1001',
+    branch: 'Regional Client Office (Downtown)',
     rank: 'Gold Senior Associate',
     kycStatus: 'verified',
     nidNo: '1984 1592 7831 44',
@@ -500,18 +500,18 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     dividendBalance: 74000,
     status: 'active',
     joinedDate: '15 March 2024',
-    nomineeName: 'Mrs. Taslima Ziabul',
+    nomineeName: 'Mrs. Jordan Johnson',
     nomineeRelation: 'Spouse'
   },
   {
     id: 'usr-ctg-101',
-    username: 'anwar_ctg',
-    fullName: 'Md. Anwar Hossain',
-    fullNameBn: 'Md. Anwar Hossain',
-    phone: '+880 1819-334455',
+    username: 'andrew_h',
+    fullName: 'Andrew Hughes',
+    fullNameBn: 'Andrew Hughes',
+    phone: '+61 181 933 4455',
     email: 'anwar.ctg@yahoo.com',
-    memberId: 'QW-CTG-9021',
-    branch: 'Chattogram Office',
+    memberId: 'QW-INT-9021',
+    branch: 'Regional Client Office',
     rank: 'Associate Member',
     kycStatus: 'verified',
     nidNo: '1979 4819 0012 33',
@@ -520,18 +520,18 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     dividendBalance: 32000,
     status: 'active',
     joinedDate: '15 August 2026',
-    nomineeName: 'Salma Anwar',
+    nomineeName: 'Laura Hughes',
     nomineeRelation: 'Spouse'
   },
   {
     id: 'usr-dhk-102',
-    username: 'tanvir_engr',
-    fullName: 'Engr. Tanvir Ahmed',
-    fullNameBn: 'Engr. Tanvir Ahmed',
-    phone: '+880 1711-223344',
-    email: 'tanvir.ahmed@buet.ac.bd',
-    memberId: 'QW-DHK-5512',
-    branch: 'Dhaka Principal Branch',
+    username: 'thomas_eng',
+    fullName: 'Engr. Thomas Anderson',
+    fullNameBn: 'Engr. Thomas Anderson',
+    phone: '+65 171 122 3344',
+    email: 'tanvir.ahmed@globaltech.io',
+    memberId: 'QW-GLB-5512',
+    branch: 'Principal Branch (City Center)',
     rank: 'Silver Associate',
     kycStatus: 'verified',
     nidNo: '1986 2819 0451 90',
@@ -540,18 +540,18 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     dividendBalance: 92500,
     status: 'active',
     joinedDate: '01 June 2024',
-    nomineeName: 'Farhana Ahmed',
+    nomineeName: 'Fiona Anderson',
     nomineeRelation: 'Spouse'
   },
   {
     id: 'usr-dhk-103',
-    username: 'farhana_doc',
-    fullName: 'Dr. Farhana Yasmin',
-    fullNameBn: 'Dr. Farhana Yasmin',
-    phone: '+880 1712-998877',
-    email: 'farhana.dr@dmc.edu.bd',
-    memberId: 'QW-DHK-6623',
-    branch: 'Dhaka Corporate Office',
+    username: 'fiona_b',
+    fullName: 'Dr. Fiona Bennett',
+    fullNameBn: 'Dr. Fiona Bennett',
+    phone: '+1 171 299 8877',
+    email: 'farhana.dr@medschool.io',
+    memberId: 'QW-GLB-6623',
+    branch: 'Global Head Office (City Center)',
     rank: 'Associate Member',
     kycStatus: 'verified',
     nidNo: '1991 3329 8812 40',
@@ -565,13 +565,13 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
   },
   {
     id: 'usr-syl-104',
-    username: 'mashiur_kazi',
-    fullName: 'Kazi Mashiur Rahman',
-    fullNameBn: 'Kazi Mashiur Rahman',
-    phone: '+880 1611-445566',
+    username: 'kevin_m',
+    fullName: 'Kevin Mitchell',
+    fullNameBn: 'Kevin Mitchell',
+    phone: '+1 161 144 5566',
     email: 'mashiur.kazi@gmail.com',
-    memberId: 'QW-DHK-7789',
-    branch: 'Sylhet Regional Branch',
+    memberId: 'QW-GLB-7789',
+    branch: 'Manchester Regional Branch',
     rank: 'Associate Member',
     kycStatus: 'pending',
     nidNo: '1982 7712 9940 11',
@@ -580,7 +580,7 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     dividendBalance: 0,
     status: 'active',
     joinedDate: '10 October 2026',
-    nomineeName: 'Nasreen Kazi',
+    nomineeName: 'Nancy Mitchell',
     nomineeRelation: 'Spouse'
   }
 ];
@@ -589,16 +589,16 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
   {
     id: 'slip-01',
     slipNo: 'CBL-DEP-741982',
-    memberUsername: 'Ziabulctg1',
-    memberName: 'Ziabul Hoque Chowdhury',
-    memberId: 'QW-CTG-8842',
+    memberUsername: 'user1',
+    memberName: 'Alex Johnson',
+    memberId: 'QW-GLOBAL-1001',
     bookingId: 'share-royal-bay-204',
     projectName: 'Questra Royal Bay (Hotel & Suites)',
-    bankName: 'The City Bank Ltd',
-    branchName: 'Agrabad Commercial Branch, Ctg',
+    bankName: 'HSBC',
+    branchName: 'Central Commercial Branch, Singapore',
     amount: 35000,
     depositDate: '2026-09-22',
-    transactionId: 'CBL-FT-491028',
+    transactionId: 'WISE-FT-491028',
     slipImageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&auto=format&fit=crop&q=80',
     notes: 'Installment #24 Cash Deposit at Bank counter verified.',
     status: 'approved',
@@ -607,13 +607,13 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
   {
     id: 'slip-02',
     slipNo: 'SLIP-RB-8820',
-    memberUsername: 'anwar_ctg',
-    memberName: 'Md. Anwar Hossain',
-    memberId: 'QW-CTG-9021',
+    memberUsername: 'andrew_h',
+    memberName: 'Andrew Hughes',
+    memberId: 'QW-INT-9021',
     bookingId: 'share-royal-bay-204',
     projectName: 'Questra Royal Bay (Hotel & Suites)',
-    bankName: 'Islami Bank Bangladesh Ltd',
-    branchName: 'Khatungonj Corporate Branch',
+    bankName: 'Standard Chartered',
+    branchName: 'Marina Corporate Branch',
     amount: 35000,
     depositDate: '2026-10-09',
     transactionId: 'IBBL-CHQ-990142',
@@ -625,16 +625,16 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
   {
     id: 'slip-03',
     slipNo: 'SLIP-HOTEL-4412',
-    memberUsername: 'tanvir_engr',
-    memberName: 'Engr. Tanvir Ahmed',
-    memberId: 'QW-DHK-5512',
+    memberUsername: 'thomas_eng',
+    memberName: 'Engr. Thomas Anderson',
+    memberId: 'QW-GLB-5512',
     bookingId: 'share-royal-bay-204',
-    projectName: "Questra Royal Bay Cox's Bazar",
-    bankName: 'Dutch-Bangla Bank Ltd',
-    branchName: 'Uttara Branch, Dhaka',
+    projectName: "Questra Royal Bay Waterfront",
+    bankName: 'Standard Chartered',
+    branchName: 'Downtown Branch, Dubai',
     amount: 50000,
     depositDate: '2026-10-08',
-    transactionId: 'DBBL-NPSB-88310',
+    transactionId: 'INTL-WIRE-88310',
     slipImageUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&auto=format&fit=crop&q=80',
     notes: 'Fractional Suite 2nd downpayment bank deposit slip.',
     status: 'pending',
@@ -645,14 +645,14 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
 export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
   {
     id: 'tour-01',
-    clientName: 'Alhajj Mustafizur Rahman (accompanied by son)',
-    phone: '+880 1715-889900',
+    clientName: 'Michael Reynolds (accompanied by son)',
+    phone: '+65 171 588 9900',
     preferredDate: 'Friday, 17 Oct 2026',
     timeSlot: 'Morning (08:30 AM)',
-    projectInterested: 'Questra Royal Bay (Hotel & Suites), Cox\'s Bazar',
-    pickupLocation: 'Mirpur-12 Corporate Head Office, Dhaka',
+    projectInterested: 'Questra Royal Bay (Hotel & Suites)',
+    pickupLocation: 'Financial District Global Head Office',
     guestsCount: 4,
-    assignedBus: 'AC Microbus #01 (Dhaka Metro-Cha 11-8842)',
+    assignedBus: 'AC Microbus #01 (Dubai Metro-Cha 11-8842)',
     coordinator: 'Engr. Masum Billah (Assistant General Manager)',
     status: 'confirmed',
     createdAt: '09 Oct 2026'
@@ -660,23 +660,23 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
   {
     id: 'tour-02',
     clientName: 'Dr. Shahabuddin & Family',
-    phone: '+880 1819-223344',
+    phone: '+1 181 922 3344',
     preferredDate: 'Saturday, 18 Oct 2026',
     timeSlot: 'Morning (09:00 AM)',
-    projectInterested: 'Questra Commercial Center (Mirpur, Dhaka)',
-    pickupLocation: 'Dhanmondi 27 (Rapa Plaza Point)',
+    projectInterested: 'Questra World Commercial Center - Mirpur',
+    pickupLocation: 'Richmond 27 (Rapa Plaza Point)',
     guestsCount: 3,
     status: 'pending',
     createdAt: '10 Oct 2026'
   },
   {
     id: 'tour-03',
-    clientName: 'Farhana Afroze (Expatriate returning)',
-    phone: '+880 1912-334455',
+    clientName: 'Fiona Bennett (Expatriate returning)',
+    phone: '+971 191 233 4455',
     preferredDate: 'Friday, 24 Oct 2026',
     timeSlot: 'Morning (09:30 AM)',
-    projectInterested: 'Questra Royal Bay Cox\'s Bazar (Resort Tour)',
-    pickupLocation: 'Chattogram Office (Salma Centre)',
+    projectInterested: 'Questra Royal Bay Waterfront (Resort Tour)',
+    pickupLocation: 'Regional Client Office (Downtown)',
     guestsCount: 2,
     status: 'pending',
     createdAt: '10 Oct 2026'
@@ -695,9 +695,9 @@ export const INITIAL_NOTICES: NoticeItem[] = [
   },
   {
     id: 'ntc-02',
-    title: 'Questra Royal Bay Hotel Cox\'s Bazar 3rd Quarterly Dividend Distribution Completed',
+    title: 'Questra Royal Bay Hotel Waterfront 3rd Quarterly Dividend Distribution Completed',
     category: 'Dividend Distribution',
-    content: 'The September 2026 dividends for all respected shareholders of the Cox\'s Bazar Royal Bay Hotel & Suites project have been successfully credited to their linked bank accounts.',
+    content: 'The September 2026 dividends for all respected shareholders of the Questra Royal Bay Hotel & Suites project have been successfully credited to their linked bank accounts.',
     date: '01 October 2026',
     priority: 'normal',
     status: 'published'
@@ -706,7 +706,7 @@ export const INITIAL_NOTICES: NoticeItem[] = [
     id: 'ntc-03',
     title: 'Friday & Saturday Family Site Visit AC Bus Pickup Schedule',
     category: 'Site Visit Schedule',
-    content: 'Every Friday and Saturday, air-conditioned microbuses will depart from Mirpur-12 and Agrabad for family visits to the Cox\'s Bazar Royal Bay Hotel & Suites and Mirpur Commercial Center projects.',
+    content: 'Every Friday and Saturday, air-conditioned microbuses will depart from Financial District and Central for family visits to the Questra Royal Bay Hotel & Suites and Questra World Commercial Center projects.',
     date: '26 September 2026',
     priority: 'normal',
     status: 'published'
@@ -716,8 +716,8 @@ export const INITIAL_NOTICES: NoticeItem[] = [
 export const INITIAL_VACATION_BOOKINGS: VacationBooking[] = [
   {
     id: 'vac-01',
-    memberId: 'QW-CTG-8842',
-    memberName: 'Ziabul Hoque Chowdhury',
+    memberId: 'QW-GLOBAL-1001',
+    memberName: 'Alex Johnson',
     checkInDate: '2026-11-12',
     checkOutDate: '2026-11-15',
     guestsCount: 2,
@@ -733,28 +733,28 @@ export const INITIAL_AUDIT_LOGS: AdminAuditLog[] = [
   {
     id: 'log-01',
     timestamp: 'Today, 10:45 AM',
-    adminUser: 'Ripon Hossain (Super Admin)',
+    adminUser: 'Richard Hoffman (Super Admin)',
     action: 'APPROVE_DEPOSIT_SLIP',
-    target: 'Deposit Slip #SLIP-RB-8820 (Md. Anwar)',
-    details: 'Credited ৳35,000 to Royal Bay suite share Installment #02. Official Money Receipt #MR-2026-10-881 generated.',
+    target: 'Deposit Slip #SLIP-RB-8820 (Andrew Hughes)',
+    details: 'Credited $35,000 to Royal Bay suite share Installment #02. Official Money Receipt #MR-2026-10-881 generated.',
     status: 'success'
   },
   {
     id: 'log-02',
     timestamp: 'Yesterday, 05:20 PM',
-    adminUser: 'Ripon Hossain (Super Admin)',
+    adminUser: 'Richard Hoffman (Super Admin)',
     action: 'PROMOTED_MLM_RANK',
-    target: 'Ziabulctg1 (QW-CTG-8842)',
-    details: 'Rank upgraded to Gold Senior Associate upon reaching ৳40 Lac team sales volume milestone.',
+    target: 'user1 (QW-GLOBAL-1001)',
+    details: 'Rank upgraded to Gold Senior Associate upon reaching $400,000 team sales volume milestone.',
     status: 'info'
   },
   {
     id: 'log-03',
     timestamp: '08 Oct 2026, 02:15 PM',
-    adminUser: 'Ripon Hossain (Super Admin)',
+    adminUser: 'Richard Hoffman (Super Admin)',
     action: 'SHARE_TRANSFER_LOGGED',
     target: 'Share Transfer SH-TR-2026-084',
-    details: 'Suite share ownership transfer application received from Ziabul Hoque Chowdhury.',
+    details: 'Suite share ownership transfer application received from Alex Johnson.',
     status: 'warning'
   }
 ];
@@ -762,8 +762,8 @@ export const INITIAL_AUDIT_LOGS: AdminAuditLog[] = [
 export const INITIAL_DOUBLE_PROFIT_PLANS: DoubleProfitPlan[] = [
   {
     id: 'dplan-8842-1',
-    memberId: 'QW-CTG-8842',
-    memberName: 'Ziabul Hoque Chowdhury',
+    memberId: 'QW-GLOBAL-1001',
+    memberName: 'Alex Johnson',
     packageName: 'Executive Gold Double Profit (12 Months)',
     packageNameBn: 'Executive Gold Double Profit (12 Months)',
     principalAmount: 500000,
@@ -781,8 +781,8 @@ export const INITIAL_DOUBLE_PROFIT_PLANS: DoubleProfitPlan[] = [
   },
   {
     id: 'dplan-9021-2',
-    memberId: 'QW-CTG-9021',
-    memberName: 'Md. Anwar Hossain',
+    memberId: 'QW-INT-9021',
+    memberName: 'Andrew Hughes',
     packageName: 'Silver Wealth Booster (12 Months)',
     packageNameBn: 'Silver Wealth Booster (12 Months)',
     principalAmount: 250000,
@@ -803,15 +803,15 @@ export const INITIAL_DOUBLE_PROFIT_PLANS: DoubleProfitPlan[] = [
 export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
   {
     id: 'ref-101',
-    name: 'Md. Anwar Hossain',
-    nameBn: 'Md. Anwar Hossain',
-    username: 'anwar_ctg',
-    memberId: 'QW-CTG-9021',
+    name: 'Andrew Hughes',
+    nameBn: 'Andrew Hughes',
+    username: 'andrew_h',
+    memberId: 'QW-INT-9021',
     email: 'anwar.ctg@yahoo.com',
-    phone: '+880 1819-334455',
+    phone: '+61 181 933 4455',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-    sponsorUsername: 'Ziabulctg1',
-    sponsorName: 'Ziabul Hoque Chowdhury',
+    sponsorUsername: 'user1',
+    sponsorName: 'Alex Johnson',
     generation: 1,
     signupDate: '15 Aug 2026',
     signupTime: '02:40 PM',
@@ -822,46 +822,46 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     commissionRate: 10,
     payoutStatus: 'credited',
     rank: 'Associate Member',
-    location: 'Chattogram (Panchlaish)',
+    location: 'Singapore (Central)',
     kycVerified: true,
-    notes: 'Down payment of ৳10 Lac verified. Monthly installment ongoing.'
+    notes: 'Down payment of $100,000 verified. Monthly installment ongoing.'
   },
   {
     id: 'ref-102',
-    name: 'Engr. Tanvir Ahmed Chowdhury',
-    nameBn: 'Engr. Tanvir Ahmed Chowdhury',
-    username: 'tanvir_eng',
-    memberId: 'QW-CTG-9104',
+    name: 'Engr. Thomas Anderson',
+    nameBn: 'Engr. Thomas Anderson',
+    username: 'thomas_eng',
+    memberId: 'QW-INT-9104',
     email: 'tanvir.engr@gmail.com',
-    phone: '+880 1711-889900',
+    phone: '+61 171 188 9900',
     avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80',
-    sponsorUsername: 'Ziabulctg1',
-    sponsorName: 'Ziabul Hoque Chowdhury',
+    sponsorUsername: 'user1',
+    sponsorName: 'Alex Johnson',
     generation: 1,
     signupDate: '04 Sep 2026',
     signupTime: '11:15 AM',
     status: 'active',
-    assetBooked: "Questra Royal Bay Cox's Bazar (1 Suite Share)",
+    assetBooked: "Questra Royal Bay Waterfront (1 Suite Share)",
     investmentValue: 600000,
     commissionEarned: 60000,
     commissionRate: 10,
     payoutStatus: 'credited',
     rank: 'Executive Associate',
-    location: 'Dhaka (Uttara Sector 7)',
+    location: 'Dubai (Marina)',
     kycVerified: true,
     notes: 'Hotel suite share booked with one-time full settlement.'
   },
   {
     id: 'ref-103',
-    name: 'Dr. Farhana Yasmin',
-    nameBn: 'Dr. Farhana Yasmin',
-    username: 'dr_farhana',
-    memberId: 'QW-CTG-9218',
+    name: 'Dr. Fiona Bennett',
+    nameBn: 'Dr. Fiona Bennett',
+    username: 'dr_fiona',
+    memberId: 'QW-INT-9218',
     email: 'farhana.dr@hospital.com',
-    phone: '+880 1912-776655',
+    phone: '+49 191 277 6655',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
-    sponsorUsername: 'Ziabulctg1',
-    sponsorName: 'Ziabul Hoque Chowdhury',
+    sponsorUsername: 'user1',
+    sponsorName: 'Alex Johnson',
     generation: 1,
     signupDate: '28 Sep 2026',
     signupTime: '04:50 PM',
@@ -872,21 +872,21 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     commissionRate: 10,
     payoutStatus: 'credited',
     rank: 'Associate Member',
-    location: 'Chattogram (Nasirabad H/S)',
+    location: 'Singapore (Riverside)',
     kycVerified: true,
-    notes: 'Commercial space in Mirpur-12 tower. Possession target 2027.'
+    notes: 'Commercial space in Financial District tower. Possession target 2027.'
   },
   {
     id: 'ref-201',
-    name: 'Kazi Mashiur Rahman',
-    nameBn: 'Kazi Mashiur Rahman',
-    username: 'mashiur_kazi',
-    memberId: 'QW-CTG-9355',
+    name: 'Kevin Mitchell',
+    nameBn: 'Kevin Mitchell',
+    username: 'kevin_m',
+    memberId: 'QW-INT-9355',
     email: 'mashiur.kazi@outlook.com',
-    phone: '+880 1611-445566',
+    phone: '+1 161 144 5566',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
-    sponsorUsername: 'anwar_ctg',
-    sponsorName: 'Md. Anwar Hossain',
+    sponsorUsername: 'andrew_h',
+    sponsorName: 'Andrew Hughes',
     generation: 2,
     signupDate: '10 Oct 2026',
     signupTime: '01:20 PM',
@@ -899,44 +899,44 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     rank: 'Associate Member',
     location: 'Cumilla Cantonment',
     kycVerified: true,
-    notes: 'Secondary generation referral through Md. Anwar Hossain.'
+    notes: 'Secondary generation referral through Andrew Hughes.'
   },
   {
     id: 'ref-202',
-    name: 'Saiful Islam Sumon',
-    nameBn: 'Saiful Islam Sumon',
-    username: 'saiful_sumon',
-    memberId: 'QW-CTG-9410',
+    name: 'Samuel Lewis',
+    nameBn: 'Samuel Lewis',
+    username: 'samuel_l',
+    memberId: 'QW-INT-9410',
     email: 'saiful.sumon@gmail.com',
-    phone: '+880 1822-112233',
+    phone: '+49 182 211 2233',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
-    sponsorUsername: 'tanvir_eng',
-    sponsorName: 'Engr. Tanvir Ahmed Chowdhury',
+    sponsorUsername: 'thomas_eng',
+    sponsorName: 'Engr. Thomas Anderson',
     generation: 2,
     signupDate: '14 Oct 2026',
     signupTime: '06:10 PM',
     status: 'active',
-    assetBooked: "Questra Royal Bay Cox's Bazar (2 Suite Shares)",
+    assetBooked: "Questra Royal Bay Waterfront (2 Suite Shares)",
     investmentValue: 1200000,
     commissionEarned: 60000,
     commissionRate: 5,
     payoutStatus: 'available',
     rank: 'Associate Member',
-    location: 'Chattogram (Agrabad)',
+    location: 'Singapore (Downtown)',
     kycVerified: true,
-    notes: 'Referred by Engr. Tanvir Ahmed. 2 Shares booked.'
+    notes: 'Referred by Engr. Thomas Anderson. 2 Shares booked.'
   },
   {
     id: 'ref-301',
-    name: 'Rubel Hossain',
-    nameBn: 'Rubel Hossain',
-    username: 'rubel_agrabad',
-    memberId: 'QW-CTG-9502',
+    name: 'Robert Hughes',
+    nameBn: 'Robert Hughes',
+    username: 'robert_h',
+    memberId: 'QW-INT-9502',
     email: 'rubel.ctg99@gmail.com',
-    phone: '+880 1515-998877',
+    phone: '+44 151 599 8877',
     avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80',
-    sponsorUsername: 'mashiur_kazi',
-    sponsorName: 'Kazi Mashiur Rahman',
+    sponsorUsername: 'kevin_m',
+    sponsorName: 'Kevin Mitchell',
     generation: 3,
     signupDate: '22 Oct 2026',
     signupTime: '10:05 AM',
@@ -947,7 +947,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     commissionRate: 0,
     payoutStatus: 'pending',
     rank: 'Member (In Review)',
-    location: 'Chattogram (GEC Circle)',
+    location: 'Singapore (Bayfront)',
     kycVerified: false,
     notes: 'Signed up via referral code. Initial booking form submitted, token verification in progress.'
   }
@@ -975,10 +975,10 @@ export const DEFAULT_CRYPTO_SETTINGS: CryptoPaymentSettings = {
 export const DEFAULT_CMS_SETTINGS: CmsSiteSettings = {
   brandName: 'Questra World',
   legalName: 'Questra World Limited',
-  tagline: 'Official Investor Portal · Cox\'s Bazar & Mirpur, Dhaka',
-  supportPhone: '+880 1819-001122',
+  tagline: 'Official Investor Portal · Global',
+  supportPhone: '+49 181 900 1122',
   supportEmail: 'support@questraworld.com',
-  corporateAddress: 'Questra World Tower, Pallabi, Mirpur-12, Dhaka, Bangladesh',
+  corporateAddress: 'Questra World Tower, International Business District',
   footerNote:
     'Government-registered real estate & hospitality investment enterprise. 100% legally verified ownership with notarized deeds and end-to-end encrypted records.',
   copyrightText: '© {year} Questra World Limited. All rights reserved.'
@@ -1024,7 +1024,7 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
 
 export const DEFAULT_CMS_COLLECTIONS: CmsCollectionItem[] = [
   // Features
-  { id: 'feat-1', collection: 'features', title: '100% Legal Ownership', subtitle: 'Registered Deeds', body: 'Every share is backed by notarized, sub-registry verified ownership documents.', badge: 'Legal', order: 0 },
+  { id: 'feat-1', collection: 'features', title: '100% Legal Ownership', subtitle: 'Registered Deeds', body: 'Every share is backed by notarized, land-registry verified ownership documents.', badge: 'Legal', order: 0 },
   { id: 'feat-2', collection: 'features', title: '12-Month Double Profit', subtitle: '2X Return Scheme', body: 'Invest any amount and receive double back across 12 equal monthly installments.', badge: '2X', order: 1 },
   { id: 'feat-3', collection: 'features', title: '18.5% Annual ROI', subtitle: 'Hotel Share Yield', body: 'Industry-leading dividend yield from premium hotel suite share ownership.', badge: 'ROI', order: 2 },
   { id: 'feat-4', collection: 'features', title: 'End-to-End Encryption', subtitle: 'Bank-Grade Security', body: 'AES-256 encrypted records protect every transaction and personal document.', badge: 'Secure', order: 3 },
@@ -1032,15 +1032,15 @@ export const DEFAULT_CMS_COLLECTIONS: CmsCollectionItem[] = [
   { id: 'feat-6', collection: 'features', title: 'Dedicated Support Desk', subtitle: 'Investor Care', body: 'A branch-based support team guides you through every step of your investment.', badge: 'Support', order: 5 },
 
   // Testimonials
-  { id: 'tst-1', collection: 'testimonials', title: 'Md. Rafiqul Islam', subtitle: 'Investor · Dhaka', body: 'The double profit scheme gave me exactly what was promised — 2X returned over 12 months, paid on time every month.', order: 0 },
-  { id: 'tst-2', collection: 'testimonials', title: 'Farzana Akter', subtitle: 'Investor · Chattogram', body: 'Transparent paperwork, verified deeds, and a support team that actually responds. Truly professional.', order: 1 },
-  { id: 'tst-3', collection: 'testimonials', title: 'Engr. Sajid Hossain', subtitle: 'Investor · Sylhet', body: 'I visited the site myself before investing. The construction progress matched every update on the portal.', order: 2 },
+  { id: 'tst-1', collection: 'testimonials', title: 'Michael Anderson', subtitle: 'Investor · Dubai', body: 'The double profit scheme gave me exactly what was promised — 2X returned over 12 months, paid on time every month.', order: 0 },
+  { id: 'tst-2', collection: 'testimonials', title: 'Sarah Mitchell', subtitle: 'Investor · Singapore', body: 'Transparent paperwork, verified deeds, and a support team that actually responds. Truly professional.', order: 1 },
+  { id: 'tst-3', collection: 'testimonials', title: 'Engr. Sam Hughes', subtitle: 'Investor · Manchester', body: 'I visited the site myself before investing. The construction progress matched every update on the portal.', order: 2 },
 
   // FAQs
   { id: 'faq-1', collection: 'faqs', title: 'How does the 12-Month Double Profit scheme work?', body: 'You invest any amount and receive double that amount back, paid across 12 equal monthly installments, secured by post-dated bank cheques and a notarized deed.', order: 0 },
   { id: 'faq-2', collection: 'faqs', title: 'What legal documents do I receive?', body: 'Every investor receives a registered share/ownership deed, a notarized agreement, and official money receipts for each payment.', order: 1 },
   { id: 'faq-3', collection: 'faqs', title: 'What payment methods are accepted?', body: 'We accept bank transfers, mobile financial services, and manual USDT (TRC20) crypto payments verified by our finance desk.', order: 2 },
-  { id: 'faq-4', collection: 'faqs', title: 'Can I visit the project before investing?', body: 'Absolutely. We offer complimentary AC microbus site tours from Dhaka and Chattogram every weekend.', order: 3 },
+  { id: 'faq-4', collection: 'faqs', title: 'Can I visit the project before investing?', body: 'Absolutely. We offer complimentary AC microbus site tours from global locations every weekend.', order: 3 },
   { id: 'faq-5', collection: 'faqs', title: 'How are dividends paid?', body: 'Share dividends are disbursed monthly to your registered bank account and are fully visible in your investor dashboard.', order: 4 },
   { id: 'faq-6', collection: 'faqs', title: 'Is my personal data secure?', body: 'Yes. All records and personal documents are protected with end-to-end AES-256 encryption on our secure cloud.', order: 5 }
 ];
@@ -1107,8 +1107,8 @@ export class StorageService {
     const cleanedUser = usernameInput.trim().toLowerCase();
     const cleanedPass = passwordInput.trim();
 
-    // Check pre-seeded credentials: Ziabulctg1 / 123456 (case-insensitive username)
-    if (cleanedUser === 'ziabulctg1' && cleanedPass === '123456') {
+    // Check pre-seeded credentials: user1 / 123456 (case-insensitive username)
+    if (cleanedUser === 'user1' && cleanedPass === '123456') {
       const user = INITIAL_USER;
       localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(user));
       this.ensureDataInitialized();
@@ -1143,12 +1143,12 @@ export class StorageService {
       fullName: newUser.fullName || 'Valued Investor',
       fullNameBn: newUser.fullNameBn || newUser.fullName || 'Valued Investor',
       email: newUser.email || 'investor@questraworld.com',
-      phone: newUser.phone || '+880 1700-000000',
-      branch: newUser.branch || 'Dhaka Head Office (Mirpur)',
+      phone: newUser.phone || '+44 170 000 0000',
+      branch: newUser.branch || 'Global Head Office (Financial District)',
       memberId: 'QW-' + Math.floor(1000 + Math.random() * 9000),
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-      address: newUser.address || 'Dhaka, Bangladesh',
-      city: newUser.city || 'Dhaka',
+      address: newUser.address || 'Dubai, the globe',
+      city: newUser.city || 'Dubai',
       nidNo: newUser.nidNo || '1990 0000 0000 00',
       role: 'investor',
       joinedDate: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
@@ -1157,7 +1157,7 @@ export class StorageService {
       nominee: newUser.nominee || {
         name: 'Authorized Nominee',
         relation: 'Family',
-        phone: '+880 1700-000000',
+        phone: '+44 170 000 0000',
         nid: '1995 0000 0000 00'
       },
       bankName: newUser.bankName,
@@ -1176,8 +1176,8 @@ export class StorageService {
     localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(user));
     this.ensureDataInitialized();
 
-    // Persist to the server-side SQLite database (see /server). Best-effort:
-    // the registration still succeeds locally when the API is not running.
+    // Persist to the Supabase `signups` table (see ./registrations.ts). Best-effort:
+    // the registration still succeeds locally when the database is unreachable.
     void submitSignupToServer({
       username: user.username,
       fullName: user.fullName,
@@ -1232,7 +1232,7 @@ export class StorageService {
   static accountExists(identifier: string): boolean {
     const cleaned = identifier.trim().toLowerCase();
     if (!cleaned) return false;
-    if (cleaned === 'ziabulctg1' || cleaned === 'admin' || cleaned === 'questraworld') return true;
+    if (cleaned === 'user1' || cleaned === 'admin' || cleaned === 'questraworld') return true;
     if (localStorage.getItem('qw_registered_account_' + cleaned)) return true;
 
     // Fall back to matching a registered mobile number (digits only).
@@ -1447,8 +1447,8 @@ export class StorageService {
       id: shareData.id || 'share-' + Date.now(),
       projectName: shareData.projectName || 'Questra Royal Bay Hotel & Suites',
       projectNameBn: shareData.projectNameBn || 'Questra Royal Bay Hotel & Suites',
-      location: shareData.location || "Cox's Bazar",
-      locationBn: shareData.locationBn || "Cox's Bazar",
+      location: shareData.location || "Waterfront District",
+      locationBn: shareData.locationBn || "Waterfront District",
       suiteNo: shareData.suiteNo || `Suite #${Math.floor(200 + Math.random() * 300)}`,
       shareCategory: shareData.shareCategory || 'luxury_suite',
       shareUnits: shareData.shareUnits || 1,
@@ -1508,8 +1508,8 @@ export class StorageService {
       id: plan.id || 'dplan-' + Date.now(),
       memberId: plan.memberId || user.memberId,
       memberName: plan.memberName || user.fullName,
-      packageName: plan.packageName || `৳${principal.toLocaleString()} 12-Month Double Return Plan`,
-      packageNameBn: plan.packageNameBn || `৳${principal.toLocaleString()} 12-Month Double Return Plan`,
+      packageName: plan.packageName || `$${principal.toLocaleString()} 12-Month Double Return Plan`,
+      packageNameBn: plan.packageNameBn || `$${principal.toLocaleString()} 12-Month Double Return Plan`,
       principalAmount: principal,
       totalReturnAmount: totalReturn,
       monthlyInstallmentAmount: monthlyInstallment,
@@ -1543,7 +1543,7 @@ export class StorageService {
     const txs = this.getTransactions();
     localStorage.setItem(STORAGE_KEYS.TRANSACTIONS, encryptPayload([tx, ...txs]));
 
-    this.addAuditLog('DOUBLE_PROFIT_PLAN_CREATED', newPlan.packageName, `User ${newPlan.memberName} enrolled in ৳${principal.toLocaleString()} 12-month double return plan.`);
+    this.addAuditLog('DOUBLE_PROFIT_PLAN_CREATED', newPlan.packageName, `User ${newPlan.memberName} enrolled in $${principal.toLocaleString()} 12-month double return plan.`);
     this.updateLastSync();
     return newPlan;
   }
@@ -1587,9 +1587,9 @@ export class StorageService {
     const currentTxs = this.getTransactions();
     localStorage.setItem(STORAGE_KEYS.TRANSACTIONS, encryptPayload([payoutTx, ...currentTxs]));
 
-    this.addAuditLog('DOUBLE_PROFIT_INSTALLMENT_DISBURSED', plan.packageName, `Disbursed installment #${plan.paidInstallments} of ৳${installmentAmt.toLocaleString()} to ${plan.memberName}`);
+    this.addAuditLog('DOUBLE_PROFIT_INSTALLMENT_DISBURSED', plan.packageName, `Disbursed installment #${plan.paidInstallments} of $${installmentAmt.toLocaleString()} to ${plan.memberName}`);
     this.updateLastSync();
-    return { success: true, installmentAmount: installmentAmt, message: `Installment #${plan.paidInstallments} of ৳${installmentAmt.toLocaleString()} disbursed successfully!` };
+    return { success: true, installmentAmount: installmentAmt, message: `Installment #${plan.paidInstallments} of $${installmentAmt.toLocaleString()} disbursed successfully!` };
   }
 
   static deleteDoubleProfitPlan(planId: string): boolean {
@@ -1611,7 +1611,7 @@ export class StorageService {
 
   static payInstallment(
     installmentId: string,
-    method: 'bKash' | 'Nagad' | 'Rocket' | 'Bank Transfer' | 'Card' | 'USDT (TRC20)',
+    method: 'PayPal' | 'Wise' | 'Stripe' | 'Bank Transfer' | 'Card' | 'USDT (TRC20)',
     txId: string
   ): { success: boolean; transaction: TransactionRecord } {
     const installments = this.getInstallments();
@@ -1657,8 +1657,8 @@ export class StorageService {
       id: 'notif-' + Date.now(),
       title: 'Payment Successful',
       titleBn: 'Payment Successful',
-      message: `৳${inst.amount.toLocaleString()} received via ${method}. Receipt: ${receiptNo}`,
-      messageBn: `৳${inst.amount.toLocaleString()} received via ${method}. Receipt: ${receiptNo}`,
+      message: `$${inst.amount.toLocaleString()} received via ${method}. Receipt: ${receiptNo}`,
+      messageBn: `$${inst.amount.toLocaleString()} received via ${method}. Receipt: ${receiptNo}`,
       date: paidDate,
       read: false,
       type: 'installment',
@@ -1721,10 +1721,10 @@ export class StorageService {
       username: inv.username || 'member_' + Math.floor(100 + Math.random() * 900),
       fullName: inv.fullName || 'New Investor',
       fullNameBn: inv.fullNameBn,
-      phone: inv.phone || '+880 1700-000000',
+      phone: inv.phone || '+44 170 000 0000',
       email: inv.email || 'investor@example.com',
-      memberId: inv.memberId || `QW-${inv.branch?.includes('Ctg') ? 'CTG' : 'DHK'}-${Math.floor(1000 + Math.random() * 9000)}`,
-      branch: inv.branch || 'Corporate Head Office, Dhaka',
+      memberId: inv.memberId || `QW-${inv.branch?.includes('Singapore') ? 'INT' : 'GLB'}-${Math.floor(1000 + Math.random() * 9000)}`,
+      branch: inv.branch || 'Global Head Office',
       rank: inv.rank || 'Associate Member',
       kycStatus: inv.kycStatus || 'pending',
       nidNo: inv.nidNo || '1990 0000 0000 00',
@@ -1779,7 +1779,7 @@ export class StorageService {
       list[idx].dividendBalance = Math.max(0, list[idx].dividendBalance + amount);
     }
     localStorage.setItem(STORAGE_KEYS.ADMIN_INVESTORS, encryptPayload(list));
-    this.addAuditLog('WALLET_ADJUSTMENT', `${list[idx].memberId} (${list[idx].fullName})`, `Adjusted ${type} balance by ৳${amount.toLocaleString()}. Note: ${note || 'Admin adjustment'}`);
+    this.addAuditLog('WALLET_ADJUSTMENT', `${list[idx].memberId} (${list[idx].fullName})`, `Adjusted ${type} balance by $${amount.toLocaleString()}. Note: ${note || 'Admin adjustment'}`);
     this.updateLastSync();
     return true;
   }
@@ -1801,8 +1801,8 @@ export class StorageService {
       memberId: slip.memberId || user.memberId,
       bookingId: slip.bookingId || 'share-royal-bay-204',
       projectName: slip.projectName || 'Questra Royal Bay (Hotel & Suites)',
-      bankName: slip.bankName || 'The City Bank Ltd',
-      branchName: slip.branchName || 'Agrabad Branch',
+      bankName: slip.bankName || 'HSBC',
+      branchName: slip.branchName || 'Central Branch',
       amount: slip.amount || 35000,
       depositDate: slip.depositDate || new Date().toISOString().split('T')[0],
       transactionId: slip.transactionId || 'DEP-' + Math.floor(100000 + Math.random() * 900000),
@@ -1813,7 +1813,7 @@ export class StorageService {
     };
     const updated = [newSlip, ...list];
     localStorage.setItem(STORAGE_KEYS.DEPOSIT_SLIPS, encryptPayload(updated));
-    this.addAuditLog('SUBMIT_SLIP', `${newSlip.slipNo} (${newSlip.memberName})`, `Deposit slip of ৳${newSlip.amount.toLocaleString()} submitted for verification.`);
+    this.addAuditLog('SUBMIT_SLIP', `${newSlip.slipNo} (${newSlip.memberName})`, `Deposit slip of $${newSlip.amount.toLocaleString()} submitted for verification.`);
     this.updateLastSync();
     return newSlip;
   }
@@ -1856,7 +1856,7 @@ export class StorageService {
       this.payInstallment(pendingInst.id, payMethod, slip.transactionId);
     }
 
-    this.addAuditLog('APPROVE_DEPOSIT_SLIP', `${slip.slipNo} (${slip.memberName})`, `Approved ৳${slip.amount.toLocaleString()}. Official Money Receipt generated.`, 'success');
+    this.addAuditLog('APPROVE_DEPOSIT_SLIP', `${slip.slipNo} (${slip.memberName})`, `Approved $${slip.amount.toLocaleString()}. Official Money Receipt generated.`, 'success');
     this.updateLastSync();
     return true;
   }
@@ -1931,11 +1931,11 @@ export class StorageService {
     const newTour: AdminSiteTourBooking = {
       id: tour.id || 'tour-' + Date.now(),
       clientName: tour.clientName || 'Valued Client',
-      phone: tour.phone || '+880 1700-000000',
+      phone: tour.phone || '+44 170 000 0000',
       preferredDate: tour.preferredDate || 'Friday, Upcoming',
       timeSlot: tour.timeSlot || 'Morning (09:00 AM)',
-      projectInterested: tour.projectInterested || "Questra Royal Bay (Hotel & Suites), Cox's Bazar",
-      pickupLocation: tour.pickupLocation || 'Mirpur-12 Corporate Head Office',
+      projectInterested: tour.projectInterested || "Questra Royal Bay (Hotel & Suites)",
+      pickupLocation: tour.pickupLocation || 'Financial District Global Head Office',
       guestsCount: tour.guestsCount || 2,
       assignedBus: tour.assignedBus,
       coordinator: tour.coordinator,
@@ -2167,7 +2167,7 @@ export class StorageService {
     this.addAuditLog(
       'NEW_REFERRAL_SIGNUP',
       `${newSignup.name} (@${newSignup.username})`,
-      `New referral signup recorded under sponsor ${newSignup.sponsorUsername}. Asset: ${newSignup.assetBooked}. Commission: ৳${newSignup.commissionEarned.toLocaleString()}`,
+      `New referral signup recorded under sponsor ${newSignup.sponsorUsername}. Asset: ${newSignup.assetBooked}. Commission: $${newSignup.commissionEarned.toLocaleString()}`,
       'success'
     );
     this.updateLastSync();
@@ -2309,14 +2309,14 @@ export class StorageService {
     this.addAuditLog(
       'CRYPTO_SETTINGS_UPDATED',
       'USDT / TRC20',
-      `Crypto payments ${next.enabled ? 'enabled' : 'disabled'}. Network: ${next.network}. Wallet: ${next.walletAddress}. Rate: ৳${next.bdtPerUsdt}/USDT.`,
+      `Crypto payments ${next.enabled ? 'enabled' : 'disabled'}. Network: ${next.network}. Wallet: ${next.walletAddress}. Rate: $${next.bdtPerUsdt}/USDT.`,
       'success'
     );
     this.updateLastSync();
     return next;
   }
 
-  /** Convert a BDT amount into USDT using the admin-configured rate. */
+  /** Convert a fiat amount into USDT using the admin-configured rate. */
   static bdtToUsdt(amountBDT: number): number {
     const rate = this.getCryptoPaymentSettings().bdtPerUsdt || DEFAULT_CRYPTO_SETTINGS.bdtPerUsdt;
     return Math.round((amountBDT / rate) * 100) / 100;
@@ -2348,7 +2348,7 @@ export class StorageService {
     this.addAuditLog(
       'CRYPTO_DEPOSIT_SUBMITTED',
       `${slip.slipNo} (${slip.memberName})`,
-      `USDT (${settings.network}) deposit of ${usdtAmount} USDT (≈৳${input.amountBDT.toLocaleString()}) submitted. TxID: ${input.txHash}. Awaiting manual approval.`,
+      `USDT (${settings.network}) deposit of ${usdtAmount} USDT (≈$${input.amountBDT.toLocaleString()}) submitted. TxID: ${input.txHash}. Awaiting manual approval.`,
       'info'
     );
     return slip;

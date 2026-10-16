@@ -100,14 +100,14 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
   };
 
   const contactMethods = [
-    { icon: Phone, label: 'Hotline', value: cmsPhone || '+880 1810-685888', sub: 'Sat–Thu, 9:00 AM – 6:00 PM' },
+    { icon: Phone, label: 'Hotline', value: cmsPhone || '+44 181 068 5888', sub: 'Mon–Sat, 9:00 AM – 6:00 PM' },
     { icon: Mail, label: 'Email', value: cmsEmail || 'info@questraworld.com', sub: 'Response within 24 hours' },
-    { icon: MapPin, label: 'Head Office', value: cmsAddress || 'House #12, Road #03, Pallabi, Mirpur, Dhaka-1216', sub: 'By appointment only' },
+    { icon: MapPin, label: 'Head Office', value: cmsAddress || 'Global Headquarters, International Business District', sub: 'By appointment only' },
   ];
 
   const bankAccounts = [
-    { bank: 'The City Bank Limited', branch: 'Agrabad, Chattogram', acc: '1102948192001' },
-    { bank: 'Islami Bank Bangladesh PLC', branch: 'Khatungonj, Chattogram', acc: '2050218940023' },
+    { bank: 'HSBC', branch: 'Central, Singapore', acc: '1102948192001' },
+    { bank: 'Standard Chartered', branch: 'Marina, Singapore', acc: '2050218940023' },
   ];
 
   const showFixLabel = submitAttempt && !result.isValid;
@@ -196,7 +196,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
                       value={formData.name}
                       onChange={handleChange}
                       onBlur={() => mark('name')}
-                      placeholder="e.g. Ziabul Hoque"
+                      placeholder="e.g. Alex Johnson"
                       aria-invalid={!!showError('name')}
                       className={withValidation(fieldBase, !!showError('name'))}
                     />
@@ -227,7 +227,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
                       value={formData.phone}
                       onChange={handleChange}
                       onBlur={() => mark('phone')}
-                      placeholder="+880 1XXX-XXXXXX"
+                      placeholder="+65 177 777 7777"
                       aria-invalid={!!showError('phone')}
                       className={withValidation(fieldBase, !!showError('phone'))}
                     />

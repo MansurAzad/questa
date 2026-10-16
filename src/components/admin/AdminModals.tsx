@@ -31,8 +31,8 @@ const CANCEL_BTN = 'px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-sla
 /** Build an input class that turns rose when the field is invalid. */
 const ic = (invalid: boolean, extra = '') => `${invalid ? INPUT_INVALID : INPUT} ${extra}`;
 
-/** Optional NID: only validated when something is typed. */
-const optionalNid = (label = 'National NID number'): Rule => v => {
+/** Optional government ID: only validated when something is typed. */
+const optionalGovId = (label = 'Government ID / Passport number'): Rule => v => {
   const t = v.replace(/\s|-/g, '');
   if (!t) return null;
   if (!/^(\d{10}|\d{13}|\d{17})$/.test(t)) return `${label} must be 10, 13 or 17 digits.`;
@@ -53,7 +53,7 @@ const ADD_INVESTOR_RULES: RuleSet = {
   username: usernameRule('Username / Portal ID'),
   phone: phoneRule('Mobile phone number', true),
   email: optionalEmail('Email'),
-  nidNo: optionalNid('National NID number'),
+  nidNo: optionalGovId('Government ID / Passport number'),
   totalInvested: minAmount('Initial portfolio value', 0),
   nomineeName: minLength('Nominee name', 3)
 };
@@ -64,7 +64,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
   const [username, setUsername] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [branch, setBranch] = useState('Chattogram Office (Salma Centre)');
+  const [branch, setBranch] = useState('Regional Client Office (Downtown)');
   const [rank, setRank] = useState('Associate Member');
   const [nidNo, setNidNo] = useState('');
   const [totalInvested, setTotalInvested] = useState(500000);
@@ -90,7 +90,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
       focusFirstInvalid(formRef.current);
       return;
     }
-    const memberId = 'QW-' + (branch.includes('Ctg') || branch.includes('Chattogram') ? 'CTG' : 'DHK') + '-' + Math.floor(1000 + Math.random() * 9000);
+    const memberId = 'QW-' + (branch.includes('Singapore') ? 'INT' : 'GLB') + '-' + Math.floor(1000 + Math.random() * 9000);
     onAdd({
       fullName,
       fullNameBn: fullNameBn || fullName,
@@ -144,7 +144,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
                 value={fullName}
                 onChange={e => setFullName(e.target.value)}
                 onBlur={() => mark('fullName')}
-                placeholder="e.g. Al-Haj Mohammad Ali"
+                placeholder="e.g. Michael Anderson"
                 aria-invalid={!!showError('fullName')}
                 className={ic(!!showError('fullName'))}
               />
@@ -156,7 +156,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
                 type="text"
                 value={fullNameBn}
                 onChange={e => setFullNameBn(e.target.value)}
-                placeholder="e.g. Al-Haj Mohammad Ali"
+                placeholder="e.g. Michael Anderson"
                 className={INPUT}
               />
             </div>
@@ -170,7 +170,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 onBlur={() => mark('username')}
-                placeholder="e.g. mohammad_ali7"
+                placeholder="e.g. michael_anderson"
                 aria-invalid={!!showError('username')}
                 className={ic(!!showError('username'), 'font-mono')}
               />
@@ -183,7 +183,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
                 onBlur={() => mark('phone')}
-                placeholder="+880 1711-000000"
+                placeholder="+61 171 100 0000"
                 aria-invalid={!!showError('phone')}
                 className={ic(!!showError('phone'), 'font-mono')}
               />
@@ -195,10 +195,10 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
             <div>
               <label className={LABEL}>Corporate Branch</label>
               <select value={branch} onChange={e => setBranch(e.target.value)} className={INPUT}>
-                <option value="Chattogram Office (Salma Centre)">Chattogram Office (Salma Centre)</option>
-                <option value="Dhaka Head Office (Mirpur-12)">Dhaka Head Office (Mirpur-12)</option>
-                <option value="Sylhet Regional Branch">Sylhet Regional Branch</option>
-                <option value="Cox's Bazar Site Office">Cox's Bazar Site Office</option>
+                <option value="Regional Client Office (Downtown)">Regional Client Office (Downtown)</option>
+                <option value="Global Head Office (Financial District)">Global Head Office (Financial District)</option>
+                <option value="Manchester Regional Branch">Manchester Regional Branch</option>
+                <option value="Waterfront Site Office">Waterfront Site Office</option>
               </select>
             </div>
             <div>
@@ -215,7 +215,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className={LABEL}>National NID Number</label>
+              <label className={LABEL}>Government ID / Passport Number</label>
               <input
                 type="text"
                 value={nidNo}
@@ -228,7 +228,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
               <FieldError message={showError('nidNo')} />
             </div>
             <div>
-              <label className={LABEL}>Initial Portfolio Value (BDT)</label>
+              <label className={LABEL}>Initial Portfolio Value (USD)</label>
               <input
                 type="number"
                 value={totalInvested}
@@ -249,7 +249,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
                 value={nomineeName}
                 onChange={e => setNomineeName(e.target.value)}
                 onBlur={() => mark('nomineeName')}
-                placeholder="e.g. Begum Rokeya"
+                placeholder="e.g. Jane Doe"
                 aria-invalid={!!showError('nomineeName')}
                 className={ic(!!showError('nomineeName'))}
               />
@@ -448,7 +448,7 @@ export const EditInvestorModal: React.FC<EditInvestorModalProps> = ({ investor, 
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
             <div>
-              <label className="block text-emerald-600 dark:text-emerald-400 font-semibold mb-1">Dividend Wallet Balance (BDT)</label>
+              <label className="block text-emerald-600 dark:text-emerald-400 font-semibold mb-1">Dividend Wallet Balance (USD)</label>
               <input
                 type="number"
                 value={dividendBalance}
@@ -460,7 +460,7 @@ export const EditInvestorModal: React.FC<EditInvestorModalProps> = ({ investor, 
               <FieldError message={showError('dividendBalance')} />
             </div>
             <div>
-              <label className="block text-amber-600 dark:text-amber-400 font-semibold mb-1">Referral Commission Balance (BDT)</label>
+              <label className="block text-amber-600 dark:text-amber-400 font-semibold mb-1">Referral Commission Balance (USD)</label>
               <input
                 type="number"
                 value={commissionBalance}
@@ -513,11 +513,11 @@ const ADD_SLIP_RULES: RuleSet = {
 };
 
 export const AddManualSlipModal: React.FC<AddManualSlipModalProps> = ({ isOpen, onClose, onAdd }) => {
-  const [memberUsername, setMemberUsername] = useState('Ziabulctg1');
-  const [memberName, setMemberName] = useState('Ziabul Hoque Chowdhury');
+  const [memberUsername, setMemberUsername] = useState('user1');
+  const [memberName, setMemberName] = useState('Alex Johnson');
   const [amount, setAmount] = useState(35000);
-  const [bankName, setBankName] = useState('Islami Bank Bangladesh PLC');
-  const [branchName, setBranchName] = useState('Agrabad Commercial Branch, Ctg');
+  const [bankName, setBankName] = useState('Standard Chartered');
+  const [branchName, setBranchName] = useState('Central Commercial Branch, Singapore');
   const [transactionId, setTransactionId] = useState('');
   const [notes, setNotes] = useState('Counter deposit / pay-order clearance');
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -543,7 +543,7 @@ export const AddManualSlipModal: React.FC<AddManualSlipModalProps> = ({ isOpen, 
       slipNo: 'SLIP-MAN-' + Math.floor(1000 + Math.random() * 9000),
       memberUsername,
       memberName,
-      memberId: 'QW-CTG-8842',
+      memberId: 'QW-GLOBAL-1001',
       bookingId: 'questra-royal-bay-suite-04',
       projectName: 'Questra Royal Bay Kuakata',
       bankName,
@@ -606,7 +606,7 @@ export const AddManualSlipModal: React.FC<AddManualSlipModalProps> = ({ isOpen, 
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className={LABEL}>Deposit Amount (BDT) *</label>
+              <label className={LABEL}>Deposit Amount (USD) *</label>
               <input
                 type="number"
                 value={amount}
@@ -827,7 +827,7 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
 
   const selectedInv = investors.find(i => i.id === selectedInvestorId);
   const memberName = selectedInv ? selectedInv.fullName : (customMemberName || 'Investor Member');
-  const memberId = selectedInv ? selectedInv.memberId : (customMemberId || 'QW-CTG-9999');
+  const memberId = selectedInv ? selectedInv.memberId : (customMemberId || 'QW-INT-9999');
 
   const totalReturn = principalAmount * 2;
   const monthlyInstallment = Math.round(totalReturn / 12);
@@ -866,7 +866,7 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
     setCustomAmountStr(val);
     const num = Number(val) || 0;
     setPrincipalAmount(num);
-    setPackageName(`Custom Double Return Plan (৳${num.toLocaleString()})`);
+    setPackageName(`Custom Double Return Plan ($${num.toLocaleString()})`);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -950,7 +950,7 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
                   value={customMemberName}
                   onChange={e => setCustomMemberName(e.target.value)}
                   onBlur={() => mark('customMemberName')}
-                  placeholder="e.g. Md. Rafiqul Islam"
+                  placeholder="e.g. Michael Anderson"
                   aria-invalid={!!showError('customMemberName')}
                   className={ic(!!showError('customMemberName'))}
                 />
@@ -963,7 +963,7 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
                   value={customMemberId}
                   onChange={e => setCustomMemberId(e.target.value)}
                   onBlur={() => mark('customMemberId')}
-                  placeholder="e.g. QW-DHK-9812"
+                  placeholder="e.g. QW-GLB-9812"
                   aria-invalid={!!showError('customMemberId')}
                   className={ic(!!showError('customMemberId'), 'font-mono')}
                 />
@@ -977,12 +977,12 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
             <label className={`${LABEL} mb-1.5`}>Choose Capital Package</label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {[
-                { amount: 100000, name: 'Starter Double Profit (৳1,00,000)' },
-                { amount: 250000, name: 'Silver Wealth Booster (৳2,50,000)' },
-                { amount: 500000, name: 'Executive Gold Double Profit (৳5,00,000)' },
-                { amount: 1000000, name: 'Platinum 2X Elite (৳10,00,000)' },
-                { amount: 2500000, name: 'Crown VIP Double Return (৳25,00,000)' },
-                { amount: 5000000, name: 'Presidential Diamond (৳50,00,000)' }
+                { amount: 100000, name: 'Starter Double Profit ($100,000)' },
+                { amount: 250000, name: 'Silver Wealth Booster ($250,000)' },
+                { amount: 500000, name: 'Executive Gold Double Profit ($500,000)' },
+                { amount: 1000000, name: 'Platinum 2X Elite ($1,000,000)' },
+                { amount: 2500000, name: 'Crown VIP Double Return ($2,500,000)' },
+                { amount: 5000000, name: 'Presidential Diamond ($5,000,000)' }
               ].map(p => (
                 <button
                   key={p.amount}
@@ -994,9 +994,9 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
                       : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:border-amber-300 dark:hover:border-amber-700'
                   }`}
                 >
-                  <strong className="block text-xs font-mono">৳{p.amount.toLocaleString()}</strong>
-                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 block mt-0.5">2X: ৳{(p.amount * 2).toLocaleString()}</span>
-                  <span className="text-[10px] text-amber-600 dark:text-amber-300 block font-mono">৳{Math.round((p.amount * 2) / 12).toLocaleString()}/mo</span>
+                  <strong className="block text-xs font-mono">${p.amount.toLocaleString()}</strong>
+                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 block mt-0.5">2X: ${(p.amount * 2).toLocaleString()}</span>
+                  <span className="text-[10px] text-amber-600 dark:text-amber-300 block font-mono">${Math.round((p.amount * 2) / 12).toLocaleString()}/mo</span>
                 </button>
               ))}
             </div>
@@ -1005,7 +1005,7 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
           {/* Custom Amount */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className={LABEL}>Or Custom Capital Amount (BDT) *</label>
+              <label className={LABEL}>Or Custom Capital Amount (USD) *</label>
               <input
                 type="text"
                 value={customAmountStr}
@@ -1035,19 +1035,19 @@ export const AddDoublePlanModal: React.FC<AddDoublePlanModalProps> = ({
           <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-center">
             <div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans block">Invested Principal</span>
-              <strong className="text-slate-900 dark:text-white text-xs">৳{principalAmount.toLocaleString()}</strong>
+              <strong className="text-slate-900 dark:text-white text-xs">${principalAmount.toLocaleString()}</strong>
             </div>
             <div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans block">100% Net Profit</span>
-              <strong className="text-emerald-600 dark:text-emerald-400 text-xs">+৳{principalAmount.toLocaleString()}</strong>
+              <strong className="text-emerald-600 dark:text-emerald-400 text-xs">+${principalAmount.toLocaleString()}</strong>
             </div>
             <div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans block">Total 12-Mo Payout</span>
-              <strong className="text-amber-600 dark:text-amber-400 text-xs">৳{totalReturn.toLocaleString()}</strong>
+              <strong className="text-amber-600 dark:text-amber-400 text-xs">${totalReturn.toLocaleString()}</strong>
             </div>
             <div>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-sans block">Monthly Installment</span>
-              <strong className="text-emerald-600 dark:text-emerald-300 text-xs font-black">৳{monthlyInstallment.toLocaleString()} / mo</strong>
+              <strong className="text-emerald-600 dark:text-emerald-300 text-xs font-black">${monthlyInstallment.toLocaleString()} / mo</strong>
             </div>
           </div>
 

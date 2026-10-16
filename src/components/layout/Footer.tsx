@@ -13,10 +13,10 @@ interface FooterProps {
 const DEFAULT_SETTINGS: CmsSiteSettings = {
   brandName: 'Questra World',
   legalName: 'Questra World Limited',
-  tagline: "Official Investor Portal · Cox's Bazar & Mirpur, Dhaka",
-  supportPhone: '+880 1819-001122',
+  tagline: "Official Investor Portal · Global",
+  supportPhone: '+49 181 900 1122',
   supportEmail: 'support@questraworld.com',
-  corporateAddress: 'Questra World Tower, Pallabi, Mirpur-12, Dhaka, Bangladesh',
+  corporateAddress: 'Questra World Tower, International Business District',
   footerNote: '',
   copyrightText: '© {year} Questra World Limited. All rights reserved.'
 };
@@ -67,7 +67,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
                   onClick={onOpenAuth}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
-                  Investor Sign In (Ziabulctg1)
+                  Investor Sign In (user1)
                 </button>
               </li>
               <li>

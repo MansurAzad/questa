@@ -24,7 +24,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
   const [visitBooked, setVisitBooked] = useState(false);
   const [visitDate, setVisitDate] = useState('2026-12-18');
   const [pickupLocation, setPickupLocation] = useState(
-    'Chattogram Office (Agrabad)'
+    'Regional Client Office (Downtown)'
   );
 
   const handleBookVisit = () => {
@@ -39,9 +39,9 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
       phone: user.phone,
       preferredDate: formatted,
       timeSlot: 'Morning (09:30 AM)',
-      projectInterested: pickupLocation.includes('Dhaka')
-        ? 'Questra Commercial Center (Mirpur, Dhaka)'
-        : "Questra Royal Bay (Hotel & Suites), Cox's Bazar",
+      projectInterested: pickupLocation.includes('Dubai')
+        ? 'Questra World Commercial Center - Mirpur'
+        : "Questra Royal Bay (Hotel & Suites)",
       pickupLocation,
       guestsCount: 1
     });
@@ -135,7 +135,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
               </span>
               <span className="flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5" />
-                Cox's Bazar, Chattogram
+                Waterfront District, Singapore
               </span>
             </div>
           </div>
@@ -227,9 +227,9 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
                   onChange={e => setPickupLocation(e.target.value)}
                   className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                 >
-                  <option>Chattogram Office (Agrabad)</option>
-                  <option>Cox's Bazar Site Office</option>
-                  <option>Dhaka Corporate Office (Mirpur-12)</option>
+                  <option>Regional Client Office (Downtown)</option>
+                  <option>Waterfront Site Office</option>
+                  <option>Global Head Office (Financial District)</option>
                 </select>
               </div>
             </div>

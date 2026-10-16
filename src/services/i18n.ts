@@ -36,11 +36,11 @@ export const translations = {
     heroBadge: 'Beachfront Hospitality & Commercial Real Estate',
     heroTitle1: 'Build Generational Wealth with',
     heroTitleHighlight: '100% Legally Verified',
-    heroTitle2: 'Real Estate in Bangladesh',
-    heroSubtitle: 'Earn guaranteed monthly dividends from luxury 5-star hotel suite shares and premium commercial unit ownership with full sub-registry legal security.',
+    heroTitle2: 'Real Estate Worldwide',
+    heroSubtitle: 'Earn guaranteed monthly dividends from luxury 5-star hotel suite shares and premium commercial unit ownership with full land-registry legal security.',
     heroCtaExplore: 'Explore Projects',
     heroCtaPortal: 'Open Investor Portal',
-    heroCtaLoginDemo: 'Quick Demo (Ziabulctg1)',
+    heroCtaLoginDemo: 'Quick Demo (user1)',
     statInvestors: 'Satisfied Investors',
     statAcres: 'Luxury Suites & Commercial Units',
     statClearance: 'Dispute Free Title',
@@ -61,7 +61,7 @@ export const translations = {
     calcPlot5Katha: '1 Commercial Unit Share',
     calcHotelShare: '1 Luxury Hotel Suite Share',
     calcTenure: 'Installment Tenure (Months)',
-    calcDownPayment: 'Down Payment (BDT)',
+    calcDownPayment: 'Down Payment (USD)',
     calcMonthlyInstallment: 'Monthly Installment',
     calcEstimatedValuation: 'Estimated 5-Yr Valuation',
     
@@ -75,8 +75,8 @@ export const translations = {
     rememberMe: 'Remember this device',
     btnSignIn: 'Sign In to Dashboard',
     btnRegister: 'Create Investor Account',
-    demoNotice: 'Quick Test: Use preloaded credentials: User Name: Ziabulctg1 | Password: 123456',
-    btnFillDemo: 'Fill Ziabulctg1 Credentials',
+    demoNotice: 'Quick Test: Use preloaded credentials: User Name: user1 | Password: 123456',
+    btnFillDemo: 'Fill user1 Credentials',
     
     // Dashboard Common
     dashGreeting: 'Assalamu Alaikum',
@@ -112,10 +112,10 @@ export const translations = {
 
     // Installments
     installmentsTitle: 'Installment Schedule & Online Payment',
-    installmentsSubtitle: 'Track scheduled installments, upload payment slips, or pay instantly with bKash / Cards / Bank.',
+    installmentsSubtitle: 'Track scheduled installments, upload payment slips, or pay instantly with PayPal / Cards / Bank.',
     thInstallmentNo: 'No.',
     thDueDate: 'Due Date',
-    thAmount: 'Amount (BDT)',
+    thAmount: 'Amount (USD)',
     thStatus: 'Status',
     thAction: 'Receipt / Action',
     statusPaid: 'PAID',
@@ -128,9 +128,9 @@ export const translations = {
     modalPayTitle: 'Secure Payment Gateway',
     modalPayDesc: 'Authorized payment integration for Questra World installment clearance.',
     selectPaymentMethod: 'Select Payment Channel',
-    bKashWallet: 'bKash Merchant Pay',
-    nagadWallet: 'Nagad Direct',
-    bankTransfer: 'City Bank / Islami Bank / DBBL',
+    PayPalWallet: 'PayPal Merchant Pay',
+    nagadWallet: 'Wise Direct',
+    bankTransfer: 'HSBC / Standard Chartered / Citi',
     cardPay: 'Visa / MasterCard',
     inputTxId: 'Enter Transaction ID / Reference',
     btnConfirmPayment: 'Verify & Confirm Payment',
@@ -160,5 +160,5 @@ export function getTranslation(lang: Language, key: keyof typeof translations.en
 }
 
 export function formatBDT(amount: number, _lang: Language): string {
-  return '\u09F3' + amount.toLocaleString('en-US');
+  return '$' + amount.toLocaleString('en-US');
 }

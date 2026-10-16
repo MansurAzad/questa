@@ -199,7 +199,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
       name: newMemberName,
       nameBn: newMemberName,
       username: safeUsername,
-      memberId: `QW-CTG-${Math.floor(9500 + Math.random() * 499)}`,
+      memberId: `QW-INT-${Math.floor(9500 + Math.random() * 499)}`,
       email: `${safeUsername}@client.com`,
       phone: newMemberPhone,
       avatar: '',
@@ -215,7 +215,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
       commissionRate: rate,
       payoutStatus: 'available',
       rank: 'Associate Member',
-      location: 'Chattogram Office',
+      location: 'Regional Client Office',
       kycVerified: false,
       notes: 'Registered directly from the generation tree.'
     });
@@ -236,7 +236,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
 
   const rankQualifiers = [
     { rank: 'Gold Senior Associate', minVolume: 40000000, reward: 'Bangkok Couple Tour', achieved: true },
-    { rank: 'Senior Associate', minVolume: 20000000, reward: "Cox's Bazar Holiday (3D/2N)", achieved: true },
+    { rank: 'Senior Associate', minVolume: 20000000, reward: "Waterfront District Holiday (3D/2N)", achieved: true },
     { rank: 'Executive Associate', minVolume: 10000000, reward: 'Smart Watch & Leather Bag', achieved: true },
     { rank: 'Associate Member', minVolume: 5000000, reward: 'Weekend Resort Voucher', achieved: false },
     { rank: 'Member (In Review)', minVolume: 1000000, reward: 'Welcome Gift Box', achieved: false },
@@ -521,7 +521,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
               </select>
             </div>
             <div>
-              <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Investment Value (BDT)</label>
+              <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Investment Value (USD)</label>
               <input
                 type="number"
                 value={calcValue}

@@ -51,7 +51,9 @@ import { formatBDT } from '../../services/i18n';
 import { StorageService } from '../../services/storage';
 import {
   SignupRecord,
+  ServerStatus,
   getAllSignups,
+  isSupabaseConfigured,
   deleteSignup as deleteSignupRecord
 } from '../../services/registrations';
 import { isTronAddress, compose, required, minLength, runRules, RuleSet } from '../../utils/validation';
@@ -119,7 +121,7 @@ interface AdminDashboardProps {
  *   notices         → Notice Board (shown to investors)
  *   support         → Support Desk
  *   cms             → Homepage CMS (sections, content library, site settings)
- *   registrations   → Signup records captured by the public form (server DB)
+ *   registrations   → Signup records captured by the public form (Supabase)
  */
 type AdminTab =
   | 'overview'
@@ -168,20 +170,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [transactions, setTransactions] = useState<TransactionRecord[]>(() => StorageService.getTransactions());
 
   // ---------------------------------------------------------------
-  // SIGNUP REGISTRATIONS (server SQLite database + local fallback)
+  // SIGNUP REGISTRATIONS (Supabase table + local browser fallback)
   // ---------------------------------------------------------------
   const [signups, setSignups] = useState<SignupRecord[]>([]);
   const [signupsLoading, setSignupsLoading] = useState(false);
   const [signupsServerOnline, setSignupsServerOnline] = useState<boolean | null>(null);
+  const [signupsStatus, setSignupsStatus] = useState<ServerStatus | null>(null);
   const [signupSearch, setSignupSearch] = useState('');
   const [revealSignupSecrets, setRevealSignupSecrets] = useState(false);
 
   const loadSignups = async () => {
     setSignupsLoading(true);
     try {
-      const { records, serverOnline } = await getAllSignups();
+      const { records, serverOnline, status } = await getAllSignups();
       setSignups(records);
       setSignupsServerOnline(serverOnline);
+      setSignupsStatus(status);
     } finally {
       setSignupsLoading(false);
     }
@@ -281,7 +285,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     const created = StorageService.createDepositSlip(slipData);
     StorageService.approveDepositSlip(created.id);
     refreshAll();
-    showToast(`Manual deposit of ৳${created.amount.toLocaleString()} recorded, credited & receipt generated!`);
+    showToast(`Manual deposit of $${created.amount.toLocaleString()} recorded, credited & receipt generated!`);
     setIsAddSlipModalOpen(false);
   };
 
@@ -352,7 +356,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         : 'Enter a valid Tron (TRC20) address — it must start with “T” and be 34 characters long.');
   const cryptoRateError = cryptoSettings.bdtPerUsdt > 0
     ? null
-    : 'Conversion rate must be greater than 0 ৳ per USDT.';
+    : 'Conversion rate must be greater than 0 $ per USDT.';
   const cryptoErrorCount = [cryptoWalletError, cryptoRateError].filter(Boolean).length;
 
   const handleSaveCryptoSettings = () => {
@@ -544,12 +548,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       StorageService.addAuditLog(
         'MASS_DIVIDEND_PAYOUT',
         disburseMonth,
-        `Disbursed ৳${totalDisbursed.toLocaleString()} to ${eligible.length} verified investors at ৳${disburseSuiteRate.toLocaleString()}/unit.`,
+        `Disbursed $${totalDisbursed.toLocaleString()} to ${eligible.length} verified investors at $${disburseSuiteRate.toLocaleString()}/unit.`,
         'success'
       );
       refreshAll();
       setIsDisbursing(false);
-      showToast(`Dividend payout of ৳${totalDisbursed.toLocaleString()} executed for ${disburseMonth}. All eligible investor wallets credited.`);
+      showToast(`Dividend payout of $${totalDisbursed.toLocaleString()} executed for ${disburseMonth}. All eligible investor wallets credited.`);
     }, 1000);
   };
 
@@ -1012,7 +1016,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">Ready</span>
                     </div>
                     <p className="text-slate-500 dark:text-slate-400 text-[11px]">
-                      Credit ৳{disburseSuiteRate.toLocaleString()}/unit to all verified investors for {disburseMonth}.
+                      Credit ${disburseSuiteRate.toLocaleString()}/unit to all verified investors for {disburseMonth}.
                     </p>
                     <button
                       onClick={() => setActiveTab('shares')}
@@ -1208,7 +1212,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         <td className="p-3.5">
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border flex items-center gap-1 w-fit ${statusBadge(inv.kycStatus)}`}>
                             {inv.kycStatus === 'verified' && <Check className="w-3 h-3" />}
-                            {inv.kycStatus === 'verified' ? 'Verified' : 'Pending NID'}
+                            {inv.kycStatus === 'verified' ? 'Verified' : 'Pending ID'}
                           </span>
                           {inv.status === 'suspended' && (
                             <span className="block mt-1 text-[10px] font-bold text-rose-600 dark:text-rose-400">SUSPENDED</span>
@@ -1312,7 +1316,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                   <div className="grid grid-cols-2 gap-3 text-xs">
                     <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
-                      <span className="text-slate-500 dark:text-slate-400 block text-[10px]">National NID No:</span>
+                      <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Government ID:</span>
                       <strong className="text-slate-900 dark:text-white font-mono">{selectedInvestorForModal.nidNo}</strong>
                     </div>
                     <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
@@ -1635,7 +1639,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">
-                    Rate per Suite Share (BDT)
+                    Rate per Suite Share (USD)
                   </label>
                   <input
                     type="number"
@@ -1861,7 +1865,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <FieldError message={cryptoTouched ? cryptoWalletError : null} />
                 </div>
                 <div>
-                  <label className="block text-slate-600 dark:text-slate-300 font-semibold mb-1">Conversion Rate (৳ per 1 USDT)</label>
+                  <label className="block text-slate-600 dark:text-slate-300 font-semibold mb-1">Conversion Rate ($ per 1 USDT)</label>
                   <input
                     type="number"
                     min={1}
@@ -2478,7 +2482,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <StatCards
               items={[
                 { label: 'Total Signups', value: String(signups.length), sub: 'Records captured', tone: 'slate' },
-                { label: 'Database Synced', value: String(signups.filter(s => s.source === 'server').length), sub: 'Saved in SQLite', tone: 'emerald' },
+                { label: 'Database Synced', value: String(signups.filter(s => s.source === 'server').length), sub: 'Saved in Supabase', tone: 'emerald' },
                 { label: 'Local Only', value: String(signups.filter(s => s.source === 'local').length), sub: 'Browser fallback', tone: 'amber' },
                 { label: 'With Reference', value: String(signups.filter(s => s.referenceUsername).length), sub: 'Referred signups', tone: 'indigo' }
               ]}
@@ -2523,27 +2527,52 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
             <div
               className={`flex items-start gap-2 p-3 rounded-2xl border text-xs ${
-                signupsServerOnline
+                signupsStatus === 'online'
                   ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-300'
                   : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/50 text-amber-800 dark:text-amber-300'
               }`}
             >
-              {signupsServerOnline ? (
+              {signupsStatus === 'online' ? (
                 <Database className="w-4 h-4 mt-0.5 shrink-0" />
               ) : (
                 <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
               )}
               <div>
-                {signupsServerOnline ? (
+                {signupsStatus === null ? (
                   <span>
-                    <strong>Server database connected.</strong> New signups are saved to the SQLite database and
-                    synced with this console automatically.
+                    Checking the Supabase connection…
+                  </span>
+                ) : signupsStatus === 'online' ? (
+                  <span>
+                    <strong>Supabase connected.</strong> New signups are written to the Postgres
+                    <code className="font-mono font-bold"> signups</code> table and shown here automatically.
+                  </span>
+                ) : signupsStatus === 'missing-table' ? (
+                  <span>
+                    <strong>The</strong> <code className="font-mono font-bold">signups</code>{' '}
+                    <strong>table does not exist yet.</strong> Supabase is reachable — paste{' '}
+                    <code className="font-mono font-bold">supabase/schema.sql</code> into the Supabase{' '}
+                    <strong>SQL Editor → New query → Run</strong>, then press <strong>Refresh</strong>. Until then,
+                    signups are kept in this browser only.
+                  </span>
+                ) : signupsStatus === 'unconfigured' || !isSupabaseConfigured ? (
+                  <span>
+                    <strong>Supabase is not configured.</strong> Set{' '}
+                    <code className="font-mono font-bold">VITE_SUPABASE_URL</code> and{' '}
+                    <code className="font-mono font-bold">VITE_SUPABASE_PUBLISHABLE_KEY</code> in{' '}
+                    <code className="font-mono font-bold">.env</code> and restart the dev server.
+                  </span>
+                ) : signupsStatus === 'offline' ? (
+                  <span>
+                    <strong>Supabase unreachable.</strong> Showing signups saved locally in this browser. Check your
+                    internet connection, then press <strong>Refresh</strong>.
                   </span>
                 ) : (
                   <span>
-                    <strong>Server database offline.</strong> Showing signups saved locally in this browser. Start the
-                    API with <code className="font-mono font-bold">npm run server</code> (defaults to
-                    http://localhost:3001) to save to the database.
+                    <strong>Supabase rejected the request.</strong> The table exists but the publishable key or row
+                    level security blocked the read. Check the key in{' '}
+                    <code className="font-mono font-bold">.env</code> and the policies in{' '}
+                    <code className="font-mono font-bold">supabase/schema.sql</code>.
                   </span>
                 )}
               </div>

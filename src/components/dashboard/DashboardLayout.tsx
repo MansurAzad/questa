@@ -544,17 +544,17 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 {/* Visual Chart Card */}
                 <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                    Portfolio Valuation Trajectory (BDT)
+                    Portfolio Valuation Trajectory (USD)
                   </h3>
 
                   {/* Simulated SVG Area Chart */}
                   <div className="h-48 w-full flex items-end gap-2 sm:gap-3 pt-6 pb-2 px-1 sm:px-2 border-b border-slate-100 dark:border-slate-800">
                     {[
-                      { year: '2024 (Purchase)', val: '৳12.0 Lac', height: '40%' },
-                      { year: '2025 (Current)', val: '৳14.2 Lac', height: '52%' },
-                      { year: '2026 (Dev)', val: '৳17.0 Lac', height: '65%' },
-                      { year: '2027 (Handover)', val: '৳21.5 Lac', height: '82%' },
-                      { year: '2028 (Mature)', val: '৳26.0 Lac', height: '100%' }
+                      { year: '2024 (Purchase)', val: '$120,000', height: '40%' },
+                      { year: '2025 (Current)', val: '$142,000', height: '52%' },
+                      { year: '2026 (Dev)', val: '$170,000', height: '65%' },
+                      { year: '2027 (Handover)', val: '$215,000', height: '82%' },
+                      { year: '2028 (Mature)', val: '$260,000', height: '100%' }
                     ].map((bar, idx) => (
                       <div key={idx} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
                         <span className="text-[10px] font-mono font-bold text-amber-600 dark:text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity text-center">
@@ -573,7 +573,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-slate-500">
                     <span>Average Annual Capital Gain: +18.2%</span>
-                    <span>Projected 5-Yr Net Gain: +৳14,00,000</span>
+                    <span>Projected 5-Yr Net Gain: +$1,400,000</span>
                   </div>
                 </div>
               </div>

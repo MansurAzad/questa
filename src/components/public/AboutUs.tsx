@@ -34,20 +34,20 @@ export const AboutUs: React.FC<AboutUsProps> = ({
 }) => {
   const leaders = [
     {
-      name: 'Mr. Ripon Hossain',
+      name: 'Mr. Richard Hoffman',
       role: 'Chairman',
       company: 'Questra World Real Estate Limited',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
       message:
-        'Our core philosophy has always been transparency, legal integrity, and sustainable wealth creation. At Questra World, we do not merely sell shares or floor units; we build generations of trust and lasting family heritage across Bangladesh.'
+        'Our core philosophy has always been transparency, legal integrity, and sustainable wealth creation. At Questra World, we do not merely sell shares or floor units; we build generations of trust and lasting family heritage across the globe.'
     },
     {
-      name: 'Mr. H. M. Ziaur Rahman',
+      name: 'Mr. Henry M. Whitfield',
       role: 'Managing Director',
       company: 'Questra World Real Estate Limited',
       image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80',
       message:
-        'We are determined to pioneer world-class beachfront hospitality and premium commercial developments in Cox\'s Bazar and Mirpur, Dhaka. Our commitment is timely project execution, zero legal flaws, and guaranteed returns for our valued investors.'
+        'We are determined to pioneer world-class beachfront hospitality and premium commercial developments at our flagship global destinations. Our commitment is timely project execution, zero legal flaws, and guaranteed returns for our valued investors.'
     },
     {
       name: 'Mr. Uttam Saha',
@@ -62,7 +62,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   const milestones = [
     {
       year: '2016',
-      title: 'Founded in Dhaka',
+      title: 'Founded Worldwide',
       desc: 'Started operations with a core focus on vetted, legally secure real estate investment opportunities.'
     },
     {
@@ -72,8 +72,8 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     },
     {
       year: '2022',
-      title: 'Chattogram Expansion',
-      desc: 'Inaugurated Chattogram regional office at Muradpur and launched 5-star resort fractional suites.'
+      title: 'Global Expansion',
+      desc: 'Inaugurated international regional office at Muradpur and launched 5-star resort fractional suites.'
     },
     {
       year: '2026',
@@ -86,7 +86,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     { icon: ShieldCheck, title: 'Legal Integrity', desc: 'Every project is RAJUK-approved with registered deeds and bank PDC cheque security.' },
     { icon: CheckCircle2, title: 'Guaranteed Returns', desc: 'Monthly dividend disbursements and 2X double profit backed by legal agreements.' },
     { icon: Users, title: 'Investor-First', desc: 'Transparent communication, 24/7 support, and dedicated relationship managers.' },
-    { icon: Compass, title: 'Visionary Growth', desc: 'Pioneering world-class hospitality and commercial infrastructure in Bangladesh.' },
+    { icon: Compass, title: 'Visionary Growth', desc: 'Pioneering world-class hospitality and commercial infrastructure worldwide.' },
   ];
 
   return (
@@ -103,14 +103,14 @@ export const AboutUs: React.FC<AboutUsProps> = ({
             {cmsTitle || 'Building Generations of Trust & Wealth'}
           </h2>
           <p className="text-sm text-slate-500 mt-4 leading-relaxed">
-            {cmsSubtitle || 'Questra World Limited is a government-registered real estate and hospitality investment enterprise headquartered in Dhaka, with regional offices in Chattogram. We specialize in fractional hotel suite ownership, commercial tower floor shares, and our flagship 12-Month Double Profit investment scheme.'}
+            {cmsSubtitle || 'Questra World Limited is a government-registered real estate and hospitality investment enterprise with a global headquarters and regional offices worldwide. We specialize in fractional hotel suite ownership, commercial tower floor shares, and our flagship 12-Month Double Profit investment scheme.'}
           </p>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
           {[
-            { value: '৳48.5 Cr+', label: 'Total Collections' },
+            { value: '$485M+', label: 'Total Collections' },
             { value: '284+', label: 'Active Investors' },
             { value: '60+', label: 'Hotel Suites' },
             { value: '120+', label: 'Commercial Floors' },

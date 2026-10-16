@@ -83,7 +83,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ lang
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                    Investment Amount (BDT)
+                    Investment Amount (USD)
                   </label>
                   <input
                     type="number"
@@ -101,8 +101,8 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ lang
                     className="w-full mt-3 accent-amber-600"
                   />
                   <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
-                    <span>৳6,00,000</span>
-                    <span>৳50,00,000</span>
+                    <span>$600,000</span>
+                    <span>$5,000,000</span>
                   </div>
                 </div>
 
@@ -130,7 +130,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ lang
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
-                    Enter Any Amount (BDT)
+                    Enter Any Amount (USD)
                   </label>
                   <input
                     type="text"
@@ -152,7 +152,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ lang
                           : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-amber-300'
                       }`}
                     >
-                      ৳{p.toLocaleString()}
+                      ${p.toLocaleString()}
                     </button>
                   ))}
                 </div>

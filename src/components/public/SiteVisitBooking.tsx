@@ -47,7 +47,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
     name: '',
     phone: '',
     project: 'questra-royal-bay',
-    pickupPoint: 'mirpur-pallabi',
+    pickupPoint: 'global-head-office',
     visitDate: todayISO(),
     guests: '2',
     notes: ''
@@ -89,8 +89,8 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
         preferredDate: dateStr,
         timeSlot: 'Morning (09:30 AM)',
         projectInterested: formData.project === 'questra-commercial-center'
-          ? 'Questra Commercial Center (Mirpur, Dhaka)'
-          : "Questra Royal Bay (Hotel & Suites), Cox's Bazar",
+          ? 'Questra World Commercial Center - Mirpur'
+          : "Questra Royal Bay (Hotel & Suites)",
         pickupLocation: formData.pickupPoint,
         guestsCount: Number(formData.guests)
       });
@@ -104,14 +104,14 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
   };
 
   const projects = [
-    { id: 'questra-royal-bay', name: "Questra Royal Bay — Cox's Bazar", desc: 'Beachfront Hotel & Suites' },
-    { id: 'questra-commercial-center', name: 'Questra Commercial Center — Mirpur', desc: 'Retail & Office Tower' },
+    { id: 'questra-royal-bay', name: "Questra Royal Bay — Waterfront District", desc: 'Beachfront Hotel & Suites' },
+    { id: 'questra-commercial-center', name: 'Questra World Commercial Center — Mirpur', desc: 'Retail & Office Tower' },
   ];
 
   const pickupPoints = [
-    { id: 'mirpur-pallabi', label: 'Dhaka: Mirpur-12 Corporate Head Office' },
-    { id: 'agradabad', label: 'Chattogram: Salma Centre, Agrabad' },
-    { id: 'cox-site', label: "Cox's Bazar: Site Office" },
+    { id: 'global-head-office', label: 'Dubai: Financial District Head Office' },
+    { id: 'agradabad', label: 'Singapore: Marina Bay Centre, Central' },
+    { id: 'cox-site', label: "Waterfront District: Site Office" },
   ];
 
   const showFixLabel = submitAttempt && !result.isValid;
@@ -131,7 +131,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
                 {cmsTitle || 'Book a Free Site Visit'}
               </h2>
               <p className="text-sm text-slate-500 mt-3 leading-relaxed">
-                {cmsSubtitle || 'Visit our projects with complimentary AC microbus transport from Dhaka and Chattogram. See the construction progress, meet our sales team, and reserve your share on the spot.'}
+                {cmsSubtitle || 'Visit our projects with complimentary AC microbus transport from global locations. See the construction progress, meet our sales team, and reserve your share on the spot.'}
               </p>
             </div>
 
@@ -187,7 +187,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
                       value={formData.name}
                       onChange={handleChange}
                       onBlur={() => mark('name')}
-                      placeholder="e.g. Ziabul Hoque"
+                      placeholder="e.g. Alex Johnson"
                       aria-invalid={!!showError('name')}
                       className={withValidation(fieldBase, !!showError('name'))}
                     />
@@ -201,7 +201,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
                       value={formData.phone}
                       onChange={handleChange}
                       onBlur={() => mark('phone')}
-                      placeholder="+880 1XXX-XXXXXX"
+                      placeholder="+65 177 777 7777"
                       aria-invalid={!!showError('phone')}
                       className={withValidation(fieldBase, !!showError('phone'))}
                     />

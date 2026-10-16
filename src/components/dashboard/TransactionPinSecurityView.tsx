@@ -380,7 +380,7 @@ export const TransactionPinSecurityView: React.FC<TransactionPinSecurityViewProp
               <Laptop className="w-4 h-4 text-emerald-600" />
               <div>
                 <strong className="text-slate-900 dark:text-white block">Current Device (Chrome on Linux / Web Preview)</strong>
-                <span className="text-[10px] text-slate-400 font-mono">IP: 103.205.71.x · Chattogram / Dhaka Gateway</span>
+                <span className="text-[10px] text-slate-400 font-mono">IP: 103.205.71.x · Singapore / Dubai Gateway</span>
               </div>
             </div>
             <span className="text-[11px] font-mono font-bold text-emerald-600">THIS SESSION (ACTIVE)</span>

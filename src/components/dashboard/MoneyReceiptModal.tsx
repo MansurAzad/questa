@@ -18,7 +18,7 @@ interface MoneyReceiptModalProps {
   language: Language;
 }
 
-/** Convert a number (up to crores) into English words for the receipt. */
+/** Convert a number into English words for the receipt (international grouping). */
 function amountInWords(num: number): string {
   if (num <= 0) return 'Zero';
   const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten',
@@ -32,15 +32,15 @@ function amountInWords(num: number): string {
     return (h ? ones[h] + ' Hundred' + (rest ? ' ' : '') : '') + (rest ? twoDigits(rest) : '');
   };
 
-  const crore = Math.floor(num / 10000000);
-  const lakh = Math.floor((num % 10000000) / 100000);
-  const thousand = Math.floor((num % 100000) / 1000);
-  const rest = num % 1000;
+  const billion = Math.floor(num / 1_000_000_000);
+  const million = Math.floor((num % 1_000_000_000) / 1_000_000);
+  const thousand = Math.floor((num % 1_000_000) / 1_000);
+  const rest = num % 1_000;
 
   const parts: string[] = [];
-  if (crore) parts.push(threeDigits(crore) + ' Crore');
-  if (lakh) parts.push(twoDigits(lakh) + ' Lakh');
-  if (thousand) parts.push(twoDigits(thousand) + ' Thousand');
+  if (billion) parts.push(threeDigits(billion) + ' Billion');
+  if (million) parts.push(threeDigits(million) + ' Million');
+  if (thousand) parts.push(threeDigits(thousand) + ' Thousand');
   if (rest) parts.push(threeDigits(rest));
   return parts.join(' ') || 'Zero';
 }
@@ -113,10 +113,10 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
                   QUESTRA WORLD LIMITED
                 </h2>
                 <p className="text-[11px] text-slate-600">
-                  Corporate Head Office: House #12, Road #03, Section #12, Pallabi, Mirpur, Dhaka-1216
+                  Global Head Office: House #12, Road #03, International Business District, Dubai
                 </p>
                 <p className="text-[10px] text-slate-500 font-mono">
-                  Hotline: +880 1810-685888 · Web: www.questraworld.com
+                  Hotline: +44 181 068 5888· Web: www.questraworld.com
                 </p>
               </div>
             </div>
@@ -151,7 +151,7 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
                 <span className="text-slate-500 text-[11px] block">Branch / Zonal Office:</span>
                 <strong className="text-xs text-slate-900 font-semibold">{user.branch}</strong>
                 <div className="text-[10px] text-slate-500 mt-0.5">
-                  Salma Centre, Muradpur, Chattogram
+                  Marina Bay Centre, Muradpur, Singapore
                 </div>
               </div>
             </div>
@@ -160,10 +160,10 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
               <div>
                 <span className="text-[11px] text-slate-500 block">Payment Purpose / Description:</span>
                 <strong className="text-slate-900 font-bold text-xs">
-                  {installment.title} - Questra Royal Bay (Hotel & Suites), Cox's Bazar
+                  {installment.title} - Questra Royal Bay (Hotel & Suites)
                 </strong>
                 <div className="text-[10px] text-slate-500 mt-0.5">
-                  Payment Method: <strong>{installment.paymentMethod || 'Online Gateway / bKash'}</strong> · Ref/Trx: <span className="font-mono">{installment.transactionId || 'TRX-CS-8842'}</span>
+                  Payment Method: <strong>{installment.paymentMethod || 'Online Gateway / PayPal'}</strong> · Ref/Trx: <span className="font-mono">{installment.transactionId || 'TRX-CS-8842'}</span>
                 </div>
               </div>
 
@@ -176,7 +176,7 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
             </div>
 
             <div className="text-[11px] text-slate-600 bg-amber-50/50 p-2.5 rounded-lg border border-amber-100">
-              <strong>In Words:</strong> {amountInWords(installment.amount)} Taka Only (Paid)
+              <strong>In Words:</strong> {amountInWords(installment.amount)} USD Only (Paid)
             </div>
           </div>
 
@@ -194,7 +194,7 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
 
             <div className="text-center">
               <div className="font-serif italic text-sm text-slate-800 mb-1 font-bold">
-                M. A. Rahman
+                M. A. Reynolds
               </div>
               <div className="border-t border-slate-400 pt-1 text-[10px] text-slate-600 font-semibold uppercase">
                 Authorized Officer (Accounts)

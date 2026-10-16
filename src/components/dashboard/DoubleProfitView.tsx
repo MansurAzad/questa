@@ -55,7 +55,7 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
     selectedPackageAmount <= 0
       ? 'Enter the capital amount you wish to invest.'
       : selectedPackageAmount < MIN_ENROLL
-      ? `Minimum investment amount is ৳${MIN_ENROLL.toLocaleString()}.`
+      ? `Minimum investment amount is $${MIN_ENROLL.toLocaleString()}.`
       : null;
   const showEnrollError = enrollAttempt ? enrollAmountError : null;
 
@@ -73,12 +73,12 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
 
   // Preset packages
   const packages = [
-    { amount: 100000, label: '৳1,00,000', returnLabel: '12-Month ৳2,00,000', monthly: '৳16,667 / mo' },
-    { amount: 250000, label: '৳2,50,000', returnLabel: '12-Month ৳5,00,000', monthly: '৳41,667 / mo' },
-    { amount: 500000, label: '৳5,00,000', returnLabel: '12-Month ৳10,00,000', monthly: '৳83,333 / mo' },
-    { amount: 1000000, label: '৳10,00,000', returnLabel: '12-Month ৳20,00,000', monthly: '৳1,66,667 / mo' },
-    { amount: 2500000, label: '৳25,00,000', returnLabel: '12-Month ৳50,00,000', monthly: '৳4,16,667 / mo' },
-    { amount: 5000000, label: '৳50,00,000', returnLabel: '12-Month ৳1,00,00,000', monthly: '৳8,33,333 / mo' }
+    { amount: 100000, label: '$100,000', returnLabel: '12-Month $200,000', monthly: '$16,667 / mo' },
+    { amount: 250000, label: '$250,000', returnLabel: '12-Month $500,000', monthly: '$41,667 / mo' },
+    { amount: 500000, label: '$500,000', returnLabel: '12-Month $1,000,000', monthly: '$83,333 / mo' },
+    { amount: 1000000, label: '$1,000,000', returnLabel: '12-Month $2,000,000', monthly: '$166,667 / mo' },
+    { amount: 2500000, label: '$2,500,000', returnLabel: '12-Month $5,000,000', monthly: '$416,667 / mo' },
+    { amount: 5000000, label: '$5,000,000', returnLabel: '12-Month $10,000,000', monthly: '$833,333 / mo' }
   ];
 
   const handleSelectPackage = (amt: number) => {
@@ -107,8 +107,8 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
     StorageService.createDoubleProfitPlan({
       memberId: user.memberId,
       memberName: user.fullName,
-      packageName: `Premium 12-Month Double Return (৳${selectedPackageAmount.toLocaleString()})`,
-      packageNameBn: `Premium 12-Month Double Return (৳${selectedPackageAmount.toLocaleString()})`,
+      packageName: `Premium 12-Month Double Return ($${selectedPackageAmount.toLocaleString()})`,
+      packageNameBn: `Premium 12-Month Double Return ($${selectedPackageAmount.toLocaleString()})`,
       principalAmount: selectedPackageAmount
     });
 
@@ -116,7 +116,7 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
     setIsEnrollModalOpen(false);
     setEnrollAttempt(false);
     setEnrollSuccessMessage(
-      `Congratulations! Your BDT ${selectedPackageAmount.toLocaleString()} 12-Month Double Profit Plan is now active. Monthly installments will be credited automatically.`
+      `Congratulations! Your $${selectedPackageAmount.toLocaleString()} 12-Month Double Profit Plan is now active. Monthly installments will be credited automatically.`
     );
     setTimeout(() => setEnrollSuccessMessage(null), 8000);
   };
@@ -188,7 +188,7 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
               Invest Any Amount — Get 2X Back in 12 Months, Paid in 12 Equal Monthly Installments!
             </h2>
             <p className="text-xs sm:text-sm text-amber-50/90 leading-relaxed">
-              However much you invest, you receive double (2X) of your capital back — disbursed month by month across 12 equal installments credited directly to your bank account or portal wallet. Every taka you put in is matched by 100% net profit, guaranteed by our company.
+              However much you invest, you receive double (2X) of your capital back — disbursed month by month across 12 equal installments credited directly to your bank account or portal wallet. Every dollar you put in is matched by 100% net profit, guaranteed by our company.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-semibold text-amber-100">
               <div className="flex items-center gap-1.5">
@@ -482,7 +482,7 @@ export const DoubleProfitView: React.FC<DoubleProfitViewProps> = ({
               {/* Custom Amount */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Or Enter Custom Amount (BDT)
+                  Or Enter Custom Amount (USD)
                 </label>
                 <input
                   type="text"

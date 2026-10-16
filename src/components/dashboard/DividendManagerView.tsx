@@ -33,7 +33,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
 }) => {
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState<number>(18500);
-  const [withdrawDestination, setWithdrawDestination] = useState<'bank' | 'bkash' | 'installment_offset'>('bank');
+  const [withdrawDestination, setWithdrawDestination] = useState<'bank' | 'paypal' | 'installment_offset'>('bank');
   const [isProcessing, setIsProcessing] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [submitAttempt, setSubmitAttempt] = useState(false);
@@ -80,10 +80,10 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
       let descBn = `Dividend Payout to ${user.bankName || 'The City Bank'}`;
       let method = `Bank Wire (${user.bankName || 'The City Bank'})`;
 
-      if (withdrawDestination === 'bkash') {
-        desc = `Instant Dividend Disbursement to bKash (${user.mfsNumber || user.phone})`;
-        descBn = `Instant Dividend Disbursement to bKash`;
-        method = 'bKash Direct';
+      if (withdrawDestination === 'paypal') {
+        desc = `Instant Dividend Disbursement to PayPal (${user.mfsNumber || user.phone})`;
+        descBn = `Instant Dividend Disbursement to PayPal`;
+        method = 'PayPal Direct';
       } else if (withdrawDestination === 'installment_offset') {
         desc = 'Dividend Auto-Adjustment to Suite Share Installment';
         descBn = 'Dividend Auto-Adjustment to Suite Share Installment';
@@ -104,7 +104,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
       });
 
       setIsProcessing(false);
-      setSuccessMessage(`৳${withdrawAmount.toLocaleString()} payout successfully processed!`);
+      setSuccessMessage(`$${withdrawAmount.toLocaleString()} payout successfully processed!`);
       setSubmitAttempt(false);
       onRefreshData();
     }, 1000);
@@ -193,7 +193,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
           <div className="flex items-center gap-2">
             <Building className="w-4 h-4 text-amber-600" />
             <strong className="text-sm text-slate-900 dark:text-white">
-              {user.bankName || 'The City Bank Limited'} — {user.bankBranch || 'Agrabad Commercial Branch, Chattogram'}
+              {user.bankName || 'HSBC'} — {user.bankBranch || 'Central Commercial Branch, Singapore'}
             </strong>
           </div>
           <p className="text-xs text-slate-500 font-mono">
@@ -203,7 +203,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
 
         <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-200 dark:border-emerald-800 self-start md:self-auto">
           <ShieldCheck className="w-4 h-4" />
-          <span>BEFTN / NPSB Direct Deposit Active</span>
+          <span>BEFTN / SWIFT Direct Deposit Active</span>
         </div>
       </div>
 
@@ -289,7 +289,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
                 )}
                 <div>
                   <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
-                    Withdrawal Amount (BDT)
+                    Withdrawal Amount (USD)
                   </label>
                   <input
                     type="number"
@@ -312,7 +312,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
                         onClick={() => setWithdrawAmount(amt)}
                         className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] font-mono text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                       >
-                        ৳{amt.toLocaleString()}
+                        ${amt.toLocaleString()}
                       </button>
                     ))}
                   </div>
@@ -335,22 +335,22 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
                       />
                       <div>
                         <strong className="block text-slate-900 dark:text-white">The City Bank (A/C: ...2001)</strong>
-                        <span className="text-[10px] text-slate-500">Agrabad Branch · NPSB Direct Transfer</span>
+                        <span className="text-[10px] text-slate-500">Central Branch · SWIFT Direct Transfer</span>
                       </div>
                     </label>
 
                     <label className={`p-3 rounded-xl border flex items-center gap-3 cursor-pointer ${
-                      withdrawDestination === 'bkash' ? 'border-amber-500 bg-amber-500/10' : 'border-slate-200 dark:border-slate-700'
+                      withdrawDestination === 'paypal' ? 'border-amber-500 bg-amber-500/10' : 'border-slate-200 dark:border-slate-700'
                     }`}>
                       <input
                         type="radio"
                         name="dest"
-                        checked={withdrawDestination === 'bkash'}
-                        onChange={() => setWithdrawDestination('bkash')}
+                        checked={withdrawDestination === 'paypal'}
+                        onChange={() => setWithdrawDestination('paypal')}
                         className="text-amber-600"
                       />
                       <div>
-                        <strong className="block text-slate-900 dark:text-white">bKash Personal ({user.mfsNumber || user.phone})</strong>
+                        <strong className="block text-slate-900 dark:text-white">PayPal Personal ({user.mfsNumber || user.phone})</strong>
                         <span className="text-[10px] text-slate-500">Instant Mobile Disbursement</span>
                       </div>
                     </label>
@@ -367,7 +367,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
                       />
                       <div>
                         <strong className="block text-slate-900 dark:text-white">Offset Against Next Share Installment</strong>
-                        <span className="text-[10px] text-slate-500">Auto-deduct from upcoming ৳35,000 installment due</span>
+                        <span className="text-[10px] text-slate-500">Auto-deduct from upcoming $35,000 installment due</span>
                       </div>
                     </label>
                   </div>

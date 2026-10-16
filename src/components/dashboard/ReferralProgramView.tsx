@@ -72,7 +72,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   language,
   onNavigateToTree
 }) => {
-  const referralCode = user.referralCode || user.memberId.replace('QW-CTG-', 'QW-') || 'QW-8842';
+  const referralCode = user.referralCode || user.memberId.replace('QW-INT-', 'QW-') || 'QW-8842';
   const referralUrl = `https://questraworld.com/user/register?ref=${user.username}&code=${referralCode}`;
 
   const [copiedCode, setCopiedCode] = useState(false);
@@ -108,7 +108,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   const [newInviteUsername, setNewInviteUsername] = useState('');
   const [newInvitePhone, setNewInvitePhone] = useState('');
   const [newInviteEmail, setNewInviteEmail] = useState('');
-  const [newInviteProject, setNewInviteProject] = useState("Questra Royal Bay Cox's Bazar (1 Suite Share)");
+  const [newInviteProject, setNewInviteProject] = useState("Questra Royal Bay Waterfront (1 Suite Share)");
   const [newInviteInvestment, setNewInviteInvestment] = useState('3500000');
   const [newInviteNotes, setNewInviteNotes] = useState('');
   const [inviteSubmitting, setInviteSubmitting] = useState(false);
@@ -214,9 +214,9 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
       name: newInviteName,
       nameBn: newInviteName,
       username: newInviteUsername.toLowerCase().trim().replace('@', ''),
-      memberId: `QW-CTG-${Math.floor(9500 + Math.random() * 499)}`,
+      memberId: `QW-INT-${Math.floor(9500 + Math.random() * 499)}`,
       email: newInviteEmail || `${newInviteUsername.toLowerCase()}@client.com`,
-      phone: newInvitePhone || '+880 1819-000000',
+      phone: newInvitePhone || '+65 181 900 0000',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
       sponsorUsername: user.username,
       sponsorName: user.fullName,
@@ -230,7 +230,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
       commissionRate: rate,
       payoutStatus: 'available',
       rank: 'Associate Member',
-      location: 'Chattogram Office',
+      location: 'Regional Client Office',
       kycVerified: true,
       notes: newInviteNotes || 'Referred directly by user referral program portal.'
     };
@@ -803,12 +803,12 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
                       onChange={e => setNewInviteProject(e.target.value)}
                       className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                     >
-                      <option>Questra Royal Bay Cox's Bazar (1 Suite Share)</option>
+                      <option>Questra Royal Bay Waterfront (1 Suite Share)</option>
                       <option>Questra Commercial Center (Tower Floor Share)</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Investment (BDT) *</label>
+                    <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Investment (USD) *</label>
                     <input
                       type="number"
                       value={newInviteInvestment}

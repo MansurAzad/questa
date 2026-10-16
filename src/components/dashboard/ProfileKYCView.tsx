@@ -23,7 +23,7 @@ import { FieldError, ValidationSummary, focusFirstInvalid, withValidation } from
 const fieldBase =
   'w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500';
 
-const nidRule = (label = 'National ID (NID) number'): Rule => v => {
+const nidRule = (label = 'Government ID / Passport number'): Rule => v => {
   const t = v.replace(/\s|-/g, '');
   if (!t) return `${label} is required.`;
   if (!/^(\d{10}|\d{13}|\d{17})$/.test(t)) return `${label} must be 10, 13 or 17 digits.`;
@@ -38,10 +38,10 @@ const RULES: RuleSet = {
   address: minLength('Present address', 5),
   nomineeName: compose(required('Nominee name'), minLength('Nominee name', 3)),
   nomineePhone: phoneRule('Nominee phone', false),
-  nomineeNid: nidRule('Nominee NID'),
+  nomineeNid: nidRule('Nominee ID / Passport'),
   bankAccount: (v) => (v.trim() && !/^\d{6,20}$/.test(v.trim()) ? 'Account number must be 6–20 digits.' : null),
   routingNumber: (v) => (v.trim() && !/^\d{6,12}$/.test(v.trim()) ? 'Routing number must be 6–12 digits.' : null),
-  bkashNumber: phoneRule('bKash / Nagad wallet number', false)
+  walletNumber: phoneRule('PayPal / Wise wallet number', false)
 };
 
 interface ProfileKYCViewProps {
@@ -66,11 +66,11 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
   const [nomineePhone, setNomineePhone] = useState(user.nominee.phone);
   const [nomineeNid, setNomineeNid] = useState(user.nominee.nid);
 
-  const [bankName, setBankName] = useState(user.bankName || 'The City Bank Limited');
-  const [bankBranch, setBankBranch] = useState(user.bankBranch || 'Agrabad Commercial Area Branch, Chattogram');
+  const [bankName, setBankName] = useState(user.bankName || 'HSBC');
+  const [bankBranch, setBankBranch] = useState(user.bankBranch || 'Central Commercial Area Branch, Singapore');
   const [bankAccount, setBankAccount] = useState(user.bankAccount || '1102948192001');
   const [routingNumber, setRoutingNumber] = useState(user.bankRoutingNumber || '225150921');
-  const [bkashNumber, setBkashNumber] = useState(user.mfsNumber || '01819745239');
+  const [walletNumber, setWalletNumber] = useState(user.mfsNumber || '+14155550199');
 
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -80,12 +80,12 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
   const values = {
     fullName, nidNo, phone, email, address,
     nomineeName, nomineePhone, nomineeNid,
-    bankAccount, routingNumber, bkashNumber
+    bankAccount, routingNumber, walletNumber
   };
   const result = useMemo(() => runRules(values, RULES), [
     fullName, nidNo, phone, email, address,
     nomineeName, nomineePhone, nomineeNid,
-    bankAccount, routingNumber, bkashNumber
+    bankAccount, routingNumber, walletNumber
   ]);
 
   const showError = (field: string): string | null =>
@@ -117,7 +117,7 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
       bankBranch,
       bankAccount,
       bankRoutingNumber: routingNumber,
-      mfsNumber: bkashNumber
+      mfsNumber: walletNumber
     };
 
     StorageService.updateUser(updated);
@@ -222,7 +222,7 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
 
             <div>
               <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
-                National ID (NID) Number *
+                Government ID (Passport) Number *
               </label>
               <input
                 type="text"
@@ -341,7 +341,7 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
 
             <div>
               <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
-                Nominee NID
+                Nominee ID
               </label>
               <input
                 type="text"
@@ -356,11 +356,11 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
           </div>
         </div>
 
-        {/* Section 3: Bank & MFS Payout Channel */}
+        {/* Section 3: Bank & Wallet Payout Channel */}
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
           <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
             <Building className="w-4 h-4 text-amber-600" />
-            <span>3. Bank Account & Mobile Financial Service (MFS)</span>
+            <span>3. Bank Account & Mobile Wallet</span>
           </h4>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
@@ -420,17 +420,17 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
 
             <div className="sm:col-span-2">
               <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
-                bKash / Nagad Wallet Number
+                PayPal / Wise Wallet Number
               </label>
               <input
                 type="text"
-                value={bkashNumber}
-                onChange={e => setBkashNumber(e.target.value)}
-                onBlur={() => mark('bkashNumber')}
-                aria-invalid={!!showError('bkashNumber')}
-                className={withValidation(`${fieldBase} font-mono`, !!showError('bkashNumber'))}
+                value={walletNumber}
+                onChange={e => setWalletNumber(e.target.value)}
+                onBlur={() => mark('walletNumber')}
+                aria-invalid={!!showError('walletNumber')}
+                className={withValidation(`${fieldBase} font-mono`, !!showError('walletNumber'))}
               />
-              <FieldError message={showError('bkashNumber')} />
+              <FieldError message={showError('walletNumber')} />
             </div>
           </div>
         </div>

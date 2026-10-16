@@ -45,7 +45,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   language
 }) => {
   const [isLoginTab, setIsLoginTab] = useState(true);
-  const [username, setUsername] = useState('Ziabulctg1');
+  const [username, setUsername] = useState('user1');
   const [password, setPassword] = useState('123456');
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
@@ -124,7 +124,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   const handleFillDemo = () => {
-    setUsername('Ziabulctg1');
+    setUsername('user1');
     setPassword('123456');
     setError(null);
     setTouched({});
@@ -155,7 +155,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         onLoginSuccess(loggedUser);
         onClose();
       } else {
-        setError('Invalid credentials. Please check your username and password, or use the demo login Ziabulctg1 / 123456.');
+        setError('Invalid credentials. Please check your username and password, or use the demo login user1 / 123456.');
       }
     } else {
       if (StorageService.accountExists(username)) {
@@ -216,7 +216,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               className="text-[11px] font-semibold text-amber-300 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors"
             >
               <KeyRound className="w-3.5 h-3.5" />
-              <span>Investor: Ziabulctg1</span>
+              <span>Investor: user1</span>
             </button>
             <button
               type="button"
@@ -277,7 +277,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 onBlur={() => mark('username')}
-                placeholder="Ziabulctg1"
+                placeholder="user1"
                 aria-invalid={!!showError('username')}
                 className={withValidation(`${fieldBase} pl-9 font-mono`, !!showError('username'))}
               />
@@ -295,7 +295,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 value={fullName}
                 onChange={e => setFullName(e.target.value)}
                 onBlur={() => mark('fullName')}
-                placeholder="e.g. Md. Rafiqul Islam"
+                placeholder="e.g. Michael Anderson"
                 aria-invalid={!!showError('fullName')}
                 className={withValidation(fieldBase, !!showError('fullName'))}
               />
@@ -314,7 +314,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
                   onBlur={() => mark('phone')}
-                  placeholder="+880 1819..."
+                  placeholder="+971 000 880 1819..."
                   aria-invalid={!!showError('phone')}
                   className={withValidation(fieldBase, !!showError('phone'))}
                 />
@@ -477,8 +477,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Footer info note */}
         <div className="px-6 py-3 bg-slate-50 dark:bg-slate-900/60 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 text-center">
-          Questra World 24/7 Investor Hotline: +880 1810-685888
-        </div>
+          Questra World 24/7 Investor Hotline: +44 181 068 5888</div>
 
       </div>
     </div>

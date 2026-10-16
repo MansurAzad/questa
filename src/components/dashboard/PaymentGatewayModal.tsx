@@ -14,7 +14,7 @@ import { StorageService } from '../../services/storage';
 import { compose, phone, required, runRules, tronTxId, Rule, RuleSet } from '../../utils/validation';
 import { FieldError, ValidationSummary, focusFirstInvalid } from '../ui/Validation';
 
-type PayChannel = 'bKash' | 'Nagad' | 'Rocket' | 'Bank Transfer' | 'Card' | 'USDT (TRC20)';
+type PayChannel = 'PayPal' | 'Wise' | 'Stripe' | 'Bank Transfer' | 'Card' | 'USDT (TRC20)';
 
 interface PaymentGatewayModalProps {
   isOpen: boolean;
@@ -59,8 +59,8 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
   language,
   onPaymentSuccess
 }) => {
-  const [selectedChannel, setSelectedChannel] = useState<PayChannel>('bKash');
-  const [accountNumber, setAccountNumber] = useState('01819745239');
+  const [selectedChannel, setSelectedChannel] = useState<PayChannel>('PayPal');
+  const [accountNumber, setAccountNumber] = useState('+14155550199');
   const [transactionId, setTransactionId] = useState('');
   const [cardNumber, setCardNumber] = useState('4532 9182 7364 8842');
   const [cardExpiry, setCardExpiry] = useState('09/28');
@@ -79,7 +79,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
   const cryptoEnabled = cryptoSettings.enabled && !!cryptoSettings.walletAddress.trim();
   const usdtAmount = StorageService.bdtToUsdt(installment?.amount || 0);
 
-  const isMobile = selectedChannel === 'bKash' || selectedChannel === 'Nagad' || selectedChannel === 'Rocket';
+  const isMobile = selectedChannel === 'PayPal' || selectedChannel === 'Wise' || selectedChannel === 'Stripe';
 
   const rules: RuleSet = useMemo<RuleSet>(() => {
     if (isMobile) {
@@ -112,10 +112,10 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
   if (!isOpen || !installment) return null;
 
   const channels: { id: PayChannel; label: string; icon: string; desc: string }[] = [
-    { id: 'bKash', label: 'bKash Pay', icon: '🇧🇩', desc: 'Merchant 01700-xxx' },
-    { id: 'Nagad', label: 'Nagad Direct', icon: '⚡', desc: 'Instant 0.99%' },
-    { id: 'Rocket', label: 'Rocket (DBBL)', icon: '🚀', desc: 'Mobile Banking' },
-    { id: 'Bank Transfer', label: 'Bank Transfer', icon: '🏛️', desc: 'City Bank / CBL' },
+    { id: 'PayPal', label: 'PayPal', icon: '🌐', desc: 'Instant checkout' },
+    { id: 'Wise', label: 'Wise', icon: '⚡', desc: 'Low-fee transfer' },
+    { id: 'Stripe', label: 'Stripe', icon: '🚀', desc: 'Card checkout' },
+    { id: 'Bank Transfer', label: 'Bank Transfer', icon: '🏛️', desc: 'SWIFT / SEPA' },
     { id: 'Card', label: 'Visa / Master', icon: '💳', desc: 'Debit / Credit' }
   ];
   if (cryptoEnabled) {
@@ -248,7 +248,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
               <div className="flex justify-between">
                 <span className="text-slate-500">Date & Timestamp:</span>
                 <span className="text-slate-900 dark:text-white font-mono">
-                  {completedTx.date} {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} BDT
+                  {completedTx.date} {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} USD
                 </span>
               </div>
             </div>
@@ -390,8 +390,8 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
               <div className="space-y-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 text-xs">
                 <p className="font-semibold text-slate-900 dark:text-white">Questra World Principal Bank Accounts:</p>
                 <div className="text-[11px] space-y-1 text-slate-600 dark:text-slate-300 font-mono">
-                  <p>• The City Bank Ltd (Agrabad/Mirpur) A/C: 1102948192001</p>
-                  <p>• Islami Bank Bangladesh PLC A/C: 2050218940023</p>
+                  <p>• HSBC (Central) A/C: 1102948192001</p>
+                  <p>• Standard Chartered A/C: 2050218940023</p>
                 </div>
                 <div className="pt-2">
                   <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">
@@ -399,7 +399,7 @@ export const PaymentGatewayModal: React.FC<PaymentGatewayModalProps> = ({
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. CBL-FT-94021"
+                    placeholder="e.g. WISE-FT-94021"
                     value={transactionId}
                     onChange={e => setTransactionId(e.target.value)}
                     onBlur={() => mark('transactionId')}
