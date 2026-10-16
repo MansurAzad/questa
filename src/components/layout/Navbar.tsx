@@ -15,11 +15,12 @@ import {
   CloudCheck,
   TrendingUp,
   LayoutDashboard,
-  Camera
+  Camera,
+  LifeBuoy
 } from 'lucide-react';
 import { User, Language, Theme, AppNotification } from '../../types';
 import { translations, getTranslation, formatBDT } from '../../services/i18n';
-import { getDashboardNavItems, DashboardTab } from '../dashboard/dashboardNav';
+import { DashboardTab } from '../dashboard/dashboardNav';
 
 interface NavbarProps {
   user: User | null;
@@ -63,7 +64,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const t = (key: keyof typeof translations.en) => getTranslation(language, key);
 
   const isDashboard = activeView === 'dashboard';
-  const dashboardNavItems = getDashboardNavItems(language);
 
   const navLinks = [
     { id: 'home', label: t('navHome') },
@@ -250,42 +250,48 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </p>
                     </div>
 
-                    {/* Investor Dashboard Menu (shown only while in the dashboard) */}
-                    {isDashboard && (
-                      <div className="py-1 border-b border-slate-100 dark:border-slate-700">
-                        <div className="px-4 py-1.5 flex items-center justify-between">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                            { 'Dashboard Menu'}
-                          </span>
-                          <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400">
-                            {user.memberId}
-                          </span>
-                        </div>
-                        <div className="max-h-[52vh] overflow-y-auto overscroll-contain">
-                          {dashboardNavItems.map(item => {
-                            const Icon = item.icon;
-                            const active = dashboardTab === item.id;
-                            return (
-                              <button
-                                key={item.id}
-                                onClick={() => {
-                                  onDashboardTabChange(item.id);
-                                  setUserDropdownOpen(false);
-                                }}
-                                className={`w-full flex items-center gap-2.5 px-4 py-2 text-xs transition-colors text-left ${
-                                  active
-                                    ? 'bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 font-semibold'
-                                    : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700'
-                                }`}
-                              >
-                                <Icon className={`w-3.5 h-3.5 ${active ? 'text-amber-600' : 'text-slate-400'}`} />
-                                <span className="truncate">{item.label}</span>
-                              </button>
-                            );
-                          })}
-                        </div>
+                    {/*
+                      Profile menu = only account-related items (4).
+                      Every dashboard section lives in the top button bar of the dashboard.
+                    */}
+                    <div className="py-1 border-b border-slate-100 dark:border-slate-700">
+                      <div className="px-4 py-1.5 flex items-center justify-between">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                          { 'Account'}
+                        </span>
+                        <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400">
+                          {user.memberId}
+                        </span>
                       </div>
-                    )}
+                      {(
+                        [
+                          { id: 'profile' as DashboardTab, label: 'My Profile', icon: UserIcon },
+                          { id: 'ledger' as DashboardTab, label: 'My Ledger', icon: CreditCard },
+                          { id: 'support' as DashboardTab, label: 'Support Center', icon: LifeBuoy },
+                          { id: 'security' as DashboardTab, label: 'Security', icon: ShieldCheck }
+                        ]
+                      ).map(item => {
+                        const Icon = item.icon;
+                        const active = isDashboard && dashboardTab === item.id;
+                        return (
+                          <button
+                            key={item.id}
+                            onClick={() => {
+                              onDashboardTabChange(item.id);
+                              setUserDropdownOpen(false);
+                            }}
+                            className={`w-full flex items-center gap-2.5 px-4 py-2 text-xs transition-colors text-left ${
+                              active
+                                ? 'bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 font-semibold'
+                                : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700'
+                            }`}
+                          >
+                            <Icon className={`w-3.5 h-3.5 ${active ? 'text-amber-600' : 'text-slate-400'}`} />
+                            <span className="truncate">{item.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
 
                     {/* Change Profile Picture */}
                     <button

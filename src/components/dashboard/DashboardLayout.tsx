@@ -152,8 +152,40 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   return (
     <div className="min-h-screen bg-slate-100/70 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors pb-16">
 
-      {/* Main Dashboard Content — full width (menu is in the header profile dropdown) */}
+      {/* Main Dashboard Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        {/* TOP BUTTON BAR — every dashboard section is reachable as a button.
+            The profile dropdown keeps only the 4-5 account-related items. */}
+        <nav className="mb-5 no-scrollbar" aria-label="Dashboard sections">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+            {navItems.map(item => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveTab(item.id)}
+                  aria-current={isActive ? 'page' : undefined}
+                  title={item.label}
+                  className={`group flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                    isActive
+                      ? 'bg-amber-600 border-amber-600 text-white shadow-md shadow-amber-600/20'
+                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-amber-400 dark:hover:border-amber-500 hover:text-amber-700 dark:hover:text-amber-400'
+                  }`}
+                >
+                  <Icon
+                    className={`w-3.5 h-3.5 shrink-0 ${
+                      isActive ? 'text-white' : 'text-slate-400 group-hover:text-amber-500'
+                    }`}
+                  />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+
         <div className="space-y-6">
 
             {/* TAB: OVERVIEW */}
