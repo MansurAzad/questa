@@ -2,6 +2,7 @@
   User,
   ShareInvestment,
   InstallmentRecord,
+  InstallmentReceipt,
   TransactionRecord,
   AppNotification,
   SupportTicket,
@@ -232,14 +233,14 @@ export const INITIAL_TRANSACTIONS: TransactionRecord[] = [
 export const INITIAL_NOTIFICATIONS: AppNotification[] = [
   {
     id: 'notif-1',
-    title: 'Installment Due Reminder',
-    titleBn: 'Installment Due Reminder',
-    message: 'Your monthly installment of $35,000 for your Royal Bay suite share is due on 25 October 2026.',
-    messageBn: 'Your monthly installment of $35,000 for your Royal Bay suite share is due on 25 October 2026.',
-    date: '2026-10-08',
+    title: 'Installment Received',
+    titleBn: 'Installment Received',
+    message: 'Monthly installment #5 of $83,333 from your Executive Gold Double Profit plan has been credited to your linked bank account. Receipt ready to download.',
+    messageBn: 'Monthly installment #5 of $83,333 from your Executive Gold Double Profit plan has been credited to your linked bank account. Receipt ready to download.',
+    date: '2026-10-01',
     read: false,
     type: 'installment',
-    actionUrl: 'installments'
+    actionUrl: 'installment_receipts'
   },
   {
     id: 'notif-2',
@@ -1603,6 +1604,68 @@ export class StorageService {
     return false;
   }
 
+  // --- INSTALLMENT RECEIPTS (installments RECEIVED on invested amounts) ---
+  /**
+   * Builds the receipt schedule for every double-profit investment the member
+   * holds. Each invested amount is paid back in 12 equal monthly installments,
+   * so every plan expands into 12 receipt rows:
+   *   • i <= paidInstallments        → received   (has receipt no + credit ref)
+   *   • i === paidInstallments + 1   → processing (currently being credited)
+   *   • i >  paidInstallments + 1    → upcoming   (scheduled in the future)
+   *
+   * The rows are derived (not stored) so they always stay in sync with the
+   * plan's paid/remaining counters after an admin disbursement.
+   */
+  static getInstallmentReceipts(memberId?: string): InstallmentReceipt[] {
+    const plans = this.getDoubleProfitPlans().filter(p => !memberId || p.memberId === memberId);
+    const receipts: InstallmentReceipt[] = [];
+
+    plans.forEach(plan => {
+      const totalMonths = plan.totalMonths || 12;
+      const baseDate = new Date(plan.startDate + 'T00:00:00');
+      // Stable short code used for receipt / reference numbers (never changes
+      // between renders so a printed receipt keeps the same number).
+      const planCode = plan.id.replace(/[^a-zA-Z0-9]/g, '').slice(-6).toUpperCase();
+
+      for (let i = 1; i <= totalMonths; i++) {
+        const creditDate = new Date(baseDate);
+        creditDate.setMonth(baseDate.getMonth() + i);
+        const scheduledDate = creditDate.toISOString().split('T')[0];
+        const isReceived = i <= plan.paidInstallments;
+        const isProcessing = i === plan.paidInstallments + 1;
+
+        receipts.push({
+          id: `${plan.id}-ir-${i}`,
+          memberId: plan.memberId,
+          planId: plan.id,
+          investmentTitle: plan.packageName,
+          principalAmount: plan.principalAmount,
+          installmentNo: i,
+          totalInstallments: totalMonths,
+          amount: plan.monthlyInstallmentAmount,
+          scheduledDate,
+          receivedDate: isReceived ? scheduledDate : undefined,
+          status: isReceived ? 'received' : isProcessing ? 'processing' : 'upcoming',
+          creditMethod: isReceived ? 'Questra Payout Bank (HSBC)' : undefined,
+          referenceNo: isReceived
+            ? `DP-INS-${planCode}-${String(i).padStart(2, '0')}`
+            : undefined,
+          receiptNo: isReceived
+            ? `IR-${creditDate.getFullYear()}-${planCode}-${String(i).padStart(2, '0')}`
+            : undefined,
+          planStatus: plan.status
+        });
+      }
+    });
+
+    // Newest scheduled installment first so the latest receipts are on top.
+    return receipts.sort((a, b) =>
+      a.scheduledDate === b.scheduledDate
+        ? b.installmentNo - a.installmentNo
+        : (a.scheduledDate < b.scheduledDate ? 1 : -1)
+    );
+  }
+
   // --- INSTALLMENTS CRUD ---
   static getInstallments(): InstallmentRecord[] {
     this.ensureDataInitialized();
@@ -1662,7 +1725,7 @@ export class StorageService {
       date: paidDate,
       read: false,
       type: 'installment',
-      actionUrl: 'installments'
+      actionUrl: 'installment_receipts'
     };
     const notifications = [newNotif, ...this.getNotifications()];
     localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, encryptPayload(notifications));

@@ -124,6 +124,30 @@ export interface InstallmentRecord {
   receiptNo?: string;
 }
 
+/**
+ * A single monthly installment RECEIVED by the investor on an invested amount
+ * (the 12-Month Double Profit scheme pays the capital + profit back in 12
+ * equal monthly installments). Every received installment produces an
+ * official, downloadable money receipt.
+ */
+export interface InstallmentReceipt {
+  id: string;
+  memberId: string;
+  planId: string;
+  investmentTitle: string;      // e.g. "Executive Gold Double Profit (12 Months)"
+  principalAmount: number;      // the invested amount backing this schedule
+  installmentNo: number;        // 1..totalInstallments
+  totalInstallments: number;
+  amount: number;               // installment amount credited
+  scheduledDate: string;        // expected credit date (YYYY-MM-DD)
+  receivedDate?: string;        // actual credit date when status === 'received'
+  status: 'received' | 'processing' | 'upcoming';
+  creditMethod?: string;        // e.g. "Questra Payout Bank (HSBC)"
+  referenceNo?: string;         // ledger reference for the credit
+  receiptNo?: string;           // official receipt number (only when received)
+  planStatus: 'active' | 'completed' | 'pending';
+}
+
 export interface TransactionRecord {
   id: string;
   date: string;

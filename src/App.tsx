@@ -29,7 +29,6 @@ import { DashboardLayout } from './components/dashboard/DashboardLayout';
 import { DashboardTab } from './components/dashboard/dashboardNav';
 import { AvatarChangeModal } from './components/dashboard/AvatarChangeModal';
 import { AuthModal } from './components/auth/AuthModal';
-import { PaymentGatewayModal } from './components/dashboard/PaymentGatewayModal';
 import { ProjectInfo } from './types';
 import { CmsSection, CmsCollectionItem, CmsSiteSettings } from './types/cms';
 import { CmsCollectionSection } from './components/public/CmsCollectionSection';

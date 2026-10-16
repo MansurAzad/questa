@@ -1,10 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import {
-  CreditCard,
-  FileText,
   TrendingUp,
-  CheckCircle2,
-  Clock,
   ArrowUpRight,
   RefreshCw,
   User as UserIcon,
@@ -29,9 +25,7 @@ import { formatBDT, getTranslation, translations } from '../../services/i18n';
 import { StorageService } from '../../services/storage';
 import { compose, required, minLength, runRules, RuleSet } from '../../utils/validation';
 import { FieldError, ValidationSummary, focusFirstInvalid } from '../ui/Validation';
-import { PaymentGatewayModal } from './PaymentGatewayModal';
 import { CertificateViewerModal } from './CertificateViewerModal';
-import { MoneyReceiptModal } from './MoneyReceiptModal';
 import { DividendManagerView } from './DividendManagerView';
 import { ProfileKYCView } from './ProfileKYCView';
 import { MemberTransferView } from './MemberTransferView';
@@ -40,6 +34,7 @@ import { ReferralTreeView } from './ReferralTreeView';
 import { ReferralProgramView } from './ReferralProgramView';
 import { TransactionPinSecurityView } from './TransactionPinSecurityView';
 import { DoubleProfitView } from './DoubleProfitView';
+import { InstallmentReceiptsView } from './InstallmentReceiptsView';
 import { DashboardTab, getDashboardNavItems } from './dashboardNav';
 
 interface DashboardLayoutProps {
@@ -74,14 +69,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const setActiveTab = onTabChange;
 
   // Modal states
-  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
-  const [selectedInstallmentForPay, setSelectedInstallmentForPay] = useState<InstallmentRecord | null>(null);
-
   const [certModalOpen, setCertModalOpen] = useState(false);
   const [certType, setCertType] = useState<'hotel_share' | 'double_profit_deed'>('hotel_share');
-
-  const [receiptModalOpen, setReceiptModalOpen] = useState(false);
-  const [selectedInstallmentForReceipt, setSelectedInstallmentForReceipt] = useState<InstallmentRecord | null>(null);
 
   // Support ticket form
   const [newTicketSubject, setNewTicketSubject] = useState('');
@@ -114,18 +103,26 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const totalSharePaid = shares.reduce((acc, s) => acc + s.paidAmount, 0);
   const totalPaid = totalSharePaid;
 
-  const pendingInstallments = installments.filter(i => i.status !== 'paid');
-  const totalRemainingDue = pendingInstallments.reduce((acc, i) => acc + i.amount, 0);
   const totalDividendsAccrued = shares.reduce((acc, s) => acc + s.totalDividendsEarned, 0);
   const monthlyDividendYield = shares.reduce((acc, s) => acc + s.monthlyDividendAmount, 0);
 
   const activeShare = shares[0];
-  const nextDueInstallment = installments.find(i => i.status === 'due') || pendingInstallments[0];
 
-  const handleOpenPayment = (inst?: InstallmentRecord) => {
-    setSelectedInstallmentForPay(inst || nextDueInstallment);
-    setPaymentModalOpen(true);
-  };
+  // Installment RECEIPTS (installments credited on invested amounts).
+  // The user dashboard has no "pay an installment" flow — capital + profit is
+  // credited back to the investor, so the overview surfaces the next credit.
+  const installmentReceipts = useMemo(
+    () => StorageService.getInstallmentReceipts(user.memberId),
+    [user.memberId]
+  );
+  const receivedReceipts = installmentReceipts.filter(r => r.status === 'received');
+  const totalInstallmentsReceived = receivedReceipts.reduce((acc, r) => acc + r.amount, 0);
+  const nextInstallmentReceipt = useMemo(() => {
+    const pending = installmentReceipts
+      .filter(r => r.status !== 'received')
+      .sort((a, b) => (a.scheduledDate < b.scheduledDate ? -1 : 1));
+    return pending[0] || null;
+  }, [installmentReceipts]);
 
   const handleOpenCertificate = (type: 'hotel_share' | 'double_profit_deed') => {
     setCertType(type);
@@ -221,16 +218,16 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     </span>
                   </div>
 
-                  {/* Card 3: Remaining Due */}
+                  {/* Card 3: Installments Received */}
                   <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                     <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block">
-                      {t('overviewRemainingDue')}
+                      { 'Installments Received'}
                     </span>
-                    <span className="text-xl font-extrabold text-amber-600 dark:text-amber-400 font-mono mt-1 block">
-                      {formatBDT(totalRemainingDue, language)}
+                    <span className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono mt-1 block">
+                      {formatBDT(totalInstallmentsReceived, language)}
                     </span>
                     <span className="text-[11px] text-slate-400 mt-1 block">
-                      {pendingInstallments.length} Installments Remaining
+                      {receivedReceipts.length} of {installmentReceipts.length} installments credited
                     </span>
                   </div>
 
@@ -249,27 +246,27 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
                 </div>
 
-                {/* Next Installment Due Alert Banner */}
-                {nextDueInstallment && nextDueInstallment.status === 'due' && (
-                  <div className="p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-300 dark:border-amber-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                {/* Next Installment Credit Alert Banner */}
+                {nextInstallmentReceipt && (
+                  <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-transparent border border-emerald-300 dark:border-emerald-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
                         <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-                          {t('nextInstallmentDue')}: {nextDueInstallment.title}
+                          { 'Next Installment Credit'}: #{nextInstallmentReceipt.installmentNo} of {nextInstallmentReceipt.totalInstallments}
                         </h3>
                       </div>
                       <p className="text-xs text-slate-600 dark:text-slate-300">
-                        Payable amount: <strong className="font-mono text-slate-900 dark:text-white">{formatBDT(nextDueInstallment.amount, language)}</strong> due on <strong className="font-mono">{nextDueInstallment.dueDate}</strong>.
+                        Credit amount: <strong className="font-mono text-slate-900 dark:text-white">{formatBDT(nextInstallmentReceipt.amount, language)}</strong> scheduled on <strong className="font-mono">{nextInstallmentReceipt.scheduledDate}</strong> from your <strong>{nextInstallmentReceipt.investmentTitle}</strong> investment.
                       </p>
                     </div>
 
                     <button
-                      onClick={() => handleOpenPayment(nextDueInstallment)}
-                      className="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap"
+                      onClick={() => setActiveTab('installment_receipts')}
+                      className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap"
                     >
-                      <CreditCard className="w-4 h-4" />
-                      <span>{t('payNow')}</span>
+                      <Wallet className="w-4 h-4" />
+                      <span>{ 'View Receipts'}</span>
                     </button>
                   </div>
                 )}
@@ -380,97 +377,15 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               />
             )}
 
-            {/* TAB: INSTALLMENTS & PAY */}
-            {activeTab === 'installments' && (
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                      {t('installmentsTitle')}
-                    </h2>
-                    <p className="text-xs text-slate-500">
-                      {t('installmentsSubtitle')}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => handleOpenPayment()}
-                    className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold shadow-xs flex items-center gap-1.5"
-                  >
-                    <CreditCard className="w-3.5 h-3.5" />
-                    <span>Pay Next Installment</span>
-                  </button>
-                </div>
-
-                {/* Installments Table */}
-                <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs overflow-hidden">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs min-w-[640px]">
-                      <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 uppercase font-semibold">
-                        <tr>
-                          <th className="p-3.5">{t('thInstallmentNo')}</th>
-                          <th className="p-3.5">{t('thDueDate')}</th>
-                          <th className="p-3.5">{t('thAmount')}</th>
-                          <th className="p-3.5">{t('thStatus')}</th>
-                          <th className="p-3.5 text-right">{t('thAction')}</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                        {installments.map(inst => (
-                          <tr key={inst.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
-                            <td className="p-3.5 font-medium text-slate-900 dark:text-white">
-                              {inst.title}
-                            </td>
-                            <td className="p-3.5 font-mono text-slate-600 dark:text-slate-300">
-                              {inst.dueDate}
-                            </td>
-                            <td className="p-3.5 font-mono font-bold text-slate-900 dark:text-white">
-                              {formatBDT(inst.amount, language)}
-                            </td>
-                            <td className="p-3.5">
-                              {inst.status === 'paid' ? (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
-                                  <CheckCircle2 className="w-3.5 h-3.5" />
-                                  {t('statusPaid')}
-                                </span>
-                              ) : inst.status === 'due' ? (
-                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400">
-                                  <Clock className="w-3.5 h-3.5" />
-                                  {t('statusDue')}
-                                </span>
-                              ) : (
-                                <span className="text-[11px] font-medium text-slate-400">
-                                  {t('statusUpcoming')}
-                                </span>
-                              )}
-                            </td>
-                            <td className="p-3.5 text-right">
-                              {inst.status === 'paid' ? (
-                                <button
-                                  onClick={() => {
-                                    setSelectedInstallmentForReceipt(inst);
-                                    setReceiptModalOpen(true);
-                                  }}
-                                  className="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 hover:bg-emerald-100 text-emerald-800 dark:text-emerald-300 text-[11px] font-bold font-mono transition-colors flex items-center gap-1 ml-auto"
-                                >
-                                  <FileText className="w-3 h-3 text-emerald-600" />
-                                  <span>{inst.receiptNo || 'MR Receipt'}</span>
-                                </button>
-                              ) : (
-                                <button
-                                  onClick={() => handleOpenPayment(inst)}
-                                  className="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-[11px] font-bold transition-colors shadow-xs"
-                                >
-                                  {t('btnPayOnline')}
-                                </button>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+            {/* TAB: INSTALLMENT RECEIPTS (installments credited on invested amounts) */}
+            {activeTab === 'installment_receipts' && (
+              <InstallmentReceiptsView
+                user={user}
+                language={language}
+                plans={doubleProfitPlans}
+                onRefreshData={onRefreshData}
+                onGoToInvest={() => setActiveTab('double_profit')}
+              />
             )}
 
             {/* TAB: DEPOSIT SLIP UPLOAD */}
@@ -758,17 +673,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         </div>
       </div>
 
-      {/* Payment Gateway Modal */}
-      <PaymentGatewayModal
-        isOpen={paymentModalOpen}
-        onClose={() => setPaymentModalOpen(false)}
-        installment={selectedInstallmentForPay}
-        language={language}
-        onPaymentSuccess={() => {
-          onRefreshData();
-        }}
-      />
-
       {/* Certificate Viewer Modal */}
       <CertificateViewerModal
         isOpen={certModalOpen}
@@ -779,17 +683,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         plans={doubleProfitPlans}
         language={language}
       />
-
-      {/* Official Money Receipt Modal */}
-      {selectedInstallmentForReceipt && (
-        <MoneyReceiptModal
-          isOpen={receiptModalOpen}
-          onClose={() => setReceiptModalOpen(false)}
-          installment={selectedInstallmentForReceipt}
-          user={user}
-          language={language}
-        />
-      )}
 
     </div>
   );

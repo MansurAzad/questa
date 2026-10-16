@@ -186,6 +186,35 @@ CREATE TABLE IF NOT EXISTS public.double_profit_plans (
 );
 
 -- -------------------------------------------------------------------
+-- 7b. INSTALLMENT RECEIPTS (installments CREDITED to an investor)
+--     The 12-Month Double Profit scheme pays capital + profit back in
+--     12 equal monthly installments; every credited installment produces
+--     one receipt row. Unlike `installments` (money the investor PAYS),
+--     these are payouts the investor RECEIVES.
+-- -------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.installment_receipts (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  member_id TEXT,
+  member_name TEXT,
+  plan_id TEXT,
+  investment_title TEXT,
+  principal_amount NUMERIC DEFAULT 0,
+  installment_no INTEGER,
+  total_installments INTEGER DEFAULT 12,
+  amount NUMERIC DEFAULT 0,
+  currency TEXT DEFAULT 'USD',
+  scheduled_date TEXT,
+  received_date TEXT,
+  status TEXT CHECK (status IN ('Received','Processing','Upcoming')) DEFAULT 'Upcoming',
+  credit_method TEXT,
+  reference_no TEXT,
+  receipt_no TEXT,
+  remarks TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- -------------------------------------------------------------------
 -- 8. DEPOSIT SLIPS
 -- -------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.deposit_slips (
@@ -451,6 +480,9 @@ CREATE INDEX IF NOT EXISTS signups_email_idx ON public.signups(email);
 CREATE INDEX IF NOT EXISTS admin_investors_member_id_idx ON public.admin_investors(member_id);
 CREATE INDEX IF NOT EXISTS installments_member_id_idx ON public.installments(member_id);
 CREATE INDEX IF NOT EXISTS installments_status_idx ON public.installments(status);
+CREATE INDEX IF NOT EXISTS installment_receipts_member_id_idx ON public.installment_receipts(member_id);
+CREATE INDEX IF NOT EXISTS installment_receipts_plan_id_idx ON public.installment_receipts(plan_id);
+CREATE INDEX IF NOT EXISTS installment_receipts_status_idx ON public.installment_receipts(status);
 CREATE INDEX IF NOT EXISTS transactions_member_id_idx ON public.transactions(member_id);
 CREATE INDEX IF NOT EXISTS deposit_slips_status_idx ON public.deposit_slips(status);
 CREATE INDEX IF NOT EXISTS support_tickets_status_idx ON public.support_tickets(status);
@@ -485,6 +517,9 @@ BEGIN
   END IF;
   IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'double_profit_plans_updated_at') THEN
     CREATE TRIGGER double_profit_plans_updated_at BEFORE UPDATE ON public.double_profit_plans FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'installment_receipts_updated_at') THEN
+    CREATE TRIGGER installment_receipts_updated_at BEFORE UPDATE ON public.installment_receipts FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
   END IF;
   IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'deposit_slips_updated_at') THEN
     CREATE TRIGGER deposit_slips_updated_at BEFORE UPDATE ON public.deposit_slips FOR EACH ROW EXECUTE FUNCTION public.update_updated_at_column();
@@ -522,6 +557,7 @@ ALTER TABLE public.share_investments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.installments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.transactions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.double_profit_plans ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.installment_receipts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.deposit_slips ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.referral_signups ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.referral_settings ENABLE ROW LEVEL SECURITY;
@@ -547,7 +583,7 @@ DECLARE
 BEGIN
   FOREACH tbl IN ARRAY ARRAY[
     'users','signups','admin_investors','share_investments','installments',
-    'transactions','double_profit_plans','deposit_slips','referral_signups',
+    'transactions','double_profit_plans','installment_receipts','deposit_slips','referral_signups',
     'referral_settings','notices','support_tickets','notifications',
     'site_visits','site_tours','vacation_bookings','audit_logs',
     'cms_sections','cms_collections','cms_settings','crypto_payment_settings'
@@ -609,6 +645,12 @@ CREATE POLICY "public_select_double_profit_plans" ON public.double_profit_plans 
 CREATE POLICY "public_insert_double_profit_plans" ON public.double_profit_plans FOR INSERT TO anon, authenticated WITH CHECK (true);
 CREATE POLICY "public_update_double_profit_plans" ON public.double_profit_plans FOR UPDATE TO anon, authenticated USING (true) WITH CHECK (true);
 CREATE POLICY "public_delete_double_profit_plans" ON public.double_profit_plans FOR DELETE TO anon, authenticated USING (true);
+
+-- INSTALLMENT RECEIPTS
+CREATE POLICY "public_select_installment_receipts" ON public.installment_receipts FOR SELECT TO anon, authenticated USING (true);
+CREATE POLICY "public_insert_installment_receipts" ON public.installment_receipts FOR INSERT TO anon, authenticated WITH CHECK (true);
+CREATE POLICY "public_update_installment_receipts" ON public.installment_receipts FOR UPDATE TO anon, authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "public_delete_installment_receipts" ON public.installment_receipts FOR DELETE TO anon, authenticated USING (true);
 
 -- DEPOSIT SLIPS
 CREATE POLICY "public_select_deposit_slips" ON public.deposit_slips FOR SELECT TO anon, authenticated USING (true);

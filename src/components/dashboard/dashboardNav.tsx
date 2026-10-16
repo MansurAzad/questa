@@ -2,7 +2,7 @@ import {
   LayoutDashboard,
   Sparkles,
   User as UserIcon,
-  CreditCard,
+  Banknote,
   Upload,
   Wallet,
   Send,
@@ -20,7 +20,7 @@ import { getTranslation, translations } from '../../services/i18n';
 export type DashboardTab =
   | 'overview'
   | 'double_profit'
-  | 'installments'
+  | 'installment_receipts'
   | 'slip_upload'
   | 'dividends'
   | 'member_transfer'
@@ -52,7 +52,7 @@ export function getDashboardNavItems(language: Language): DashboardNavItem[] {
       label: '12-Month Double Profit',
       icon: Sparkles
     },
-    { id: 'installments', label: t('dashInstallments'), icon: CreditCard },
+    { id: 'installment_receipts', label: t('dashInstallmentReceipts'), icon: Banknote },
     { id: 'slip_upload', label: t('dashSlipUpload'), icon: Upload },
     { id: 'dividends', label: t('dashDividends'), icon: Wallet },
     { id: 'member_transfer', label: t('dashMemberTransfer'), icon: Send },

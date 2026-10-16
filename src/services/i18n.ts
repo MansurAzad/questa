@@ -87,7 +87,7 @@ export const translations = {
     dashShares: 'Hotel Shares',
     dashVacation: 'Claim 7-Day Resort Stay',
     dashSiteProgress: 'Site Cam & Drone Updates',
-    dashInstallments: 'Installments & Pay',
+    dashInstallmentReceipts: 'Installment Receipts',
     dashSlipUpload: 'Deposit Slip Upload',
     dashDividends: 'Dividend & Payouts',
     dashMemberTransfer: 'Member Fund Transfer',
@@ -110,9 +110,9 @@ export const translations = {
     payNow: 'Pay Now',
     paymentProgress: 'Overall Payment Progress',
 
-    // Installments
-    installmentsTitle: 'Installment Schedule & Online Payment',
-    installmentsSubtitle: 'Track scheduled installments, upload payment slips, or pay instantly with PayPal / Cards / Bank.',
+    // Installment Receipts (installments credited on invested amounts)
+    installmentsTitle: 'Installment Receipts',
+    installmentsSubtitle: 'Every monthly installment credited on your invested amounts — open or print the official payout receipt.',
     thInstallmentNo: 'No.',
     thDueDate: 'Due Date',
     thAmount: 'Amount (USD)',
