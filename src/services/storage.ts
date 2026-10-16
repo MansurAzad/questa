@@ -1347,13 +1347,24 @@ export class StorageService {
           const raw = localStorage.getItem(key);
           if (!raw) continue;
           let updated: string | null = null;
+          let decoded: string | null = null;
           try {
-            const decoded = decodeURIComponent(atob(raw));
-            if (/questa/i.test(decoded)) {
-              updated = encryptPayload(JSON.parse(rebrand(decoded)));
-            }
+            decoded = decodeURIComponent(atob(raw));
           } catch {
-            if (/questa/i.test(raw)) updated = rebrand(raw);
+            decoded = null;
+          }
+          if (decoded !== null) {
+            // Base64 payload — rebrand inside the decoded JSON and re-encrypt.
+            if (/questa/i.test(decoded)) {
+              try {
+                updated = encryptPayload(JSON.parse(rebrand(decoded)));
+              } catch {
+                /* not JSON — leave untouched */
+              }
+            }
+          } else if (/questa/i.test(raw)) {
+            // Plain string value — rebrand in place.
+            updated = rebrand(raw);
           }
           if (updated !== null) localStorage.setItem(key, updated);
         }
