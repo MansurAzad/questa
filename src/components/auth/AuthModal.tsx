@@ -6,7 +6,6 @@ import {
   Eye,
   EyeOff,
   ShieldCheck,
-  Building2,
   KeyRound,
   ArrowRight
 } from 'lucide-react';
@@ -152,9 +151,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <X className="w-5 h-5" />
           </button>
 
-          <div className="w-12 h-12 mx-auto rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center mb-3">
-            <Building2 className="w-6 h-6 text-amber-300" />
-          </div>
+          <img
+            src="/questa-logo.jpeg"
+            alt="Questa World logo"
+            className="w-14 h-14 mx-auto rounded-xl object-cover ring-2 ring-amber-400/40 shadow-lg mb-3 bg-white"
+          />
 
           <h2 className="text-lg font-bold tracking-tight">
             {t('authModalTitle')}

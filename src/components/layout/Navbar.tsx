@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Building2,
   Globe,
   Moon,
   Sun,
@@ -84,9 +83,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => { onNavigate('home'); setMobileMenuOpen(false); }}
               className="flex items-center gap-3 group text-left focus:outline-none"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-600 via-amber-700 to-slate-900 flex items-center justify-center shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform">
-                <Building2 className="w-5 h-5 text-amber-200" />
-              </div>
+              <img
+                src="/questa-logo.jpeg"
+                alt="Questa World logo"
+                className="w-10 h-10 rounded-xl object-cover shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform bg-white ring-1 ring-slate-200 dark:ring-slate-700"
+              />
               <div>
                 <span className="font-extrabold tracking-tight text-lg sm:text-xl text-slate-900 dark:text-white block leading-tight">
                   Questa <span className="text-amber-600 dark:text-amber-500">World</span>

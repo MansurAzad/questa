@@ -105,7 +105,12 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
       {/* Bottom copyright bar */}
       <div className="border-t border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-center sm:text-left">
+          <div className="flex items-center gap-2.5 text-center sm:text-left">
+            <img
+              src="/questa-logo.jpeg"
+              alt="Questa World logo"
+              className="w-7 h-7 rounded-md object-cover ring-1 ring-slate-700 shrink-0"
+            />
             <Copyright className="w-3.5 h-3.5 text-amber-500/80 shrink-0" />
             <span className="text-[11px] text-slate-400">{copyright}</span>
           </div>

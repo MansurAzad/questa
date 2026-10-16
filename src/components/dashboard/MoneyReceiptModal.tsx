@@ -3,7 +3,6 @@ import {
   X,
   Printer,
   Download,
-  Building2,
   CheckCircle2,
   ShieldCheck,
   QrCode
@@ -104,9 +103,11 @@ export const MoneyReceiptModal: React.FC<MoneyReceiptModalProps> = ({
           {/* Header */}
           <div className="flex items-start justify-between gap-4 border-b border-amber-200 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-600 to-slate-900 flex items-center justify-center text-amber-200 font-bold text-xl shadow-xs">
-                <Building2 className="w-7 h-7" />
-              </div>
+              <img
+                src="/questa-logo.jpeg"
+                alt="Questa World logo"
+                className="w-12 h-12 rounded-xl object-cover shadow-xs border border-amber-300 bg-white"
+              />
               <div>
                 <h2 className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900">
                   QUESTA WORLD LIMITED

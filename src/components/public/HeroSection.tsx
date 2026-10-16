@@ -2,7 +2,6 @@ import React, { useMemo, useRef, useState } from 'react';
 import {
   ArrowRight,
   ShieldCheck,
-  UserPlus,
   Lock,
   Eye,
   EyeOff,
@@ -152,9 +151,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               {/* Card Header */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center shrink-0">
-                  <UserPlus className="w-5 h-5 text-amber-300" />
-                </div>
+                <img
+                  src="/questa-logo.jpeg"
+                  alt="Questa World logo"
+                  className="w-11 h-11 rounded-xl object-cover ring-1 ring-amber-400/30 shrink-0 bg-white"
+                />
                 <div>
                   <h2 className="text-base font-bold text-white leading-tight">
                     {cmsTitle || 'New Investor Registration'}

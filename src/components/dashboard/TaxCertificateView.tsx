@@ -4,7 +4,6 @@ import {
   Printer,
   Download,
   ShieldCheck,
-  Building2,
   Award,
   CheckCircle2,
   Scale
@@ -61,9 +60,11 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
           
           {/* Header */}
           <div className="text-center pb-6 border-b border-amber-900/20 dark:border-amber-500/20 font-sans">
-            <div className="w-12 h-12 mx-auto rounded-full bg-amber-600 text-white flex items-center justify-center mb-2 shadow-md">
-              <Building2 className="w-6 h-6" />
-            </div>
+            <img
+              src="/questa-logo.jpeg"
+              alt="Questa World logo"
+              className="w-14 h-14 mx-auto rounded-full object-cover border-2 border-amber-600 bg-white mb-2 shadow-md"
+            />
             <h1 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-slate-900 dark:text-white">
               QUESTA WORLD LIMITED
             </h1>

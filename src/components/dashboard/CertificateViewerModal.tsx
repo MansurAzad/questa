@@ -73,9 +73,11 @@ export const CertificateViewerModal: React.FC<CertificateViewerModalProps> = ({
 
             {/* Top Emblem & Header */}
             <div className="text-center pb-6 border-b border-amber-800/20 dark:border-amber-500/20">
-              <div className="w-14 h-14 mx-auto rounded-full border-2 border-amber-600 bg-amber-50 dark:bg-slate-800 flex items-center justify-center mb-2">
-                <Building2 className="w-8 h-8 text-amber-700 dark:text-amber-400" />
-              </div>
+              <img
+                src="/questa-logo.jpeg"
+                alt="Questa World logo"
+                className="w-16 h-16 mx-auto rounded-full object-cover border-2 border-amber-600 bg-white mb-2"
+              />
               <h1 className="text-xl sm:text-2xl font-extrabold tracking-widest text-amber-950 dark:text-amber-200 uppercase">
                 Questa World LIMITED
               </h1>
