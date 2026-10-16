@@ -1018,18 +1018,6 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     ctaLabel: '',
     visible: true,
     order: 2
-  },
-  {
-    id: 'gallery-renders',
-    label: '3D Render Gallery',
-    kind: 'standard',
-    title: '3D Renders & Concept Gallery',
-    subtitle: 'See the finished vision before handover.',
-    body:
-      'Architectural 3D visualisations of the completed resorts, sky lounges, infinity pools and commercial interiors — the finished experience our investors are building towards.',
-    ctaLabel: '',
-    visible: true,
-    order: 3
   }
 ];
 
@@ -1301,6 +1289,25 @@ export class StorageService {
     if (!localStorage.getItem('qw_cms_sections_curated_v1')) {
       localStorage.setItem(STORAGE_KEYS.CMS_SECTIONS, encryptPayload(DEFAULT_CMS_SECTIONS));
       localStorage.setItem('qw_cms_sections_curated_v1', '1');
+    }
+    // One-time migration: permanently drop the "3D Renders & Concept Gallery"
+    // section from the public homepage (also removed from the default layout).
+    if (!localStorage.getItem('qw_cms_drop_renders_v1')) {
+      try {
+        const storedSections = decryptPayload<CmsSection[] | null>(
+          localStorage.getItem(STORAGE_KEYS.CMS_SECTIONS),
+          null
+        );
+        if (storedSections && storedSections.length) {
+          localStorage.setItem(
+            STORAGE_KEYS.CMS_SECTIONS,
+            encryptPayload(storedSections.filter(s => s.id !== 'gallery-renders'))
+          );
+        }
+      } catch {
+        /* non-fatal — keep whatever data is present */
+      }
+      localStorage.setItem('qw_cms_drop_renders_v1', '1');
     }
     if (!localStorage.getItem(STORAGE_KEYS.CMS_COLLECTIONS)) {
       localStorage.setItem(STORAGE_KEYS.CMS_COLLECTIONS, encryptPayload(DEFAULT_CMS_COLLECTIONS));

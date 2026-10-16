@@ -3,7 +3,7 @@
 //
 // The public site is composed of a handful of photo & video gallery sections.
 // Every section renders a curated slice of this single library (see the CMS
-// section ids `gallery`, `gallery-videos`, `gallery-renders`).
+// section ids `gallery` and `gallery-videos`).
 //
 // Real on-site photographs live in `public/gallery/` and are referenced with
 // root-relative paths (e.g. `/gallery/gallery-01.jpeg`).
@@ -14,7 +14,7 @@
 
 export type GalleryMediaKind = 'photo' | 'video';
 
-export type GalleryMediaCategory = 'construction' | 'aerial' | 'event' | 'render';
+export type GalleryMediaCategory = 'construction' | 'aerial' | 'event';
 
 export interface GalleryMediaItem {
   id: string;
@@ -53,38 +53,6 @@ const SITE_PHOTOS: GalleryMediaItem[] = Array.from(
 export const GALLERY_MEDIA: GalleryMediaItem[] = [
   // --------------------------- SITE PHOTOS -------------------------------
   ...SITE_PHOTOS,
-
-  // --------------------------- 3D RENDERS --------------------------------
-  {
-    id: 'rend-1',
-    kind: 'photo',
-    category: 'render',
-    title: 'Architectural 3D Render — Oceanfront Infinity Pool & Sky Lounge',
-    project: 'Questra Royal Bay Hotel & Suites',
-    date: 'May 2026',
-    tag: '3D Render',
-    imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'rend-2',
-    kind: 'photo',
-    category: 'render',
-    title: 'Commercial Center Concept — Double-Height Retail Atrium',
-    project: 'Questra World Commercial Center - Mirpur',
-    date: 'March 2026',
-    tag: '3D Render',
-    imageUrl: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&auto=format&fit=crop&q=80'
-  },
-  {
-    id: 'rend-3',
-    kind: 'photo',
-    category: 'render',
-    title: 'Resort Master Plan — Landscape, Boardwalk & Amenity Deck',
-    project: 'Questra Royal Bay Hotel & Suites',
-    date: 'February 2026',
-    tag: 'Master Plan',
-    imageUrl: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&auto=format&fit=crop&q=80'
-  },
 
   // ----------------------------- VIDEOS ----------------------------------
   ...Array.from({ length: 6 }, (_, index): GalleryMediaItem => {

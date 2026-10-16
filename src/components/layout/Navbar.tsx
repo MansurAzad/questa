@@ -68,8 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { id: 'home', label: t('navHome') },
     { id: 'gallery', label: 'Site Photos' },
-    { id: 'gallery-videos', label: 'Video Tours' },
-    { id: 'gallery-renders', label: '3D Renders' }
+    { id: 'gallery-videos', label: 'Video Tours' }
   ];
 
   return (

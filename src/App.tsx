@@ -165,7 +165,7 @@ export default function App() {
             } else if (view === 'admin') {
               setActiveView('admin');
               window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (['gallery', 'gallery-videos', 'gallery-renders'].includes(view)) {
+            } else if (['gallery', 'gallery-videos'].includes(view)) {
               setActiveView('home');
               setTimeout(() => {
                 const el = document.getElementById(view);
@@ -356,20 +356,6 @@ export default function App() {
                         filter={{ kind: 'video' }}
                       />
                     );
-                  case 'gallery-renders':
-                    return (
-                      <MediaGallery
-                        key={section.id}
-                        language={language}
-                        sectionId="gallery-renders"
-                        tone="light"
-                        badge="3D & Concept"
-                        cmsTitle={section.title}
-                        cmsSubtitle={section.subtitle}
-                        cmsBody={section.body}
-                        filter={{ kind: 'photo', category: 'render' }}
-                      />
-                    );
                   case 'news':
                     return (
                       <NoticeBoard
@@ -478,7 +464,7 @@ export default function App() {
           onNavigate={view => {
             if (view === 'dashboard' && !user) {
               setAuthModalOpen(true);
-            } else if (['gallery', 'gallery-videos', 'gallery-renders'].includes(view)) {
+            } else if (['gallery', 'gallery-videos'].includes(view)) {
               setActiveView('home');
               setTimeout(() => {
                 const el = document.getElementById(view);
