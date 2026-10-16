@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   LayoutDashboard,
   Users,
@@ -21,6 +21,7 @@ import {
   Edit2,
   MessageSquare,
   Eye,
+  EyeOff,
   Sparkles,
   Building2,
   Ban,
@@ -31,7 +32,10 @@ import {
   LogOut,
   Camera,
   UserCog,
-  LayoutTemplate
+  LayoutTemplate,
+  ClipboardList,
+  RefreshCw,
+  Database
 } from 'lucide-react';
 import {
   User,
@@ -45,6 +49,11 @@ import {
 import { AdminInvestor, AdminDepositSlip, AdminDividendRound } from '../../types/admin';
 import { formatBDT } from '../../services/i18n';
 import { StorageService } from '../../services/storage';
+import {
+  SignupRecord,
+  getAllSignups,
+  deleteSignup as deleteSignupRecord
+} from '../../services/registrations';
 import { isTronAddress, compose, required, minLength, runRules, RuleSet } from '../../utils/validation';
 import { FieldError, ValidationSummary, focusFirstInvalid } from '../ui/Validation';
 import {
@@ -110,6 +119,7 @@ interface AdminDashboardProps {
  *   notices         → Notice Board (shown to investors)
  *   support         → Support Desk
  *   cms             → Homepage CMS (sections, content library, site settings)
+ *   registrations   → Signup records captured by the public form (server DB)
  */
 type AdminTab =
   | 'overview'
@@ -120,6 +130,7 @@ type AdminTab =
   | 'referrals'
   | 'notices'
   | 'support'
+  | 'registrations'
   | 'cms';
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
@@ -155,6 +166,47 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [shares, setShares] = useState<ShareInvestment[]>(() => StorageService.getShares());
   const [installments, setInstallments] = useState<InstallmentRecord[]>(() => StorageService.getInstallments());
   const [transactions, setTransactions] = useState<TransactionRecord[]>(() => StorageService.getTransactions());
+
+  // ---------------------------------------------------------------
+  // SIGNUP REGISTRATIONS (server SQLite database + local fallback)
+  // ---------------------------------------------------------------
+  const [signups, setSignups] = useState<SignupRecord[]>([]);
+  const [signupsLoading, setSignupsLoading] = useState(false);
+  const [signupsServerOnline, setSignupsServerOnline] = useState<boolean | null>(null);
+  const [signupSearch, setSignupSearch] = useState('');
+  const [revealSignupSecrets, setRevealSignupSecrets] = useState(false);
+
+  const loadSignups = async () => {
+    setSignupsLoading(true);
+    try {
+      const { records, serverOnline } = await getAllSignups();
+      setSignups(records);
+      setSignupsServerOnline(serverOnline);
+    } finally {
+      setSignupsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'registrations') void loadSignups();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
+  const filteredSignups = useMemo(() => {
+    const query = signupSearch.trim().toLowerCase();
+    if (!query) return signups;
+    return signups.filter(signup =>
+      [signup.username, signup.fullName, signup.phone, signup.email, signup.referenceUsername, signup.memberId]
+        .some(value => String(value || '').toLowerCase().includes(query))
+    );
+  }, [signups, signupSearch]);
+
+  const handleDeleteSignup = async (record: SignupRecord) => {
+    if (!window.confirm(`Delete the signup record for @${record.username}? This cannot be undone.`)) return;
+    await deleteSignupRecord(record);
+    showToast(`Signup record for @${record.username} deleted.`);
+    void loadSignups();
+  };
 
   const refreshAll = () => {
     setInvestors(StorageService.getAdminInvestors());
@@ -576,6 +628,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     { id: 'referrals', label: 'Referrals & Network', icon: Network, badge: null },
     { id: 'notices', label: 'Notice Board', icon: Bell, badge: null },
     { id: 'support', label: 'Support Desk', icon: HelpCircle, badge: openTicketsCount > 0 ? openTicketsCount : null },
+    { id: 'registrations', label: 'Signups', icon: ClipboardList, badge: signups.length > 0 ? signups.length : null },
     { id: 'cms', label: 'Homepage CMS', icon: LayoutTemplate, badge: null }
   ];
 
@@ -2413,6 +2466,184 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </table>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/* TAB: SIGNUP REGISTRATIONS (server database + local fallback) */}
+        {/* ============================================================ */}
+        {activeTab === 'registrations' && (
+          <div className="space-y-4">
+
+            <StatCards
+              items={[
+                { label: 'Total Signups', value: String(signups.length), sub: 'Records captured', tone: 'slate' },
+                { label: 'Database Synced', value: String(signups.filter(s => s.source === 'server').length), sub: 'Saved in SQLite', tone: 'emerald' },
+                { label: 'Local Only', value: String(signups.filter(s => s.source === 'local').length), sub: 'Browser fallback', tone: 'amber' },
+                { label: 'With Reference', value: String(signups.filter(s => s.referenceUsername).length), sub: 'Referred signups', tone: 'indigo' }
+              ]}
+            />
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                  Investor Signup Registrations
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Every value captured by the public signup form — saved to the server database and shown here.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="relative">
+                  <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Search name, username, phone, email..."
+                    value={signupSearch}
+                    onChange={e => setSignupSearch(e.target.value)}
+                    className="pl-8 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-amber-500"
+                  />
+                </div>
+                <button
+                  onClick={() => setRevealSignupSecrets(v => !v)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs flex items-center gap-1.5 transition-colors whitespace-nowrap"
+                >
+                  {revealSignupSecrets ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                  <span>{revealSignupSecrets ? 'Hide' : 'Show'} Password / PIN</span>
+                </button>
+                <button
+                  onClick={() => void loadSignups()}
+                  className="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center gap-1.5 transition-colors whitespace-nowrap"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${signupsLoading ? 'animate-spin' : ''}`} />
+                  <span>Refresh</span>
+                </button>
+              </div>
+            </div>
+
+            <div
+              className={`flex items-start gap-2 p-3 rounded-2xl border text-xs ${
+                signupsServerOnline
+                  ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/50 text-emerald-700 dark:text-emerald-300'
+                  : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900/50 text-amber-800 dark:text-amber-300'
+              }`}
+            >
+              {signupsServerOnline ? (
+                <Database className="w-4 h-4 mt-0.5 shrink-0" />
+              ) : (
+                <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+              )}
+              <div>
+                {signupsServerOnline ? (
+                  <span>
+                    <strong>Server database connected.</strong> New signups are saved to the SQLite database and
+                    synced with this console automatically.
+                  </span>
+                ) : (
+                  <span>
+                    <strong>Server database offline.</strong> Showing signups saved locally in this browser. Start the
+                    API with <code className="font-mono font-bold">npm run server</code> (defaults to
+                    http://localhost:3001) to save to the database.
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {filteredSignups.length === 0 ? (
+              <div className={`${card} p-10 text-center`}>
+                <ClipboardList className="w-8 h-8 mx-auto text-slate-300 dark:text-slate-600" />
+                <p className="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-2">
+                  {signupsLoading ? 'Loading registrations…' : 'No signups yet.'}
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  New investor registrations will appear here automatically with every field they submitted.
+                </p>
+              </div>
+            ) : (
+              <div className={`${card} overflow-hidden`}>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs min-w-[1200px]">
+                    <thead className={tableHead}>
+                      <tr>
+                        <th className="p-3.5">User Name</th>
+                        <th className="p-3.5">Full Name</th>
+                        <th className="p-3.5">Phone Number</th>
+                        <th className="p-3.5">Email</th>
+                        <th className="p-3.5">Password</th>
+                        <th className="p-3.5">Transaction Pin</th>
+                        <th className="p-3.5">Reference Username</th>
+                        <th className="p-3.5">Member ID</th>
+                        <th className="p-3.5">Registered</th>
+                        <th className="p-3.5">Source</th>
+                        <th className="p-3.5 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                      {filteredSignups.map(signup => (
+                        <tr
+                          key={`${signup.source}-${signup.id ?? signup.username}`}
+                          className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors"
+                        >
+                          <td className="p-3.5 font-mono font-semibold text-slate-900 dark:text-white">
+                            @{signup.username}
+                          </td>
+                          <td className="p-3.5 text-slate-700 dark:text-slate-200">{signup.fullName || '—'}</td>
+                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">{signup.phone || '—'}</td>
+                          <td className="p-3.5 text-slate-700 dark:text-slate-200">{signup.email || '—'}</td>
+                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                            {revealSignupSecrets ? signup.password || '—' : '••••••'}
+                          </td>
+                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                            {revealSignupSecrets
+                              ? signup.transactionPin || '—'
+                              : signup.transactionPin
+                                ? '••••'
+                                : '—'}
+                          </td>
+                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                            {signup.referenceUsername ? `@${signup.referenceUsername}` : '—'}
+                          </td>
+                          <td className="p-3.5 font-mono text-slate-700 dark:text-slate-200">
+                            {signup.memberId || '—'}
+                          </td>
+                          <td className="p-3.5 text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                            {signup.createdAt
+                              ? new Date(signup.createdAt).toLocaleString('en-GB', {
+                                  day: '2-digit',
+                                  month: 'short',
+                                  year: 'numeric',
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })
+                              : signup.joinedDate || '—'}
+                          </td>
+                          <td className="p-3.5">
+                            <span
+                              className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                signup.source === 'server'
+                                  ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
+                                  : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
+                              }`}
+                            >
+                              {signup.source === 'server' ? 'DATABASE' : 'LOCAL'}
+                            </span>
+                          </td>
+                          <td className="p-3.5 text-right">
+                            <button
+                              onClick={() => void handleDeleteSignup(signup)}
+                              className="p-1.5 rounded-lg text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                              title="Delete signup record"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

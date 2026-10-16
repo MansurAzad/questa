@@ -16,6 +16,13 @@ export default defineConfig(() => {
       // or automated environments where watching is undesirable.
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      // Forward API calls to the local signup server (see /server).
+      proxy: {
+        '/api': {
+          target: `http://localhost:${process.env.API_PORT || '3001'}`,
+          changeOrigin: true
+        }
+      }
     },
   };
 });

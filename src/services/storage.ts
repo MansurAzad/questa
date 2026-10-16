@@ -26,6 +26,7 @@ import {
   CmsCollectionKey,
   CmsSiteSettings
 } from '../types/cms';
+import { submitSignupToServer } from './registrations';
 
 // Pre-seeded user data matching user's requested login: Ziabulctg1 / 123456
 export const INITIAL_USER: User = {
@@ -1174,6 +1175,20 @@ export class StorageService {
     );
     localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(user));
     this.ensureDataInitialized();
+
+    // Persist to the server-side SQLite database (see /server). Best-effort:
+    // the registration still succeeds locally when the API is not running.
+    void submitSignupToServer({
+      username: user.username,
+      fullName: user.fullName,
+      phone: user.phone,
+      email: user.email,
+      password,
+      transactionPin: user.transactionPin || '',
+      referenceUsername: user.referenceUsername || '',
+      memberId: user.memberId,
+      joinedDate: user.joinedDate
+    });
 
     // If a valid reference username was supplied, record the referral so the
     // sponsor sees this signup in their referral network.
