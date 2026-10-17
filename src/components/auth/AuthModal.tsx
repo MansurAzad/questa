@@ -501,7 +501,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Footer info note */}
         <div className="px-6 py-3 bg-slate-50 dark:bg-slate-900/60 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 text-center">
-          Questra World 24/7 Investor Hotline: +44 181 068 5888</div>
+          Questra World 24/7 Support Hotline: +44 181 068 5888</div>
 
       </div>
     </div>
