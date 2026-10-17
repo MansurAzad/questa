@@ -54,6 +54,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [transactionPin, setTransactionPin] = useState('');
   const [confirmTransactionPin, setConfirmTransactionPin] = useState('');
   const [referenceUsername, setReferenceUsername] = useState('');
+  const [userId, setUserId] = useState<string>(() => {
+    const last = localStorage.getItem('qw_last_user_id');
+    const next = last ? parseInt(last, 10) + 1 : 6120;
+    const idStr = String(next);
+    localStorage.setItem('qw_last_user_id', idStr);
+    return idStr;
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -121,6 +128,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     setError(null);
     setTouched({});
     setSubmitAttempt(false);
+    if (!login) {
+      const last = localStorage.getItem('qw_last_user_id');
+      const next = last ? parseInt(last, 10) + 1 : 6120;
+      const idStr = String(next);
+      setUserId(idStr);
+      localStorage.setItem('qw_last_user_id', idStr);
+    }
   };
 
   const handleFillDemo = () => {
@@ -169,7 +183,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           phone,
           email,
           transactionPin,
-          referenceUsername: referenceUsername.trim() || undefined
+          referenceUsername: referenceUsername.trim() || userId || undefined,
+          userId: userId || undefined
         },
         password
       );
@@ -210,31 +225,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           />
 
           <h2 className="text-lg font-bold tracking-tight">
-            {t('authModalTitle')}
+            Login
           </h2>
-          <p className="text-xs text-slate-300 mt-1 max-w-xs mx-auto">
-            {t('authModalSubtitle')}
-          </p>
-
-          {/* Quick Demo Fill Pills */}
-          <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-center gap-2">
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="text-[11px] font-semibold text-amber-300 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/30 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors"
-            >
-              <KeyRound className="w-3.5 h-3.5" />
-              <span>Investor: user1</span>
-            </button>
-            <button
-              type="button"
-              onClick={handleFillAdmin}
-              className="text-[11px] font-semibold text-emerald-300 hover:text-emerald-200 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-400/30 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors"
-            >
-              <KeyRound className="w-3.5 h-3.5" />
-              <span>Admin: admin</span>
-            </button>
-          </div>
         </div>
 
         {/* Tab Switcher */}
@@ -436,6 +428,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  USER ID
+                </label>
+                <input
+                  type="text"
+                  value={userId}
+                  readOnly
+                  disabled
+                  className={`${fieldBase} font-mono bg-slate-100 dark:bg-slate-800 cursor-not-allowed`}
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Reference Username
                 </label>
                 <input
@@ -443,7 +448,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   value={referenceUsername}
                   onChange={e => setReferenceUsername(e.target.value)}
                   onBlur={() => mark('referenceUsername')}
-                  placeholder="Optional — sponsor's username"
+                  placeholder="Optional — sponsor's username or USER ID"
                   aria-invalid={!!showError('referenceUsername')}
                   className={withValidation(`${fieldBase} font-mono`, !!showError('referenceUsername'))}
                 />
@@ -465,22 +470,33 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
           )}
 
-          <button
-            type="submit"
-            aria-disabled={showFixLabel}
-            className={`w-full py-2.5 px-4 rounded-xl font-semibold text-xs shadow-md transition-all flex items-center justify-center gap-2 ${
-              showFixLabel
-                ? 'bg-rose-100 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-900'
-                : 'bg-amber-600 hover:bg-amber-700 text-white hover:shadow-amber-600/20'
-            }`}
-          >
-            <span>
-              {showFixLabel
-                ? `Fix ${invalidCount} field${invalidCount > 1 ? 's' : ''} to continue`
-                : isLoginTab ? t('btnSignIn') : 'Submit'}
-            </span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="submit"
+              aria-disabled={showFixLabel}
+              className={`flex-1 py-2.5 px-4 rounded-xl font-semibold text-xs shadow-md transition-all flex items-center justify-center gap-2 ${
+                showFixLabel
+                  ? 'bg-rose-100 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-900'
+                  : 'bg-amber-600 hover:bg-amber-700 text-white hover:shadow-amber-600/20'
+              }`}
+            >
+              <span>
+                {showFixLabel
+                  ? `Fix ${invalidCount} field${invalidCount > 1 ? 's' : ''} to continue`
+                  : isLoginTab ? t('btnSignIn') : 'Submit'}
+              </span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            {isLoginTab && (
+              <button
+                type="button"
+                onClick={() => switchTab(false)}
+                className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors whitespace-nowrap"
+              >
+                New Registration
+              </button>
+            )}
+          </div>
         </form>
 
         {/* Footer info note */}

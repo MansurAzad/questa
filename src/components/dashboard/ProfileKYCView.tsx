@@ -151,37 +151,40 @@ export const ProfileKYCView: React.FC<ProfileKYCViewProps> = ({
       </div>
 
       {/* Profile Overview Card */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950 text-white shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
-          <img
-            src={user.avatar}
-            alt={user.fullName}
-            className="w-16 h-16 rounded-2xl object-cover border-2 border-amber-400 shadow-lg"
-          />
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-base sm:text-lg font-extrabold text-white">
-                {user.fullName}
-              </h3>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500 text-slate-950 font-bold uppercase">
-                GOLD INVESTOR
-              </span>
+      <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 text-white border border-white/20 shadow-[0_20px_60px_-15px_rgba(79,70,229,0.5)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_70%)]"></div>
+        <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+        <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <img
+                src={user.avatar}
+                alt={user.fullName}
+                className="w-16 h-16 rounded-2xl object-cover border-2 border-white/60 shadow-lg"
+              />
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white shadow-md"></div>
             </div>
-            <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300 font-mono mt-1">
-              <span>Member ID: {user.memberId}</span>
-              <span>·</span>
-              <span>Username: {user.username}</span>
-              <span>·</span>
-              <span>Branch: {user.branch}</span>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight">
+                  {user.fullName}
+                </h3>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/20 backdrop-blur-sm border border-white/30 text-white font-bold uppercase">
+                  INVESTOR
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-white/90 font-mono mt-2">
+                <span className="px-2 py-1 rounded-lg bg-white/15 border border-white/20">Member ID: {user.memberId}</span>
+                <span className="px-2 py-1 rounded-lg bg-white/15 border border-white/20">Username: @{user.username}</span>
+                {user.userId && (<span className="px-2 py-1 rounded-lg bg-white/15 border border-white/20">USER ID: {user.userId}</span>)}
+                {user.branch && (<span className="px-2 py-1 rounded-lg bg-white/15 border border-white/20">Branch: {user.branch}</span>)}
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="text-right sm:self-center font-mono text-xs text-amber-200">
-          <span>Joined: {user.joinedDate}</span>
-          <span className="block text-[11px] text-emerald-400 font-semibold mt-0.5">
-            Sponsor / Reference: Central Corporate Desk
-          </span>
+          <div className="text-right sm:self-center font-mono text-xs text-white/90">
+            <span className="px-2 py-1 rounded-lg bg-white/15 border border-white/20">Joined: {user.joinedDate}</span>
+            <span className="block mt-1 px-2 py-1 rounded-lg bg-white/15 border border-white/20">Sponsor / Reference: {user.referenceUsername || '—'}</span>
+          </div>
         </div>
       </div>
 

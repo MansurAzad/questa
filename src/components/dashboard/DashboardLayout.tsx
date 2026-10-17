@@ -189,59 +189,109 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             {activeTab === 'overview' && (
               <div className="space-y-6">
 
-                {/* 4 Stat Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                  {/* Card 1: Total Portfolio */}
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block">
-                      {t('overviewTotalInvested')}
-                    </span>
-                    <span className="text-xl font-extrabold text-slate-900 dark:text-white font-mono mt-1 block">
-                      {formatBDT(totalPortfolioValue, language)}
-                    </span>
-                    <span className="text-[11px] text-slate-400 mt-1 block">
-                      Hotel & commercial share holdings
-                    </span>
+                {/* Profile Info Card - First Card */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 text-white border border-white/20 shadow-[0_20px_60px_-15px_rgba(79,70,229,0.5)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(79,70,229,0.6)]">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_70%)]"></div>
+                    <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="relative">
+                          <img
+                            src={user.avatar}
+                            alt={user.fullName}
+                            className="w-16 h-16 rounded-2xl object-cover border-2 border-white/60 shadow-lg"
+                          />
+                          <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white shadow-md"></div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-extrabold tracking-tight">{user.fullName}</h3>
+                          <p className="text-xs text-white/90 font-mono">@{user.username}</p>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 mt-auto">
+                        <div className="p-3 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 text-center">
+                          <span className="text-[10px] uppercase tracking-wider text-white/80 block mb-1">Member ID</span>
+                          <span className="text-sm font-bold font-mono">{user.memberId}</span>
+                        </div>
+                        <div className="p-3 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 text-center">
+                          <span className="text-[10px] uppercase tracking-wider text-white/80 block mb-1">Phone</span>
+                          <span className="text-sm font-bold">{user.phone}</span>
+                        </div>
+                        <div className="p-3 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 text-center col-span-2">
+                          <span className="text-[10px] uppercase tracking-wider text-white/80 block mb-1">Email</span>
+                          <span className="text-sm font-bold break-all">{user.email}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
+                  {/* Card 1: Total Portfolio */}
+                  <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white border border-slate-700/60 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.8)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(15,23,42,0.9)]">
+                    <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-amber-500/20 blur-2xl"></div>
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                      <span className="text-xs uppercase tracking-wider text-amber-300 font-bold mb-2">
+                        {t('overviewTotalInvested')}
+                      </span>
+                      <span className="text-2xl sm:text-3xl font-black text-white font-mono">
+                        {formatBDT(totalPortfolioValue, language)}
+                      </span>
+                      <span className="text-xs text-white/80 mt-2 font-medium">
+                        Hotel & commercial share holdings
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3D Colorful Stat Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
                   {/* Card 2: Total Paid */}
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block">
-                      {t('overviewTotalPaid')}
-                    </span>
-                    <span className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono mt-1 block">
-                      {formatBDT(totalPaid, language)}
-                    </span>
-                    <span className="text-[11px] text-emerald-600/80 dark:text-emerald-400/80 font-medium mt-1 block">
-                      {totalPortfolioValue > 0 ? Math.round((totalPaid / totalPortfolioValue) * 100) : 0}% Cleared
-                    </span>
+                  <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white border border-emerald-300/40 shadow-[0_20px_60px_-15px_rgba(16,185,129,0.6)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(16,185,129,0.7)]">
+                    <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                      <span className="text-xs uppercase tracking-wider text-emerald-100 font-bold mb-2">
+                        {t('overviewTotalPaid')}
+                      </span>
+                      <span className="text-2xl sm:text-3xl font-black text-white font-mono">
+                        {formatBDT(totalPaid, language)}
+                      </span>
+                      <span className="text-xs text-emerald-50 font-semibold mt-2">
+                        {totalPortfolioValue > 0 ? Math.round((totalPaid / totalPortfolioValue) * 100) : 0}% Cleared
+                      </span>
+                    </div>
                   </div>
 
                   {/* Card 3: Installments Received */}
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block">
-                      { 'Installments Received'}
-                    </span>
-                    <span className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono mt-1 block">
-                      {formatBDT(totalInstallmentsReceived, language)}
-                    </span>
-                    <span className="text-[11px] text-slate-400 mt-1 block">
-                      {receivedReceipts.length} of {installmentReceipts.length} installments credited
-                    </span>
+                  <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-700 text-white border border-cyan-300/40 shadow-[0_20px_60px_-15px_rgba(14,165,233,0.6)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(14,165,233,0.7)]">
+                    <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                      <span className="text-xs uppercase tracking-wider text-cyan-100 font-bold mb-2">
+                        { 'Installments Received'}
+                      </span>
+                      <span className="text-2xl sm:text-3xl font-black text-white font-mono">
+                        {formatBDT(totalInstallmentsReceived, language)}
+                      </span>
+                      <span className="text-xs text-cyan-50 font-medium mt-2">
+                        {receivedReceipts.length} of {installmentReceipts.length} installments credited
+                      </span>
+                    </div>
                   </div>
 
                   {/* Card 4: Dividends Earned */}
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block">
-                      {t('overviewDividendsReceived')}
-                    </span>
-                    <span className="text-xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono mt-1 block">
-                      {formatBDT(totalDividendsAccrued, language)}
-                    </span>
-                    <span className="text-[11px] text-indigo-600/80 dark:text-indigo-400/80 font-medium mt-1 block">
-                      +{formatBDT(monthlyDividendYield, language)} / month
-                    </span>
+                  <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-fuchsia-500 via-purple-600 to-pink-700 text-white border border-fuchsia-300/40 shadow-[0_20px_60px_-15px_rgba(217,70,239,0.6)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(217,70,239,0.7)]">
+                    <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
+                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                      <span className="text-xs uppercase tracking-wider text-fuchsia-100 font-bold mb-2">
+                        {t('overviewDividendsReceived')}
+                      </span>
+                      <span className="text-2xl sm:text-3xl font-black text-white font-mono">
+                        {formatBDT(totalDividendsAccrued, language)}
+                      </span>
+                      <span className="text-xs text-fuchsia-50 font-semibold mt-2">
+                        +{formatBDT(monthlyDividendYield, language)} / month
+                      </span>
+                    </div>
                   </div>
 
                 </div>

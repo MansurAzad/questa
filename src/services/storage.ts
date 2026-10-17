@@ -1138,6 +1138,7 @@ export class StorageService {
   }
 
   static register(newUser: Partial<User>, password: string): User {
+    const userIdStr = newUser.userId ? String(newUser.userId) : undefined;
     const user: User = {
       id: 'usr-' + Date.now(),
       username: newUser.username || 'investor_' + Math.floor(Math.random() * 1000),
@@ -1146,7 +1147,8 @@ export class StorageService {
       email: newUser.email || 'investor@questraworld.com',
       phone: newUser.phone || '+44 170 000 0000',
       branch: newUser.branch || 'Global Head Office (Financial District)',
-      memberId: 'QW-' + Math.floor(1000 + Math.random() * 9000),
+      memberId: newUser.memberId || userIdStr || ('QW-' + Math.floor(1000 + Math.random() * 9000)),
+      userId: userIdStr,
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
       address: newUser.address || 'Dubai, the globe',
       city: newUser.city || 'Dubai',
@@ -1167,7 +1169,7 @@ export class StorageService {
       bankRoutingNumber: newUser.bankRoutingNumber,
       mfsNumber: newUser.mfsNumber,
       transactionPin: newUser.transactionPin,
-      referenceUsername: newUser.referenceUsername
+      referenceUsername: newUser.referenceUsername || userIdStr || ''
     };
 
     localStorage.setItem(
@@ -1186,14 +1188,14 @@ export class StorageService {
       email: user.email,
       password,
       transactionPin: user.transactionPin || '',
-      referenceUsername: user.referenceUsername || '',
+      referenceUsername: user.referenceUsername || user.userId || '',
       memberId: user.memberId,
       joinedDate: user.joinedDate
     });
 
     // If a valid reference username was supplied, record the referral so the
     // sponsor sees this signup in their referral network.
-    const sponsorUsername = (newUser.referenceUsername || '').trim();
+    const sponsorUsername = (newUser.referenceUsername || newUser.userId || '').trim();
     if (sponsorUsername && this.accountExists(sponsorUsername)) {
       try {
         this.addReferralSignup({

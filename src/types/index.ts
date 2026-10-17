@@ -36,6 +36,8 @@ export interface User {
   transactionPin?: string;
   /** Username of the investor who referred this account (optional). */
   referenceUsername?: string;
+  /** Auto-generated user ID (e.g. 6120, 6121...) */
+  userId?: string;
 }
 
 export interface ReferralSignup {

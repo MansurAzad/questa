@@ -245,9 +245,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <p className="text-xs font-semibold text-slate-900 dark:text-white truncate">
                         {user.fullName}
                       </p>
-                      <p className="text-[11px] text-slate-600 dark:text-slate-300 font-mono mt-0.5 truncate">
-                        {user.branch}
-                      </p>
                     </div>
 
                     {/*
@@ -255,20 +252,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                       Every dashboard section lives in the top button bar of the dashboard.
                     */}
                     <div className="py-1 border-b border-slate-100 dark:border-slate-700">
-                      <div className="px-4 py-1.5 flex items-center justify-between">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                          { 'Account'}
-                        </span>
-                        <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400">
-                          {user.memberId}
-                        </span>
-                      </div>
+
                       {(
                         [
+                          { id: 'overview' as DashboardTab, label: 'Dashboard', icon: LayoutDashboard },
                           { id: 'profile' as DashboardTab, label: 'My Profile', icon: UserIcon },
-                          { id: 'ledger' as DashboardTab, label: 'My Ledger', icon: CreditCard },
-                          { id: 'support' as DashboardTab, label: 'Support Center', icon: LifeBuoy },
-                          { id: 'security' as DashboardTab, label: 'Security', icon: ShieldCheck }
+                          { id: 'profile' as DashboardTab, label: 'My Account', icon: UserIcon },
+                          { id: 'referrals' as DashboardTab, label: 'Team', icon: Compass },
+                          { id: 'ledger' as DashboardTab, label: 'Withdraw', icon: CreditCard },
+                          { id: 'referrals' as DashboardTab, label: 'Referral Link', icon: Compass },
+                          { id: 'security' as DashboardTab, label: 'Settings', icon: ShieldCheck }
                         ]
                       ).map(item => {
                         const Icon = item.icon;
