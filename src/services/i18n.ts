@@ -17,8 +17,8 @@ export const translations = {
     navGallery: 'Media Gallery',
     navSiteVisit: 'Free Site Visit',
     navContact: 'Contact',
-    navPortal: 'Investor Portal',
-    navLogin: 'Investor Login',
+    navPortal: 'Portal',
+    navLogin: 'Login',
     navLogout: 'Sign Out',
     
     // Timeline
