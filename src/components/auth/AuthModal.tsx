@@ -169,7 +169,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         onLoginSuccess(loggedUser);
         onClose();
       } else {
-        setError('Invalid credentials. Please check your username and password, or use the demo login user1 / 123456.');
+        setError('Invalid credentials. Please check your username and password.');
       }
     } else {
       if (StorageService.accountExists(username)) {

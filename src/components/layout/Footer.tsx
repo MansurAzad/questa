@@ -59,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
           {/* Investor Portal */}
           <div className="space-y-3">
             <h4 className="text-white font-bold text-xs uppercase tracking-wider">
-              { 'Investor Portal' }
+              { 'Portal' }
             </h4>
             <ul className="space-y-2">
               <li>
@@ -67,7 +67,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
                   onClick={onOpenAuth}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
-                  Investor Sign In (user1)
+                  Sign In
                 </button>
               </li>
               <li>

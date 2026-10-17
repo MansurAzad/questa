@@ -990,7 +990,7 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     id: 'hero',
     label: 'Hero & Registration',
     kind: 'standard',
-    title: 'New Investor Registration',
+    title: 'New Registration',
     subtitle: 'Create your secure Questra World account',
     body: '',
     ctaLabel: '',

@@ -69,7 +69,7 @@ export const translations = {
     authModalTitle: 'Investor Access Portal',
     authModalSubtitle: 'Sign in to access your investment portfolio, payment passbook, and digital share certificates.',
     tabLogin: 'Sign In',
-    tabRegister: 'New Investor Registration',
+    tabRegister: 'New Registration',
     usernameLabel: 'User Name / Member ID',
     passwordLabel: 'Password',
     rememberMe: 'Remember this device',

@@ -214,7 +214,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 />
                 <div>
                   <h2 className="text-base font-bold text-white leading-tight">
-                    {cmsTitle || 'New Investor Registration'}
+                    {cmsTitle || 'New Registration'}
                   </h2>
                   <span className="text-[11px] text-slate-400">
                     {cmsSubtitle || 'Create your secure Questra World account'}
@@ -404,14 +404,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                {/* Login information */}
-                <div className="flex items-center gap-1.5 text-[10px] text-slate-400 pt-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span>
-                    {'Existing investor demo login: '}
-                    <span className="font-mono text-amber-300">user1 / 123456</span>
-                  </span>
-                </div>
               </form>
 
               {/* Login & Recovery Buttons */}
