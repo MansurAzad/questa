@@ -22,6 +22,9 @@ import { ProjectTimeline } from './components/public/ProjectTimeline';
 import { AboutUs } from './components/public/AboutUs';
 import { NoticeBoard } from './components/public/NoticeBoard';
 import { MediaGallery } from './components/public/MediaGallery';
+import { CompanyAchievements } from './components/public/CompanyAchievements';
+import { GlobalConferences } from './components/public/GlobalConferences';
+import { SuccessStories } from './components/public/SuccessStories';
 import { SiteVisitBooking } from './components/public/SiteVisitBooking';
 import { ContactUs } from './components/public/ContactUs';
 import { ProjectDetailModal } from './components/public/ProjectDetailModal';
@@ -382,6 +385,36 @@ export default function App() {
                         language={language}
                         cmsTitle={section.title}
                         cmsSubtitle={section.subtitle}
+                      />
+                    );
+                  case 'achievements':
+                    return (
+                      <CompanyAchievements
+                        key={section.id}
+                        language={language}
+                        cmsTitle={section.title}
+                        cmsSubtitle={section.subtitle}
+                        cmsBody={section.body}
+                      />
+                    );
+                  case 'conferences':
+                    return (
+                      <GlobalConferences
+                        key={section.id}
+                        language={language}
+                        cmsTitle={section.title}
+                        cmsSubtitle={section.subtitle}
+                        cmsBody={section.body}
+                      />
+                    );
+                  case 'success-stories':
+                    return (
+                      <SuccessStories
+                        key={section.id}
+                        language={language}
+                        cmsTitle={section.title}
+                        cmsSubtitle={section.subtitle}
+                        cmsBody={section.body}
                       />
                     );
                   case 'site-visit':

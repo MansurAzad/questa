@@ -57,13 +57,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [transactionPin, setTransactionPin] = useState('');
   const [confirmTransactionPin, setConfirmTransactionPin] = useState('');
   const [referenceUsername, setReferenceUsername] = useState(initialReferenceUsername || '');
-  const [userId, setUserId] = useState<string>(() => {
-    const last = localStorage.getItem('qw_last_user_id');
-    const next = last ? parseInt(last, 10) + 1 : 6120;
-    const idStr = String(next);
-    localStorage.setItem('qw_last_user_id', idStr);
-    return idStr;
-  });
+  // Preview of the auto-generated sequential USER ID (6120, 6121, 6122 …).
+  // The number is claimed — and the counter advanced — only when a
+  // registration actually succeeds, so IDs stay strictly sequential.
+  const nextUserId = StorageService.peekNextUserId();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -90,7 +87,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           pinRule('Confirm Transaction Pin', 4),
           matches('Confirm Transaction Pin', 'Transaction Pin', () => transactionPin)
         ),
-        referenceUsername: optionalUsername('Reference Username')
+        referenceUsername: optionalUsername('Reference Username or USER ID')
       };
 
   const values = {
@@ -131,13 +128,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     setError(null);
     setTouched({});
     setSubmitAttempt(false);
-    if (!login) {
-      const last = localStorage.getItem('qw_last_user_id');
-      const next = last ? parseInt(last, 10) + 1 : 6120;
-      const idStr = String(next);
-      setUserId(idStr);
-      localStorage.setItem('qw_last_user_id', idStr);
-    }
   };
 
   const handleFillDemo = () => {
@@ -187,7 +177,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           email,
           transactionPin,
           referenceUsername: referenceUsername.trim() || undefined,
-          userId: userId || undefined
+          userId: nextUserId
         },
         password
       );
@@ -435,16 +425,19 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 </label>
                 <input
                   type="text"
-                  value={userId}
+                  value={nextUserId}
                   readOnly
                   disabled
                   className={`${fieldBase} font-mono bg-slate-100 dark:bg-slate-800 cursor-not-allowed`}
                 />
+                <p className="mt-1 text-[10px] text-slate-400">
+                  Auto-generated sequential ID — it also works as your referral ID.
+                </p>
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                  Reference Username
+                  Reference Username or USER ID
                 </label>
                 <input
                   type="text"

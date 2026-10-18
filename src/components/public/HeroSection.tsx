@@ -77,12 +77,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [confirmTransactionPin, setConfirmTransactionPin] = useState('');
   const [referenceUsername, setReferenceUsername] = useState(initialReferenceUsername || '');
   const [showPassword, setShowPassword] = useState(false);
-
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitAttempt, setSubmitAttempt] = useState(false);
   const [signupError, setSignupError] = useState<string | null>(null);
   const [signupDone, setSignupDone] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Auto-generated sequential USER ID (6120, 6121, …) shown read-only.
+  // It is also accepted as a referral reference.
+  const userId = StorageService.peekNextUserId();
 
   const rules = useMemo<RuleSet>(
     () => ({
@@ -97,7 +100,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         pinRule('Confirm Transaction Pin', 4),
         matches('Confirm Transaction Pin', 'Transaction Pin', () => transactionPin)
       ),
-      referenceUsername: optionalUsername('Reference Username')
+      referenceUsername: optionalUsername('Reference Username or USER ID')
     }),
     [password, transactionPin]
   );
@@ -160,6 +163,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         phone,
         email,
         transactionPin,
+        userId,
         referenceUsername: referenceUsername.trim() || undefined
       },
       password
@@ -198,7 +202,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   if (user) return null;
 
   return (
-    <section className="relative overflow-hidden bg-slate-900 text-white pt-6 pb-20 sm:pt-8 sm:pb-28">
+    <section className="relative overflow-hidden bg-slate-900 text-white pt-6 pb-8 sm:pt-8 sm:pb-10">
 
       {/* Background Architectural Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -393,13 +397,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-semibold mb-1">Reference Username</label>
+                  <label className="block text-slate-300 font-semibold mb-1">USER ID</label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={userId}
+                      readOnly
+                      className={`${inputBase} font-mono bg-slate-800/60 text-amber-300 cursor-not-allowed pr-16`}
+                    />
+                    <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                      Auto
+                    </span>
+                  </div>
+                  <p className="mt-1 text-[10px] text-slate-400">
+                    Generated automatically — share it so others can use it as your referral ID.
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 font-semibold mb-1">Reference Username or USER ID</label>
                   <input
                     type="text"
                     value={referenceUsername}
                     onChange={e => setReferenceUsername(e.target.value)}
                     onBlur={() => mark('referenceUsername')}
-                    placeholder="Optional — your sponsor's username"
+                    placeholder="Optional — your sponsor's username or USER ID"
                     aria-invalid={!!showError('referenceUsername')}
                     className={withValidation(`${inputBase} font-mono`, !!showError('referenceUsername'))}
                   />

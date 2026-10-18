@@ -69,7 +69,7 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
   return (
     <section
       id={sectionId}
-      className={`scroll-mt-20 py-14 sm:py-20 border-b border-slate-200 dark:border-slate-800 transition-colors ${
+      className={`scroll-mt-20 pt-9 pb-14 sm:pt-11 sm:pb-20 border-b border-slate-200 dark:border-slate-800 transition-colors ${
         tone === 'muted' ? 'bg-slate-50 dark:bg-slate-950' : 'bg-white dark:bg-slate-900'
       }`}
     >

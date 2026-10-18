@@ -1020,6 +1020,42 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     ctaLabel: '',
     visible: true,
     order: 2
+  },
+  {
+    id: 'achievements',
+    label: 'Achievements & Milestones',
+    kind: 'standard',
+    title: 'Achievements That Speak for Themselves',
+    subtitle: 'Registered deeds, handed-over towers and on-time investor payouts — year after year.',
+    body:
+      'Since 2019 Questra World has delivered 12 completed developments, handed over 4,800+ registered share certificates and paid every double-profit installment on schedule. Our growth is audited, documented and open for inspection at any branch.',
+    ctaLabel: '',
+    visible: true,
+    order: 3
+  },
+  {
+    id: 'conferences',
+    label: 'Global Conferences & Summits',
+    kind: 'standard',
+    title: 'Questra World on the Global Stage',
+    subtitle: 'International property expos, investment summits and diaspora conventions.',
+    body:
+      'From the Dubai International Property Show to the Singapore Real Estate Investment Summit and the London Diaspora Investment Expo, our leadership presents Questra World developments to investors, banks and regulators around the world.',
+    ctaLabel: '',
+    visible: true,
+    order: 4
+  },
+  {
+    id: 'success-stories',
+    label: 'Investor Success Stories',
+    kind: 'standard',
+    title: 'Real Investors. Real Returns.',
+    subtitle: 'Families who completed their payments, received registered deeds and doubled their investment.',
+    body:
+      'Every story below belongs to a verified investor whose registered share, installment schedule and dividend payouts are visible in the Questra World investor portal.',
+    ctaLabel: '',
+    visible: true,
+    order: 5
   }
 ];
 
@@ -1187,8 +1223,75 @@ export class StorageService {
     return null;
   }
 
+  // -------------------------------------------------------------------------
+  // Sequential USER ID allocation.
+  //
+  // Every new registration receives a permanent numeric USER ID starting at
+  // 6120 and increasing by one for each account (6120, 6121, 6122 …). The ID is
+  // shown read-only on both registration forms and can be used as a referral
+  // reference instead of a username.
+  // -------------------------------------------------------------------------
+
+  /** First USER ID handed out to a new registration. */
+  static readonly USER_ID_START = 6120;
+
+  /** Highest USER ID issued so far (floor is USER_ID_START - 1). */
+  private static highestUserId(): number {
+    const floor = StorageService.USER_ID_START - 1;
+    const stored = parseInt(localStorage.getItem('qw_last_user_id') || '', 10);
+    return Number.isFinite(stored) && stored > floor ? stored : floor;
+  }
+
+  /** The next USER ID that will be issued — a preview, it does not consume it. */
+  static peekNextUserId(): string {
+    return String(StorageService.highestUserId() + 1);
+  }
+
+  /** True when a USER ID has already been assigned to an account. */
+  static userIdTaken(id: string | number | undefined): boolean {
+    const target = String(id ?? '').trim();
+    if (!target) return false;
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key || !key.startsWith('qw_registered_account_')) continue;
+      try {
+        const parsed = JSON.parse(localStorage.getItem(key) || '{}');
+        const stored = parsed?.user?.userId;
+        if (stored !== undefined && stored !== null && String(stored).trim() === target) return true;
+      } catch {
+        // ignore malformed entries
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Claims the next sequential USER ID and persists the counter.
+   *
+   * `preferred` is the ID the form previewed to the investor. It is honoured
+   * only when it is still the next free number, so two registrations can never
+   * receive the same USER ID.
+   */
+  static claimUserId(preferred?: string | number): string {
+    const preferredNum = Number(String(preferred ?? '').trim());
+    const isSequential =
+      Number.isInteger(preferredNum) &&
+      preferredNum === StorageService.highestUserId() + 1 &&
+      !StorageService.userIdTaken(preferredNum);
+
+    if (isSequential) {
+      localStorage.setItem('qw_last_user_id', String(preferredNum));
+      return String(preferredNum);
+    }
+
+    const next = StorageService.highestUserId() + 1;
+    localStorage.setItem('qw_last_user_id', String(next));
+    return String(next);
+  }
+
   static register(newUser: Partial<User>, password: string): User {
-    const userIdStr = newUser.userId ? String(newUser.userId) : undefined;
+    // Every account receives its permanent sequential USER ID up front.
+    const userIdStr = this.claimUserId(newUser.userId);
     // Resolve the typed reference (username / USER ID / member ID / referral
     // code) into the sponsor's real account before the record is created.
     const sponsor = this.resolveSponsor(newUser.referenceUsername || '');
@@ -1200,7 +1303,7 @@ export class StorageService {
       email: newUser.email || 'investor@questraworld.com',
       phone: newUser.phone || '+44 170 000 0000',
       branch: newUser.branch || 'Global Head Office (Financial District)',
-      memberId: newUser.memberId || userIdStr || ('QW-' + Math.floor(1000 + Math.random() * 9000)),
+      memberId: newUser.memberId || ('QW-' + Math.floor(1000 + Math.random() * 9000)),
       userId: userIdStr,
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
       address: newUser.address || 'Dubai, the globe',
@@ -1291,9 +1394,12 @@ export class StorageService {
     if (cleaned === 'user1' || cleaned === 'admin' || cleaned === 'questraworld') return true;
     if (localStorage.getItem('qw_registered_account_' + cleaned)) return true;
 
-    // Fall back to matching a registered mobile number (digits only).
-    const digits = cleaned.replace(/\D/g, '');
-    if (!digits) return false;
+    // Fall back to matching a registered mobile number — but only when the
+    // input actually looks like a phone number. Otherwise any username that
+    // merely contains a digit would collide with an unrelated phone number.
+    const stripSeparators = cleaned.replace(/[\s()+-]/g, '');
+    if (!/^\d{5,}$/.test(stripSeparators)) return false;
+    const digits = stripSeparators;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key && key.startsWith('qw_registered_account_')) {
