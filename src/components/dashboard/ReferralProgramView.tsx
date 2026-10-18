@@ -340,7 +340,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
             on every successful referral.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={onNavigateToTree}
             className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -418,7 +418,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
             <div>
               <span className="text-[10px] text-slate-400 uppercase tracking-wider">Your Unique Referral Code</span>
               <div className="flex flex-wrap items-center gap-3 mt-1">
-                <code className="px-4 py-2.5 rounded-xl bg-white/10 border border-amber-500/30 font-mono text-2xl font-black tracking-widest text-amber-300">
+                <code className="px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-white/10 border border-amber-500/30 font-mono text-xl sm:text-2xl font-black tracking-wider sm:tracking-widest text-amber-300">
                   {referralCode}
                 </code>
                 <button
@@ -438,15 +438,15 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
 
             <div>
               <span className="text-[10px] text-slate-400 uppercase tracking-wider">Your Referral Link</span>
-              <div className="flex items-center gap-2 mt-1">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-1">
                 <input
                   readOnly
                   value={referralUrl}
-                  className="flex-1 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-slate-300 focus:outline-none"
+                  className="w-full min-w-0 flex-1 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-slate-300 focus:outline-none"
                 />
                 <button
                   onClick={handleCopyLink}
-                  className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-colors"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-colors"
                 >
                   {copiedLink ? 'Copied!' : 'Copy Link'}
                 </button>
@@ -558,7 +558,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
             ))}
           </select>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-xl p-1 text-xs">
             <button
               onClick={() => setViewMode('table')}
@@ -746,7 +746,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
                   />
                   <FieldError message={showInviteError('newInviteName')} />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Username *</label>
                     <input
@@ -796,7 +796,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
                   />
                   <FieldError message={showInviteError('newInviteEmail')} />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">Asset Booked</label>
                     <select

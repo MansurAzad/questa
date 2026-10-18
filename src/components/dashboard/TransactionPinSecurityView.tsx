@@ -293,7 +293,7 @@ export const TransactionPinSecurityView: React.FC<TransactionPinSecurityViewProp
               <FieldError message={pinShow('currentPin')} />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-1">
                   New 4-Digit T-PIN *

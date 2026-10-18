@@ -167,7 +167,7 @@ export const SuccessStories: React.FC<SuccessStoriesProps> = ({
                 </span>
               </div>
 
-              <div className="mt-4 grid grid-cols-3 gap-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 p-3 text-center">
+              <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 text-center">
                 <div>
                   <div className="text-[10px] uppercase tracking-wide text-slate-500">Invested</div>
                   <div className="text-sm font-bold text-slate-900 dark:text-white">{story.invested}</div>

@@ -393,12 +393,12 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
           <div className="p-6 sm:p-8 space-y-4">
             
             {/* Filter Buttons */}
-            <div className="flex items-center justify-between pb-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-2">
               <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                 { 'Milestone Schedule'}
               </span>
 
-              <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-700/60 rounded-xl text-xs">
+              <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-700/60 rounded-xl text-xs max-w-full overflow-x-auto no-scrollbar">
                 {(['all', 'completed', 'in_progress'] as const).map(tab => (
                   <button
                     key={tab}

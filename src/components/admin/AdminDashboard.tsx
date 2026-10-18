@@ -1358,7 +1358,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                   <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                     <span className="text-xs font-bold text-slate-600 dark:text-slate-300 block">Admin Control Actions:</span>
-                    <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <button
                         onClick={() => {
                           handleApproveKYC(selectedInvestorForModal.id);

@@ -98,7 +98,7 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
             {/* Assets Table */}
             <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden text-xs">
               <div className="rtable-scroll">
-              <table className="w-full text-left min-w-[520px]">
+              <table className="rtable w-full text-left min-w-[520px]">
                 <thead className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono uppercase">
                   <tr>
                     <th className="p-3">Asset Description</th>
@@ -110,12 +110,12 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-800 font-mono">
                   {shares.map(s => (
                     <tr key={s.id}>
-                      <td className="p-3 font-sans font-medium text-slate-900 dark:text-white">
+                      <td data-label="Asset Description" className="p-3 font-sans font-medium text-slate-900 dark:text-white">
                         {s.projectName} ({s.shareNumbers.join(', ')})
                       </td>
-                      <td className="p-3 text-slate-500">{s.certificateNo}</td>
-                      <td className="p-3">{formatBDT(s.totalInvestment, language)}</td>
-                      <td className="p-3 text-right font-bold text-emerald-600 dark:text-emerald-400">
+                      <td data-label="Certificate Ref" className="p-3 text-slate-500">{s.certificateNo}</td>
+                      <td data-label="Total Consideration" className="p-3">{formatBDT(s.totalInvestment, language)}</td>
+                      <td data-label="Cumulative Paid" className="p-3 text-right font-bold text-emerald-600 dark:text-emerald-400">
                         {formatBDT(s.paidAmount, language)}
                       </td>
                     </tr>
@@ -124,8 +124,8 @@ export const TaxCertificateView: React.FC<TaxCertificateViewProps> = ({
                 <tfoot className="bg-slate-50 dark:bg-slate-800/80 font-mono font-bold text-slate-900 dark:text-white">
                   <tr>
                     <td colSpan={2} className="p-3 text-right font-sans">TOTAL QUALIFYING INVESTMENT:</td>
-                    <td className="p-3">{formatBDT(totalValuation, language)}</td>
-                    <td className="p-3 text-right text-emerald-600 dark:text-emerald-400">
+                    <td data-label="Total Consideration" className="p-3">{formatBDT(totalValuation, language)}</td>
+                    <td data-label="Cumulative Paid" className="p-3 text-right text-emerald-600 dark:text-emerald-400">
                       {formatBDT(totalPaid, language)}
                     </td>
                   </tr>

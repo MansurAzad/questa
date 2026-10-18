@@ -577,7 +577,7 @@ export const AddManualSlipModal: React.FC<AddManualSlipModalProps> = ({ isOpen, 
         <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-4 text-xs">
           {fixLabel && <ValidationSummary messages={result.messages} />}
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className={LABEL}>Investor Username *</label>
               <input
@@ -604,7 +604,7 @@ export const AddManualSlipModal: React.FC<AddManualSlipModalProps> = ({ isOpen, 
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className={LABEL}>Deposit Amount (USD) *</label>
               <input
@@ -631,7 +631,7 @@ export const AddManualSlipModal: React.FC<AddManualSlipModalProps> = ({ isOpen, 
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className={LABEL}>Bank Branch *</label>
               <input

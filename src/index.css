@@ -7,6 +7,38 @@
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
+
+  /* Never let media or long unbreakable strings (emails, hashes, wallet
+     addresses, member IDs) push a phone screen into horizontal scroll. */
+  img,
+  video {
+    max-width: 100%;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Mobile card system
+   ---------------------------------------------------------------
+   Every data table renders through `.rtable` (below), so all admin and
+   dashboard lists collapse into stacked, labelled cards under 768px.
+   `.scroll-x` is the swipeable pill / filter rail used by the navbar and
+   the filter bars, so narrow screens never wrap into a ragged block.
+   --------------------------------------------------------------- */
+.scroll-x {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.scroll-x::-webkit-scrollbar {
+  display: none;
+}
+.scroll-x > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
 }
 
 /* Custom slick scrollbars for tables and drawers */
@@ -126,20 +158,6 @@
   .rtable-scroll {
     overflow: visible !important;
   }
-}
-
-/* Utility: responsive card grid helpers */
-.card-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-}
-@media (min-width: 640px) {
-  .card-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (min-width: 1024px) {
-  .card-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .card-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 /* Guard against accidental horizontal overflow from long words / unbreakable

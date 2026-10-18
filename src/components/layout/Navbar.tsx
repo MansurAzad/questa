@@ -71,25 +71,25 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-900/90 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex h-14 sm:h-16 items-center justify-between gap-2">
           
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex min-w-0 items-center gap-3">
             <button
               onClick={() => onNavigate('home')}
-              className="flex items-center gap-3 group text-left focus:outline-none"
+              className="flex min-w-0 items-center gap-2 sm:gap-3 group text-left focus:outline-none"
             >
               <img
                 src="/questra-logo.jpeg"
                 alt="Questra World logo"
-                className="w-10 h-10 rounded-xl object-cover shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform bg-white ring-1 ring-slate-200 dark:ring-slate-700"
+                className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-xl object-cover shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform bg-white ring-1 ring-slate-200 dark:ring-slate-700"
               />
-              <div>
-                <span className="font-extrabold tracking-tight text-lg sm:text-xl text-slate-900 dark:text-white block leading-tight">
+              <div className="min-w-0">
+                <span className="font-extrabold tracking-tight text-base sm:text-xl text-slate-900 dark:text-white block leading-tight truncate">
                   Questra <span className="text-amber-600 dark:text-amber-500">World</span>
                 </span>
-                <span className="text-[10px] tracking-wider uppercase font-semibold text-slate-600 dark:text-slate-300 block -mt-0.5">
+                <span className="hidden sm:block text-[10px] tracking-wider uppercase font-semibold text-slate-600 dark:text-slate-300 -mt-0.5 truncate">
                   Real Estate & Investment
                 </span>
               </div>
@@ -98,15 +98,15 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Nav Links - HIDE IN USER DASHBOARD */}
           {activeView !== 'dashboard' && (
-            <nav className="hidden lg:flex items-center gap-6">
+            <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map(link => (
                 <button
                   key={link.id}
                   onClick={() => onNavigate(link.id)}
-                  className={`text-sm font-medium transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     activeView === link.id
-                      ? 'text-amber-700 dark:text-amber-400 font-semibold'
-                      : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                      ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800'
                   }`}
                 >
                   {link.label}
@@ -165,7 +165,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 {/* Notification Dropdown */}
                 {notificationsOpen && (
-                  <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-xl bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden">
+                  <div className="absolute right-0 mt-2 w-80 sm:w-96 max-w-[calc(100vw-1.5rem)] rounded-xl bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden">
                     <div className="p-3 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                       <span className="font-semibold text-xs text-slate-900 dark:text-white uppercase tracking-wider">
                         {t('notificationsTitle')}
@@ -362,6 +362,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           </div>
         </div>
+
+        {/*
+          Mobile section rail — the same section links as the desktop nav,
+          rendered as a swipeable pill/card rail on small screens.
+          Deliberately NOT a hamburger menu.
+        */}
+        {activeView !== 'dashboard' && (
+          <nav
+            className="lg:hidden scroll-x -mx-3 px-3 pb-2 sm:-mx-6 sm:px-6"
+            aria-label="Homepage sections"
+          >
+            {navLinks.map(link => (
+              <button
+                key={link.id}
+                onClick={() => onNavigate(link.id)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
+                  activeView === link.id
+                    ? 'bg-amber-600 border-amber-600 text-white shadow-sm'
+                    : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200'
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
+        )}
       </div>
     </header>
   );

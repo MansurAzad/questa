@@ -105,7 +105,7 @@ export const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = (
 
           {/* Body Content */}
           <div className="space-y-4 text-xs leading-relaxed text-slate-800">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <span className="text-slate-500 text-[11px] block">Credited to (Investor):</span>
                 <strong className="text-sm text-slate-900 font-bold">{user.fullName}</strong>
@@ -128,7 +128,7 @@ export const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = (
               <strong className="text-slate-900 font-bold text-xs block mt-0.5">
                 {receipt.investmentTitle}
               </strong>
-              <div className="text-[10px] text-slate-600 mt-1 grid grid-cols-2 gap-2">
+              <div className="text-[10px] text-slate-600 mt-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <span>Invested Principal: <strong className="font-mono">{formatBDT(receipt.principalAmount, language)}</strong></span>
                 <span>Installment: <strong className="font-mono">#{receipt.installmentNo} of {receipt.totalInstallments}</strong></span>
               </div>
