@@ -201,7 +201,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Investor Registration / Signup */}
+        {/* Investor Registration / Signup — hidden while the user is logged in */}
+        {!user ? (
         <div className="max-w-md mx-auto">
             <div className="relative rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-6 shadow-2xl">
 
@@ -459,6 +460,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             </div>
           </div>
+        ) : (
+          <div className="max-w-md mx-auto">
+            {/* Logged-in welcome panel — shown instead of the login/registration card */}
+            <div className="relative rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-6 shadow-2xl text-center">
+              <img
+                src={user.avatar}
+                alt={user.fullName}
+                className="w-16 h-16 mx-auto rounded-2xl object-cover border-2 border-amber-400/40 shadow-lg bg-white"
+              />
+              <h2 className="mt-3 text-lg font-bold text-white">Welcome back, {user.fullName}</h2>
+              <p className="mt-1 text-[11px] text-slate-400 font-mono">
+                {user.memberId}
+                {user.userId ? ` · ID ${user.userId}` : ''}
+              </p>
+              <button
+                type="button"
+                onClick={onOpenPortal}
+                className="mt-4 w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs uppercase tracking-wider transition-colors"
+              >
+                Go to Dashboard
+              </button>
+            </div>
+          </div>
+        )}
 
       </div>
     </section>

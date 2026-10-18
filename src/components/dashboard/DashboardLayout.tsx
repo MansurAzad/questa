@@ -2,15 +2,12 @@ import React, { useMemo, useRef, useState } from 'react';
 import {
   TrendingUp,
   ArrowUpRight,
-  RefreshCw,
-  User as UserIcon,
-  Phone,
-  Mail,
   ChevronRight,
   Wallet,
-  Send,
   Sparkles,
-  Upload
+  BadgeCheck,
+  Banknote,
+  FileText
 } from 'lucide-react';
 import {
   User,
@@ -151,85 +148,69 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
       {/* Main Dashboard Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        {/* TOP BUTTON BAR — every dashboard section is reachable as a button.
-            The profile dropdown keeps only the 4-5 account-related items. */}
-        <nav className="mb-5 no-scrollbar" aria-label="Dashboard sections">
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-            {navItems.map(item => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setActiveTab(item.id)}
-                  aria-current={isActive ? 'page' : undefined}
-                  title={item.label}
-                  className={`group flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
-                    isActive
-                      ? 'bg-amber-600 border-amber-600 text-white shadow-md shadow-amber-600/20'
-                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:border-amber-400 dark:hover:border-amber-500 hover:text-amber-700 dark:hover:text-amber-400'
-                  }`}
-                >
-                  <Icon
-                    className={`w-3.5 h-3.5 shrink-0 ${
-                      isActive ? 'text-white' : 'text-slate-400 group-hover:text-amber-500'
-                    }`}
-                  />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </nav>
-
         <div className="space-y-6">
 
             {/* TAB: OVERVIEW */}
             {activeTab === 'overview' && (
               <div className="space-y-6">
 
-                {/* Profile Info Card - First Card */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 text-white border border-white/20 shadow-[0_20px_60px_-15px_rgba(79,70,229,0.5)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(79,70,229,0.6)]">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_70%)]"></div>
-                    <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
-                    <div className="relative z-10 flex flex-col h-full">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="relative">
-                          <img
-                            src={user.avatar}
-                            alt={user.fullName}
-                            className="w-16 h-16 rounded-2xl object-cover border-2 border-white/60 shadow-lg"
-                          />
-                          <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white shadow-md"></div>
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-extrabold tracking-tight">{user.fullName}</h3>
-                          <p className="text-xs text-white/90 font-mono">@{user.username}</p>
-                        </div>
+                {/* FIRST CARD — the user's full details, listed row by row in a single card */}
+                <div className="relative overflow-hidden p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 text-white border border-white/20 shadow-[0_20px_60px_-15px_rgba(79,70,229,0.5)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(79,70,229,0.6)]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_70%)]"></div>
+                  <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+                  <div className="relative z-10">
+                    {/* Header */}
+                    <div className="flex items-center gap-4 pb-5 mb-2 border-b border-white/20">
+                      <div className="relative shrink-0">
+                        <img
+                          src={user.avatar}
+                          alt={user.fullName}
+                          className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-white/60 shadow-lg"
+                        />
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white shadow-md"></div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3 mt-auto">
-                        <div className="p-3 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 text-center">
-                          <span className="text-[10px] uppercase tracking-wider text-white/80 block mb-1">Member ID</span>
-                          <span className="text-sm font-bold font-mono">{user.memberId}</span>
-                        </div>
-                        <div className="p-3 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 text-center">
-                          <span className="text-[10px] uppercase tracking-wider text-white/80 block mb-1">Phone</span>
-                          <span className="text-sm font-bold">{user.phone}</span>
-                        </div>
-                        <div className="p-3 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 text-center col-span-2">
-                          <span className="text-[10px] uppercase tracking-wider text-white/80 block mb-1">Email</span>
-                          <span className="text-sm font-bold break-all">{user.email}</span>
-                        </div>
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-2xl font-extrabold tracking-tight leading-tight truncate">{user.fullName}</h3>
+                        <p className="text-xs sm:text-sm text-white/90 font-mono truncate">@{user.username}</p>
+                        <span className="inline-flex items-center gap-1.5 mt-1.5 px-2.5 py-0.5 rounded-full bg-white/20 border border-white/25 text-[10px] font-bold uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          Active Member
+                        </span>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Card 1: Total Portfolio */}
+                    {/* Details — one item per row */}
+                    <dl className="divide-y divide-white/15">
+                      {[
+                        { label: 'User ID', value: user.userId },
+                        { label: 'Member ID', value: user.memberId },
+                        { label: 'Username', value: `@${user.username}` },
+                        { label: 'Phone', value: user.phone },
+                        { label: 'Email', value: user.email },
+                        { label: 'City / Address', value: [user.city, user.address].filter(Boolean).join(', ') },
+                        { label: 'Joined', value: user.joinedDate }
+                      ]
+                        .filter(row => row.value)
+                        .map(row => (
+                          <div key={row.label} className="flex items-center justify-between gap-4 py-3">
+                            <dt className="text-[11px] uppercase tracking-wider text-white/70 font-semibold shrink-0">{row.label}</dt>
+                            <dd className="text-sm font-bold font-mono text-right break-all">{row.value}</dd>
+                          </div>
+                        ))}
+                    </dl>
+                  </div>
+                </div>
+
+                {/* 3D Colorful Stat Cards — each with a related icon centred at the top */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                  {/* Total Portfolio */}
                   <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white border border-slate-700/60 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.8)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(15,23,42,0.9)]">
                     <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-amber-500/20 blur-2xl"></div>
-                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                    <div className="relative z-10 flex flex-col items-center text-center h-full">
+                      <span className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center mb-3 shadow-inner">
+                        <Wallet className="w-6 h-6 text-amber-300" />
+                      </span>
                       <span className="text-xs uppercase tracking-wider text-amber-300 font-bold mb-2">
                         {t('overviewTotalInvested')}
                       </span>
@@ -241,15 +222,14 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                       </span>
                     </div>
                   </div>
-                </div>
 
-                {/* 3D Colorful Stat Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
-                  {/* Card 2: Total Paid */}
+                  {/* Total Paid */}
                   <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 text-white border border-emerald-300/40 shadow-[0_20px_60px_-15px_rgba(16,185,129,0.6)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(16,185,129,0.7)]">
                     <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
-                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                    <div className="relative z-10 flex flex-col items-center text-center h-full">
+                      <span className="w-12 h-12 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center mb-3 shadow-inner">
+                        <BadgeCheck className="w-6 h-6 text-white" />
+                      </span>
                       <span className="text-xs uppercase tracking-wider text-emerald-100 font-bold mb-2">
                         {t('overviewTotalPaid')}
                       </span>
@@ -262,10 +242,13 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     </div>
                   </div>
 
-                  {/* Card 3: Installments Received */}
+                  {/* Installments Received */}
                   <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-700 text-white border border-cyan-300/40 shadow-[0_20px_60px_-15px_rgba(14,165,233,0.6)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(14,165,233,0.7)]">
                     <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
-                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                    <div className="relative z-10 flex flex-col items-center text-center h-full">
+                      <span className="w-12 h-12 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center mb-3 shadow-inner">
+                        <Banknote className="w-6 h-6 text-white" />
+                      </span>
                       <span className="text-xs uppercase tracking-wider text-cyan-100 font-bold mb-2">
                         { 'Installments Received'}
                       </span>
@@ -278,10 +261,13 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     </div>
                   </div>
 
-                  {/* Card 4: Dividends Earned */}
+                  {/* Dividends Earned */}
                   <div className="relative overflow-hidden p-6 rounded-3xl bg-gradient-to-br from-fuchsia-500 via-purple-600 to-pink-700 text-white border border-fuchsia-300/40 shadow-[0_20px_60px_-15px_rgba(217,70,239,0.6)] transform transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_25px_70px_-10px_rgba(217,70,239,0.7)]">
                     <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-white/20 blur-2xl"></div>
-                    <div className="relative z-10 flex flex-col items-center justify-center text-center h-full">
+                    <div className="relative z-10 flex flex-col items-center text-center h-full">
+                      <span className="w-12 h-12 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center mb-3 shadow-inner">
+                        <TrendingUp className="w-6 h-6 text-white" />
+                      </span>
                       <span className="text-xs uppercase tracking-wider text-fuchsia-100 font-bold mb-2">
                         {t('overviewDividendsReceived')}
                       </span>
@@ -344,64 +330,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                   </button>
                 </div>
 
-                {/* Portfolio Holdings Card */}
-                {activeShare && (
-                  <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
-                      <div>
-                        <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                          Active Share Holding
-                        </span>
-                        <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                          {activeShare.projectName}
-                        </h2>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => handleOpenCertificate('hotel_share')}
-                          className="px-3 py-1.5 rounded-lg bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-300 dark:border-amber-700 text-xs font-semibold hover:bg-amber-500/20 transition-colors"
-                        >
-                          Share Certificate
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
-                      <div>
-                        <span className="text-slate-400 block">Unit Numbers</span>
-                        <strong className="text-slate-900 dark:text-white font-mono">{activeShare.shareNumbers.join(', ')}</strong>
-                      </div>
-                      <div>
-                        <span className="text-slate-400 block">Total Investment</span>
-                        <strong className="text-amber-600 dark:text-amber-400 font-mono font-bold">{formatBDT(activeShare.totalInvestment, language)}</strong>
-                      </div>
-                      <div>
-                        <span className="text-slate-400 block">Monthly Profit</span>
-                        <strong className="text-emerald-600 dark:text-emerald-400 font-mono">+{formatBDT(activeShare.monthlyDividendAmount, language)}</strong>
-                      </div>
-                      <div>
-                        <span className="text-slate-400 block">Annual ROI</span>
-                        <strong className="text-slate-900 dark:text-white font-mono">{activeShare.annualRoiPercentage}% p.a.</strong>
-                      </div>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="space-y-1.5 pt-2">
-                      <div className="flex justify-between text-xs font-semibold">
-                        <span className="text-slate-600 dark:text-slate-300">Project Construction Progress</span>
-                        <span className="font-mono text-amber-700 dark:text-amber-400">
-                          {activeShare.projectCompletionPercentage}%
-                        </span>
-                      </div>
-                      <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-amber-500 to-amber-600 rounded-full transition-all duration-500"
-                          style={{ width: `${activeShare.projectCompletionPercentage}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {/* Portfolio Holdings Card removed per request (Active Share Holding section). */}
 
               </div>
             )}
@@ -715,9 +644,52 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               </div>
             )}
 
-            {/* TAB: SECURITY, PASSWORD & TRANSACTION PIN */}
+            {/* TAB: SETTINGS — dashboard section shortcuts (moved from the top row) + security */}
             {activeTab === 'security' && (
-              <TransactionPinSecurityView user={user} language={language} />
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-white">Settings</h2>
+                  <p className="text-xs text-slate-500">
+                    Jump to any dashboard section below, or manage your login credentials and transaction PIN.
+                  </p>
+                </div>
+
+                {/* Dashboard sections as cards */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {navItems.map(item => {
+                    const Icon = item.icon;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setActiveTab(item.id)}
+                        className="group relative overflow-hidden text-left p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs hover:border-amber-400 dark:hover:border-amber-500 hover:-translate-y-0.5 hover:shadow-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                      >
+                        <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-white flex items-center justify-center mb-3 shadow-sm group-hover:scale-105 transition-transform">
+                          <Icon className="w-5 h-5" />
+                        </span>
+                        <span className="block text-xs font-bold text-slate-900 dark:text-white leading-snug pr-4">{item.label}</span>
+                        <ChevronRight className="absolute top-4 right-3 w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-amber-500 transition-colors" />
+                      </button>
+                    );
+                  })}
+
+                  {/* Share certificate quick action (was in the removed holdings card) */}
+                  <button
+                    type="button"
+                    onClick={() => handleOpenCertificate('hotel_share')}
+                    className="group relative overflow-hidden text-left p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs hover:border-amber-400 dark:hover:border-amber-500 hover:-translate-y-0.5 hover:shadow-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                  >
+                    <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-white flex items-center justify-center mb-3 shadow-sm group-hover:scale-105 transition-transform">
+                      <FileText className="w-5 h-5" />
+                    </span>
+                    <span className="block text-xs font-bold text-slate-900 dark:text-white leading-snug pr-4">Share Certificate</span>
+                    <ChevronRight className="absolute top-4 right-3 w-4 h-4 text-slate-300 dark:text-slate-600 group-hover:text-amber-500 transition-colors" />
+                  </button>
+                </div>
+
+                <TransactionPinSecurityView user={user} language={language} />
+              </div>
             )}
 
         </div>

@@ -6,7 +6,6 @@ import {
   Bell,
   User as UserIcon,
   LogOut,
-  Menu,
   X,
   CreditCard,
   ShieldCheck,
@@ -55,7 +54,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onDashboardTabChange,
   onChangeAvatar
 }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
@@ -79,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Logo */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => { onNavigate('home'); setMobileMenuOpen(false); }}
+              onClick={() => onNavigate('home')}
               className="flex items-center gap-3 group text-left focus:outline-none"
             >
               <img
@@ -146,9 +144,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
 
 
-            {/* Notification Bell - REMOVED / HIDDEN IN USER DASHBOARD */}
-            {activeView !== 'dashboard' && (
-              <div className="relative">
+            {/* Notification Bell — always visible (homepage + dashboard) */}
+            <div className="relative">
                 <button
                   onClick={() => {
                     setNotificationsOpen(!notificationsOpen);
@@ -208,7 +205,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </div>
                 )}
               </div>
-            )}
 
             {/* User Session / Auth Action */}
             {user ? (
@@ -248,8 +244,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     </div>
 
                     {/*
-                      Profile menu = only account-related items (4).
-                      Every dashboard section lives in the top button bar of the dashboard.
+                      Profile menu = main account shortcuts.
+                      Every dashboard section is also reachable from the Settings page.
                     */}
                     <div className="py-1 border-b border-slate-100 dark:border-slate-700">
 
@@ -258,9 +254,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                           { id: 'overview' as DashboardTab, label: 'Dashboard', icon: LayoutDashboard },
                           { id: 'profile' as DashboardTab, label: 'My Profile', icon: UserIcon },
                           { id: 'profile' as DashboardTab, label: 'My Account', icon: UserIcon },
-                          { id: 'referrals' as DashboardTab, label: 'Team', icon: Compass },
+                          { id: 'referral_tree' as DashboardTab, label: 'Team', icon: Compass },
                           { id: 'ledger' as DashboardTab, label: 'Withdraw', icon: CreditCard },
-                          { id: 'referrals' as DashboardTab, label: 'Referral Link', icon: Compass },
+                          { id: 'affiliate' as DashboardTab, label: 'Referral Link', icon: Compass },
                           { id: 'security' as DashboardTab, label: 'Settings', icon: ShieldCheck }
                         ]
                       ).map(item => {
@@ -362,57 +358,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             )}
 
-            {/* Mobile Menu Trigger (Public site only) */}
-            {activeView !== 'dashboard' && (
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-                aria-label="Toggle Mobile Menu"
-              >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            )}
-
           </div>
         </div>
       </div>
-
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-2">
-          {navLinks.map(link => (
-            <button
-              key={link.id}
-              onClick={() => {
-                onNavigate(link.id);
-                setMobileMenuOpen(false);
-              }}
-              className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
-                activeView === link.id
-                  ? 'bg-amber-50 text-amber-700 dark:bg-slate-800 dark:text-amber-400 font-semibold'
-                  : 'text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800'
-              }`}
-            >
-              {link.label}
-            </button>
-          ))}
-
-          {user && (
-            <button
-              onClick={() => {
-                onNavigate('dashboard');
-                setMobileMenuOpen(false);
-              }}
-              className="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold bg-amber-600 text-white flex items-center justify-between"
-            >
-              <span>{t('navPortal')}</span>
-              <span className="text-xs bg-amber-700/60 px-2 py-0.5 rounded font-mono">
-                {user.memberId}
-              </span>
-            </button>
-          )}
-        </div>
-      )}
     </header>
   );
 };
