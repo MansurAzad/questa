@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   User,
   Language,
@@ -32,6 +32,7 @@ import { AuthModal } from './components/auth/AuthModal';
 import { ProjectInfo } from './types';
 import { CmsSection, CmsCollectionItem, CmsSiteSettings } from './types/cms';
 import { CmsCollectionSection } from './components/public/CmsCollectionSection';
+import { readReferralParam } from './utils/referral';
 
 export default function App() {
   // Theme state
@@ -74,6 +75,15 @@ export default function App() {
   const [isCloudSynced, setIsCloudSynced] = useState(true);
   const [projectModalOpen, setProjectModalOpen] = useState(false);
   const [selectedProjectModal, setSelectedProjectModal] = useState<ProjectInfo | null>(null);
+
+  // Referral link support: ?ref=<username|USER ID|code> carried in the URL.
+  // The sponsor is resolved to a real account so the signup form (and the
+  // register tab in the auth modal) can be pre-filled automatically.
+  const referralRef = useMemo(() => readReferralParam(), []);
+  const initialReferenceUsername = useMemo(
+    () => StorageService.resolveSponsor(referralRef)?.username || referralRef,
+    [referralRef]
+  );
 
   // Sync theme to HTML class
   useEffect(() => {
@@ -279,6 +289,7 @@ export default function App() {
                         }}
                         onOpenPortal={() => setActiveView('dashboard')}
                         onRegisterSuccess={handleLoginSuccess}
+                        initialReferenceUsername={initialReferenceUsername}
                         cmsTitle={sec('hero')?.title}
                         cmsSubtitle={sec('hero')?.subtitle}
                         cmsBanner={sec('hero')?.body}
@@ -432,6 +443,7 @@ export default function App() {
         onClose={() => setAuthModalOpen(false)}
         onLoginSuccess={handleLoginSuccess}
         language={language}
+        initialReferenceUsername={initialReferenceUsername}
       />
 
       {/* Profile Picture Change Modal */}
@@ -469,6 +481,7 @@ export default function App() {
         <Footer
           language={language}
           settings={cmsSettings}
+          user={user}
           onNavigate={view => {
             if (view === 'dashboard' && !user) {
               setAuthModalOpen(true);

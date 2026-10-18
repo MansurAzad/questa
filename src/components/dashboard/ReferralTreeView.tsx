@@ -22,6 +22,7 @@ import { formatBDT } from '../../services/i18n';
 import { StorageService } from '../../services/storage';
 import { compose, required, minLength, username as usernameRule, phone as phoneRule, runRules, RuleSet } from '../../utils/validation';
 import { FieldError, ValidationSummary, focusFirstInvalid } from '../ui/Validation';
+import { buildReferralLink } from '../../utils/referral';
 
 interface ReferralTreeViewProps {
   user: User;
@@ -122,7 +123,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
   const markDownline = (f: string) => setDownlineTouched(prev => ({ ...prev, [f]: true }));
 
   const referralCode = user.referralCode || 'QW-8842';
-  const refUrl = `https://questraworld.com/user/register?ref=${user.username}&code=${referralCode}`;
+  const refUrl = buildReferralLink(user.username, referralCode);
 
   const handleCopy = () => {
     navigator.clipboard?.writeText(refUrl);

@@ -6,7 +6,8 @@ import {
   Eye,
   EyeOff,
   KeyRound,
-  CheckCircle2
+  CheckCircle2,
+  Sparkles
 } from 'lucide-react';
 import { Language, User } from '../../types';
 import { translations, getTranslation } from '../../services/i18n';
@@ -32,8 +33,10 @@ interface HeroSectionProps {
   user: User | null;
   onOpenAuth: () => void;
   onExploreProjects: () => void;
-  onOpenPortal: () => void;
+  onOpenPortal?: () => void;
   onRegisterSuccess: (user: User) => void;
+  /** Sponsor username carried by a referral link (?ref=…), pre-filled into the form. */
+  initialReferenceUsername?: string;
   /** CMS overrides */
   cmsTitle?: string;
   cmsSubtitle?: string;
@@ -56,8 +59,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   user,
   onOpenAuth,
   onExploreProjects,
-  onOpenPortal,
   onRegisterSuccess,
+  initialReferenceUsername,
   cmsTitle,
   cmsSubtitle
 }) => {
@@ -72,7 +75,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [confirmPassword, setConfirmPassword] = useState('');
   const [transactionPin, setTransactionPin] = useState('');
   const [confirmTransactionPin, setConfirmTransactionPin] = useState('');
-  const [referenceUsername, setReferenceUsername] = useState('');
+  const [referenceUsername, setReferenceUsername] = useState(initialReferenceUsername || '');
   const [showPassword, setShowPassword] = useState(false);
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -190,6 +193,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   const signupReady = result.isValid;
 
+  // Logged-in investors never see the public login / registration section —
+  // the whole first homepage section is hidden for them.
+  if (user) return null;
+
   return (
     <section className="relative overflow-hidden bg-slate-900 text-white pt-6 pb-20 sm:pt-8 sm:pb-28">
 
@@ -201,8 +208,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Investor Registration / Signup — hidden while the user is logged in */}
-        {!user ? (
+        {/* Investor Registration / Signup (guests only) */}
         <div className="max-w-md mx-auto">
             <div className="relative rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-6 shadow-2xl">
 
@@ -222,6 +228,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   </span>
                 </div>
               </div>
+
+              {/* Referral attribution — shown when the visitor arrived via a referral link */}
+              {referenceUsername.trim() && (
+                <div className="mt-3 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-200 flex items-start gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-300" />
+                  <span>
+                    You were invited by{' '}
+                    <strong className="font-semibold font-mono">@{referenceUsername.trim()}</strong> — this
+                    sponsor is pre-filled in the Reference Username field below.
+                  </span>
+                </div>
+              )}
 
               {/* Signup Form */}
               <form ref={formRef} onSubmit={handleSignup} noValidate className="space-y-3 mt-4 text-xs">
@@ -460,30 +478,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             </div>
           </div>
-        ) : (
-          <div className="max-w-md mx-auto">
-            {/* Logged-in welcome panel — shown instead of the login/registration card */}
-            <div className="relative rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-6 shadow-2xl text-center">
-              <img
-                src={user.avatar}
-                alt={user.fullName}
-                className="w-16 h-16 mx-auto rounded-2xl object-cover border-2 border-amber-400/40 shadow-lg bg-white"
-              />
-              <h2 className="mt-3 text-lg font-bold text-white">Welcome back, {user.fullName}</h2>
-              <p className="mt-1 text-[11px] text-slate-400 font-mono">
-                {user.memberId}
-                {user.userId ? ` · ID ${user.userId}` : ''}
-              </p>
-              <button
-                type="button"
-                onClick={onOpenPortal}
-                className="mt-4 w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs uppercase tracking-wider transition-colors"
-              >
-                Go to Dashboard
-              </button>
-            </div>
-          </div>
-        )}
 
       </div>
     </section>

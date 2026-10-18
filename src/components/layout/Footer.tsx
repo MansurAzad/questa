@@ -1,11 +1,13 @@
 import React from 'react';
 import { ShieldCheck, ExternalLink, Copyright } from 'lucide-react';
-import { Language } from '../../types';
+import { Language, User } from '../../types';
 import { CmsSiteSettings } from '../../types/cms';
 
 interface FooterProps {
   language: Language;
   settings?: CmsSiteSettings;
+  /** Current session — used to hide sign-in affordances once logged in. */
+  user?: User | null;
   onNavigate: (view: string) => void;
   onOpenAuth: () => void;
 }
@@ -21,7 +23,7 @@ const DEFAULT_SETTINGS: CmsSiteSettings = {
   copyrightText: '© {year} Questra World Limited. All rights reserved.'
 };
 
-export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth }) => {
+export const Footer: React.FC<FooterProps> = ({ settings, user, onNavigate, onOpenAuth }) => {
   const s = { ...DEFAULT_SETTINGS, ...(settings || {}) };
   const year = new Date().getFullYear();
   const copyright = (s.copyrightText || DEFAULT_SETTINGS.copyrightText).replace(/\{year\}/g, String(year));
@@ -62,14 +64,16 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate, onOpenAuth
               { 'Portal' }
             </h4>
             <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={onOpenAuth}
-                  className="text-left hover:text-amber-400 transition-colors"
-                >
-                  Sign In
-                </button>
-              </li>
+              {!user && (
+                <li>
+                  <button
+                    onClick={onOpenAuth}
+                    className="text-left hover:text-amber-400 transition-colors"
+                  >
+                    Sign In
+                  </button>
+                </li>
+              )}
               <li>
                 <button
                   onClick={() => onNavigate('dashboard')}

@@ -36,6 +36,7 @@ import {
   RuleSet
 } from '../../utils/validation';
 import { FieldError, ValidationSummary, focusFirstInvalid } from '../ui/Validation';
+import { buildReferralLink } from '../../utils/referral';
 
 interface ReferralProgramViewProps {
   user: User;
@@ -73,7 +74,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   onNavigateToTree
 }) => {
   const referralCode = user.referralCode || user.memberId.replace('QW-INT-', 'QW-') || 'QW-8842';
-  const referralUrl = `https://questraworld.com/user/register?ref=${user.username}&code=${referralCode}`;
+  const referralUrl = buildReferralLink(user.username, referralCode);
 
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);

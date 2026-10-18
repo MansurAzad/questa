@@ -144,8 +144,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
 
 
-            {/* Notification Bell — always visible (homepage + dashboard) */}
-            <div className="relative">
+            {/* Notification Bell — investors only, inside the dashboard */}
+            {user && isDashboard && (
+              <div className="relative">
                 <button
                   onClick={() => {
                     setNotificationsOpen(!notificationsOpen);
@@ -205,6 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </div>
                 )}
               </div>
+            )}
 
             {/* User Session / Auth Action */}
             {user ? (
@@ -264,7 +266,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         const active = isDashboard && dashboardTab === item.id;
                         return (
                           <button
-                            key={item.id}
+                            key={item.label}
                             onClick={() => {
                               onDashboardTabChange(item.id);
                               setUserDropdownOpen(false);

@@ -1137,8 +1137,61 @@ export class StorageService {
     return null;
   }
 
+  /**
+   * Resolves a sponsor reference typed by a new investor — or carried by a
+   * referral link — into the sponsor's real account.
+   *
+   * Accepts any of: username, USER ID, member ID or referral code. Returns the
+   * canonical username plus display name, or `null` when nothing matches.
+   */
+  static resolveSponsor(input: string): { username: string; fullName: string } | null {
+    const cleaned = (input || '').trim();
+    if (!cleaned) return null;
+    const lower = cleaned.toLowerCase();
+
+    // Built-in seeded accounts (match by username, member ID or referral code).
+    const builtIns: Array<{ user: User; aliases: Array<string | undefined> }> = [
+      { user: INITIAL_USER, aliases: [INITIAL_USER.username, INITIAL_USER.memberId, INITIAL_USER.referralCode, INITIAL_USER.userId] },
+      { user: INITIAL_ADMIN, aliases: [INITIAL_ADMIN.username, INITIAL_ADMIN.memberId, INITIAL_ADMIN.referralCode, INITIAL_ADMIN.userId, 'questraworld'] }
+    ];
+    for (const entry of builtIns) {
+      if (entry.aliases.some(alias => alias && String(alias).toLowerCase() === lower)) {
+        return { username: entry.user.username, fullName: entry.user.fullName };
+      }
+    }
+
+    // Locally registered accounts.
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key || !key.startsWith('qw_registered_account_')) continue;
+      try {
+        const parsed = JSON.parse(localStorage.getItem(key) || '{}');
+        const u = parsed?.user || {};
+        const username = String(u.username || key.slice('qw_registered_account_'.length));
+        if (username.toLowerCase() === lower) return { username, fullName: String(u.fullName || username) };
+        const aliases = [u.userId, u.memberId, u.referralCode]
+          .filter(Boolean)
+          .map((value: unknown) => String(value).toLowerCase());
+        if (aliases.includes(lower)) return { username, fullName: String(u.fullName || username) };
+      } catch {
+        // ignore malformed entries
+      }
+    }
+
+    // Admin CRM registry (covers investor profiles that were created by admin).
+    const investor = this.getAdminInvestors().find(
+      inv => inv.username.toLowerCase() === lower || inv.memberId.toLowerCase() === lower
+    );
+    if (investor) return { username: investor.username, fullName: investor.fullName };
+
+    return null;
+  }
+
   static register(newUser: Partial<User>, password: string): User {
     const userIdStr = newUser.userId ? String(newUser.userId) : undefined;
+    // Resolve the typed reference (username / USER ID / member ID / referral
+    // code) into the sponsor's real account before the record is created.
+    const sponsor = this.resolveSponsor(newUser.referenceUsername || '');
     const user: User = {
       id: 'usr-' + Date.now(),
       username: newUser.username || 'investor_' + Math.floor(Math.random() * 1000),
@@ -1169,7 +1222,8 @@ export class StorageService {
       bankRoutingNumber: newUser.bankRoutingNumber,
       mfsNumber: newUser.mfsNumber,
       transactionPin: newUser.transactionPin,
-      referenceUsername: newUser.referenceUsername || userIdStr || ''
+      // Only a genuine sponsor reference is stored — never the member's own id.
+      referenceUsername: sponsor?.username || newUser.referenceUsername || ''
     };
 
     localStorage.setItem(
@@ -1188,15 +1242,14 @@ export class StorageService {
       email: user.email,
       password,
       transactionPin: user.transactionPin || '',
-      referenceUsername: user.referenceUsername || user.userId || '',
+      referenceUsername: sponsor?.username || '',
       memberId: user.memberId,
       joinedDate: user.joinedDate
     });
 
-    // If a valid reference username was supplied, record the referral so the
+    // If a valid sponsor reference was supplied, record the referral so the
     // sponsor sees this signup in their referral network.
-    const sponsorUsername = (newUser.referenceUsername || newUser.userId || '').trim();
-    if (sponsorUsername && this.accountExists(sponsorUsername)) {
+    if (sponsor && sponsor.username.toLowerCase() !== user.username.toLowerCase()) {
       try {
         this.addReferralSignup({
           name: user.fullName,
@@ -1205,8 +1258,8 @@ export class StorageService {
           email: user.email,
           phone: user.phone,
           avatar: user.avatar,
-          sponsorUsername,
-          sponsorName: sponsorUsername,
+          sponsorUsername: sponsor.username,
+          sponsorName: sponsor.fullName,
           generation: 1,
           signupDate: user.joinedDate,
           status: 'pending',
@@ -1218,7 +1271,7 @@ export class StorageService {
           rank: 'New Investor',
           location: user.city,
           kycVerified: false,
-          notes: 'Registered via the public signup form with a reference username.'
+          notes: 'Registered via the public signup form with a reference username or referral link.'
         });
       } catch {
         /* non-fatal — the account is still created */

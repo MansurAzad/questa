@@ -33,6 +33,8 @@ interface AuthModalProps {
   onClose: () => void;
   onLoginSuccess: (user: User) => void;
   language: Language;
+  /** Sponsor username carried by a referral link (?ref=…), pre-filled into the register form. */
+  initialReferenceUsername?: string;
 }
 
 const fieldBase =
@@ -42,7 +44,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   isOpen,
   onClose,
   onLoginSuccess,
-  language
+  language,
+  initialReferenceUsername
 }) => {
   const [isLoginTab, setIsLoginTab] = useState(true);
   const [username, setUsername] = useState('user1');
@@ -53,7 +56,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [confirmPassword, setConfirmPassword] = useState('');
   const [transactionPin, setTransactionPin] = useState('');
   const [confirmTransactionPin, setConfirmTransactionPin] = useState('');
-  const [referenceUsername, setReferenceUsername] = useState('');
+  const [referenceUsername, setReferenceUsername] = useState(initialReferenceUsername || '');
   const [userId, setUserId] = useState<string>(() => {
     const last = localStorage.getItem('qw_last_user_id');
     const next = last ? parseInt(last, 10) + 1 : 6120;
@@ -183,7 +186,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           phone,
           email,
           transactionPin,
-          referenceUsername: referenceUsername.trim() || userId || undefined,
+          referenceUsername: referenceUsername.trim() || undefined,
           userId: userId || undefined
         },
         password
