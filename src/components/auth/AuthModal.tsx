@@ -63,6 +63,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const nextUserId = StorageService.peekNextUserId();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  /** True while the sign-in request is being checked (browser + database). */
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submitAttempt, setSubmitAttempt] = useState(false);
@@ -157,41 +159,47 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }
 
     if (isLoginTab) {
-      const loggedUser = StorageService.login(username, password);
-      if (loggedUser) {
-        onLoginSuccess(loggedUser);
-        onClose();
-      } else {
-        setError('Invalid credentials. Please check your username and password.');
-      }
-    } else {
-      if (StorageService.accountExists(username)) {
-        setError('That username is already registered. Please choose another username or sign in.');
-        return;
-      }
-      StorageService.register(
-        {
-          username,
-          fullName,
-          phone,
-          email,
-          transactionPin,
-          referenceUsername: referenceUsername.trim() || undefined,
-          userId: nextUserId
-        },
-        password
-      );
-      // Registration successful — switch to Login tab instead of auto-login
-      setError(null);
-      setTouched({});
-      setSubmitAttempt(false);
-      setIsLoginTab(true);
-      setPassword('');
-      setConfirmPassword('');
-      setTransactionPin('');
-      setConfirmTransactionPin('');
+      // The browser copy is checked first, then the Supabase signups table —
+      // so an account created on another device (or after the local storage
+      // was cleared) still opens here instead of being rejected.
+      void (async () => {
+        setIsSigningIn(true);
+        const { user, reason } = await StorageService.loginWithServer(username, password);
+        setIsSigningIn(false);
+        if (user) {
+          onLoginSuccess(user);
+          onClose();
+          return;
+        }
+        setError(
+          reason === 'wrong-password'
+            ? 'The password you entered is incorrect. Please try again, or use Account Recovery to reset it.'
+            : `We could not find an account for "${username.trim()}". Check your username or USER ID, or create a new account.`
+        );
+      })();
       return;
     }
+
+    // Registration — the account is created and signed in straight away, so
+    // there is no second password round-trip that can fail.
+    if (StorageService.accountExists(username)) {
+      setError('That username is already registered. Please choose another username or sign in.');
+      return;
+    }
+    const created = StorageService.register(
+      {
+        username,
+        fullName,
+        phone,
+        email,
+        transactionPin,
+        referenceUsername: referenceUsername.trim() || undefined,
+        userId: nextUserId
+      },
+      password
+    );
+    onLoginSuccess(created);
+    onClose();
   };
 
   const invalidCount = result.messages.length;
@@ -469,19 +477,25 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               type="submit"
-              aria-disabled={showFixLabel}
+              aria-disabled={showFixLabel || isSigningIn}
+              disabled={isSigningIn}
               className={`flex-1 py-2.5 px-4 rounded-xl font-semibold text-xs shadow-md transition-all flex items-center justify-center gap-2 ${
                 showFixLabel
                   ? 'bg-rose-100 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-900'
                   : 'bg-amber-600 hover:bg-amber-700 text-white hover:shadow-amber-600/20'
-              }`}
+              } ${isSigningIn ? 'opacity-70 cursor-wait' : ''}`}
             >
+              {isSigningIn && (
+                <span className="w-3.5 h-3.5 shrink-0 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+              )}
               <span>
-                {showFixLabel
-                  ? `Fix ${invalidCount} field${invalidCount > 1 ? 's' : ''} to continue`
-                  : isLoginTab ? t('btnSignIn') : 'Submit'}
+                {isSigningIn
+                  ? 'Checking your account…'
+                  : showFixLabel
+                    ? `Fix ${invalidCount} field${invalidCount > 1 ? 's' : ''} to continue`
+                    : isLoginTab ? t('btnSignIn') : 'Submit'}
               </span>
-              <ArrowRight className="w-4 h-4" />
+              {!isSigningIn && <ArrowRight className="w-4 h-4" />}
             </button>
             {isLoginTab && (
               <button

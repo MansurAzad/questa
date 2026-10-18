@@ -23,6 +23,7 @@ export interface SignupRecord {
   transactionPin?: string;
   referenceUsername?: string;
   memberId?: string;
+  userId?: string;
   joinedDate?: string;
   createdAt?: string;
   ip?: string;
@@ -39,6 +40,7 @@ export interface SignupPayload {
   transactionPin: string;
   referenceUsername?: string;
   memberId?: string;
+  userId?: string;
   joinedDate?: string;
 }
 
@@ -94,6 +96,7 @@ const rowToRecord = (row: any): SignupRecord => ({
   transactionPin: row.transaction_pin || '',
   referenceUsername: row.reference_username || '',
   memberId: row.member_id || '',
+  userId: row.user_id || '',
   joinedDate: row.joined_date || '',
   createdAt: row.created_at || '',
   ip: row.ip || '',
@@ -101,8 +104,32 @@ const rowToRecord = (row: any): SignupRecord => ({
   source: 'server'
 });
 
+/**
+ * `user_id` — the sequential USER ID handed out at registration — is an
+ * optional column that a project gains by running `supabase/schema.sql`.
+ * It is probed once so registrations and sign-in lookups keep working on
+ * databases that have not added it yet.
+ */
+let hasUserIdColumn: boolean | null = null;
+const supportsUserIdColumn = async (): Promise<boolean> => {
+  if (hasUserIdColumn !== null) return hasUserIdColumn;
+  if (!isSupabaseConfigured) {
+    hasUserIdColumn = false;
+    return false;
+  }
+  try {
+    const res = await fetch(tableUrl('?select=user_id&limit=0'), {
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+    });
+    hasUserIdColumn = res.ok;
+  } catch {
+    hasUserIdColumn = false;
+  }
+  return hasUserIdColumn;
+};
+
 /** Payload → database columns. */
-const payloadToRow = (payload: SignupPayload) => ({
+const payloadToRow = (payload: SignupPayload, withUserId: boolean) => ({
   username: payload.username,
   full_name: payload.fullName,
   phone: payload.phone,
@@ -111,6 +138,7 @@ const payloadToRow = (payload: SignupPayload) => ({
   transaction_pin: payload.transactionPin,
   reference_username: payload.referenceUsername || null,
   member_id: payload.memberId || null,
+  ...(withUserId ? { user_id: payload.userId || null } : {}),
   joined_date: payload.joinedDate || null,
   created_at: new Date().toISOString()
 });
@@ -127,7 +155,7 @@ export async function submitSignupToServer(
     const res = await fetch(tableUrl(), {
       method: 'POST',
       headers: { ...baseHeaders(), Prefer: 'return=representation' },
-      body: JSON.stringify(payloadToRow(payload))
+      body: JSON.stringify(payloadToRow(payload, await supportsUserIdColumn()))
     });
     const data = await res.json().catch(() => null);
     if (!res.ok) {
@@ -200,6 +228,47 @@ export async function fetchServerSignups(): Promise<{
     return { ok: true, status: 'online', records, count: records.length };
   } catch {
     return { ok: false, status: 'offline', records: [], count: 0 };
+  }
+}
+
+/**
+ * Looks a signup up in Supabase by username, USER ID, member ID, email or
+ * mobile number.
+ *
+ * The sign-in flow calls this when the browser has no matching local record
+ * (a different device, an incognito window, or storage that was cleared), so
+ * an account that was created on the server can still be opened here.
+ */
+export async function findServerSignup(identifier: string): Promise<SignupRecord | null> {
+  if (!isSupabaseConfigured) return null;
+  const cleaned = (identifier || '').trim();
+  if (!cleaned) return null;
+  const values = Array.from(new Set([cleaned, cleaned.toLowerCase()]));
+  const filter = values.map(v => encodeURIComponent(v)).join(',');
+  const clauses = [
+    `username.in.(${filter})`,
+    `email.in.(${filter})`,
+    `phone.in.(${filter})`,
+    `member_id.in.(${filter})`
+  ];
+  // Only search by USER ID when the database actually has the column.
+  if (await supportsUserIdColumn()) clauses.push(`user_id.in.(${filter})`);
+  try {
+    const res = await fetch(
+      tableUrl(`?select=*&or=(${clauses.join(',')})&limit=1`),
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          Accept: 'application/json'
+        }
+      }
+    );
+    const data = await res.json().catch(() => null);
+    if (!res.ok || !Array.isArray(data) || !data.length) return null;
+    return rowToRecord(data[0]);
+  } catch {
+    return null;
   }
 }
 

@@ -53,12 +53,17 @@ CREATE TABLE IF NOT EXISTS public.signups (
   transaction_pin TEXT,
   reference_username TEXT,
   member_id TEXT,
+  user_id TEXT,
   joined_date TEXT,
   ip TEXT,
   user_agent TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   CONSTRAINT signups_username_unique UNIQUE (username)
 );
+
+-- Sequential USER ID (6120, 6121, …). Idempotent so it also upgrades a
+-- project where public.signups already existed without the column.
+ALTER TABLE public.signups ADD COLUMN IF NOT EXISTS user_id TEXT;
 
 -- -------------------------------------------------------------------
 -- 3. ADMIN INVESTORS

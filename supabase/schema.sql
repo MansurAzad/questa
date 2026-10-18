@@ -25,6 +25,11 @@ create table if not exists public.signups (
 create index if not exists signups_created_at_idx on public.signups (created_at desc);
 create index if not exists signups_email_idx on public.signups (email);
 
+-- Sequential USER ID handed out at registration (6120, 6121, …). Kept in the
+-- database so an investor can sign in from any device with the number they
+-- were given, even when the browser no longer has their local account.
+alter table public.signups add column if not exists user_id text;
+
 -- -----------------------------------------------------------------------------
 -- Row Level Security: the public site may register (insert) and the admin
 -- console may read/delete. No anon update. Tighten further by replacing these

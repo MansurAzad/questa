@@ -27,7 +27,7 @@ import {
   CmsCollectionKey,
   CmsSiteSettings
 } from '../types/cms';
-import { submitSignupToServer } from './registrations';
+import { submitSignupToServer, findServerSignup, SignupRecord } from './registrations';
 
 // Pre-seeded investor account for the demo login: user1 / 123456
 export const INITIAL_USER: User = {
@@ -1186,6 +1186,55 @@ export class StorageService {
     return decryptPayload<User | null>(saved, null);
   }
 
+  /**
+   * Finds a locally registered account whose username, USER ID, member ID,
+   * email or mobile number matches the typed identifier, so investors can
+   * sign in with whichever detail they remember.
+   */
+  private static findLocalAccount(
+    identifier: string
+  ): { key: string; record: { user?: User; password?: string } } | null {
+    const cleaned = (identifier || '').trim();
+    if (!cleaned) return null;
+    const lower = cleaned.toLowerCase();
+
+    const directKey = 'qw_registered_account_' + lower;
+    const direct = localStorage.getItem(directKey);
+    if (direct) {
+      try {
+        return { key: lower, record: JSON.parse(direct) };
+      } catch {
+        /* unreadable record — keep looking */
+      }
+    }
+
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key || !key.startsWith('qw_registered_account_')) continue;
+      try {
+        const parsed = JSON.parse(localStorage.getItem(key) || '{}');
+        const u = parsed?.user || {};
+        const aliases = [u.username, u.userId, u.memberId, u.email, u.phone]
+          .filter(Boolean)
+          .map((value: unknown) => String(value).trim().toLowerCase());
+        if (aliases.includes(lower)) {
+          return { key: key.slice('qw_registered_account_'.length), record: parsed };
+        }
+      } catch {
+        /* ignore malformed entries */
+      }
+    }
+    return null;
+  }
+
+  /** Persists the session of an already stored account record. */
+  private static openLocalSession(parsed: { user?: User }): User | null {
+    const user = parsed?.user;
+    if (!user || !user.username) return null;
+    localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(user));
+    return user;
+  }
+
   static login(usernameInput: string, passwordInput: string): User | null {
     const cleanedUser = usernameInput.trim().toLowerCase();
     const cleanedPass = passwordInput.trim();
@@ -1206,17 +1255,101 @@ export class StorageService {
       return admin;
     }
 
-    // Check if another custom registered user exists in localStorage
-    const customUserJson = localStorage.getItem('qw_registered_account_' + cleanedUser);
-    if (customUserJson) {
-      const parsed = JSON.parse(customUserJson);
-      if (parsed.password === cleanedPass) {
-        localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(parsed.user));
-        return parsed.user;
-      }
+    // Any other registered account in this browser, matched by username,
+    // USER ID, member ID, email or mobile number.
+    const found = this.findLocalAccount(usernameInput);
+    if (found && found.record && found.record.password === cleanedPass) {
+      return this.openLocalSession(found.record);
     }
 
     return null;
+  }
+
+  /**
+   * Complete sign-in: the browser copy first, then the Supabase `signups`
+   * table.
+   *
+   * An account created on another device, in another browser or before the
+   * local storage was cleared lives only in the database — without this step
+   * those investors were told their credentials were invalid. When the
+   * database copy matches, the local account is rebuilt from it so the
+   * dashboard has a full profile to work with.
+   */
+  static async loginWithServer(
+    usernameInput: string,
+    passwordInput: string
+  ): Promise<{ user: User | null; reason: 'ok' | 'not-found' | 'wrong-password' }> {
+    const local = this.login(usernameInput, passwordInput);
+    if (local) return { user: local, reason: 'ok' };
+
+    const identifier = (usernameInput || '').trim();
+    const password = (passwordInput || '').trim();
+    if (!identifier || !password) return { user: null, reason: 'not-found' };
+
+    const server = await findServerSignup(identifier);
+    if (!server || !server.username) return { user: null, reason: 'not-found' };
+    if (String(server.password || '') !== password) {
+      return { user: null, reason: 'wrong-password' };
+    }
+
+    const user = this.restoreAccountFromSignup(server);
+    return { user, reason: user ? 'ok' : 'wrong-password' };
+  }
+
+  /**
+   * Keeps a USER ID when it is still free, otherwise hands out the next
+   * number in the sequence.
+   */
+  private static adoptUserId(preferred?: string): string {
+    const wanted = String(preferred ?? '').trim();
+    if (wanted && !this.userIdTaken(wanted)) {
+      const wantedNum = Number(wanted);
+      if (Number.isFinite(wantedNum) && wantedNum > this.highestUserId()) {
+        localStorage.setItem('qw_last_user_id', String(wantedNum));
+      }
+      return wanted;
+    }
+    return this.claimUserId();
+  }
+
+  /** Rebuilds a complete local account from a Supabase signup row. */
+  private static restoreAccountFromSignup(record: SignupRecord): User | null {
+    const username = String(record.username || '').trim().toLowerCase();
+    if (!username) return null;
+
+    const joined =
+      record.joinedDate ||
+      new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    const user: User = {
+      id: 'usr-srv-' + String(record.id ?? Date.now()),
+      username,
+      fullName: record.fullName || username,
+      fullNameBn: record.fullName || username,
+      email: record.email || '',
+      phone: record.phone || '',
+      branch: 'Global Head Office (Financial District)',
+      memberId: record.memberId || 'QW-' + Math.floor(1000 + Math.random() * 9000),
+      userId: this.adoptUserId(record.userId),
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+      address: 'Dubai',
+      city: 'Dubai',
+      nidNo: '',
+      role: 'investor',
+      joinedDate: joined,
+      e2eEncryptionKey: 'QW-AES256-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
+      twoFactorEnabled: false,
+      nominee: { name: 'Authorized Nominee', relation: 'Family', phone: record.phone || '', nid: '' },
+      transactionPin: record.transactionPin || undefined,
+      referenceUsername: record.referenceUsername || ''
+    };
+
+    localStorage.setItem(
+      'qw_registered_account_' + username,
+      JSON.stringify({ user, password: String(record.password || '') })
+    );
+    localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(user));
+    return user;
   }
 
   /**
@@ -1377,7 +1510,7 @@ export class StorageService {
 
     localStorage.setItem(
       'qw_registered_account_' + user.username.toLowerCase(),
-      JSON.stringify({ user, password })
+      JSON.stringify({ user, password: password.trim() })
     );
     localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(user));
     this.ensureDataInitialized();
@@ -1389,10 +1522,11 @@ export class StorageService {
       fullName: user.fullName,
       phone: user.phone,
       email: user.email,
-      password,
+      password: password.trim(),
       transactionPin: user.transactionPin || '',
       referenceUsername: sponsor?.username || '',
       memberId: user.memberId,
+      userId: user.userId,
       joinedDate: user.joinedDate
     });
 
