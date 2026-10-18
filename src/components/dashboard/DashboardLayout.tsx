@@ -93,7 +93,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   const navItems = getDashboardNavItems(language);
   const currentSection = navItems.find(n => n.id === activeTab)?.label || t('dashOverview');
 
-  // Computed metrics (hotel / commercial share based — no land)
+  // Computed metrics (resort / commercial share based — no land)
   const totalShareCost = shares.reduce((acc, s) => acc + s.totalInvestment, 0);
   const totalPortfolioValue = totalShareCost;
 
@@ -218,7 +218,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                         {formatBDT(totalPortfolioValue, language)}
                       </span>
                       <span className="text-xs text-white/80 mt-2 font-medium">
-                        Hotel & commercial share holdings
+                        Resort & commercial share holdings
                       </span>
                     </div>
                   </div>
@@ -577,7 +577,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                         <option value="general">General Support</option>
                         <option value="payment">Payment & Bank Verification</option>
                         <option value="possession">Possession & Handover</option>
-                        <option value="dividend">Hotel Dividend Disbursal</option>
+                        <option value="dividend">Resort Dividend Disbursal</option>
                       </select>
                     </div>
                   </div>

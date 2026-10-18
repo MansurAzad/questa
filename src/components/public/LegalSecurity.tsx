@@ -19,7 +19,7 @@ export const LegalSecurity: React.FC<LegalSecurityProps> = ({ language, cmsTitle
     },
     {
       title: 'National Building Code & Safety Conformance',
-      titleBn: 'National Building Code & Fire Safety Compliant Construction',
+      titleBn: 'National Building Code & Fire Safety Compliant Development',
       desc: 'All Questra World towers are designed strictly adhering to the national building code, fire-safety regulations and approved architectural plans.',
       descBn: 'All Questra World towers strictly follow the national building code, fire-safety regulations and approved architectural plans.'
     },
@@ -32,8 +32,8 @@ export const LegalSecurity: React.FC<LegalSecurityProps> = ({ language, cmsTitle
     {
       title: 'Bank & Islamic Finance Approved',
       titleBn: 'Bank Loan & Shariah-Compliant Investment',
-      desc: 'All projects are pre-vetted by leading banks for seamless construction finance and shariah-compliant fractional profit-sharing.',
-      descBn: 'All projects are pre-vetted by leading banks for seamless construction finance and shariah-compliant fractional profit-sharing.'
+      desc: 'All projects are pre-vetted by leading banks for seamless development finance and shariah-compliant fractional profit-sharing.',
+      descBn: 'All projects are pre-vetted by leading banks for seamless development finance and shariah-compliant fractional profit-sharing.'
     }
   ];
 
@@ -85,7 +85,7 @@ export const LegalSecurity: React.FC<LegalSecurityProps> = ({ language, cmsTitle
             </div>
           </div>
           <div className="text-xs font-mono bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 whitespace-nowrap">
-            Hotline: +44 181 068 5888</div>
+            Hotline: +971 4 512 8800</div>
         </div>
 
       </div>

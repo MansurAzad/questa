@@ -56,8 +56,8 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
     },
     {
       id: 'not-01',
-      title: 'Questra Royal Bay Hotel & Suites - Suite Handover & Ownership Registration Schedule',
-      titleBn: 'Questra Royal Bay Hotel & Suites - Suite Handover & Ownership Registration Schedule',
+      title: 'Questra Royal Bay Suites & Residences - Suite Handover & Ownership Registration Schedule',
+      titleBn: 'Questra Royal Bay Suites & Residences - Suite Handover & Ownership Registration Schedule',
       category: 'handover',
       categoryLabel: 'Possession & Handover',
       categoryLabelBn: 'Possession & Handover',
@@ -70,25 +70,25 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
     },
     {
       id: 'not-02',
-      title: 'Questra Royal Bay Hotel & Suites - Monthly Dividend Distribution Notification',
-      titleBn: 'Questra Royal Bay Hotel & Suites - Monthly Dividend Distribution Notification',
+      title: 'Questra Royal Bay Suites & Residences - Monthly Dividend Distribution Notification',
+      titleBn: 'Questra Royal Bay Suites & Residences - Monthly Dividend Distribution Notification',
       category: 'important',
       categoryLabel: 'Dividend Distribution',
       categoryLabelBn: 'Dividend Distribution',
       date: '01 October 2026',
       urgent: false,
       summary:
-        'Monthly profit sharing and Q3 performance dividends for Questra Royal Bay Hotel & Suites share owners have been directly transferred to respective bank accounts. Investors can view detailed statement vouchers in the portal.',
+        'Monthly profit sharing and Q3 performance dividends for Questra Royal Bay Suites & Residences share owners have been directly transferred to respective bank accounts. Investors can view detailed statement vouchers in the portal.',
       summaryBn:
         'Questra World notification'
     },
     {
       id: 'not-03',
-      title: 'Free Weekend Site Visit to Questra Royal Bay & Commercial Center',
-      titleBn: 'Free Weekend Site Visit to Questra Royal Bay & Commercial Center',
+      title: 'Free Weekend Project Visit to Questra Royal Bay & Commercial Center',
+      titleBn: 'Free Weekend Project Visit to Questra Royal Bay & Commercial Center',
       category: 'event',
-      categoryLabel: 'Site Tour',
-      categoryLabelBn: 'Site Tour',
+      categoryLabel: 'Project Tour',
+      categoryLabelBn: 'Project Tour',
       date: '25 September 2026',
       urgent: false,
       summary:
@@ -146,7 +146,7 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-400">
               {cmsSubtitle || (isBn
-                ? 'Latest official updates on share transfers, land-registry, dividend distribution, and site visits.।'
+                ? 'Latest official updates on share transfers, land-registry, dividend distribution, and project visits.।'
                 : 'Stay updated with official company notices, AGM circulars, dividend distributions, and handover alerts.')}
             </p>
           </div>
@@ -254,8 +254,8 @@ export const NoticeBoard: React.FC<NoticeBoardProps> = ({ language, cmsTitle, cm
                 <AlertCircle className="w-5 h-5 shrink-0 text-amber-600" />
                 <span>
                   {isBn
-                    ? 'For any queries, contact our head office hotline directly at +44 181 068 5888.'
-                    : 'For official clarifications, please call our Head Office Help Desk at +44 181 068 5888.'}
+                    ? 'For any queries, contact our head office hotline directly at +971 4 512 8800.'
+                    : 'For official clarifications, please call our Head Office Help Desk at +971 4 512 8800.'}
                 </span>
               </div>
 

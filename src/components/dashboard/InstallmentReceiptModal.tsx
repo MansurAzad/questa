@@ -85,7 +85,7 @@ export const InstallmentReceiptModal: React.FC<InstallmentReceiptModalProps> = (
                   Global Head Office: House #12, Road #03, International Business District, Dubai
                 </p>
                 <p className="text-[10px] text-slate-500 font-mono">
-                  Hotline: +44 181 068 5888 · Web: www.questraworld.com
+                  Hotline: +971 4 512 8800 · Web: www.questraworld.com
                 </p>
               </div>
             </div>

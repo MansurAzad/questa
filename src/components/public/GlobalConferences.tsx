@@ -47,7 +47,7 @@ const EVENTS: ConferenceEvent[] = [
     dates: '05 – 07 December 2025',
     attendance: '6,200+ visitors',
     detail:
-      'The largest Questra World stand to date — live deed verification desk, site-tour bookings and instant installment planning.'
+      'The largest Questra World stand to date — live deed verification desk, project-tour bookings and instant installment planning.'
   },
   {
     title: 'London Diaspora Investment Expo',
@@ -74,7 +74,7 @@ const EVENTS: ConferenceEvent[] = [
     dates: '18 – 19 April 2025',
     attendance: '1,100+ investors met',
     detail:
-      'Regional convention focused on hotel suite share yields and hands-on walkthroughs of completed towers.'
+      'Regional convention focused on suite share yields and hands-on walkthroughs of completed towers.'
   }
 ];
 
@@ -82,7 +82,7 @@ const HIGHLIGHTS = [
   { icon: Users, value: '13,750+', label: 'Investors met in 2025' },
   { icon: Globe2, value: '11', label: 'Countries hosted' },
   { icon: Mic, value: '24', label: 'Keynote & panel sessions' },
-  { icon: Handshake, value: '680+', label: 'On-site share agreements' }
+  { icon: Handshake, value: '680+', label: 'On-location share agreements' }
 ];
 
 /**

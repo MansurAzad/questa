@@ -7,7 +7,6 @@ import {
   ShieldCheck,
   TrendingUp,
   SlidersHorizontal,
-  Hotel,
   Home
 } from 'lucide-react';
 import { Language, ProjectInfo } from '../../types';

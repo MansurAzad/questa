@@ -123,7 +123,7 @@ export const DepositSlipUploadView: React.FC<DepositSlipUploadViewProps> = ({
       memberName: user.fullName,
       memberId: user.memberId,
       bookingId: 'share-royal-bay-204',
-      projectName: 'Questra Royal Bay (Hotel & Suites)',
+      projectName: 'Questra Royal Bay (Suites & Residences)',
       bankName,
       branchName: paymentMode,
       amount: inst.amount,

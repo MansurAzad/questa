@@ -8,7 +8,6 @@ import {
   ChevronRight,
   ShieldCheck,
   Building2,
-  Hotel,
   Layers,
   Sparkles,
   ArrowRight
@@ -333,7 +332,7 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({
                       {activeMilestone.status === 'completed'
                         ? ( 'Verified Completed')
                         : activeMilestone.status === 'in_progress'
-                        ? ( 'Active On-Site Phase')
+                        ? ( 'Active Development Phase')
                         : ( 'Scheduled Phase')}
                     </span>
                   </div>

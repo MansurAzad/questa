@@ -29,21 +29,21 @@ import {
 } from '../types/cms';
 import { submitSignupToServer } from './registrations';
 
-// Pre-seeded user data matching user's requested login: user1 / 123456
+// Pre-seeded investor account for the demo login: user1 / 123456
 export const INITIAL_USER: User = {
   id: 'usr-global-001',
   username: 'user1',
   fullName: 'Alex Johnson',
   fullNameBn: 'Alex Johnson',
   referralCode: 'QW-1001',
-  email: 'user1@questraworld.com',
-  phone: '+1 415 555 0101',
-  branch: 'Global Headquarters',
+  email: 'alex.johnson@questraworld.com',
+  phone: '+971 50 236 8842',
+  branch: 'Global Headquarters (Financial District)',
   memberId: 'QW-GLOBAL-1001',
   avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-  address: 'Global Business District, International Center',
-  city: 'International',
-  nidNo: '0000 0000 0000',
+  address: 'Marina Plaza, Dubai Marina',
+  city: 'Dubai',
+  nidNo: '1984 1592 7831 44',
   role: 'investor',
   joinedDate: '15 March 2024',
   e2eEncryptionKey: 'QW-AES256-GCM-global-001',
@@ -51,14 +51,14 @@ export const INITIAL_USER: User = {
   nominee: {
     name: 'Mrs. Jordan Johnson',
     relation: 'Spouse',
-    phone: '+61 181 974 5240',
-    nid: '1988 2419 8832 91'
+    phone: '+971 50 445 1907',
+    nid: '1986 2174 9031 52'
   },
   bankName: 'HSBC',
-  bankBranch: 'Central Commercial Branch, Singapore',
+  bankBranch: 'Emaar Square Branch, Dubai',
   bankAccount: '1102948192001',
   bankRoutingNumber: '225150921',
-  mfsNumber: '+14155550199'
+  mfsNumber: '+971502368899'
 };
 
 export const INITIAL_ADMIN: User = {
@@ -67,11 +67,11 @@ export const INITIAL_ADMIN: User = {
   fullName: 'Richard Hoffman (Super Admin)',
   fullNameBn: 'Richard Hoffman (Super Admin)',
   email: 'admin@questraworld.com',
-  phone: '+49 181 900 1122',
+  phone: '+971 4 512 8800',
   branch: 'Global Head Office (Financial District)',
   memberId: 'QW-HQ-001',
   avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80',
-  address: 'Questra World Tower, International Business District',
+  address: 'Questra World Tower, Business Bay',
   city: 'Dubai',
   nidNo: '1975 1209 8832 01',
   role: 'admin',
@@ -81,7 +81,7 @@ export const INITIAL_ADMIN: User = {
   nominee: {
     name: 'Henry M. Whitfield',
     relation: 'Managing Director Partner',
-    phone: '+1 181 900 1123',
+    phone: '+971 50 447 1123',
     nid: '1978 4429 8812 02'
   }
 };
@@ -89,8 +89,8 @@ export const INITIAL_ADMIN: User = {
 export const INITIAL_SHARES: ShareInvestment[] = [
   {
     id: 'share-royal-bay-204',
-    projectName: 'Questra Royal Bay Hotel & Suites',
-    projectNameBn: 'Questra Royal Bay Hotel & Suites',
+    projectName: 'Questra Royal Bay Suites & Residences',
+    projectNameBn: 'Questra Royal Bay Suites & Residences',
     shareCategory: 'luxury_suite',
     shareUnits: 2,
     shareNumbers: ['RB-204', 'RB-205'],
@@ -171,8 +171,8 @@ export const INITIAL_TRANSACTIONS: TransactionRecord[] = [
   {
     id: 'tx-101',
     date: '2026-10-01',
-    title: 'Hotel Suite Monthly Dividend Distribution (September)',
-    titleBn: 'Hotel Suite Monthly Dividend Distribution (September)',
+    title: 'Suite Share Monthly Dividend Distribution (September)',
+    titleBn: 'Suite Share Monthly Dividend Distribution (September)',
     category: 'dividend',
     amount: 18500,
     type: 'credit',
@@ -195,8 +195,8 @@ export const INITIAL_TRANSACTIONS: TransactionRecord[] = [
   {
     id: 'tx-103',
     date: '2026-09-01',
-    title: 'Hotel Suite Monthly Dividend Distribution (August)',
-    titleBn: 'Hotel Suite Monthly Dividend Distribution (August)',
+    title: 'Suite Share Monthly Dividend Distribution (August)',
+    titleBn: 'Suite Share Monthly Dividend Distribution (August)',
     category: 'dividend',
     amount: 18500,
     type: 'credit',
@@ -255,8 +255,8 @@ export const INITIAL_NOTIFICATIONS: AppNotification[] = [
   },
   {
     id: 'notif-3',
-    title: 'Questra Royal Bay Construction Milestone',
-    titleBn: 'Questra Royal Bay Construction Milestone',
+    title: 'Questra Royal Bay Development Milestone',
+    titleBn: 'Questra Royal Bay Development Milestone',
     message: 'Beachfront RCC superstructure and facade glazing work progressing on schedule. Your suite floor is now structurally complete.',
     messageBn: 'Beachfront RCC superstructure and facade glazing work progressing on schedule. Your suite floor is now structurally complete.',
     date: '2026-09-28',
@@ -296,8 +296,8 @@ export const INITIAL_TICKETS: SupportTicket[] = [
 export const PUBLIC_PROJECTS: ProjectInfo[] = [
   {
     id: 'questra-royal-bay',
-    name: 'Questra Royal Bay Luxury Hotel & Suites',
-    nameBn: 'Questra Royal Bay Luxury Hotel & Suites',
+    name: 'Questra Royal Bay Luxury Suites & Residences',
+    nameBn: 'Questra Royal Bay Luxury Suites & Residences',
     tagline: '5-Star Hospitality Fractional Ownership & Monthly Profit Sharing',
     taglineBn: '5-Star Hospitality Fractional Ownership & Monthly Profit Sharing',
     category: 'hospitality',
@@ -312,14 +312,14 @@ export const PUBLIC_PROJECTS: ProjectInfo[] = [
       'Monthly Auto-Transfer to Any Global Bank Account',
       'Sub-Registry Fractional Ownership Deed Provided',
       '7 Days Free Annual Stay for Family with VIP Access',
-      'Professional International Hotel Management Operator'
+      'Professional International Resort Management Operator'
     ],
     featuresBn: [
       '18.5% to 22% Projected Annual Dividend Payout',
       'Monthly Auto-Transfer to Any Global Bank Account',
       'Sub-Registry Fractional Ownership Deed Provided',
       '7 Days Free Annual Stay for Family with VIP Access',
-      'Professional International Hotel Management Operator'
+      'Professional International Resort Management Operator'
     ],
     rajukApproved: true,
     status: 'under_development',
@@ -489,14 +489,14 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     username: 'user1',
     fullName: 'Alex Johnson',
     fullNameBn: 'Alex Johnson',
-    phone: '+1 181 974 5239',
-    email: 'ziabul.ctg@gmail.com',
+    phone: '+971 50 236 8842',
+    email: 'alex.johnson@questraworld.com',
     memberId: 'QW-GLOBAL-1001',
-    branch: 'Regional Client Office (Downtown)',
+    branch: 'Global Headquarters (Financial District)',
     rank: 'Gold Senior Associate',
     kycStatus: 'verified',
     nidNo: '1984 1592 7831 44',
-    totalInvested: 4700000,
+    totalInvested: 1200000,
     commissionBalance: 25000,
     dividendBalance: 74000,
     status: 'active',
@@ -509,10 +509,10 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     username: 'andrew_h',
     fullName: 'Andrew Hughes',
     fullNameBn: 'Andrew Hughes',
-    phone: '+61 181 933 4455',
-    email: 'anwar.ctg@yahoo.com',
+    phone: '+61 412 883 4455',
+    email: 'andrew.hughes@outlook.com',
     memberId: 'QW-INT-9021',
-    branch: 'Regional Client Office',
+    branch: 'Sydney Regional Office',
     rank: 'Associate Member',
     kycStatus: 'verified',
     nidNo: '1979 4819 0012 33',
@@ -529,10 +529,10 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     username: 'thomas_eng',
     fullName: 'Engr. Thomas Anderson',
     fullNameBn: 'Engr. Thomas Anderson',
-    phone: '+65 171 122 3344',
-    email: 'tanvir.ahmed@globaltech.io',
+    phone: '+44 161 496 1180',
+    email: 'thomas.anderson@andersonengineering.co.uk',
     memberId: 'QW-GLB-5512',
-    branch: 'Principal Branch (City Center)',
+    branch: 'Principal Branch (Manchester)',
     rank: 'Silver Associate',
     kycStatus: 'verified',
     nidNo: '1986 2819 0451 90',
@@ -549,10 +549,10 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     username: 'fiona_b',
     fullName: 'Dr. Fiona Bennett',
     fullNameBn: 'Dr. Fiona Bennett',
-    phone: '+1 171 299 8877',
-    email: 'farhana.dr@medschool.io',
+    phone: '+65 8761 2244',
+    email: 'fiona.bennett@protonmail.com',
     memberId: 'QW-GLB-6623',
-    branch: 'Global Head Office (City Center)',
+    branch: 'Global Head Office (Singapore)',
     rank: 'Associate Member',
     kycStatus: 'verified',
     nidNo: '1991 3329 8812 40',
@@ -561,18 +561,18 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     dividendBalance: 45000,
     status: 'active',
     joinedDate: '28 September 2026',
-    nomineeName: 'Kabir Yasmin',
-    nomineeRelation: 'Brother'
+    nomineeName: 'Yasmin Kabir',
+    nomineeRelation: 'Sister'
   },
   {
     id: 'usr-syl-104',
     username: 'kevin_m',
     fullName: 'Kevin Mitchell',
     fullNameBn: 'Kevin Mitchell',
-    phone: '+1 161 144 5566',
-    email: 'mashiur.kazi@gmail.com',
+    phone: '+44 121 496 0566',
+    email: 'kevin.mitchell@gmail.com',
     memberId: 'QW-GLB-7789',
-    branch: 'Manchester Regional Branch',
+    branch: 'Birmingham Regional Office',
     rank: 'Associate Member',
     kycStatus: 'pending',
     nidNo: '1982 7712 9940 11',
@@ -583,6 +583,46 @@ export const INITIAL_ADMIN_INVESTORS: AdminInvestor[] = [
     joinedDate: '10 October 2026',
     nomineeName: 'Nancy Mitchell',
     nomineeRelation: 'Spouse'
+  },
+  {
+    id: 'usr-dhk-105',
+    username: 'samuel_l',
+    fullName: 'Samuel Lewis',
+    fullNameBn: 'Samuel Lewis',
+    phone: '+65 8127 4490',
+    email: 'samuel.lewis@gmail.com',
+    memberId: 'QW-GLB-8845',
+    branch: 'Regional Client Office (Downtown)',
+    rank: 'Associate Member',
+    kycStatus: 'verified',
+    nidNo: '1988 4471 2209 63',
+    totalInvested: 1200000,
+    commissionBalance: 60000,
+    dividendBalance: 18500,
+    status: 'active',
+    joinedDate: '14 October 2026',
+    nomineeName: 'Grace Lewis',
+    nomineeRelation: 'Spouse'
+  },
+  {
+    id: 'usr-dhk-106',
+    username: 'robert_h',
+    fullName: 'Robert Hughes',
+    fullNameBn: 'Robert Hughes',
+    phone: '+44 7911 245 118',
+    email: 'robert.hughes@gmail.com',
+    memberId: 'QW-GLB-9031',
+    branch: 'London Regional Office',
+    rank: 'Member (In Review)',
+    kycStatus: 'pending',
+    nidNo: '1990 5527 7104 18',
+    totalInvested: 2200000,
+    commissionBalance: 0,
+    dividendBalance: 0,
+    status: 'active',
+    joinedDate: '22 October 2026',
+    nomineeName: 'Helen Hughes',
+    nomineeRelation: 'Mother'
   }
 ];
 
@@ -594,9 +634,9 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
     memberName: 'Alex Johnson',
     memberId: 'QW-GLOBAL-1001',
     bookingId: 'share-royal-bay-204',
-    projectName: 'Questra Royal Bay (Hotel & Suites)',
+    projectName: 'Questra Royal Bay (Suites & Residences)',
     bankName: 'HSBC',
-    branchName: 'Central Commercial Branch, Singapore',
+    branchName: 'Emaar Square Branch, Dubai',
     amount: 35000,
     depositDate: '2026-09-22',
     transactionId: 'WISE-FT-491028',
@@ -611,10 +651,10 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
     memberUsername: 'andrew_h',
     memberName: 'Andrew Hughes',
     memberId: 'QW-INT-9021',
-    bookingId: 'share-royal-bay-204',
-    projectName: 'Questra Royal Bay (Hotel & Suites)',
+    bookingId: 'share-royal-bay-618',
+    projectName: 'Questra Royal Bay (Suites & Residences)',
     bankName: 'Standard Chartered',
-    branchName: 'Marina Corporate Branch',
+    branchName: 'Barangaroo Corporate Branch, Sydney',
     amount: 35000,
     depositDate: '2026-10-09',
     transactionId: 'IBBL-CHQ-990142',
@@ -625,14 +665,14 @@ export const INITIAL_DEPOSIT_SLIPS: AdminDepositSlip[] = [
   },
   {
     id: 'slip-03',
-    slipNo: 'SLIP-HOTEL-4412',
+    slipNo: 'SLIP-RB-4412',
     memberUsername: 'thomas_eng',
     memberName: 'Engr. Thomas Anderson',
     memberId: 'QW-GLB-5512',
-    bookingId: 'share-royal-bay-204',
-    projectName: "Questra Royal Bay Waterfront",
+    bookingId: 'share-royal-bay-742',
+    projectName: 'Questra Royal Bay Waterfront',
     bankName: 'Standard Chartered',
-    branchName: 'Downtown Branch, Dubai',
+    branchName: 'Spinningfields Branch, Manchester',
     amount: 50000,
     depositDate: '2026-10-08',
     transactionId: 'INTL-WIRE-88310',
@@ -647,25 +687,25 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
   {
     id: 'tour-01',
     clientName: 'Michael Reynolds (accompanied by son)',
-    phone: '+65 171 588 9900',
+    phone: '+65 8127 6688',
     preferredDate: 'Friday, 17 Oct 2026',
     timeSlot: 'Morning (08:30 AM)',
-    projectInterested: 'Questra Royal Bay (Hotel & Suites)',
+    projectInterested: 'Questra Royal Bay (Suites & Residences)',
     pickupLocation: 'Financial District Global Head Office',
     guestsCount: 4,
-    assignedBus: 'AC Microbus #01 (Dubai Metro-Cha 11-8842)',
+    assignedBus: 'AC Microbus #01 (Dubai Plate 11-8842)',
     coordinator: 'Engr. Masum Billah (Assistant General Manager)',
     status: 'confirmed',
     createdAt: '09 Oct 2026'
   },
   {
     id: 'tour-02',
-    clientName: 'Dr. Shahabuddin & Family',
-    phone: '+1 181 922 3344',
+    clientName: 'Dr. Aisha Rahman & Family',
+    phone: '+971 50 774 3388',
     preferredDate: 'Saturday, 18 Oct 2026',
     timeSlot: 'Morning (09:00 AM)',
     projectInterested: 'Questra World Commercial Center - Mirpur',
-    pickupLocation: 'Richmond 27 (Rapa Plaza Point)',
+    pickupLocation: 'Central Branch, Downtown Dubai',
     guestsCount: 3,
     status: 'pending',
     createdAt: '10 Oct 2026'
@@ -673,7 +713,7 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
   {
     id: 'tour-03',
     clientName: 'Fiona Bennett (Expatriate returning)',
-    phone: '+971 191 233 4455',
+    phone: '+65 8761 2244',
     preferredDate: 'Friday, 24 Oct 2026',
     timeSlot: 'Morning (09:30 AM)',
     projectInterested: 'Questra Royal Bay Waterfront (Resort Tour)',
@@ -687,27 +727,30 @@ export const INITIAL_SITE_TOURS: AdminSiteTourBooking[] = [
 export const INITIAL_NOTICES: NoticeItem[] = [
   {
     id: 'ntc-01',
-    title: 'Questra Royal Bay Hotel & Suites — New Share Unit Release & Dividend Schedule Notice',
+    title: 'Questra Royal Bay Suites & Residences — New Share Unit Release & Dividend Schedule Notice',
     category: 'Share Release & Dividend',
-    content: 'All respected shareholders are hereby informed that on 25 October 2026 at 10:00 AM at the Head Office, the new share unit release and monthly dividend distribution schedule for Royal Bay Hotel & Suites will be announced.',
+    content:
+      'All respected shareholders are hereby informed that on 25 October 2026 at 10:00 AM at the Head Office, the new share unit release and monthly dividend distribution schedule for Royal Bay Suites & Residences will be announced.',
     date: '08 October 2026',
     priority: 'high',
     status: 'published'
   },
   {
     id: 'ntc-02',
-    title: 'Questra Royal Bay Hotel Waterfront 3rd Quarterly Dividend Distribution Completed',
+    title: 'Questra Royal Bay Waterfront 3rd Quarterly Dividend Distribution Completed',
     category: 'Dividend Distribution',
-    content: 'The September 2026 dividends for all respected shareholders of the Questra Royal Bay Hotel & Suites project have been successfully credited to their linked bank accounts.',
+    content:
+      'The September 2026 dividends for all respected shareholders of the Questra Royal Bay Suites & Residences project have been successfully credited to their linked bank accounts.',
     date: '01 October 2026',
     priority: 'normal',
     status: 'published'
   },
   {
     id: 'ntc-03',
-    title: 'Friday & Saturday Family Site Visit AC Bus Pickup Schedule',
-    category: 'Site Visit Schedule',
-    content: 'Every Friday and Saturday, air-conditioned microbuses will depart from Financial District and Central for family visits to the Questra Royal Bay Hotel & Suites and Questra World Commercial Center projects.',
+    title: 'Friday & Saturday Family Project Visit AC Bus Pickup Schedule',
+    category: 'Project Visit Schedule',
+    content:
+      'Every Friday and Saturday, air-conditioned microbuses will depart from Financial District and Central for family visits to the Questra Royal Bay Suites & Residences and Questra World Commercial Center projects.',
     date: '26 September 2026',
     priority: 'normal',
     status: 'published'
@@ -808,9 +851,9 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     nameBn: 'Andrew Hughes',
     username: 'andrew_h',
     memberId: 'QW-INT-9021',
-    email: 'anwar.ctg@yahoo.com',
-    phone: '+61 181 933 4455',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    email: 'andrew.hughes@outlook.com',
+    phone: '+61 412 883 4455',
+    avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=150&auto=format&fit=crop&q=80',
     sponsorUsername: 'user1',
     sponsorName: 'Alex Johnson',
     generation: 1,
@@ -823,7 +866,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     commissionRate: 10,
     payoutStatus: 'credited',
     rank: 'Associate Member',
-    location: 'Singapore (Central)',
+    location: 'Sydney, Australia',
     kycVerified: true,
     notes: 'Down payment of $100,000 verified. Monthly installment ongoing.'
   },
@@ -832,9 +875,9 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     name: 'Engr. Thomas Anderson',
     nameBn: 'Engr. Thomas Anderson',
     username: 'thomas_eng',
-    memberId: 'QW-INT-9104',
-    email: 'tanvir.engr@gmail.com',
-    phone: '+61 171 188 9900',
+    memberId: 'QW-GLB-5512',
+    email: 'thomas.anderson@andersonengineering.co.uk',
+    phone: '+44 161 496 1180',
     avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80',
     sponsorUsername: 'user1',
     sponsorName: 'Alex Johnson',
@@ -848,18 +891,18 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     commissionRate: 10,
     payoutStatus: 'credited',
     rank: 'Executive Associate',
-    location: 'Dubai (Marina)',
+    location: 'Manchester, United Kingdom',
     kycVerified: true,
-    notes: 'Hotel suite share booked with one-time full settlement.'
+    notes: 'Suite share booked with one-time full settlement.'
   },
   {
     id: 'ref-103',
     name: 'Dr. Fiona Bennett',
     nameBn: 'Dr. Fiona Bennett',
-    username: 'dr_fiona',
-    memberId: 'QW-INT-9218',
-    email: 'farhana.dr@hospital.com',
-    phone: '+49 191 277 6655',
+    username: 'fiona_b',
+    memberId: 'QW-GLB-6623',
+    email: 'fiona.bennett@protonmail.com',
+    phone: '+65 8761 2244',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
     sponsorUsername: 'user1',
     sponsorName: 'Alex Johnson',
@@ -882,9 +925,9 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     name: 'Kevin Mitchell',
     nameBn: 'Kevin Mitchell',
     username: 'kevin_m',
-    memberId: 'QW-INT-9355',
-    email: 'mashiur.kazi@outlook.com',
-    phone: '+1 161 144 5566',
+    memberId: 'QW-GLB-7789',
+    email: 'kevin.mitchell@gmail.com',
+    phone: '+44 121 496 0566',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
     sponsorUsername: 'andrew_h',
     sponsorName: 'Andrew Hughes',
@@ -898,7 +941,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     commissionRate: 5,
     payoutStatus: 'available',
     rank: 'Associate Member',
-    location: 'Cumilla Cantonment',
+    location: 'Birmingham, United Kingdom',
     kycVerified: true,
     notes: 'Secondary generation referral through Andrew Hughes.'
   },
@@ -907,9 +950,9 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     name: 'Samuel Lewis',
     nameBn: 'Samuel Lewis',
     username: 'samuel_l',
-    memberId: 'QW-INT-9410',
-    email: 'saiful.sumon@gmail.com',
-    phone: '+49 182 211 2233',
+    memberId: 'QW-GLB-8845',
+    email: 'samuel.lewis@gmail.com',
+    phone: '+65 8127 4490',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
     sponsorUsername: 'thomas_eng',
     sponsorName: 'Engr. Thomas Anderson',
@@ -932,9 +975,9 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     name: 'Robert Hughes',
     nameBn: 'Robert Hughes',
     username: 'robert_h',
-    memberId: 'QW-INT-9502',
-    email: 'rubel.ctg99@gmail.com',
-    phone: '+44 151 599 8877',
+    memberId: 'QW-GLB-9031',
+    email: 'robert.hughes@gmail.com',
+    phone: '+44 7911 245 118',
     avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80',
     sponsorUsername: 'kevin_m',
     sponsorName: 'Kevin Mitchell',
@@ -948,7 +991,7 @@ export const INITIAL_REFERRAL_SIGNUPS: ReferralSignup[] = [
     commissionRate: 0,
     payoutStatus: 'pending',
     rank: 'Member (In Review)',
-    location: 'Singapore (Bayfront)',
+    location: 'London, United Kingdom',
     kycVerified: false,
     notes: 'Signed up via referral code. Initial booking form submitted, token verification in progress.'
   }
@@ -977,9 +1020,9 @@ export const DEFAULT_CMS_SETTINGS: CmsSiteSettings = {
   brandName: 'Questra World',
   legalName: 'Questra World Limited',
   tagline: 'Official Investor Portal · Global',
-  supportPhone: '+49 181 900 1122',
+  supportPhone: '+971 4 512 8800',
   supportEmail: 'support@questraworld.com',
-  corporateAddress: 'Questra World Tower, International Business District',
+  corporateAddress: 'Questra World Tower, Business Bay, Dubai',
   footerNote:
     'Government-registered real estate & hospitality investment enterprise. 100% legally verified ownership with notarized deeds and end-to-end encrypted records.',
   copyrightText: '© {year} Questra World Limited. All rights reserved.'
@@ -999,12 +1042,12 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
   },
   {
     id: 'gallery',
-    label: 'Site Photo Gallery',
+    label: 'Project Photo Gallery',
     kind: 'standard',
-    title: 'On-Site Construction Photo Gallery',
+    title: 'Live Development Photo Gallery',
     subtitle: 'Real progress, documented on the ground every month.',
     body:
-      'Explore transparent site photography from our active developments — deep piling and raft foundations, RCC superstructures, façade glazing, interior fit-outs and investor handover ceremonies at Questra Royal Bay and Questra World Commercial Center.',
+      'Explore transparent progress photography from our active developments — deep piling and raft foundations, RCC superstructures, façade glazing, interior fit-outs and investor handover ceremonies at Questra Royal Bay and Questra World Commercial Center.',
     ctaLabel: '',
     visible: true,
     order: 1
@@ -1013,10 +1056,10 @@ export const DEFAULT_CMS_SECTIONS: CmsSection[] = [
     id: 'gallery-videos',
     label: 'Video Tour Gallery',
     kind: 'standard',
-    title: 'Aerial Drone & Site Walkthrough Videos',
-    subtitle: 'Fly over the sites and walk every floor with our project team.',
+    title: 'Aerial Drone & Project Walkthrough Videos',
+    subtitle: 'Fly over the projects and walk every floor with our project team.',
     body:
-      'High-definition drone flyovers and guided walkthrough videos capture the true scale, beachfront location and finishing quality of every Questra World development — the closest thing to standing on site.',
+      'High-definition drone flyovers and guided walkthrough videos capture the true scale, beachfront location and finishing quality of every Questra World development — the closest thing to standing on location.',
     ctaLabel: '',
     visible: true,
     order: 2
@@ -1063,7 +1106,7 @@ export const DEFAULT_CMS_COLLECTIONS: CmsCollectionItem[] = [
   // Features
   { id: 'feat-1', collection: 'features', title: '100% Legal Ownership', subtitle: 'Registered Deeds', body: 'Every share is backed by notarized, land-registry verified ownership documents.', badge: 'Legal', order: 0 },
   { id: 'feat-2', collection: 'features', title: '12-Month Double Profit', subtitle: '2X Return Scheme', body: 'Invest any amount and receive double back across 12 equal monthly installments.', badge: '2X', order: 1 },
-  { id: 'feat-3', collection: 'features', title: '18.5% Annual ROI', subtitle: 'Hotel Share Yield', body: 'Industry-leading dividend yield from premium hotel suite share ownership.', badge: 'ROI', order: 2 },
+  { id: 'feat-3', collection: 'features', title: '18.5% Annual ROI', subtitle: 'Suites Share Yield', body: 'Industry-leading dividend yield from premium suite share ownership.', badge: 'ROI', order: 2 },
   { id: 'feat-4', collection: 'features', title: 'End-to-End Encryption', subtitle: 'Bank-Grade Security', body: 'AES-256 encrypted records protect every transaction and personal document.', badge: 'Secure', order: 3 },
   { id: 'feat-5', collection: 'features', title: 'Bank PDC Protection', subtitle: 'Post-Dated Cheques', body: 'All double-profit investments are secured by post-dated bank cheques.', badge: 'Protected', order: 4 },
   { id: 'feat-6', collection: 'features', title: 'Dedicated Support Desk', subtitle: 'Investor Care', body: 'A branch-based support team guides you through every step of your investment.', badge: 'Support', order: 5 },
@@ -1071,13 +1114,13 @@ export const DEFAULT_CMS_COLLECTIONS: CmsCollectionItem[] = [
   // Testimonials
   { id: 'tst-1', collection: 'testimonials', title: 'Michael Anderson', subtitle: 'Investor · Dubai', body: 'The double profit scheme gave me exactly what was promised — 2X returned over 12 months, paid on time every month.', order: 0 },
   { id: 'tst-2', collection: 'testimonials', title: 'Sarah Mitchell', subtitle: 'Investor · Singapore', body: 'Transparent paperwork, verified deeds, and a support team that actually responds. Truly professional.', order: 1 },
-  { id: 'tst-3', collection: 'testimonials', title: 'Engr. Sam Hughes', subtitle: 'Investor · Manchester', body: 'I visited the site myself before investing. The construction progress matched every update on the portal.', order: 2 },
+  { id: 'tst-3', collection: 'testimonials', title: 'Engr. Sam Hughes', subtitle: 'Investor · Manchester', body: 'I visited the project myself before investing. The development progress matched every update on the portal.', order: 2 },
 
   // FAQs
   { id: 'faq-1', collection: 'faqs', title: 'How does the 12-Month Double Profit scheme work?', body: 'You invest any amount and receive double that amount back, paid across 12 equal monthly installments, secured by post-dated bank cheques and a notarized deed.', order: 0 },
   { id: 'faq-2', collection: 'faqs', title: 'What legal documents do I receive?', body: 'Every investor receives a registered share/ownership deed, a notarized agreement, and official money receipts for each payment.', order: 1 },
   { id: 'faq-3', collection: 'faqs', title: 'What payment methods are accepted?', body: 'We accept bank transfers, mobile financial services, and manual USDT (TRC20) crypto payments verified by our finance desk.', order: 2 },
-  { id: 'faq-4', collection: 'faqs', title: 'Can I visit the project before investing?', body: 'Absolutely. We offer complimentary AC microbus site tours from global locations every weekend.', order: 3 },
+  { id: 'faq-4', collection: 'faqs', title: 'Can I visit the project before investing?', body: 'Absolutely. We offer complimentary AC microbus project tours from global locations every weekend.', order: 3 },
   { id: 'faq-5', collection: 'faqs', title: 'How are dividends paid?', body: 'Share dividends are disbursed monthly to your registered bank account and are fully visible in your investor dashboard.', order: 4 },
   { id: 'faq-6', collection: 'faqs', title: 'Is my personal data secure?', body: 'Yes. All records and personal documents are protected with end-to-end AES-256 encryption on our secure cloud.', order: 5 }
 ];
@@ -1132,6 +1175,9 @@ function decryptPayload<T>(cipher: string | null, fallback: T): T {
 
 export class StorageService {
   static getUser(): User | null {
+    // Make sure demo content is current before we hand back the session —
+    // a built-in account that is still signed in gets refreshed profile data.
+    this.ensureDataInitialized();
     const saved = localStorage.getItem(STORAGE_KEYS.USER);
     if (!saved) {
       // Default to null until logged in or preloaded
@@ -1301,12 +1347,12 @@ export class StorageService {
       fullName: newUser.fullName || 'Valued Investor',
       fullNameBn: newUser.fullNameBn || newUser.fullName || 'Valued Investor',
       email: newUser.email || 'investor@questraworld.com',
-      phone: newUser.phone || '+44 170 000 0000',
+      phone: newUser.phone || '+971 50 236 8800',
       branch: newUser.branch || 'Global Head Office (Financial District)',
       memberId: newUser.memberId || ('QW-' + Math.floor(1000 + Math.random() * 9000)),
       userId: userIdStr,
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-      address: newUser.address || 'Dubai, the globe',
+      address: newUser.address || 'Dubai',
       city: newUser.city || 'Dubai',
       nidNo: newUser.nidNo || '1990 0000 0000 00',
       role: 'investor',
@@ -1316,7 +1362,7 @@ export class StorageService {
       nominee: newUser.nominee || {
         name: 'Authorized Nominee',
         relation: 'Family',
-        phone: '+44 170 000 0000',
+        phone: '+971 50 236 8800',
         nid: '1995 0000 0000 00'
       },
       bankName: newUser.bankName,
@@ -1592,6 +1638,47 @@ export class StorageService {
       }
       localStorage.setItem('qw_brand_questra_v1', '1');
     }
+    // One-time content refresh: re-seed every demo dataset. Browsers that
+    // visited an earlier build still hold the previous payload in
+    // localStorage, which would otherwise keep old wording and placeholder
+    // identities on screen forever. Real accounts registered by visitors
+    // (qw_registered_account_*) are never touched.
+    if (!localStorage.getItem('qw_content_refresh_v3')) {
+      const reseed: Array<[string, unknown]> = [
+        [STORAGE_KEYS.SHARES, INITIAL_SHARES],
+        [STORAGE_KEYS.INSTALLMENTS, INITIAL_INSTALLMENTS],
+        [STORAGE_KEYS.TRANSACTIONS, INITIAL_TRANSACTIONS],
+        [STORAGE_KEYS.NOTIFICATIONS, INITIAL_NOTIFICATIONS],
+        [STORAGE_KEYS.TICKETS, INITIAL_TICKETS],
+        [STORAGE_KEYS.ADMIN_INVESTORS, INITIAL_ADMIN_INVESTORS],
+        [STORAGE_KEYS.DEPOSIT_SLIPS, INITIAL_DEPOSIT_SLIPS],
+        [STORAGE_KEYS.NOTICES, INITIAL_NOTICES],
+        [STORAGE_KEYS.SITE_TOURS, INITIAL_SITE_TOURS],
+        [STORAGE_KEYS.VACATION_BOOKINGS, INITIAL_VACATION_BOOKINGS],
+        [STORAGE_KEYS.AUDIT_LOGS, INITIAL_AUDIT_LOGS],
+        [STORAGE_KEYS.REFERRAL_SIGNUPS, INITIAL_REFERRAL_SIGNUPS],
+        [STORAGE_KEYS.DOUBLE_PROFIT_PLANS, INITIAL_DOUBLE_PROFIT_PLANS],
+        [STORAGE_KEYS.CMS_SECTIONS, DEFAULT_CMS_SECTIONS],
+        [STORAGE_KEYS.CMS_COLLECTIONS, DEFAULT_CMS_COLLECTIONS],
+        [STORAGE_KEYS.CMS_SETTINGS, DEFAULT_CMS_SETTINGS]
+      ];
+      reseed.forEach(([key, value]) => {
+        localStorage.setItem(key, encryptPayload(value));
+      });
+      // Refresh the session of a signed-in built-in account so its profile
+      // shows the current data too.
+      try {
+        const session = decryptPayload<User | null>(localStorage.getItem(STORAGE_KEYS.USER), null);
+        if (session && session.username === INITIAL_USER.username) {
+          localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(INITIAL_USER));
+        } else if (session && session.username === INITIAL_ADMIN.username) {
+          localStorage.setItem(STORAGE_KEYS.USER, encryptPayload(INITIAL_ADMIN));
+        }
+      } catch {
+        /* non-fatal — keep whatever session is present */
+      }
+      localStorage.setItem('qw_content_refresh_v3', '1');
+    }
     if (!localStorage.getItem(STORAGE_KEYS.LAST_SYNC)) {
       localStorage.setItem(STORAGE_KEYS.LAST_SYNC, new Date().toISOString());
     }
@@ -1607,8 +1694,8 @@ export class StorageService {
     const shares = this.getShares();
     const newShare: ShareInvestment = {
       id: shareData.id || 'share-' + Date.now(),
-      projectName: shareData.projectName || 'Questra Royal Bay Hotel & Suites',
-      projectNameBn: shareData.projectNameBn || 'Questra Royal Bay Hotel & Suites',
+      projectName: shareData.projectName || 'Questra Royal Bay Suites & Residences',
+      projectNameBn: shareData.projectNameBn || 'Questra Royal Bay Suites & Residences',
       location: shareData.location || "Waterfront District",
       locationBn: shareData.locationBn || "Waterfront District",
       suiteNo: shareData.suiteNo || `Suite #${Math.floor(200 + Math.random() * 300)}`,
@@ -1945,8 +2032,8 @@ export class StorageService {
       username: inv.username || 'member_' + Math.floor(100 + Math.random() * 900),
       fullName: inv.fullName || 'New Investor',
       fullNameBn: inv.fullNameBn,
-      phone: inv.phone || '+44 170 000 0000',
-      email: inv.email || 'investor@example.com',
+      phone: inv.phone || '+971 50 236 8800',
+      email: inv.email || 'investor@questraworld.com',
       memberId: inv.memberId || `QW-${inv.branch?.includes('Singapore') ? 'INT' : 'GLB'}-${Math.floor(1000 + Math.random() * 9000)}`,
       branch: inv.branch || 'Global Head Office',
       rank: inv.rank || 'Associate Member',
@@ -2024,7 +2111,7 @@ export class StorageService {
       memberName: slip.memberName || user.fullName,
       memberId: slip.memberId || user.memberId,
       bookingId: slip.bookingId || 'share-royal-bay-204',
-      projectName: slip.projectName || 'Questra Royal Bay (Hotel & Suites)',
+      projectName: slip.projectName || 'Questra Royal Bay (Suites & Residences)',
       bankName: slip.bankName || 'HSBC',
       branchName: slip.branchName || 'Central Branch',
       amount: slip.amount || 35000,
@@ -2144,7 +2231,7 @@ export class StorageService {
     return false;
   }
 
-  // --- SITE TOURS CRUD ---
+  // --- PROJECT TOURS CRUD ---
   static getSiteTours(): AdminSiteTourBooking[] {
     this.ensureDataInitialized();
     return decryptPayload<AdminSiteTourBooking[]>(localStorage.getItem(STORAGE_KEYS.SITE_TOURS), INITIAL_SITE_TOURS);
@@ -2155,10 +2242,10 @@ export class StorageService {
     const newTour: AdminSiteTourBooking = {
       id: tour.id || 'tour-' + Date.now(),
       clientName: tour.clientName || 'Valued Client',
-      phone: tour.phone || '+44 170 000 0000',
+      phone: tour.phone || '+971 50 000 0000',
       preferredDate: tour.preferredDate || 'Friday, Upcoming',
       timeSlot: tour.timeSlot || 'Morning (09:00 AM)',
-      projectInterested: tour.projectInterested || "Questra Royal Bay (Hotel & Suites)",
+      projectInterested: tour.projectInterested || "Questra Royal Bay (Suites & Residences)",
       pickupLocation: tour.pickupLocation || 'Financial District Global Head Office',
       guestsCount: tour.guestsCount || 2,
       assignedBus: tour.assignedBus,
@@ -2579,7 +2666,7 @@ export class StorageService {
   }
 
   // ==================================================================
-  // HOMEPAGE CMS (sections, collections, site settings) — full CRUD
+  // HOMEPAGE CMS (sections, collections, global settings) — full CRUD
   // ==================================================================
   static getCmsSections(): CmsSection[] {
     this.ensureDataInitialized();
@@ -2777,7 +2864,7 @@ export class StorageService {
       updatedAt: new Date().toISOString()
     };
     localStorage.setItem(STORAGE_KEYS.CMS_SETTINGS, encryptPayload(next));
-    this.addAuditLog('CMS_SETTINGS_UPDATED', 'Site Settings', `Brand: ${next.brandName}. Legal: ${next.legalName}.`, 'success');
+    this.addAuditLog('CMS_SETTINGS_UPDATED', 'Global Settings', `Brand: ${next.brandName}. Legal: ${next.legalName}.`, 'success');
     this.updateLastSync();
     return next;
   }

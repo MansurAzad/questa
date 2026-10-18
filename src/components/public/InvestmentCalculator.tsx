@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, TrendingUp, Calculator, Building, Hotel, CreditCard } from 'lucide-react';
+import { Sparkles, TrendingUp, Calculator, Building, CreditCard } from 'lucide-react';
 import { Language } from '../../types';
 import { formatBDT } from '../../services/i18n';
 
@@ -41,7 +41,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ lang
             {cmsTitle || 'Plan Your Returns'}
           </h2>
           <p className="text-sm text-slate-500 mt-3 leading-relaxed">
-            {cmsSubtitle || 'Estimate your monthly dividends from hotel share ownership or calculate your 2X return from the 12-Month Double Profit Scheme.'}
+            {cmsSubtitle || 'Estimate your monthly dividends from suite share ownership or calculate your 2X return from the 12-Month Double Profit Scheme.'}
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ lang
                 : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
             }`}
           >
-            <Hotel className="w-3.5 h-3.5" />
+            <Building className="w-3.5 h-3.5" />
             Share Dividend
           </button>
           <button
@@ -77,7 +77,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ lang
             {activeTab === 'share' ? (
               <div className="space-y-6">
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                  <Hotel className="w-4 h-4 text-amber-600" />
+                  <Building className="w-4 h-4 text-amber-600" />
                   Share Dividend Calculator
                 </h3>
 

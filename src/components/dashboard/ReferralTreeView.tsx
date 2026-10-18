@@ -517,7 +517,7 @@ export const ReferralTreeView: React.FC<ReferralTreeViewProps> = ({ user, langua
                 onChange={e => setCalcAssetType(e.target.value as any)}
                 className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
               >
-                <option value="hotel_share">Hotel Suite Share</option>
+                <option value="hotel_share">Resort Suite Share</option>
                 <option value="commercial">Commercial Floor Share</option>
               </select>
             </div>

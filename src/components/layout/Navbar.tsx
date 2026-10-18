@@ -63,12 +63,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const isDashboard = activeView === 'dashboard';
 
-  const navLinks = [
-    { id: 'home', label: t('navHome') },
-    { id: 'gallery', label: 'Site Photos' },
-    { id: 'gallery-videos', label: 'Video Tours' }
-  ];
-
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-900/90 transition-colors">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -96,24 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Desktop Nav Links - HIDE IN USER DASHBOARD */}
-          {activeView !== 'dashboard' && (
-            <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map(link => (
-                <button
-                  key={link.id}
-                  onClick={() => onNavigate(link.id)}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    activeView === link.id
-                      ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 font-semibold'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800'
-                  }`}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </nav>
-          )}
+
 
           {/* Action Items: Lang, Theme, Sync, Notifications, Glance Widget, Auth */}
           <div className="flex items-center gap-2 sm:gap-3">
@@ -318,7 +295,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-left"
                       >
                         <Compass className="w-3.5 h-3.5 text-slate-500" />
-                        <span>{ 'Back to Website'}</span>
+                        <span>{ 'Back to Home Page'}</span>
                       </button>
                     )}
 
@@ -363,31 +340,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/*
-          Mobile section rail — the same section links as the desktop nav,
-          rendered as a swipeable pill/card rail on small screens.
-          Deliberately NOT a hamburger menu.
-        */}
-        {activeView !== 'dashboard' && (
-          <nav
-            className="lg:hidden scroll-x -mx-3 px-3 pb-2 sm:-mx-6 sm:px-6"
-            aria-label="Homepage sections"
-          >
-            {navLinks.map(link => (
-              <button
-                key={link.id}
-                onClick={() => onNavigate(link.id)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
-                  activeView === link.id
-                    ? 'bg-amber-600 border-amber-600 text-white shadow-sm'
-                    : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
-          </nav>
-        )}
+
       </div>
     </header>
   );

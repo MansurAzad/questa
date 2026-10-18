@@ -120,7 +120,7 @@ export default function App() {
     setIsCloudSynced(true);
   };
 
-  // Re-read CMS content whenever the visitor returns to the public site so
+  // Re-read CMS content whenever the visitor returns to the public homepage so
   // admin edits are reflected immediately without a reload.
   useEffect(() => {
     if (activeView !== 'admin') {
@@ -264,7 +264,7 @@ export default function App() {
             </div>
           )
         ) : (
-          /* ROUTE 2: PUBLIC WEBSITE PAGES (CMS-driven sections) */
+          /* ROUTE 2: PUBLIC HOMEPAGE PAGES (CMS-driven sections) */
           <>
             {(() => {
               const sec = (id: string) => cmsSections.find(s => s.id === id);
@@ -338,7 +338,7 @@ export default function App() {
                         key={section.id}
                         language={language}
                         onBookSiteVisit={() => {
-                          const el = document.getElementById('site-visit');
+                          const el = document.getElementById('project-visit');
                           el?.scrollIntoView({ behavior: 'smooth' });
                         }}
                         onOpenProjects={() => {
@@ -361,7 +361,7 @@ export default function App() {
                         cmsTitle={section.title}
                         cmsSubtitle={section.subtitle}
                         cmsBody={section.body}
-                        filter={{ kind: 'photo', category: 'construction' }}
+                        filter={{ kind: 'photo', category: 'development' }}
                       />
                     );
                   case 'gallery-videos':
@@ -417,7 +417,7 @@ export default function App() {
                         cmsBody={section.body}
                       />
                     );
-                  case 'site-visit':
+                  case 'project-visit':
                     return (
                       <SiteVisitBooking
                         key={section.id}
@@ -504,7 +504,7 @@ export default function App() {
         }}
         onBookTour={() => {
           setProjectModalOpen(false);
-          const el = document.getElementById('site-visit');
+          const el = document.getElementById('project-visit');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
       />

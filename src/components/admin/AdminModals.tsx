@@ -96,7 +96,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
       fullNameBn: fullNameBn || fullName,
       username: username || fullName.toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 12),
       phone,
-      email: email || `${username || 'investor'}@gmail.com`,
+      email: email || `${username || 'investor'}@questraworld.com`,
       memberId,
       branch,
       rank,
@@ -183,7 +183,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
                 onBlur={() => mark('phone')}
-                placeholder="+61 171 100 0000"
+                placeholder="+971 50 236 8842"
                 aria-invalid={!!showError('phone')}
                 className={ic(!!showError('phone'), 'font-mono')}
               />
@@ -198,7 +198,7 @@ export const AddInvestorModal: React.FC<AddInvestorModalProps> = ({ isOpen, onCl
                 <option value="Regional Client Office (Downtown)">Regional Client Office (Downtown)</option>
                 <option value="Global Head Office (Financial District)">Global Head Office (Financial District)</option>
                 <option value="Manchester Regional Branch">Manchester Regional Branch</option>
-                <option value="Waterfront Site Office">Waterfront Site Office</option>
+                <option value="Waterfront Project Office">Waterfront Project Office</option>
               </select>
             </div>
             <div>

@@ -41,7 +41,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
       timeSlot: 'Morning (09:30 AM)',
       projectInterested: pickupLocation.includes('Dubai')
         ? 'Questra World Commercial Center - Mirpur'
-        : "Questra Royal Bay (Hotel & Suites)",
+        : "Questra Royal Bay (Suites & Residences)",
       pickupLocation,
       guestsCount: 1
     });
@@ -50,8 +50,8 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
 
   const updates = [
     {
-      id: 'site-1',
-      title: 'Royal Bay Hotel & Suites — RCC Superstructure & Facade Glazing',
+      id: 'project-1',
+      title: 'Royal Bay Suites & Residences — RCC Superstructure & Facade Glazing',
       date: '02 October 2026',
       phase: 'Phase 2',
       progress: 88,
@@ -61,7 +61,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
         'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&auto=format&fit=crop&q=80'
     },
     {
-      id: 'site-2',
+      id: 'project-2',
       title: 'Commercial Center — Interior Fit-out & Central HVAC',
       date: '24 September 2026',
       phase: 'Phase 3',
@@ -72,7 +72,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
         'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=80'
     },
     {
-      id: 'site-3',
+      id: 'project-3',
       title: 'Resort Landscaping, Infinity Pool & Beach Access Deck',
       date: '11 September 2026',
       phase: 'Amenities',
@@ -93,10 +93,10 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-            Live Site Progress & Drone Updates
+            Live Project Progress & Drone Updates
           </h2>
           <p className="text-xs text-slate-500">
-            Real-time verified engineering progress, on-site civil works, and handover schedules.
+            Real-time verified engineering progress, live civil works, and handover schedules.
           </p>
         </div>
 
@@ -188,12 +188,12 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
         ))}
       </div>
 
-      {/* Book Site Visit */}
+      {/* Book Project Visit */}
       <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
         <div className="flex items-center gap-2">
           <Camera className="w-5 h-5 text-amber-600" />
           <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-            Book a Free Site Visit
+            Book a Free Project Visit
           </h3>
         </div>
 
@@ -201,7 +201,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
           <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-200 flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>
-              Thank you! Your site visit request for {visitDate} has been received. Our team will contact you shortly.
+              Thank you! Your project visit request for {visitDate} has been received. Our team will contact you shortly.
             </span>
           </div>
         ) : (
@@ -228,7 +228,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
                   className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                 >
                   <option>Regional Client Office (Downtown)</option>
-                  <option>Waterfront Site Office</option>
+                  <option>Waterfront Project Office</option>
                   <option>Global Head Office (Financial District)</option>
                 </select>
               </div>
@@ -238,7 +238,7 @@ export const SiteProgressView: React.FC<SiteProgressViewProps> = ({ user, langua
               className="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold shadow-xs flex items-center gap-1.5 transition-colors"
             >
               <HardHat className="w-4 h-4" />
-              <span>Confirm Site Visit</span>
+              <span>Confirm Project Visit</span>
             </button>
           </>
         )}

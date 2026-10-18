@@ -16,9 +16,9 @@ const DEFAULT_SETTINGS: CmsSiteSettings = {
   brandName: 'Questra World',
   legalName: 'Questra World Limited',
   tagline: "Official Investor Portal · Global",
-  supportPhone: '+49 181 900 1122',
+  supportPhone: '+971 4 512 8800',
   supportEmail: 'support@questraworld.com',
-  corporateAddress: 'Questra World Tower, International Business District',
+  corporateAddress: 'Questra World Tower, Business Bay, Dubai',
   footerNote: '',
   copyrightText: '© {year} Questra World Limited. All rights reserved.'
 };
@@ -44,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, user, onNavigate, onOp
                   onClick={() => onNavigate('gallery')}
                   className="text-left hover:text-amber-400 transition-colors"
                 >
-                  Questra Royal Bay Hotel &amp; Suites
+                  Questra Royal Bay Suites &amp; Residences
                 </button>
               </li>
               <li>

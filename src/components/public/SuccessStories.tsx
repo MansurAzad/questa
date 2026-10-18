@@ -26,7 +26,7 @@ const STORIES: Story[] = [
     name: 'Farhan Ahmed',
     location: 'Dhaka, Bangladesh',
     avatar:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=160&auto=format&fit=crop&q=80',
     project: 'Questra Royal Bay · Suite Share #3168',
     invested: '$30,000',
     returned: '$60,000',
@@ -48,7 +48,7 @@ const STORIES: Story[] = [
   },
   {
     name: 'Dr. Fiona Bennett',
-    location: 'London, United Kingdom',
+    location: 'Singapore',
     avatar:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&auto=format&fit=crop&q=80',
     project: 'Royal Bay Waterfront · Floor Unit',
@@ -68,7 +68,7 @@ const STORIES: Story[] = [
     returned: '$90,000',
     duration: '12 monthly installments',
     quote:
-      'I flew in and walked the site with the project team. The construction matched every single progress update posted on the portal.'
+      'I flew in and walked the grounds with the project team. The development matched every single progress update posted on the portal.'
   }
 ];
 

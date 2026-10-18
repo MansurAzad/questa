@@ -33,7 +33,7 @@ const STATS = [
   { icon: Coins, value: '$96M+', label: 'Investor Payouts Released', note: 'Double-profit + dividends, on time' },
   { icon: Users, value: '3,200+', label: 'Active Investors', note: 'Across 6 countries' },
   { icon: Globe2, value: '6', label: 'Countries Served', note: 'Global investor network' },
-  { icon: TrendingUp, value: '18.5%', label: 'Average Annual Yield', note: 'Hotel & commercial share ROI' }
+  { icon: TrendingUp, value: '18.5%', label: 'Average Annual Yield', note: 'Resort & commercial share ROI' }
 ];
 
 const AWARDS = [
@@ -47,18 +47,18 @@ const AWARDS = [
     icon: Award,
     title: 'Transparency Excellence Award',
     by: 'South Asian Property Council',
-    detail: 'Awarded for registered deeds, audited accounts and open site access.'
+    detail: 'Awarded for registered deeds, audited accounts and open project access.'
   },
   {
     icon: ShieldCheck,
     title: 'ISO 9001:2015 Certified',
     by: 'Quality Management Systems',
-    detail: 'Construction, finance and investor servicing audited annually.'
+    detail: 'Development, finance and investor servicing audited annually.'
   },
   {
     icon: Rocket,
     title: 'Fastest Growing Developer',
-    by: 'Regional Construction Forum 2024',
+    by: 'Regional Development Forum 2024',
     detail: 'Triple-digit growth in registered share ownership over 24 months.'
   }
 ];
@@ -71,7 +71,7 @@ const MILESTONES: Milestone[] = [
   { year: '2023', title: 'International offices opened', detail: 'Representative desks in Dubai and Singapore.' },
   { year: '2024', title: '10 completed developments', detail: 'ISO 9001:2015 certification achieved for quality management.' },
   { year: '2025', title: 'Best Boutique Developer', detail: 'Global Real Estate Excellence Awards, Dubai.' },
-  { year: '2026', title: '4,800+ deeds delivered', detail: 'New waterfront and commercial phases under construction.' }
+  { year: '2026', title: '4,800+ deeds delivered', detail: 'New waterfront and commercial phases under development.' }
 ];
 
 /**

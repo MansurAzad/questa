@@ -76,9 +76,9 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
     setIsProcessing(true);
 
     setTimeout(() => {
-      let desc = `Dividend Payout to ${user.bankName || 'The City Bank'} (A/C: ...${(user.bankAccount || '2001').slice(-4)})`;
-      let descBn = `Dividend Payout to ${user.bankName || 'The City Bank'}`;
-      let method = `Bank Wire (${user.bankName || 'The City Bank'})`;
+      let desc = `Dividend Payout to ${user.bankName || 'Emirates NBD'} (A/C: ...${(user.bankAccount || '2001').slice(-4)})`;
+      let descBn = `Dividend Payout to ${user.bankName || 'Emirates NBD'}`;
+      let method = `Bank Wire (${user.bankName || 'Emirates NBD'})`;
 
       if (withdrawDestination === 'paypal') {
         desc = `Instant Dividend Disbursement to PayPal (${user.mfsNumber || user.phone})`;
@@ -117,7 +117,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-            Hotel Share Dividend & Yield Manager
+            Resort Share Dividend & Yield Manager
           </h2>
           <p className="text-xs text-slate-500">
             Monitor monthly resort room yield distributions and withdraw payouts directly to your linked bank account.
@@ -221,7 +221,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
             <thead className="bg-slate-50/50 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-semibold">
               <tr>
                 <th className="p-3.5">Disbursement Date</th>
-                <th className="p-3.5">Hotel Asset / Period</th>
+                <th className="p-3.5">Resort Asset / Period</th>
                 <th className="p-3.5">Method</th>
                 <th className="p-3.5">Reference No</th>
                 <th className="p-3.5 text-right">Yield Amount</th>
@@ -231,7 +231,7 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
               {dividendTransactions.map(tx => (
                 <tr key={tx.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
                   <td data-label="Date" className="p-3.5 font-mono text-slate-600 dark:text-slate-400">{tx.date}</td>
-                  <td data-label="Hotel Asset / Period" className="p-3.5 font-medium text-slate-900 dark:text-white">
+                  <td data-label="Resort Asset / Period" className="p-3.5 font-medium text-slate-900 dark:text-white">
                     {tx.title}
                   </td>
                   <td data-label="Method" className="p-3.5 text-slate-600 dark:text-slate-300">{tx.method}</td>
@@ -334,8 +334,8 @@ export const DividendManagerView: React.FC<DividendManagerViewProps> = ({
                         className="text-amber-600"
                       />
                       <div>
-                        <strong className="block text-slate-900 dark:text-white">The City Bank (A/C: ...2001)</strong>
-                        <span className="text-[10px] text-slate-500">Central Branch · SWIFT Direct Transfer</span>
+                        <strong className="block text-slate-900 dark:text-white">{user.bankName || 'Emirates NBD'} (A/C: ...{(user.bankAccount || '4471').slice(-4)})</strong>
+                        <span className="text-[10px] text-slate-500">{user.bankBranch || 'Business Bay Branch'} · SWIFT Direct Transfer</span>
                       </div>
                     </label>
 

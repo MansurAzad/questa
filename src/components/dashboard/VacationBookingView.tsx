@@ -90,7 +90,7 @@ export const VacationBookingView: React.FC<VacationBookingViewProps> = ({
             Claim 7-Day Complimentary Annual Resort Stay
           </h2>
           <p className="text-xs text-slate-500">
-            Exclusive fractional owner privilege: 7 days complimentary stay per year at Questra Royal Bay Hotel & Suites, Inani.
+            Exclusive fractional owner privilege: 7 days complimentary stay per year at Questra Royal Bay Suites & Residences, Inani.
           </p>
         </div>
 
@@ -115,7 +115,7 @@ export const VacationBookingView: React.FC<VacationBookingViewProps> = ({
             5-STAR LUXURY HOSPITALITY PRIVILEGE
           </span>
           <h3 className="text-xl sm:text-2xl font-black text-white">
-            Questra Royal Bay Hotel & Suites — Marine Drive, Waterfront District
+            Questra Royal Bay Suites & Residences — Marine Drive, Waterfront District
           </h3>
           <p className="text-xs text-slate-200 leading-relaxed">
             Your fractional ownership in suite units <strong className="text-amber-300 font-mono">#RB-204 & #RB-205</strong> entitles you and your family to 7 complimentary nights every calendar year with 5-star resort amenities.

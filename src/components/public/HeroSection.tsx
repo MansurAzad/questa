@@ -297,7 +297,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     onBlur={() => mark('phone')}
-                    placeholder="+61 171 100 0000"
+                    placeholder="+971 50 236 8842"
                     aria-invalid={!!showError('phone')}
                     className={withValidation(`${inputBase} font-mono`, !!showError('phone'))}
                   />

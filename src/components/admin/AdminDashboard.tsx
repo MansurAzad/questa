@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   LayoutDashboard,
   Users,
-  Hotel,
+  Coins,
   Network,
   CreditCard,
   Bell,
@@ -115,12 +115,12 @@ interface AdminDashboardProps {
  *   overview        → user dashboard overview
  *   investors       → My Profile & KYC
  *   double_profit   → 12-Month Double Profit
- *   shares          → Hotel Shares & Dividend Payouts
+ *   shares          → Resort Shares & Dividend Payouts
  *   accounts        → Deposit Slip Upload & Installments
  *   referrals       → Referral & Network
  *   notices         → Notice Board (shown to investors)
  *   support         → Support Desk
- *   cms             → Homepage CMS (sections, content library, site settings)
+ *   cms             → Homepage CMS (sections, content library, global settings)
  *   registrations   → Signup records captured by the public form (Supabase)
  */
 type AdminTab =
@@ -627,7 +627,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     { id: 'overview', label: 'Overview', icon: LayoutDashboard, badge: null },
     { id: 'investors', label: 'Investors & KYC', icon: Users, badge: pendingKycCount > 0 ? pendingKycCount : null },
     { id: 'double_profit', label: 'Double Profit', icon: Sparkles, badge: null },
-    { id: 'shares', label: 'Shares & Dividends', icon: Hotel, badge: null },
+    { id: 'shares', label: 'Shares & Dividends', icon: Coins, badge: null },
     { id: 'accounts', label: 'Deposits & Installments', icon: CreditCard, badge: pendingSlipsCount > 0 ? pendingSlipsCount : null },
     { id: 'referrals', label: 'Referrals & Network', icon: Network, badge: null },
     { id: 'notices', label: 'Notice Board', icon: Bell, badge: null },
@@ -786,7 +786,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-left"
                       >
                         <Building2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>Public Website</span>
+                        <span>Public Home Page</span>
                       </button>
                     </div>
 
@@ -1054,7 +1054,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       </span>
                     </div>
                     <p className="text-slate-500 dark:text-slate-400 text-[11px]">
-                      Publish circulars visible to investors and website visitors.
+                      Publish circulars visible to investors and public visitors.
                     </p>
                     <button
                       onClick={() => setActiveTab('notices')}
@@ -1601,7 +1601,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-                  Hotel Shares &amp; Dividend Distribution Engine
+                  Resort Shares &amp; Dividend Distribution Engine
                 </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   Declare monthly profit rates and disburse returns directly into all verified investors' dividend wallets.
@@ -2206,7 +2206,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 Notice Board &amp; Official Circular CMS
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Publish notices that appear on both the public website and investor portal.
+                Publish notices that appear on both the public homepage and investor portal.
               </p>
             </div>
 
@@ -2224,7 +2224,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     onChange={e => setNewNoticeTitle(e.target.value)}
                     onBlur={() => markNotice('newNoticeTitle')}
                     aria-invalid={!!showNoticeError('newNoticeTitle')}
-                    placeholder="e.g. Questra Royal Bay Hotel Share & Quarterly Dividend Distribution Urgent Notice"
+                    placeholder="e.g. Questra Royal Bay Resort Share & Quarterly Dividend Distribution Urgent Notice"
                     className={showNoticeError('newNoticeTitle')
                       ? 'w-full px-3 py-2 rounded-xl border border-rose-400 dark:border-rose-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500/30'
                       : inputCls}
@@ -2238,10 +2238,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     onChange={e => setNewNoticeCategory(e.target.value)}
                     className={inputCls}
                   >
-                    <option value="Share Allotment">Hotel &amp; Tower Share Allotment</option>
+                    <option value="Share Allotment">Resort &amp; Tower Share Allotment</option>
                     <option value="Dividend Distribution">Dividend Distribution</option>
                     <option value="AGM Circular">Annual General Meeting (AGM)</option>
-                    <option value="Site Visit Schedule">Site Visit Schedule</option>
+                    <option value="Project Visit Schedule">Project Visit Schedule</option>
                   </select>
                 </div>
               </div>
@@ -2255,7 +2255,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     onChange={e => setNewNoticeContent(e.target.value)}
                     onBlur={() => markNotice('newNoticeContent')}
                     aria-invalid={!!showNoticeError('newNoticeContent')}
-                    placeholder="Write the full circular text that will be displayed to investors and website visitors..."
+                    placeholder="Write the full circular text that will be displayed to investors and public visitors..."
                     className={showNoticeError('newNoticeContent')
                       ? 'w-full px-3 py-2 rounded-xl border border-rose-400 dark:border-rose-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500/30'
                       : inputCls}

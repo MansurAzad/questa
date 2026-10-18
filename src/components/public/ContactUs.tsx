@@ -19,7 +19,7 @@ const CONTACT_TOPICS: Record<string, { label: string; category: TicketCategory }
   'share-inquiry': { label: 'Share Investment Inquiry', category: 'general' },
   'double-profit': { label: '12-Month Double Profit', category: 'dividend' },
   'installment': { label: 'Installment Question', category: 'payment' },
-  'site-visit': { label: 'Book a Site Visit', category: 'general' },
+  'project-visit': { label: 'Book a Project Visit', category: 'general' },
   'other': { label: 'General Inquiry', category: 'general' }
 };
 
@@ -100,7 +100,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
   };
 
   const contactMethods = [
-    { icon: Phone, label: 'Hotline', value: cmsPhone || '+44 181 068 5888', sub: 'Mon–Sat, 9:00 AM – 6:00 PM' },
+    { icon: Phone, label: 'Hotline', value: cmsPhone || '+971 4 512 8800', sub: 'Mon–Sat, 9:00 AM – 6:00 PM' },
     { icon: Mail, label: 'Email', value: cmsEmail || 'info@questraworld.com', sub: 'Response within 24 hours' },
     { icon: MapPin, label: 'Head Office', value: cmsAddress || 'Global Headquarters, International Business District', sub: 'By appointment only' },
   ];
@@ -227,7 +227,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
                       value={formData.phone}
                       onChange={handleChange}
                       onBlur={() => mark('phone')}
-                      placeholder="+65 177 777 7777"
+                      placeholder="+65 8127 4490"
                       aria-invalid={!!showError('phone')}
                       className={withValidation(fieldBase, !!showError('phone'))}
                     />
@@ -247,7 +247,7 @@ export const ContactUs: React.FC<ContactUsProps> = ({ language, cmsTitle, cmsSub
                       <option value="share-inquiry">Share Investment Inquiry</option>
                       <option value="double-profit">12-Month Double Profit</option>
                       <option value="installment">Installment Question</option>
-                      <option value="site-visit">Book a Site Visit</option>
+                      <option value="project-visit">Book a Project Visit</option>
                       <option value="other">Other</option>
                     </select>
                     <FieldError message={showError('subject')} />

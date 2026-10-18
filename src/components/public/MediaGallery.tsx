@@ -69,11 +69,11 @@ export const MediaGallery: React.FC<MediaGalleryProps> = ({
   return (
     <section
       id={sectionId}
-      className={`scroll-mt-20 pt-9 pb-14 sm:pt-11 sm:pb-20 border-b border-slate-200 dark:border-slate-800 transition-colors ${
+      className={`scroll-mt-20 pt-6 pb-10 sm:pt-8 sm:pb-14 md:pt-11 md:pb-20 border-b border-slate-200 dark:border-slate-800 transition-colors ${
         tone === 'muted' ? 'bg-slate-50 dark:bg-slate-950' : 'bg-white dark:bg-slate-900'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-10">
 
         {/* Header */}
         <div className="max-w-3xl space-y-3">

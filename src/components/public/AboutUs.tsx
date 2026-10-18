@@ -37,7 +37,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
       name: 'Mr. Richard Hoffman',
       role: 'Chairman',
       company: 'Questra World Real Estate Limited',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=80',
       message:
         'Our core philosophy has always been transparency, legal integrity, and sustainable wealth creation. At Questra World, we do not merely sell shares or floor units; we build generations of trust and lasting family heritage across the globe.'
     },
@@ -45,7 +45,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
       name: 'Mr. Henry M. Whitfield',
       role: 'Managing Director',
       company: 'Questra World Real Estate Limited',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=600&auto=format&fit=crop&q=80',
       message:
         'We are determined to pioneer world-class beachfront hospitality and premium commercial developments at our flagship global destinations. Our commitment is timely project execution, zero legal flaws, and guaranteed returns for our valued investors.'
     },
@@ -53,9 +53,9 @@ export const AboutUs: React.FC<AboutUsProps> = ({
       name: 'Mr. Uttam Saha',
       role: 'Marketing Director',
       company: 'Questra World Real Estate Limited',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=600&auto=format&fit=crop&q=80',
       message:
-        'Customer satisfaction and transparent communication define our investor relationships. Whether for small fractional hotel suite shares or larger commercial floor investments, we offer bespoke guidance and unwavering post-purchase service.'
+        'Customer satisfaction and transparent communication define our investor relationships. Whether for small fractional suite shares or larger commercial floor investments, we offer bespoke guidance and unwavering post-purchase service.'
     }
   ];
 
@@ -67,8 +67,8 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     },
     {
       year: '2019',
-      title: 'Site Securing',
-      desc: 'Began securing prime beachfront and commercial sites for landmark hotel and retail developments.'
+      title: 'Land Securing',
+      desc: 'Began securing prime beachfront and commercial plots for landmark resort and retail developments.'
     },
     {
       year: '2022',
@@ -103,7 +103,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
             {cmsTitle || 'Building Generations of Trust & Wealth'}
           </h2>
           <p className="text-sm text-slate-500 mt-4 leading-relaxed">
-            {cmsSubtitle || 'Questra World Limited is a government-registered real estate and hospitality investment enterprise with a global headquarters and regional offices worldwide. We specialize in fractional hotel suite ownership, commercial tower floor shares, and our flagship 12-Month Double Profit investment scheme.'}
+            {cmsSubtitle || 'Questra World Limited is a government-registered real estate and hospitality investment enterprise with a global headquarters and regional offices worldwide. We specialize in fractional suite ownership, commercial tower floor shares, and our flagship 12-Month Double Profit investment scheme.'}
           </p>
         </div>
 
@@ -112,7 +112,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
           {[
             { value: '$485M+', label: 'Total Collections' },
             { value: '284+', label: 'Active Investors' },
-            { value: '60+', label: 'Hotel Suites' },
+            { value: '60+', label: 'Resort Suites' },
             { value: '120+', label: 'Commercial Floors' },
           ].map((stat, idx) => (
             <div key={idx} className="text-center p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -230,7 +230,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
                 className="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors flex items-center gap-2"
               >
                 <MapPin className="w-4 h-4" />
-                Book a Site Visit
+                Book a Project Visit
               </button>
             </div>
           </div>

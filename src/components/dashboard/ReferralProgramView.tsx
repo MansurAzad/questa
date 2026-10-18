@@ -145,7 +145,7 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
   };
 
   // Social Share Helpers
-  const shareText = `Invest in Questra World premium hotel & commercial projects for guaranteed capital appreciation & halal returns. Use my referral code: ${referralCode} to sign up: ${referralUrl}`;
+  const shareText = `Invest in Questra World premium resort & commercial projects for guaranteed capital appreciation & halal returns. Use my referral code: ${referralCode} to sign up: ${referralUrl}`;
 
   const handleShareWhatsApp = () => {
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
@@ -216,8 +216,8 @@ export const ReferralProgramView: React.FC<ReferralProgramViewProps> = ({
       nameBn: newInviteName,
       username: newInviteUsername.toLowerCase().trim().replace('@', ''),
       memberId: `QW-INT-${Math.floor(9500 + Math.random() * 499)}`,
-      email: newInviteEmail || `${newInviteUsername.toLowerCase()}@client.com`,
-      phone: newInvitePhone || '+65 181 900 0000',
+      email: newInviteEmail || `${newInviteUsername.toLowerCase()}@questraworld.com`,
+      phone: newInvitePhone || '+65 8127 0000',
       avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
       sponsorUsername: user.username,
       sponsorName: user.fullName,

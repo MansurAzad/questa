@@ -90,7 +90,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
         timeSlot: 'Morning (09:30 AM)',
         projectInterested: formData.project === 'questra-commercial-center'
           ? 'Questra World Commercial Center - Mirpur'
-          : "Questra Royal Bay (Hotel & Suites)",
+          : "Questra Royal Bay (Suites & Residences)",
         pickupLocation: formData.pickupPoint,
         guestsCount: Number(formData.guests)
       });
@@ -104,20 +104,20 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
   };
 
   const projects = [
-    { id: 'questra-royal-bay', name: "Questra Royal Bay — Waterfront District", desc: 'Beachfront Hotel & Suites' },
+    { id: 'questra-royal-bay', name: "Questra Royal Bay — Waterfront District", desc: 'Beachfront Resort & Suites' },
     { id: 'questra-commercial-center', name: 'Questra World Commercial Center — Mirpur', desc: 'Retail & Office Tower' },
   ];
 
   const pickupPoints = [
     { id: 'global-head-office', label: 'Dubai: Financial District Head Office' },
     { id: 'agradabad', label: 'Singapore: Marina Bay Centre, Central' },
-    { id: 'cox-site', label: "Waterfront District: Site Office" },
+    { id: 'cox-project', label: "Waterfront District: Project Office" },
   ];
 
   const showFixLabel = submitAttempt && !result.isValid;
 
   return (
-    <section id="site-visit" className="py-12 sm:py-16 bg-white dark:bg-slate-900 transition-colors">
+    <section id="project-visit" className="py-12 sm:py-16 bg-white dark:bg-slate-900 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Left Column: Info */}
@@ -128,10 +128,10 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
                 Free Weekend Tours
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                {cmsTitle || 'Book a Free Site Visit'}
+                {cmsTitle || 'Book a Free Project Visit'}
               </h2>
               <p className="text-sm text-slate-500 mt-3 leading-relaxed">
-                {cmsSubtitle || 'Visit our projects with complimentary AC microbus transport from global locations. See the construction progress, meet our sales team, and reserve your share on the spot.'}
+                {cmsSubtitle || 'Visit our projects with complimentary AC microbus transport from global locations. See the development progress, meet our sales team, and reserve your share on the spot.'}
               </p>
             </div>
 
@@ -155,7 +155,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
               </div>
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-amber-400">Every Friday & Saturday</span>
-                <p className="text-[11px] text-slate-300 mt-0.5">AC Microbus departs 8:30 AM sharp · Includes breakfast & site tour</p>
+                <p className="text-[11px] text-slate-300 mt-0.5">AC Microbus departs 8:30 AM sharp · Includes breakfast & project tour</p>
               </div>
             </div>
           </div>
@@ -168,7 +168,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                  Site Visit Booked!
+                  Project Visit Booked!
                 </h3>
                 <p className="text-sm text-slate-500">
                   Our team will call you within 2 hours to confirm your pickup point and schedule.
@@ -201,7 +201,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
                       value={formData.phone}
                       onChange={handleChange}
                       onBlur={() => mark('phone')}
-                      placeholder="+65 177 777 7777"
+                      placeholder="+65 8127 4490"
                       aria-invalid={!!showError('phone')}
                       className={withValidation(fieldBase, !!showError('phone'))}
                     />
@@ -299,7 +299,7 @@ export const SiteVisitBooking: React.FC<SiteVisitBookingProps> = ({
                   ) : (
                     <>
                       <Calendar className="w-4 h-4" />
-                      Confirm Free Site Visit
+                      Confirm Free Project Visit
                     </>
                   )}
                 </button>

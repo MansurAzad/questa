@@ -1,7 +1,7 @@
 /**
  * Referral link helpers.
  *
- * The referral link must always point at the *live* site (the origin the app is
+ * The referral link must always point at the *live* origin (the origin the app is
  * currently served from) instead of a hard-coded domain, and it must carry a
  * single, resolvable sponsor reference so a brand-new visitor can register and
  * be attached to the correct sponsor's network.
@@ -17,7 +17,7 @@ export function buildReferralLink(username: string, code?: string): string {
   let base = '/';
   try {
     // Older links used a /user/register path that does not exist as a route;
-    // normalise it back to the site root so shared links keep working.
+    // normalise it back to the origin root so shared links keep working.
     const path = (window.location.pathname || '/').replace(/\/user\/register\/?$/i, '/');
     base = `${window.location.origin}${path || '/'}`;
   } catch {

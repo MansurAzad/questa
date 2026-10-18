@@ -307,7 +307,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
                   onBlur={() => mark('phone')}
-                  placeholder="+971 000 880 1819..."
+                  placeholder="+971 50 236 8842..."
                   aria-invalid={!!showError('phone')}
                   className={withValidation(fieldBase, !!showError('phone'))}
                 />
@@ -497,7 +497,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Footer info note */}
         <div className="px-6 py-3 bg-slate-50 dark:bg-slate-900/60 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 text-center">
-          Questra World 24/7 Support Hotline: +44 181 068 5888</div>
+          Questra World 24/7 Support Hotline: +971 4 512 8800</div>
 
       </div>
     </div>

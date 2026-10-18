@@ -289,7 +289,7 @@ export const CmsManager: React.FC<CmsManagerProps> = ({ onToast }) => {
     const saved = StorageService.updateCmsSiteSettings(settingsDraft);
     setSettings(saved);
     setSettingsDraft(saved);
-    onToast('Website settings saved.');
+    onToast('Global settings saved.');
   };
 
   const setField = (field: keyof CmsSiteSettings, value: string) =>
@@ -301,7 +301,7 @@ export const CmsManager: React.FC<CmsManagerProps> = ({ onToast }) => {
   const subTabs: { id: SubTab; label: string; icon: any }[] = [
     { id: 'sections', label: 'Homepage Sections', icon: Layers },
     { id: 'content', label: 'Content Library', icon: ListChecks },
-    { id: 'settings', label: 'Website Settings', icon: SettingsIcon }
+    { id: 'settings', label: 'Global Settings', icon: SettingsIcon }
   ];
 
   const visibleCount = sections.filter(s => s.visible).length;
@@ -316,8 +316,8 @@ export const CmsManager: React.FC<CmsManagerProps> = ({ onToast }) => {
             Homepage CMS
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-2xl">
-            Manage every homepage section, the content inside them, and global website settings. Changes publish to the
-            public website instantly. Everything is stored encrypted in the central ledger.
+            Manage every homepage section, the content inside them, and global platform settings. Changes publish to the
+            public homepage instantly. Everything is stored encrypted in the central ledger.
           </p>
         </div>
       </div>
